@@ -1,12 +1,544 @@
-<header>
-
-</header>
-
 <div id="main">
+    <div class="standard-page-frame">
 
-    <form id="order" name="order">
+        <div class="small-header">
+            <h1 class="main-headline">Order BigInsights Hosting</h1>
+            <h2 class="sub-headline">Select your Big Data cluster configuration</h2>
+            <p class="introP">Use the options below to customize your Big Data cluster on SoftLayer to meet your specific needs. If you are unsure about an option, feel free to get in touch with our team.</p>
+        </div>
 
-    </form>
+        <hr class="thirty-bottom">
+
+        <div class="container-main">
+
+            <div class="row">
+                <form accept-charset="UTF-8" class="form-horizontal">
+                    <div id="placeOrder" class="panel-group">
+                        <div class="panel-group" id="accordion">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading collapsed" ng-click="toggleAccordion(1)" data-toggle="collapse" data-target="#panel-general" data-parent="#accordion">
+                                    <h4 class="panel-title">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                        General Configuration
+                                    </h4>
+                                </div>
+                                <div id="panel-general" class="panel-collapse" ng-class="collapsePanel(1)">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="required col-sm-3 control-label" for="cluster_name">Cluster Name</label>
+                                            <div class="col-sm-4">
+                                                <input ng-model="model.cluster_name" class="form-control" data-no-update="true" id="cluster_name" name="cluster[name]" type="text">
+                                                <span class="glyphicon glyphicon-question-sign"
+                                                      data-toggle="popover"
+                                                      data-content="You will use the cluster's name to identify which of your SoftLayer devices are part of this cluster."
+                                                      data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <h4>Cloud Configuration</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="datacenter" class="required col-sm-3 control-label">
+                                                Data Center
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.datacenter" name="datacenter" class="form-control" data-no-update="true">
+                                                    <option value="Amsterdam 1">Amsterdam 1</option>
+                                                    <option value="Ashburn, VA 3">Ashburn, VA 3</option>
+                                                    <option value="Dallas 1">Dallas 1</option>
+                                                    <option value="Dallas 2">Dallas 2</option>
+                                                    <option value="Dallas 4">Dallas 4</option>
+                                                    <option value="Dallas 5">Dallas 5</option>
+                                                    <option value="Dallas 6">Dallas 6</option>
+                                                    <option value="Dallas 7">Dallas 7</option>
+                                                    <option value="Dallas 8">Dallas 8</option>
+                                                    <option value="Hong Kong 2">Hong Kong 2</option>
+                                                    <option value="Houston 2">Houston 2</option>
+                                                    <option value="London 2">London 2</option>
+                                                    <option value="San Jose 1">San Jose 1</option>
+                                                    <option value="Seattle">Seattle</option>
+                                                    <option value="Singapore 1">Singapore 1</option>
+                                                    <option value="Washington, DC 1" selected="">Washington, DC 1</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="You should select the location closest to your data source
+                                                                    to achieve better data transfer rates." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <h4>BigInsights Configuration</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="edition" class="required col-sm-3 control-label">
+                                                BigInsights Edition
+                                            </label>
+                                            <div class="col-sm-6 col-md-5">
+                                                <select ng-model="model.edition" name="edition" class="form-control">
+                                                    <option value="enterprise-production" selected="">Enterprise Production Environment
+                                                    </option>
+                                                    <option value="enterprise">Enterprise Non-Production Environment</option>
+                                                    <option value="standard-production">Standard Production Environment</option>
+                                                    <option value="standard">Standard Non-Production Environment</option>
+                                                    <option value="quickstart">Quick Start</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="You must purchase a BigInsights license before creating your cluster
+                                                                    or use your own if you already have a valid license." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="filesystem" class="required col-sm-3 control-label">
+                                                Hadoop Filesystem
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <select ng-model="model.filesystem" name="filesystem" class="form-control" data-no-update="true">
+                                                    <option value="hdfs" selected="">HDFS</option>
+                                                    <option value="gpfs" disabled="">GPFS</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="Currently we only support HDFS."
+                                                      data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading collapsed" ng-click="toggleAccordion(2)" data-toggle="collapse" data-target="#panel-master"
+                                     data-parent="#accordion">
+                                    <h4 class="panel-title">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                        Master Node Configuration
+                                        <span id="master-price" class="pull-right"><span
+                                                class="price-class">hw: </span>US$ 998.00/month<span class="price-class">sw: </span>US$ 1,040.00/month</span>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse" ng-class="collapsePanel(2)">
+                                    <div class="panel-body">
+                                        <input type="hidden" name="master-price-total" value="998">
+
+                                        <h4>Server Configuration</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="master-device" class="col-sm-4 required control-label">
+                                                Server Type
+                                            </label>
+                                            <div class="col-sm-4">
+                                                <select ng-model="model.masterDevice" id="master-device" name="master-device" class="form-control">
+                                                    <option value="bare_metal_server" selected="">Dedicated BareMetal</option>
+                                                    <option value="virtual_server">Virtual Server</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="Dedicated BareMetal are single tenant physical servers while
+                                                                    Virtual Servers are virtual machines on a multi-tenant environment.
+                                                                    The deployment time for Dedicated BareMetal is significant higher
+                                                                    compared to Virtual Servers." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <h4>Server Hardware</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="master-disk-max" class="col-sm-4 required control-label">
+                                                Maximum Internal Drives
+                                            </label>
+                                            <div class="col-sm-8">
+                                                Up to
+                                                <select ng-model="model.masterDiskMax" id="master-disk-max" name="master-disk-max" class="form-control with-text">
+                                                    <option value="4">4</option>
+                                                    <option value="12">12</option>
+                                                    <option value="24">24</option>
+                                                    <option value="36">36</option>
+                                                </select>
+                                                drives
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="This option defines the chassis size for your server. A larger
+                                                                    chassis allows you to have more space for RAM and disks." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="master-cpu" class="col-sm-4 required control-label">
+                                                CPU
+                                            </label>
+                                            <div class="col-sm-5">
+                                                <select ng-model="model.masterCpu" id="master-cpu" name="master-cpu" class="form-control">
+                                                    <option value="Xeon 5620">Intel Xeon 5620 8 Cores (2.40 GHz)</option>
+                                                </select>
+                                            </div>
+                                            <span id="master-cpu-price" class="price pull-right form-control-static">US$ 329.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="master-ram" class="col-sm-4 required control-label">
+                                                RAM
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.masterRam" id="master-ram" name="master-ram" class="form-control">
+                                                    <option value="36">36 GB</option>
+                                                    <option value="48">48 GB</option>
+                                                    <option selected="" value="96">96 GB</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="The master node on a BigInsights cluster uses a significant amout
+                                                                    of RAM. For a small cluster you can use 32GB but we recommend at
+                                                                    least 96 GB for anything bigger." data-original-title="" title="">
+                                                </span>
+                                            </div>
+
+                                            <span id="master-ram-price" class="price pull-right form-control-static">US$ 488.00/month</span>
+                                        </div>
+
+                                        <div class="form-group has-sub-item">
+                                            <label for="master-disk" class="col-sm-4 required control-label">
+                                                Operating System Disk
+                                            </label>
+                                            <div class="col-sm-3 col-xs-9">
+                                                <select ng-model="model.masterDisk" id="master-disk" name="master-disk" class="form-control">
+                                                    <option value="500GB SATA II">500GB SATA II</option>
+                                                </select>
+                                            </div>
+                                            <div id="master-ask-raid" class="col-sm-2  col-xs-3 checkbox">
+                                                <label>
+                                                    <input ng-model="model.masterRaid" type="checkbox" name="master-raid" value="raid"> RAID 1?
+                                                </label>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="Enabling RAID 1 provides a secondary hard drive for operating
+                                                                    system data redundacy, this will improve system availability." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                            <span id="master-os-disk-price" class="price pull-right form-control-static">US$ 0.00/month</span>
+                                        </div>
+
+                                        <div class="form-group" id="master-raid-disk" ng-show="model.masterRaid">
+                                            <div class="col-sm-3 col-xs-9 col-sm-offset-4">
+                                                <input ng-model="model.masterDisk" type="text" id="master-raid1" class="form-control" disabled="">
+                                            </div>
+
+                                            <span id="master-raid-disk-price" class="price pull-right form-control-static">US$ 21.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="master-network" class="col-sm-4 required control-label">
+                                                Network
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <select ng-model="model.masterNetwork" id="master-network" name="master-network" class="form-control">
+                                                    <option value="1G" selected="">1 Gbit</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover"
+                                                      data-content="Currently we only support 1 Gbps network speed." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                            <span id="master-network-price" class="price pull-right form-control-static">US$ 20.00/month</span>
+                                        </div>
+
+                                        <h4>Software</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="master-os" class="col-sm-4 required control-label">
+                                                Operating System
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.masterOs" id="master-os" name="master-os" class="form-control">
+                                                    <option value="RHEL" selected="">Redhat 6.5</option>
+                                                </select>
+                                            </div>
+                                            <span id="master-os-price" class="price pull-right form-control-static">US$ 90.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="master-license" class="col-sm-4 required control-label">
+                                                BigInsights License
+                                            </label>
+                                            <div class="col-sm-5">
+                                                <input ng-model="model.masterLicense" type="text" id="master-license" name="master-license" class="form-control" disabled="">
+                                            </div>
+                                            <span id="master-license-price" class="price pull-right form-control-static">US$ 1,040.00/month</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading collapsed" ng-click="toggleAccordion(3)" data-toggle="collapse" data-target="#panel-data" data-parent="#accordion">
+                                    <h4 class="panel-title">
+                                        <span class="glyphicon glyphicon-chevron-right"></span>
+                                        Data Nodes Configuration
+                                        <span id="data-price" class="pull-right"><span class="price-class">hw: </span>US$ 4,851.00/month<span
+                                                class="price-class">sw: </span>US$ 3,120.00/month</span>
+                                    </h4>
+                                </div>
+                                <div id="panel-data" ng-class="collapsePanel(3)" class="panel-collapse">
+                                    <div class="panel-body">
+                                        <input type="hidden" name="data-price-total" value="4851">
+
+                                        <h4>Server Configuration</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="datanodes" class="col-sm-4 required control-label">
+                                                Number of Servers
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input ng-model="model.datanodes" type="text" id="datanodes" name="datanodes" class="form-control" value="3" maxlength="4" size="4" max="10" min="1">
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="You should have at least 3 data node servers for
+                                                                    optimal performance." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="data-device" class="col-sm-4 required control-label">
+                                                Server Type
+                                            </label>
+                                            <div class="col-sm-4">
+                                                <select ng-model="model.dataDevice" id="data-device" name="data-device" class="form-control">
+                                                    <option value="bare_metal_server" selected="">Dedicated BareMetal</option>
+                                                    <option value="virtual_server">Virtual Server</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="Dedicated BareMetal are single tenant physical servers while
+                                                                    Virtual Servers are virtual machines on a multi-tenant environment.
+                                                                    The deployment time for Dedicated BareMetal is significant higher
+                                                                    compared to Virtual Servers." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <h4>Server Hardware</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="datanodes-disk-max" class="col-sm-4 required control-label">
+                                                Maximum Internal Drives
+                                            </label>
+                                            <div class="col-sm-8">
+                                                Up to
+                                                <select ng-model="model.datanodesDiskMax" id="datanodes-disk-max" name="datanodes-disk-max" class="form-control with-text"
+                                                        onchange="updateNumberOfDataDisks()">
+                                                    <option value="4">4</option>
+                                                    <option value="12">12</option>
+                                                    <option value="24" selected="">24</option>
+                                                    <option value="36">36</option>
+                                                </select>
+                                                drives
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="This option defines the chassis size for your server. A larger
+                                                                    chassis allows you to have more space for RAM and disks." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="datanode-cpu" class="col-sm-4 required control-label">
+                                                CPU
+                                            </label>
+                                            <div class="col-sm-5">
+                                                <select ng-model="model.datanodeCpu" id="datanode-cpu" name="datanode-cpu" class="form-control">
+                                                    <option value="Xeon 5620">Intel Xeon 5620 8 Cores (2.40 GHz)</option>
+                                                </select>
+                                            </div>
+                                            <span id="datanode-cpu-price" class="price pull-right form-control-static">US$ 589.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="datanode-ram" class="col-sm-4 required control-label">
+                                                RAM
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.datanodeRam" id="datanode-ram" name="datanode-ram" class="form-control">
+                                                    <option value="36">36 GB</option>
+                                                    <option value="48">48 GB</option>
+                                                    <option value="96">96 GB</option>
+                                                    <option value="128">128 GB</option>
+                                                    <option value="144">144 GB</option>
+                                                    <option value="192">192 GB</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="The data nodes on a BigInsights cluster don't rely as much
+                                                                    on RAM storage" data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                            <span id="datanode-ram-price" class="price pull-right form-control-static">US$ 616.00/month</span>
+                                        </div>
+
+                                        <div class="form-group has-sub-item">
+                                            <label for="datanode-disk1" class="col-sm-4 required control-label">
+                                                Operating System Disk
+                                            </label>
+                                            <div class="col-sm-3 col-xs-9">
+                                                <select ng-model="model.datanodeDisk1" id="datanode-disk1" name="datanode-disk1" class="form-control">
+                                                    <option value="500GB SATA II">500GB SATA II</option>
+                                                </select>
+                                            </div>
+                                            <div id="data-ask-raid" class="col-xs-3 checkbox">
+                                                <label>
+                                                    <input ng-model="model.dataRaid" type="checkbox" name="data-raid" value="raid"> RAID 1?
+                                                </label>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="Enabling RAID 1 provides a secondary hard drive for operating
+                                                                    system data redundacy, this will improve system availability." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                            <span id="datanode-disk1-price" class="price pull-right form-control-static">US$ 0.00/month</span>
+                                        </div>
+
+                                        <div class="form-group" id="data-raid-disk" ng-show="model.dataRaid">
+                                            <div class="col-sm-3 col-xs-9 col-sm-offset-4">
+                                                <input ng-model="model.datanodeDisk1" type="text" id="data-raid1" name="data-raid1" class="form-control" disabled="">
+                                            </div>
+                                            <span id="datanode-raid1-price" class="price pull-right form-control-static">US$ 0.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="datanode-disk" class="col-sm-4 required control-label">
+                                                Number of Data Disks
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.datanodesDisk" id="datanodes-disk" name="datanodes-disk" class="form-control" onchange="updateDataTotalSize()">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-content="Having more disks per server allows you to store more data
+                                                                    into your BigInsights cluster." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="datanodes-disk2" class="col-sm-4 required control-label">
+                                                Data Disks Size
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.datanodesDisk2" id="datanodes-disk2" name="datanodes-disk2" class="form-control">
+                                                    <option value="0.5">500GB SATA II</option>
+                                                    <option value="1">1.00TB SATA II</option>
+                                                    <option value="2">2.00TB SATA II</option>
+                                                    <option value="3">3.00TB SATA III</option>
+                                                    <option value="4">4.00TB SATA III</option>
+                                                </select>
+                                            </div>
+                                            <span id="datanodes-disk2-price" class="price pull-right form-control-static">US$ 42.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="datanode-disk" class="col-sm-4 required control-label">
+                                                Total Data Disk Size
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input value="{{ model.datanodesDisk * model.datanodesDisk2 }} TB" type="text" id="totalDataDisk" class="form-control" disabled="">
+                                            </div>
+                                            <span id="datanodes-disk-price" class="price pull-right form-control-static">US$ 252.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="data-network" class="col-sm-4 required control-label">
+                                                Network
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <select ng-model="model.dataNetwork" id="data-network" name="data-network" class="form-control">
+                                                    <option value="1G" selected="">1 Gbit</option>
+                                                </select>
+                                                <span class="glyphicon glyphicon-question-sign" data-toggle="popover"
+                                                      data-content="Currently we only support 1 Gbps network speed." data-original-title="" title="">
+                                                </span>
+                                            </div>
+                                            <span id="datanode-network-price" class="price pull-right form-control-static">US$ 20.00/month</span>
+                                        </div>
+
+                                        <h4>Software</h4>
+                                        <hr>
+
+                                        <div class="form-group">
+                                            <label for="data-os" class="col-sm-4 required control-label">
+                                                Operating System
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <select ng-model="model.dataOs" id="data-os" name="data-os" class="form-control">
+                                                    <option value="RHEL">Redhat 6.5</option>
+                                                </select>
+                                            </div>
+                                            <span id="datanode-os-price" class="price pull-right form-control-static">US$ 90.00/month</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="data-license" class="col-sm-4 required control-label">
+                                                BigInsights License
+                                            </label>
+                                            <div class="col-sm-5">
+                                                <input ng-model="model.dataLicense" type="text" id="data-license" class="form-control" disabled="">
+                                            </div>
+                                            <span id="data-license-price" class="price pull-right form-control-static">US$ 3,120.00/month</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-summary">
+                                <div class="panel-body">
+                                    Total SoftLayer (hardware + OS)
+                                    <span id="total-price-softlayer" class="pull-right">US$ 5,849.00/month</span>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-summary">
+                                <div class="panel-body">
+                                    Total BigInsights (software + support)
+                                    <span id="total-price-ibm" class="pull-right">US$ 4,160.00/month</span>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-summary">
+                                <div class="panel-body">
+                                    Total Price Estimate
+                                    <span id="total-price" class="pull-right">US$ 10,009.00/month</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <button ng-click="reviewCluster()" type="button" class="btn btn-lg btn-success" data-submit="#new-system">
+                        Review Cluster
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
 </div>
 
 <footer>

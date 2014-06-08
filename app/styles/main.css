@@ -2,11 +2,91 @@ body {
     margin: 0;
     padding: 0;
     background: #d1d3d4;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 13px "BentonSans Regular";
     color: #333;
 }
 
-header {
-    height: 200px;
-    background-image: url('');
+@font-face {
+    font-family: 'BentonSans Light';
+    src: url('/fonts/bentonsans/bentonsans_light-webfont.eot');
+    src: url('/fonts/bentonsans/bentonsans_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bentonsans/bentonsans_light-webfont.woff') format('woff'),
+         url('/fonts/bentonsans/bentonsans_light-webfont.ttf') format('truetype'),
+         url('/fonts/bentonsans/bentonsans_light-webfont.svg#bentonsans_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BentonSans Bold';
+    src: url('/fonts/bentonsans/bentonsans_bold-webfont.eot');
+    src: url('/fonts/bentonsans/bentonsans_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bentonsans/bentonsans_bold-webfont.woff') format('woff'),
+         url('/fonts/bentonsans/bentonsans_bold-webfont.ttf') format('truetype'),
+         url('/fonts/bentonsans/bentonsans_bold-webfont.svg#bentonsans_boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BentonSans Regular';
+    src: url('/fonts/bentonsans/bentonsans_regular-webfont.eot');
+    src: url('/fonts/bentonsans/bentonsans_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bentonsans/bentonsans_regular-webfont.woff') format('woff'),
+         url('/fonts/bentonsans/bentonsans_regular-webfont.ttf') format('truetype'),
+         url('/fonts/bentonsans/bentonsans_regular-webfont.svg#bentonsans_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.small-header {
+    padding: 30px 0 0;
+    margin: 0px 0px 40px 0px;
+}
+
+.small-header .main-headline {
+    font-family: "BentonSans Light";
+    font-size: 42px;
+    letter-spacing: -0.42px;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-weight: normal;
+}
+
+.small-header .sub-headline {
+    font-family: "BentonSans Bold";
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 0px;
+    font-weight: normal;
+    font-size: 18px;
+    padding: 0 0 5px 0;
+    margin: 5px 0 10px 0;
+}
+
+.small-header p.introP {
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+.container-main {
+    width: 750px;
+    margin: 15px auto;
+    box-sizing: border-box;
+}
+
+.form-group label.required {
+    color: #972f2c;
+}
+
+.form-horizontal .control-label {
+    text-align: right;
+}
+
+.form-control.with-text {
+    width: initial;
+    display: initial;
+    margin-left: 10px;
+    margin-right: 10px;
 }
