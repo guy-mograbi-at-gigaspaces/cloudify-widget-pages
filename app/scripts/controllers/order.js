@@ -75,8 +75,8 @@ angular.module('ibmBiginsightsUiApp')
 
         function convertModelToRealNames(dataModel) {
             var result = {};
-            for(var i in dataModel) {
-                if(realNames.hasOwnProperty(i)) {
+            for (var i in dataModel) {
+                if (realNames.hasOwnProperty(i)) {
                     result[realNames[i]] = $scope.model[i];
                 }
                 else {
