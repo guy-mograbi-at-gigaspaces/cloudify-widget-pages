@@ -6,17 +6,10 @@ body {
   background: #d1d3d4 !important;
 }
 
-header {
-  position: absolute;
-  top: 0;
-  left: 1px;
-  width: 100%;
-  background-image: url('/images/ibm-header-mock.PNG');
-  background-position: center top;
-  width: 1383px;
-  height: 250px;
-}
 
+.container{
+  width:1470px;
+}
 @font-face {
   font-family: 'BentonSans Light';
   src: url('/fonts/bentonsans/bentonsans_light-webfont.eot');
@@ -51,8 +44,8 @@ header {
 }
 
 .standard-page-frame {
-  margin: 250px auto 0;
-  width: 960px;
+  margin: 372px auto 0;
+  width: 1432px;
   background-color: #fff;
   padding: 0px 40px 40px 40px;
 }
