@@ -3,6 +3,30 @@
 angular.module('ibmBiginsightsUiApp')
     .controller('OrderCtrl', function ($scope) {
 
+        var accordion = 1;
+        var realNames = {
+            'masterDevice': 'master-device',
+            'masterDiskMax': 'master-disk-max',
+            'masterCpu': 'master-cpu',
+            'masterRam': 'master-ram',
+            'masterDisk': 'master-disk',
+            'masterRaid': 'master-raid',
+            'masterNetwork': 'master-network',
+            'masterOs': 'master-os',
+            'masterLicense': 'master-license',
+            'dataDevice': 'data-device',
+            'datanodesDiskMax': 'datanodes-disk-max',
+            'datanodeCpu': 'datanode-cpu',
+            'datanodeRam': 'datanode-ram',
+            'datanodeDisk1': 'datanode-disk1',
+            'dataRaid': 'data-raid',
+            'datanodesDisk': 'datanodes-disk',
+            'datanodesDisk2': 'datanodes-disk2',
+            'dataNetwork': 'data-network',
+            'dataOs': 'data-os',
+            'dataLicense': 'data-license'
+        };
+
         $scope.model = {
             'datacenter': 'Washington, DC 1',
             'edition': 'enterprise-production',
@@ -30,8 +54,6 @@ angular.module('ibmBiginsightsUiApp')
             'dataLicense': 'Enterprise Production Environment'
         };
 
-        var accordion = 1;
-
         $scope.toggleAccordion = function (panel) {
             if (accordion === panel) {
                 accordion = null;
@@ -48,7 +70,20 @@ angular.module('ibmBiginsightsUiApp')
         };
 
         $scope.reviewCluster = function () {
-            console.log(['reviewCluster', $scope.model]);
+            console.log(['reviewCluster', convertModelToRealNames($scope.model)]);
         };
+
+        function convertModelToRealNames(dataModel) {
+            var result = {};
+            for(var i in dataModel) {
+                if(realNames.hasOwnProperty(i)) {
+                    result[realNames[i]] = $scope.model[i];
+                }
+                else {
+                    result[i] = $scope.model[i];
+                }
+            }
+            return result;
+        }
 
     });
