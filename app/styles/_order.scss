@@ -101,3 +101,32 @@ body {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+.popover {
+  width:350px;
+  line-height:25px;
+}
+
+.panel-summary{
+  display:none;
+}
+
+.container-main{
+  margin-top:0;
+}
+
+.panel-group .panel{
+  overflow:visible;
+}
+
+.bare-metal{
+  .cci{
+    display:none;
+  }
+}
+
+.cci {
+  .bare-metal{
+    display:none;
+  }
+}

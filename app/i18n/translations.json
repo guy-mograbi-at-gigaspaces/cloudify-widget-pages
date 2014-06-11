@@ -1,0 +1,90 @@
+{
+    "datacenters": {
+        "amsterdam1": "Amsterdam 1",
+        "dallas1": "Dallas 1",
+        "dallas5": "Dallas 5",
+        "dallas6": "Dallas 6",
+        "dallas7": "Dallas 7",
+        "hongkong2": "Hong Kong 2",
+        "sanjose1": "San Jose 1",
+        "seattle": "Seattle",
+        "singapore1": "Singapore 1",
+        "washington1": "Washington, DC 1"
+
+    },
+    "biginsightsEditions" : {
+        "enterpriseProduction" : "Enterprise Production Environment",
+        "enterprise":"Enterprise Non-Production Environment",
+        "standardProduction" : "Standard Production Environment",
+        "standard" : "Standard Non-Production Environment",
+        "quickstart":"Quick Start"
+    },
+
+    "filesystemTypes" : {
+        "hdfs" : "HDFS",
+        "gpfs" : "GPFS"
+    },
+    "serverTypes" : {
+        "cci" : "Virtual Server",
+        "baremetal" : "Dedicated BareMetal"
+    },
+    "cpu" : {
+        "xeon5620" : "Intel Xeon 5620 8 Cores (2.40 GHz)",
+        "2" : "2 cores",
+        "4" : "4 cores",
+        "8" : "8 cores",
+        "12" : "12 cores",
+        "16" : "16 cores"
+
+    },
+    "ram" : {
+        "16" : "16 GB",
+        "24" : "24 GB",
+        "32" : "32 GB",
+        "36" : "36 GB",
+        "48" : "48 GB",
+        "64" : "64 GB",
+        "96" : "96 GB",
+        "128" : "128 GB",
+        "144" : "144 GB",
+        "192" : "192 GB"
+    },
+    "disks" : {
+        "05" : "500GB SATA II",
+        "1" : "1.00TB SATA II",
+        "2" : "2.00TB SATA II",
+        "3" : "3.00TB SATA III",
+        "4" : "4.00TB SATA III",
+
+
+        "100":"100 GB (SAN)",
+        "250":"250 GB (SAN)",
+        "300": "300 GB (SAN)",
+        "350": "350 GB (SAN)",
+        "400": "400 GB (SAN)",
+        "500": "500 GB (SAN)",
+        "750": "750 GB (SAN)",
+        "1000": "1.00 TB (SAN)",
+        "1500": "1.50 TB (SAN)",
+        "2000": "2.00 TB (SAN)"
+
+
+    },
+
+    "help" : {
+        "clusterName" :"You will use the cluster's name to identify which of your SoftLayer devices are part of this cluster.",
+        "locationId" : "You should select the location closest to your data source to achieve better data transfer rates",
+        "edition" : "You must purchase a BigInsights license before creating your cluster or use your own if you already have a valid license.",
+        "filesystemTypes" :"Currently we only support HDFS",
+        "serverType" : "Dedicated BareMetal are single tenant physical servers while Virtual Servers are virtual machines on a multi-tenant environment. The deployment time for Dedicated BareMetal is significant higher compared to Virtual Servers.",
+        "maxInternalDrivers" : "This option defines the chassis size for your server. A larger chassis allows you to have more space for RAM and disks.",
+        "masterRam" : "The master node on a BigInsights cluster uses a significant amout of RAM. For a small cluster you can use 32GB but we recommend at least 96 GB for anything bigger.",
+        "dataRam" : "The data nodes on a BigInsights cluster don't rely as much on RAM storage",
+        "network" : "Currently we only support 1 Gbps network speed.",
+        "numberOfServers" : "You should have at least 3 data node servers for optimal performance.",
+        "maxInternalDrives" : "This option defines the chassis size for your server. A larger chassis allows you to have more space for RAM and disks.",
+        "operatingSystemDisk" : "Enabling RAID 1 provides a secondary hard drive for operating system data redundancy, this will improve system availability.",
+        "numberOfDataDisks" : "Having more disks per server allows you to store more data into your BigInsights cluster."
+    }
+
+}
