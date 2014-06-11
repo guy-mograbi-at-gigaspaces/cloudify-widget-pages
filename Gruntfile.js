@@ -224,14 +224,14 @@ module.exports = function (grunt) {
             // minification. This option is pre-configured if you do not wish to use
             // Usemin blocks.
             dist: {
-               files: {
-                 '<%= yeoman.dist %>/styles/main.css': [
-                   '.tmp/styles/{,*/}*.css',
-                   '<%= yeoman.app %>/styles/{,*/}*.css'
-                 ]
-               }
+                files: {
+                    '<%= yeoman.dist %>/styles/main.css': [
+                        '.tmp/styles/{,*/}*.css',
+                        '<%= yeoman.app %>/styles/{,*/}*.css'
+                    ]
+                }
             },
-            options:{processImport: false}
+            options: {processImport: false}
         },
         htmlmin: {
             dist: {
