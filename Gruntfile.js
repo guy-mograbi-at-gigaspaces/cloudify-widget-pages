@@ -270,7 +270,8 @@ module.exports = function (grunt) {
                             '.htaccess',
                             'bower_components/**/*',
                             'i18n/{,*/}*.json',
-                            'images/{,*/}*.{gif,webp,svg}',
+                            'fonts/**/*',
+                            'images/{,*/}*.{gif,webp,svg,PNG}',
                             'styles/fonts/*'
                         ]
                     },
