@@ -60,7 +60,7 @@ angular.module('ibmBiginsightsUiApp')
 
 
         this.getByLabel = function( collection, label ){
-            return collection.filter(function(o){ return o.label === label})[0];
+            return collection.filter(function(o){ return o.label === label; })[0];
         };
 
         this.getDefaultValue = function(){
@@ -68,12 +68,12 @@ angular.module('ibmBiginsightsUiApp')
                 'cci' : this.getByLabel( ramTypes.cci, '32').id,
                 'bmMaster' : this.getByLabel( ramTypes.bmMaster, '24').id,
                 'bmData' : this.getByLabel( ramTypes. bmData, '24').id
-            }
+            };
         };
 
         this.get = function( ){
             var deferred = $q.defer();
             deferred.resolve(ramTypes);
             return deferred.promise;
-        }
+        };
     });

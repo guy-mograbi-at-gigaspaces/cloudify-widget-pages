@@ -17,16 +17,16 @@ angular.module('ibmBiginsightsUiApp')
 
 
         this.isBareMetal = function( id ) {
-            return this.getByLabel('baremetal').id === ~~id;
+            return this.getByLabel('baremetal').id === parseInt(id,10);
         };
 
         this.isCci = function(id){
-            return this.getByLabel('cci').id === ~~id;
+            return this.getByLabel('cci').id === parseInt(id,10);
         };
 
 
         this.getByLabel = function( label ){
-            return types.filter( function(o){ return o.label === label } )[0];
+            return types.filter( function(o){ return o.label === label; } )[0];
         };
 
         this.getDefaultValue = function(){
@@ -38,6 +38,6 @@ angular.module('ibmBiginsightsUiApp')
             var deferred = $q.defer();
             deferred.resolve(types);
             return deferred.promise;
-        }
+        };
 
     });

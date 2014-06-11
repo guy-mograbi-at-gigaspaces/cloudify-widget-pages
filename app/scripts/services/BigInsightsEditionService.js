@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-  .service('BigInsightsEditionService', function BigInsightsEditionService( $q ) {
+    .service('BigInsightsEditionService', function BigInsightsEditionService($q) {
         // currently not supported in recipe, ignore for now.
         var biginsightsEdition = [
             { 'id': 'enterprise-production', 'label': 'enterpriseProduction' } ,
@@ -11,20 +11,22 @@ angular.module('ibmBiginsightsUiApp')
             { 'id': 'quickstart', 'label': 'quickstart'}
         ];
 
-        this.getByLabel = function( label ){
-            return biginsightsEdition.filter( function(o) { return o.label === label} )[0];
+        this.getByLabel = function (label) {
+            return biginsightsEdition.filter(function (o) {
+                return o.label === label;
+            })[0];
         };
 
-        this.getDefaultValue = function(){
+        this.getDefaultValue = function () {
             return this.getByLabel('quickstart');
         };
 
-        this.getEditions = function(){
+        this.getEditions = function () {
             var deferred = $q.defer();
 
             deferred.resolve(biginsightsEdition);
 
             return deferred.promise;
-        }
+        };
 
-  });
+    });

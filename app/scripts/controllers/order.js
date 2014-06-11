@@ -90,9 +90,9 @@ angular.module('ibmBiginsightsUiApp')
 
         $scope.totalDiskSize = function(){
             if ( $scope.isDataBareMetal() ){
-                return Client.disks.getById( $scope.disks.bm, $scope.input.dataBareMetalDisks).size * $scope.input.dataBareMetalNumberOfDisks + '.00 GB'
+                return Client.disks.getById( $scope.disks.bm, $scope.input.dataBareMetalDisks).size * $scope.input.dataBareMetalNumberOfDisks + '.00 GB';
             }else{
-                return Client.disks.getById( $scope.disks.cci, $scope.input.dataCciDisks).size * $scope.input.dataCciNumberOfDisks + '.00 GB'
+                return Client.disks.getById( $scope.disks.cci, $scope.input.dataCciDisks).size * $scope.input.dataCciNumberOfDisks + '.00 GB';
             }
 
         };

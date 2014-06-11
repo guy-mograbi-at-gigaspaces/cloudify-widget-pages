@@ -12,7 +12,7 @@ angular.module('ibmBiginsightsUiApp')
                 var text = i18n(attrs.content || attrs.helpPopover);
 
 
-                $(element).popover({ 'content' : text , 'trigger' : 'hover', 'style' : {'width' : '400px'}}).data("popover");
+                $(element).popover({ 'content': text, 'trigger': 'hover', 'style': {'width': '400px'}}).data('popover');
 
 
 //        element.text('this is the helpPopover directive');

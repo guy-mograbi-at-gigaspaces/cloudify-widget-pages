@@ -1,13 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-  .service('Client', function Client( CpuService,
-                                      DataCenterService,
-                                      BigInsightsEditionService,
-                                      FilesystemTypesService,
-                                      RamService,
-                                      DisksService,
-                                      ServerTypesService ) {
+    .service('Client', function Client(CpuService, DataCenterService, BigInsightsEditionService, FilesystemTypesService, RamService, DisksService, ServerTypesService) {
         this.dataCenters = DataCenterService;
         this.biginsightsEditions = BigInsightsEditionService;
         this.filesystemTypes = FilesystemTypesService;
@@ -15,4 +9,4 @@ angular.module('ibmBiginsightsUiApp')
         this.cpu = CpuService;
         this.ram = RamService;
         this.disks = DisksService;
-  });
+    });
