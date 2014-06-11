@@ -1,6 +1,6 @@
 {
-  "name": "ibm-biginsights-ui",
-  "version": "0.0.0",
+  "name": "biginsights-page",
+  "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
       "karma-script-launcher": "~0.1.0",
