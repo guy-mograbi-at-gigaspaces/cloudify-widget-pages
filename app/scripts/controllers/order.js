@@ -47,11 +47,10 @@ angular.module('ibmBiginsightsUiApp')
             $scope.recipeProperties = RecipePropertiesService.toCloudifyProperties($scope.input);
 
 
+            try {
+                frames[0].postMessage({'name': 'widget_recipe_properties', 'data': $scope.recipeProperties }, 'http://ibmstaging.gsdev.info');
 
-            var targetOrigin = frames[0].location.origin;
-            if ( !!targetOrigin  ) {
-                frames[0].postMessage({'name': 'widget_recipe_properties', 'data': $scope.recipeProperties }, frames[0].location.origin);
-            }
+            }catch(e){$log.error(e)}
         }, true);
 
 
