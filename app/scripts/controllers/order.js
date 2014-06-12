@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('OrderCtrl', function ($scope, Client, $log, RecipePropertiesService) {
+    .controller('OrderCtrl', function ($scope, Client, $log, RecipePropertiesService, $routeParams) {
 
+        $scope.showProperties = !!$routeParams.showProperties;
 
         Client.dataCenters.getDataCenters().then(function(result){
             $log.info('got datacenters', result);
