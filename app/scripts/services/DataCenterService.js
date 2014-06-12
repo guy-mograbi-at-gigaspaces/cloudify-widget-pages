@@ -27,7 +27,7 @@ angular.module('ibmBiginsightsUiApp')
         };
 
         this.getDefaultValue = function(){
-            return this.getByLabel('amsterdam1').id;
+            return this.getByLabel('washington1').id;
         };
 
 

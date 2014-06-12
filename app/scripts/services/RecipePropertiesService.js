@@ -26,9 +26,9 @@ angular.module('ibmBiginsightsUiApp')
                 properties.push({ 'key': key, 'value': value });
             }
 
-            add('locationId', parseInt(input.locationId,10));
-            add('masterPackage', parseInt(input.masterPackage,10));
-            add('dataPackage', parseInt(input.dataPackage,10));
+            add('locationId', input.locationId,10);
+            add('packageId', parseInt(input.masterPackage,10));
+//            add('dataPackage', parseInt(input.dataPackage,10));
 
 
             function isMasterBareMetal() {
@@ -36,7 +36,9 @@ angular.module('ibmBiginsightsUiApp')
             }
 
             function isDataBareMetal() {
-                return ServerTypesService.isBareMetal(input.dataPackage);
+                return ServerTypesService.isBareMetal(input.masterPackage);
+
+//                return ServerTypesService.isBareMetal(input.dataPackage);
             }
 
             // hardwareId="CPU,RAM,1st HardDisk,Uplink ports speed and Bandwidth. Use the following two(hard codedd) as the last two: 1284,249
@@ -55,14 +57,44 @@ angular.module('ibmBiginsightsUiApp')
                 dataHardwareIdValue = input.dataCciCpu + ',' + input.dataCciRam + ',' + /* first disk cci */ 865 + ',188,439';
             }
 
-            add('masterHardwareId', masterHardwareIdValue);
-            add('dataHardwareId', dataHardwareIdValue);
+            add('smallHardwareId', masterHardwareIdValue);
+            add('largeHardwareId', dataHardwareIdValue);
+
+            if ( isMasterBareMetal() && !!input.masterRaid ) {
+                add('smallLinuxOtherHardDisksIDs', '14');
+            }else{
+                add('smallLinuxOtherHardDisksIDs', '');
+            }
+
+            var dataNumberOfDisks = isDataBareMetal() ? input.dataBareMetalNumberOfDisks : input.dataCciNumberOfDisks;
+            var dataDisks = isDataBareMetal() ? input.dataBareMetalDisks : input.dataCciDisks;
 
 
-            add('masterOtherHardDisksIDs', '???');
-            add('dataOtherHardDisksIDs', '???');
-            add('masterDiskControllerID', '???');
-            add('dataDiskControllerID', '???');
+            var dataOtherHardDisksIDsArray = [];
+
+            if ( !!input.dataRaid && isDataBareMetal() ){
+                dataOtherHardDisksIDsArray.push(  '14' );
+            }
+
+            for ( var i = 0; i < dataNumberOfDisks; i ++ ){
+                dataOtherHardDisksIDsArray.push(dataDisks);
+            }
+            add('largeLinuxOtherHardDisksIDs', dataOtherHardDisksIDsArray.join(','));
+
+
+            if ( isMasterBareMetal() ) {
+                add('masterDiskControllerID', '487');
+            }else{
+                add('masterDiskControllerID', '');
+
+            }
+
+            if ( isDataBareMetal() ) {
+                add('dataDiskControllerID', '487');
+            }else{
+                add('masterDiskControllerID', '');
+
+            }
 
 
             var masterImageIdValue = '???';
@@ -80,20 +112,25 @@ angular.module('ibmBiginsightsUiApp')
                 dataImageIdValue = input.dataCciImage;
             }
 
-            add('masterLinuxImageId', masterImageIdValue);
-            add('dataLinuxImageId', dataImageIdValue);
+            add('linuxImageId', masterImageIdValue);
+//            add('dataLinuxImageId', dataImageIdValue);
 
 
             // recipes properties
 
-            add('numOfDataNodes', 2);
+            add('numOfDataNodes', input.numOfDataNodes);
 
             add('maxNumOfDataNodes', 10);
             add('masterComputeTemplate', input.masterComputeTemplate);
             add('dataNodesComputeTemplate', input.dataNodesComputeTemplate);
             add('infoFileName', input.infoFileName);
-            add('tag', input.tag);
+            add('tag', (input.tag.length > 0 ? input.tag : 'biginsights') + '-' + this.getRandomTag() );
             add('biAdminPassword', input.biAdminPassword);
+
+            var myTag = this.getRandomTag();
+            add('MANAGER_PREFIX', 'bi' + myTag + 'mngr');
+            add('AGENT_PREFIX', 'bi' + myTag + 'agent');
+
 
 
             return properties;

@@ -84,7 +84,8 @@
         "numberOfServers" : "You should have at least 3 data node servers for optimal performance.",
         "maxInternalDrives" : "This option defines the chassis size for your server. A larger chassis allows you to have more space for RAM and disks.",
         "operatingSystemDisk" : "Enabling RAID 1 provides a secondary hard drive for operating system data redundancy, this will improve system availability.",
-        "numberOfDataDisks" : "Having more disks per server allows you to store more data into your BigInsights cluster."
+        "numberOfDataDisks" : "Having more disks per server allows you to store more data into your BigInsights cluster.",
+        "masterRaid" :"Enabling RAID 1 provides a secondary hard drive for operating system data redundacy, this will improve system availability."
     }
 
 }

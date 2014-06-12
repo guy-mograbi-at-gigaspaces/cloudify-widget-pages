@@ -40,14 +40,14 @@
                 </div>
                 <div class="panel-collapse" ng-class="collapsePanel(1)">
                     <div class="panel-body">
-                        <!--<div class="form-group">
+                        <div class="form-group">
                             <label class="required col-sm-3 control-label" for="cluster_name">Cluster Name</label>
                             <div class="col-sm-4">
-                                <input ng-model="input.clusterName" class="form-control" data-no-update="true" id="cluster_name" name="cluster[name]" type="text">
+                                <input ng-model="input.tag" class="form-control" data-no-update="true" id="cluster_name" name="cluster[name]" type="text">
                                 <span help-popover content="help.clusterName"></span>
                             </div>
                         </div>
-                        -->
+
                         <h4>Cloud Configuration</h4>
                         <hr>
 
@@ -200,27 +200,24 @@
                                     <option value="500GB SATA II">100 GB (SAN)</option>
                                 </select>
                             </div>
-                            <!--<div id="master-ask-raid" class="col-sm-2  col-xs-3 checkbox bare-metal">
+                            <div id="master-ask-raid" class="col-sm-2  col-xs-3 checkbox bare-metal">
                                 <label>
-                                    <input ng-model="model.masterRaid" type="checkbox" name="master-raid" value="raid"> RAID 1?
+                                    <input ng-model="input.masterRaid" type="checkbox" name="master-raid" value="raid"> RAID 1?
                                 </label>
-                                                            <span class="glyphicon glyphicon-question-sign" data-toggle="popover"
-                                                                  data-content="Enabling RAID 1 provides a secondary hard drive for operating
-                                                                                system data redundacy, this will improve system availability."
-                                                                  data-original-title="" title="">
-                                                            </span>
-                            </div>-->
+                                <span help-popover="help.masterRaid"></span>
+
+                            </div>
                             <!--<span id="master-os-disk-price" class="price pull-right form-control-static">US$ 0.00/month</span>-->
                         </div>
 
-                       <!-- <div class="form-group bare-metal" id="master-raid-disk" ng-show="model.masterRaid">
+                        <div class="form-group bare-metal" id="master-raid-disk" ng-show="input.masterRaid">
                             <div class="col-sm-3 col-xs-9 col-sm-offset-4">
-                                <input ng-model="model.masterDisk" type="text" id="master-raid1" class="form-control" disabled="">
+                                <input  value="500GB SATA II" type="text" id="master-raid1" class="form-control" disabled="">
                             </div>
 
-                            &lt;!&ndash;<span id="master-raid-disk-price" class="price pull-right form-control-static">US$ 21.00/month</span>&ndash;&gt;
+                            <!--<span id="master-raid-disk-price" class="price pull-right form-control-static">US$ 21.00/month</span>-->
                         </div>
--->
+
                         <div class="form-group">
                             <label  class="col-sm-4 required control-label">
                                 Network
@@ -268,7 +265,7 @@
                 </div>
             </div>
 
-            <div class="panel panel-default"  ng-class="{'bare-metal' : !!isDataBareMetal(), 'cci' : !isDataBareMetal()}">
+            <div class="panel panel-default"  ng-class="{'bare-metal' : !!isMasterBareMetal(), 'cci' : !isMasterBareMetal()}">
             <div class="panel-heading collapsed" ng-click="toggleAccordion(3)" data-toggle="collapse" data-target="#panel-data"
                  data-parent="#accordion">
                 <h4 class="panel-title">
@@ -291,7 +288,7 @@
                 </label>
 
                 <div class="col-sm-2">
-                    <input ng-model="input.numberOfDataNodes" type="text"  class="form-control" maxlength="4" size="4" max="10" min="1">
+                    <input ng-model="input.numOfDataNodes" type="text"  class="form-control" maxlength="4" size="4" max="10" min="1">
                     <span help-popover content="help.numberOfServers"></span>
 
                 </div>
@@ -304,9 +301,12 @@
 
                 <div class="col-sm-4">
 
-                    <select ng-model="input.dataPackage" class="form-control"
+                    <select ng-model="input.masterPackage" class="form-control"
                             ng-options="type.id as ('serverTypes.' + type.label | i18n) for type in serverTypes ">
                     </select>
+                    <!--<select ng-model="input.dataPackage" class="form-control"
+                            ng-options="type.id as ('serverTypes.' + type.label | i18n) for type in serverTypes ">
+                    </select>-->
                     <span help-popover content="help.serverType"></span>
 
                 </div>
@@ -391,22 +391,25 @@
                         <option value="500GB SATA II">100 GB (SAN)</option>
                     </select>
                 </div>
-                <!--<div id="data-ask-raid" class="bare-metal col-xs-3 checkbox">
+                <div id="data-ask-raid" class="bare-metal col-xs-3 checkbox">
                     <label>
-                        <input ng-model="model.dataRaid" type="checkbox" name="data-raid" value="raid"> RAID 1?
+                        <input ng-model="input.dataRaid" type="checkbox" name="data-raid" value="raid"> RAID 1?
                     </label>
                     <span help-popover="help.operatingSystemDisk"></span>
-                </div>-->
+                </div>
                 <!--<span id="datanode-disk1-price" class="price pull-right form-control-static">US$ 0.00/month</span>-->
             </div>
 
-           <!-- <div class="form-group bare-metal" id="data-raid-disk" ng-show="model.dataRaid" >
+
+            <div class="form-group bare-metal" id="data-raid-disk" ng-show="input.dataRaid" >
+
                 <div class="col-sm-3 col-xs-9 col-sm-offset-4">
-                    <input ng-model="model.datanodeDisk1" type="text" id="data-raid1" name="data-raid1" class="form-control"
+                    <input value="500GB SATA II" type="text" class="bare-metal form-control"
                            disabled="">
+
                 </div>
-                &lt;!&ndash;<span id="datanode-raid1-price" class="price pull-right form-control-static">US$ 0.00/month</span>&ndash;&gt;
-            </div>-->
+                <!--<span id="datanode-raid1-price" class="price pull-right form-control-static">US$ 0.00/month</span>-->
+            </div>
 
             <div class="form-group">
                 <label  class="col-sm-4 required control-label">
@@ -538,7 +541,7 @@
 </form>
 </div>
 <center>
-<iframe src="http://ibmstaging.gsdev.info/widget/widget?apiKey=e54ee456-0732-41ec-927b-953f9e04f662&amp;showAdvanced=true&amp;title=Big%20Insights%20BMI&amp;origin_page_url=http%3A%2F%2Fibmstaging.gsdev.info%2Fdemos%2F131%2Fe54ee456-0732-41ec-927b-953f9e04f662&amp;video_url=%2F%2Fwww.youtube.com%2Fembed%2F59NmBXNIcoc" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>
+<iframe src="http://ibmstaging.gsdev.info/widget/widget?apiKey=e54ee456-0732-41ec-927b-953f9e04f662&amp;showAdvanced=true&amp;title=Big%20Insights&amp;origin_page_url=http%3A%2F%2Fibmstaging.gsdev.info%2Fdemos%2F131%2Fe54ee456-0732-41ec-927b-953f9e04f662&amp;video_url=%2F%2Fwww.youtube.com%2Fembed%2F59NmBXNIcoc" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>
 </center>
 
 

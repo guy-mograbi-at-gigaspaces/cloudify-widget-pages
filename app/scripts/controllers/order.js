@@ -38,7 +38,8 @@ angular.module('ibmBiginsightsUiApp')
         };
 
         $scope.isDataBareMetal = function(){
-            return Client.serverTypes.isBareMetal( $scope.input.dataPackage );
+               return $scope.isMasterBareMetal();
+//            return Client.serverTypes.isBareMetal( $scope.input.dataPackage );
         };
 
 
@@ -58,11 +59,11 @@ angular.module('ibmBiginsightsUiApp')
             'masterPackage' : Client.serverTypes.getDefaultValue(),
             'dataPackage' : Client.serverTypes.getDefaultValue(),
             'locationId' : Client.dataCenters.getDefaultValue(),
-            'tag' : RecipePropertiesService.getRandomTag(),
-            'numOfDataNodes' : 2,
+            'tag' : '',
+            'numOfDataNodes' : 3,
             'maxNumOfDataNodes' : 10,
-            'masterComputeTemplate' : 'MASTER_NODE',
-            'dataNodesComputeTemplate' : 'DATA_NODE',
+            'masterComputeTemplate' : 'SMALL_LINUX',
+            'dataNodesComputeTemplate' : 'LARGE_LINUX',
             'infoFileName' : 'data.info',
             'biAdminPassword' : 'adminPassword',
             'masterBareMetalCpu' : Client.cpu.getDefaultValue().bm,
@@ -82,7 +83,11 @@ angular.module('ibmBiginsightsUiApp')
             'masterBareMetalImage' : 4321,
             'masterCciImage' : 3839,
             'dataBareMetalImage' : 4321,
-            'dataCciImage' : 3839
+            'dataCciImage' : 3839,
+            'dataCciOperatingSystemDisk' : 1,
+            'dataBareMetalOperatingSystemDisk' : 1,
+            'masterCciOperatingSystemDisk' : 1,
+            'masterBareMetalOperatingSystemDisk' : 1
 
         };
 
