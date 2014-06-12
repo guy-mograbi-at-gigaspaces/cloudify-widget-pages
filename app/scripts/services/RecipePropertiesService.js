@@ -117,7 +117,7 @@ angular.module('ibmBiginsightsUiApp')
 
 
             // recipes properties
-
+            add('currentAppName', 'bi' + this.getRandomTag() + '_cloudify');
             add('numOfDataNodes', parseInt(input.numOfDataNodes,10));
 
             add('maxNumOfDataNodes', 10);
