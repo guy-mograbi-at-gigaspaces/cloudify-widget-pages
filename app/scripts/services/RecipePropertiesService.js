@@ -124,7 +124,7 @@ angular.module('ibmBiginsightsUiApp')
             add('masterComputeTemplate', input.masterComputeTemplate);
             add('dataNodesComputeTemplate', input.dataNodesComputeTemplate);
             add('infoFileName', input.infoFileName);
-            add('tag', (input.tag.length > 0 ? input.tag : 'biginsights') + '-' + this.getRandomTag() );
+            add('tag', this.getRandomTag() );
             add('biAdminPassword', input.biAdminPassword);
 
             var myTag = this.getRandomTag();
