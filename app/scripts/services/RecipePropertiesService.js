@@ -118,7 +118,7 @@ angular.module('ibmBiginsightsUiApp')
 
             // recipes properties
 
-            add('numOfDataNodes', input.numOfDataNodes);
+            add('numOfDataNodes', parseInt(input.numOfDataNodes,10));
 
             add('maxNumOfDataNodes', 10);
             add('masterComputeTemplate', input.masterComputeTemplate);
