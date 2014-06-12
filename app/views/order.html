@@ -1,4 +1,5 @@
-<img src="/images/ibm-header-mock.PNG" style="width:100%; position:absolute;top:0; left:0;"/>
+<!--<img src="/images/ibm-header-mock.PNG" style="width:100%; position:absolute;top:0; left:0;"/>-->
+        <div style="width:100%; position:absolute;top:0; left:0; height:200px; background:black"></div>
 <div id="main">
 <div style="display:none">
 
@@ -199,7 +200,7 @@
                                     <option value="500GB SATA II">100 GB (SAN)</option>
                                 </select>
                             </div>
-                            <div id="master-ask-raid" class="col-sm-2  col-xs-3 checkbox bare-metal">
+                            <!--<div id="master-ask-raid" class="col-sm-2  col-xs-3 checkbox bare-metal">
                                 <label>
                                     <input ng-model="model.masterRaid" type="checkbox" name="master-raid" value="raid"> RAID 1?
                                 </label>
@@ -208,27 +209,27 @@
                                                                                 system data redundacy, this will improve system availability."
                                                                   data-original-title="" title="">
                                                             </span>
-                            </div>
+                            </div>-->
                             <!--<span id="master-os-disk-price" class="price pull-right form-control-static">US$ 0.00/month</span>-->
                         </div>
 
-                        <div class="form-group bare-metal" id="master-raid-disk" ng-show="model.masterRaid">
+                       <!-- <div class="form-group bare-metal" id="master-raid-disk" ng-show="model.masterRaid">
                             <div class="col-sm-3 col-xs-9 col-sm-offset-4">
                                 <input ng-model="model.masterDisk" type="text" id="master-raid1" class="form-control" disabled="">
                             </div>
 
-                            <!--<span id="master-raid-disk-price" class="price pull-right form-control-static">US$ 21.00/month</span>-->
+                            &lt;!&ndash;<span id="master-raid-disk-price" class="price pull-right form-control-static">US$ 21.00/month</span>&ndash;&gt;
                         </div>
-
+-->
                         <div class="form-group">
-                            <label for="master-network" class="col-sm-4 required control-label">
+                            <label  class="col-sm-4 required control-label">
                                 Network
                             </label>
 
                             <div class="col-sm-2">
-                                <select ng-model="model.masterNetwork" id="master-network" name="master-network"
+                                <select
                                         class="form-control">
-                                    <option value="1G" selected="">1 Gbit</option>
+                                    <option value="1G" selected="selected">1 Gbit</option>
                                 </select>
                                  <span help-popover content="help.network"></span>
                             </div>
@@ -244,8 +245,8 @@
                             </label>
 
                             <div class="col-sm-3">
-                                <select ng-model="model.masterOs" id="master-os" name="master-os" class="form-control">
-                                    <option value="RHEL" selected="">Redhat 6.5</option>
+                                <select  class="form-control">
+                                    <option value="RHEL" selected="selected">Redhat 6.5</option>
                                 </select>
                             </div>
                             <!--<span id="master-os-price" class="price pull-right form-control-static">US$ 90.00/month</span>-->
@@ -390,22 +391,22 @@
                         <option value="500GB SATA II">100 GB (SAN)</option>
                     </select>
                 </div>
-                <div id="data-ask-raid" class="bare-metal col-xs-3 checkbox">
+                <!--<div id="data-ask-raid" class="bare-metal col-xs-3 checkbox">
                     <label>
                         <input ng-model="model.dataRaid" type="checkbox" name="data-raid" value="raid"> RAID 1?
                     </label>
                     <span help-popover="help.operatingSystemDisk"></span>
-                </div>
+                </div>-->
                 <!--<span id="datanode-disk1-price" class="price pull-right form-control-static">US$ 0.00/month</span>-->
             </div>
 
-            <div class="form-group bare-metal" id="data-raid-disk" ng-show="model.dataRaid" >
+           <!-- <div class="form-group bare-metal" id="data-raid-disk" ng-show="model.dataRaid" >
                 <div class="col-sm-3 col-xs-9 col-sm-offset-4">
                     <input ng-model="model.datanodeDisk1" type="text" id="data-raid1" name="data-raid1" class="form-control"
                            disabled="">
                 </div>
-                <!--<span id="datanode-raid1-price" class="price pull-right form-control-static">US$ 0.00/month</span>-->
-            </div>
+                &lt;!&ndash;<span id="datanode-raid1-price" class="price pull-right form-control-static">US$ 0.00/month</span>&ndash;&gt;
+            </div>-->
 
             <div class="form-group">
                 <label  class="col-sm-4 required control-label">
@@ -469,8 +470,8 @@
                 </label>
 
                 <div class="col-sm-2">
-                    <select ng-model="model.dataNetwork" id="data-network" name="data-network" class="form-control">
-                        <option value="1G" selected="">1 Gbit</option>
+                    <select id="data-network" name="data-network" class="form-control">
+                        <option value="1G" selected="selected">1 Gbit</option>
                     </select>
                                                             <span class="glyphicon glyphicon-question-sign" data-toggle="popover"
                                                                   data-content="Currently we only support 1 Gbps network speed."
@@ -489,14 +490,14 @@
                 </label>
 
                 <div class="col-sm-3">
-                    <select ng-model="model.dataOs" id="data-os" name="data-os" class="form-control">
-                        <option value="RHEL">Redhat 6.5</option>
+                    <select  class="form-control">
+                        <option value="RHEL" selected="selected">Redhat 6.5</option>
                     </select>
                 </div>
                 <!--<span id="datanode-os-price" class="price pull-right form-control-static">US$ 90.00/month</span>-->
             </div>
 
-            <div class="form-group">
+           <!-- <div class="form-group">
                 <label for="data-license" class="col-sm-4 required control-label">
                     BigInsights License
                 </label>
@@ -504,8 +505,8 @@
                 <div class="col-sm-5">
                     <input ng-model="model.dataLicense" type="text" id="data-license" class="form-control" disabled="">
                 </div>
-                <!--<span id="data-license-price" class="price pull-right form-control-static">US$ 3,120.00/month</span>-->
-            </div>
+                &lt;!&ndash;<span id="data-license-price" class="price pull-right form-control-static">US$ 3,120.00/month</span>&ndash;&gt;
+            </div>-->
 
             </div>
             </div>
