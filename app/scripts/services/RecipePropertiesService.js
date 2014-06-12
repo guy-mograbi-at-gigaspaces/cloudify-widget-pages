@@ -112,7 +112,7 @@ angular.module('ibmBiginsightsUiApp')
                 dataImageIdValue = input.dataCciImage;
             }
 
-            add('linuxImageId', masterImageIdValue);
+            add('linuxImageId', masterImageIdValue + '');
 //            add('dataLinuxImageId', dataImageIdValue);
 
 
