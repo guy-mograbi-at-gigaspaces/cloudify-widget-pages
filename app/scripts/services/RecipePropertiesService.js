@@ -83,16 +83,16 @@ angular.module('ibmBiginsightsUiApp')
 
 
             if ( isMasterBareMetal() ) {
-                add('masterDiskControllerID', '487');
+                add('masterDiskControllerID', 487);
             }else{
                 add('masterDiskControllerID', '');
 
             }
 
             if ( isDataBareMetal() ) {
-                add('dataDiskControllerID', '487');
+                add('dataDiskControllerID', 487);
             }else{
-                add('masterDiskControllerID', '');
+                add('dataDiskControllerID', '');
 
             }
 
