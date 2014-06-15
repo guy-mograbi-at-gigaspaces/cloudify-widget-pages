@@ -130,7 +130,7 @@ angular.module('ibmBiginsightsUiApp')
             var myTag = this.getRandomTag();
 
             function getPrefix( isBare, suffix ){
-                return 'bi' + isBare ? 'bm' : 'cci' + myTag + suffix;
+                return 'bi' + ( isBare ? 'bm' : 'cci' ) + myTag + suffix;
             }
 
             add('MANAGER_PREFIX', getPrefix( isMasterBareMetal(), 'mngr'));
