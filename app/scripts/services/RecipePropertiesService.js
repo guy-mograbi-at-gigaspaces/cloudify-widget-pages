@@ -128,8 +128,13 @@ angular.module('ibmBiginsightsUiApp')
             add('biAdminPassword', input.biAdminPassword);
 
             var myTag = this.getRandomTag();
-            add('MANAGER_PREFIX', 'bi' + myTag + 'mngr');
-            add('AGENT_PREFIX', 'bi' + myTag + 'agent');
+
+            function getPrefix( isBare, suffix ){
+                return 'bi' + isBare ? 'bm' : 'cci' + myTag + suffix;
+            }
+
+            add('MANAGER_PREFIX', getPrefix( isMasterBareMetal(), 'mngr'));
+            add('AGENT_PREFIX', getPrefix(isDataBareMetal(), 'agent'));
 
 
 
