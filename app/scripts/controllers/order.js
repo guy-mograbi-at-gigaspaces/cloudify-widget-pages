@@ -50,7 +50,7 @@ angular.module('ibmBiginsightsUiApp')
 
 
             try {
-                frames[0].postMessage({'name': 'widget_recipe_properties', 'data': $scope.recipeProperties }, 'http://ibmstaging.gsdev.info');
+                frames[0].postMessage({'name': 'widget_recipe_properties', 'data': $scope.recipeProperties }, 'http://ibmstaging2.gsdev.info');
 
             } catch (e) {
                 $log.error(e);
