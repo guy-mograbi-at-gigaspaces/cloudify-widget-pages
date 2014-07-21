@@ -86,6 +86,19 @@
         "operatingSystemDisk" : "Enabling RAID 1 provides a secondary hard drive for operating system data redundancy, this will improve system availability.",
         "numberOfDataDisks" : "Having more disks per server allows you to store more data into your BigInsights cluster.",
         "masterRaid" :"Enabling RAID 1 provides a secondary hard drive for operating system data redundacy, this will improve system availability."
+    },
+
+    "blu" : {
+        "title": "BLU Acceleration for Cloud",
+        "tryHeader": "Try BLU Acceleration for Cloud (Beta) directly in your web browser",
+        "try": "Try BLU Acceleration for Cloud using the Cloudify widget below. Evaluate a set of great data warehousing and analytics technologies directly from your browser at no cost. Just follow these simple steps:",
+        "step1": "<strong>Step 1</strong>: Click the <strong>Play</strong> button in the widget below. If you don’t see a widget, ensure that JavaScript is enabled and that you’re using a modern web browser.",
+        "step2": "<strong>Step 2</strong>: Instantaneously sign up for the trial through your <strong>Google ID</strong> or by providing <strong>your name and email</strong> in the pop up that appears.",
+        "step3": "<strong>Step 3</strong>: When your system is ready, the widget will show a <strong>Start BLU Acceleration</strong> link. Click this link to start your trial. You can safely ignore any certificate warnings. In the page that opens up, enter the <strong>Username</strong> and <strong>Password</strong> shown in the bottom right of the widget below.",
+        "note": "Note",
+        "noteDetails": "You are advised not to upload sensitive data during your free trial of BLU Acceleration for Cloud.",
+        "trialTitle": "BLU Acceleration For Cloud Trial",
+        "trialEnds": "When your trial period ends, continue using BLU Acceleration for Cloud using the Solo or Business plans. "
     }
 
 }

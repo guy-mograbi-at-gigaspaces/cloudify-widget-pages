@@ -1,9 +1,13 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
@@ -11,54 +15,60 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- build:css(.tmp,app) styles/main.css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
+    <!-- build:css(.tmp,app) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
 </head>
-  <body ng-app="ibmBiginsightsUiApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<body ng-app="ibmBiginsightsUiApp">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
 
-        <!-- Add your site or application content here -->
-        <div ng-view=""></div>
+<!-- Add your site or application content here -->
+<div ng-view=""></div>
 
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 
-    <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular/angular.js"></script>
 
-        <!-- build:js scripts/modules.js -->
+<!-- build:js scripts/modules.js -->
 
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <!-- endbuild -->
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/i18next/release/i18next-1.7.1.min.js"></script>
+<script src="bower_components/gs-ui-infra/app/scripts/app.js"></script>
+<script src="bower_components/gs-ui-infra/app/scripts/filters/i18n.js"></script>
+<script src="bower_components/gs-ui-infra/app/scripts/services/i18next.js"></script>
+<!-- endbuild -->
 
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/order.js"></script>
-        <script src="scripts/services/RecipePropertiesService.js"></script>
-        <script src="scripts/filters/i18n.js"></script>
-        <script src="scripts/services/DataCenterService.js"></script>
-        <script src="scripts/services/Client.js"></script>
-        <script src="scripts/directives/helpPopover.js"></script>
-        <script src="scripts/services/BigInsightsEditionService.js"></script>
-        <script src="scripts/services/FilesystemTypesService.js"></script>
-        <script src="scripts/directives/optionDisabled.js"></script>
-        <script src="scripts/services/ServerTypeService.js"></script>
-        <script src="scripts/services/CpuService.js"></script>
-        <script src="scripts/services/RamService.js"></script>
-        <script src="scripts/services/DisksService.js"></script>
-        <!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<script src="scripts/controllers/order.js"></script>
+<script src="scripts/services/RecipePropertiesService.js"></script>
+<script src="scripts/services/DataCenterService.js"></script>
+<script src="scripts/services/Client.js"></script>
+<script src="scripts/directives/helpPopover.js"></script>
+<script src="scripts/services/BigInsightsEditionService.js"></script>
+<script src="scripts/services/FilesystemTypesService.js"></script>
+<script src="scripts/directives/optionDisabled.js"></script>
+<script src="scripts/services/ServerTypeService.js"></script>
+<script src="scripts/services/CpuService.js"></script>
+<script src="scripts/services/RamService.js"></script>
+<script src="scripts/services/DisksService.js"></script>
+<script src="scripts/controllers/blu.js"></script>
+<!-- endbuild -->
 </body>
 </html>
