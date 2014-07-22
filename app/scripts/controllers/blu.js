@@ -1,12 +1,20 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('BluCtrl', function ($scope, I18next) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+    .controller('BluCtrl', function ($scope, I18next, $routeParams) {
 
-        I18next.setOptions({lng: 'ch'});
+        function setLanguage( code ){
+            I18next.setOptions({lng: code});
+        }
+
+        $scope.toChinese =function(){
+            setLanguage('ch');
+        };
+
+        $scope.toEnglish = function(){
+            setLanguage('en');
+        };
+
+
+        setLanguage($routeParams.lang || 'ch');
     });
