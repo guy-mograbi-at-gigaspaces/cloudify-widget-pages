@@ -12,6 +12,6 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute', 'gsUiInfraApp'])
                 controller: 'BluCtrl'
             })
             .otherwise({
-                redirectTo: '/order'
+                templateUrl: 'views/main.html'
             });
     });
