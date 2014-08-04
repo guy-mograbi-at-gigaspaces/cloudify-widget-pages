@@ -11,6 +11,10 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute', 'gsUiInfraApp'])
                 templateUrl: 'views/blu.html',
                 controller: 'BluCtrl'
             })
+            .when('/blusolo', {
+                templateUrl : 'views/blu_solo.html',
+                controller: 'BluSoloCtrl'
+            })
             .otherwise({
                 templateUrl: 'views/main.html'
             });

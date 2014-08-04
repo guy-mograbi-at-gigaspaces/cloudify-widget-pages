@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('BluCtrl', function ($scope, I18next, $routeParams) {
+    .controller('BluCtrl', function ($scope, I18next, $routeParams, $timeout) {
 
         function setLanguage( code ){
             I18next.setOptions({lng: code});
         }
 
         $scope.toChinese =function(){
-            setLanguage('ch');
+            $timeout(function(){ setLanguage('ch')},0);
         };
 
         $scope.toEnglish = function(){
