@@ -28,6 +28,12 @@
             Find your account number by clicking one of these two links: SoftLayer | AWS
         </div>
 
+        <div class="register-marketplace" ng-show="execution.cloudProvider==='aws'">
+            In order to use this service, you need to first sign up to this product in <a href="https://aws.amazon.com/marketplace/pp/B00A6KUVBW" target="_blank">AWS marketplace</a>. <br/>
+            <a href="https://aws.amazon.com/marketplace/pp/B00A6KUVBW" target="_blank">Click the link</a> and follow AWS instructions.
+
+        </div>
+
         <div class="form">
         <!-- TODO : do form here -->
             <div class="h2">BLU Acceleration for Cloud - Beta</div>
@@ -46,39 +52,103 @@
                         Choose the cloud where you want to deploy your BLU Acceleration for Cloud
                     </div>
                 </div>
-
                 <!-- softlayer specific -->
-                <div class="controller softlayer-account" control-focus ng-show="execution.cloudProvider==='softlayer'">
-                    <div class="section">
-                        <div class="label">SoftLayer Account (e.g., 123456) <span class="required">*</span></div>
-                        <div class="control">
-                            <input type="text" ng-model="execution.softlayerAccount" maxlength="6"/>
-                        </div>
-                        <span class="instructions">
-                            <span class="text">Maximum Allowed: 6 digits.</span>
-                            <span class="current">Currently Used: {{execution.softlayerAccount.length}} digits.</span>
-                        </span>
-                    </div>
-                    <div class="side-info">
-                        You will find your Softlayer Account on the upper hand side of the Softlayer Control Portal <a href="https://control.softlayer.com/" target="_blank">https://control.softlayer.com/</a>
-                    </div>
-                </div>
+                <span ng-show="execution.cloudProvider==='softlayer'">
+                    <!--<div class="controller softlayer-account" control-focus >-->
+                        <!--<div class="section">-->
+                            <!--<div class="label">SoftLayer Account (e.g., 123456) <span class="required">*</span></div>-->
+                            <!--<div class="control">-->
+                                <!--<input type="text" ng-model="execution.softlayerAccount" maxlength="6"/>-->
+                            <!--</div>-->
+                            <!--<span class="instructions">-->
+                                <!--<span class="text">Maximum Allowed: 6 digits.</span>-->
+                                <!--<span class="current">Currently Used: {{execution.softlayerAccount.length}} digits.</span>-->
+                            <!--</span>-->
+                        <!--</div>-->
+                        <!--<div class="side-info">-->
+                            <!--You will find your Softlayer Account on the upper hand side of the Softlayer Control Portal <a href="https://control.softlayer.com/" target="_blank">https://control.softlayer.com/</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
-                <div class="controller aws-account" control-focus ng-show="execution.cloudProvider==='aws'">
-                    <div class="section">
-                        <div class="label">AWS Account Number (e.g., 1111-2222-3333)  <span class="required">*</span></div>
-                        <div class="control">
-                            <input type="text" ng-model="execution.softlayerAccount" maxlength="6"/>
+                    <div class="controller" control-focus >
+                        <div class="section">
+                            <div class="label">Sfotlayer API Key  <span class="required">*</span></div>
+                            <div class="control">
+                                <input type="text" ng-model="execution.softlayerApiKey" />
+                            </div>
                         </div>
-                        <span class="instructions">
-                            <span class="text">Maximum Allowed: 6 digits.</span>
-                            <span class="current">Currently Used: {{execution.softlayerAccount.length}} digits.</span>
-                        </span>
                     </div>
-                    <div class="side-info">
-                        You will find your Account number at <a href="https://portal.aws.amazon.com/gp/aws/manageYourAccount" target="_blank">AWS Manager Your Account Page</a>
+
+                    <div class="controller" control-focus >
+                        <div class="section">
+                            <div class="label">Softlayer API Secret Key  <span class="required">*</span></div>
+                            <div class="control">
+                                <input type="text" ng-model="execution.softlayerApiSecretKey" />
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="controller" control-focus>
+                        <div class="section">
+                            <div class="label">Data Center <span class="required">*</span></div>
+                            <div class="control">
+                                <select ng-options="dc.id as ('datacenters.' + dc.label | i18n) for dc in dataCenters" ng-model="execution.dataCenter"></select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </span>
+                <span ng-show="execution.cloudProvider==='aws'">
+                    <div class="controller aws-account" control-focus >
+                        <div class="section">
+                            <div class="label">AWS Account Number (e.g., 1111-2222-3333)  <span class="required">*</span></div>
+                            <div class="control">
+                                <input type="text" ng-model="execution.awsAccount"/>
+                            </div>
+                        </div>
+                        <div class="side-info">
+                            You will find your Account number at <a href="https://portal.aws.amazon.com/gp/aws/manageYourAccount" target="_blank">AWS Manager Your Account Page</a>
+                        </div>
+                    </div>
+
+                    <div class="controller" control-focus >
+                        <div class="section">
+                            <div class="label">AWS API Key  <span class="required">*</span></div>
+                            <div class="control">
+                                <input type="text" ng-model="execution.awsApiKey" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controller " control-focus >
+                        <div class="section">
+                            <div class="label">AWS API Secret Key  <span class="required">*</span></div>
+                            <div class="control">
+                                <input type="password" ng-model="execution.awsApiSecretKey" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controller" control-focus>
+                        <div class="section">
+                            <div class="label">Region <span class="required">*</span></div>
+                            <div class="control">
+                                <select ng-options="region.id as region.label for region in regions" ng-model="execution.region"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="controller" control-focus>
+                        <div class="section">
+                            <div class="label">Instance Type <span class="required">*</span></div>
+                            <div class="control">
+                                <select ng-options="instanceType.id as instanceType.label for instanceType in instanceTypes" ng-model="execution.instanceType"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </span>
 
                 <div class="controller" control-focus>
                     <div class="section">
@@ -121,13 +191,19 @@
                     </div>
                 </div>
 
+
+
                 <div class="agreement controller" control-focus>
                     <div class="section">
                         <div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>
                         <div class="control">
-                            <input type="checkbox"> I agree
+                            <input type="checkbox" ng-model="execution.agreed"> I agree
                         </div>
                     </div>
+                </div>
+
+                <div class="form-errors" ng-show="execution.error">
+                    {{execution.error}}
                 </div>
 
                 <div class="controller" control-focus>
@@ -136,13 +212,17 @@
                             You must agree to email communications to participate in this program.
                         </div>
                         <div class="form-actions">
-                            <button ng-click="submit">Submit</button>
+                            <button ng-click="submitForm()" ng-disabled="!formIsValid">Submit</button>
                         </div>
                     </div>
                 </div>
             </div>
 
 
+        </div>
+
+        <div>
+            <iframe src="http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/0375c7bb-c070-4b80-970b-eaec99fccfc7/view?since=1408442996708" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>
         </div>
 
         <div class="h2">
