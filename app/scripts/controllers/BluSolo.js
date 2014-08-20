@@ -36,8 +36,8 @@ angular.module('ibmBiginsightsUiApp')
 
         DataCenterService.getDataCenters().then(function (result) {
 
-            $scope.dataCenters = [_.find(result, { 'label': 'hongkong2'})];
-            $scope.execution.dataCenter = $scope.dataCenters[0].id;
+            $scope.dataCenters = result;
+            $scope.execution.dataCenter = _.find(result, { 'label': 'hongkong2'}).id;
         });
 
 
