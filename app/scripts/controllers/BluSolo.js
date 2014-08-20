@@ -137,6 +137,7 @@ angular.module('ibmBiginsightsUiApp')
                 return;
             }
             $log.info('submitting form');
+            _postMessage('widget_play',{});
         };
 
 
@@ -154,6 +155,8 @@ angular.module('ibmBiginsightsUiApp')
             // 'widget_advanced_data'
             $('iframe')[0].contentWindow.postMessage( { 'name' : name, 'data' :  data } , '*');
         }
+
+
 
         function receiveMessage( e ){
             $log.info('parent got message ', e.data );
