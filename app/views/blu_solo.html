@@ -1,31 +1,28 @@
 <div id="blu_solo">
     <div class="header">
+
         <div class=" content-width">
             BLU Acceleration for Cloud
         </div>
     </div>
     <div class="content content-width">
-        <div class="h2">BLU Acceleration for Cloud Solo – Beta</div>
-        <div class="intro">Designed to meet demands of the most sophisticated enterprises, BLU Acceleration for Cloud Solo brings advanced data warehousing and analytics to an individual user. With the Solo plan you provision a private, dedicated data analytics and warehouse for your personal use… on the cloud of your choice (AWS or SoftLayer). Regardless of which cloud provider you choose to host your BLU Acceleration for Cloud Solo you will enjoy the same benefits.</div>
+    <div class="switch-language"></div>
+        <div class="h2">{{ 'bluSolo.title' | i18n }}</div>
+        <div class="intro"> {{ 'bluSolo.intro.text' | i18n }}</div>
         <ul>
-            <li>Use all of the capabilities: We held nothing back</li>
-            <li>Single user configuration to keep the cost down without sacrificing function</li>
-            <li>10GB of compressed database storage should accommodate 50GB or even larger data sets</li>
-            <li>No charge for software. Only pay for your cloud resources</li>
-            <li>Seamlessly upgrade to one of the business plans when you need more users or larger data sets</li>
+            <li>{{ 'bluSolo.intro.item1' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item2' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item3' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item4' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item5' | i18n }}</li>
         </ul>
-        <div class="h2">Launch BLU Acceleration for Cloud</div>
+        <div class="h2"> {{ 'bluSolo.launch.title' | i18n }}</div>
         <div>
-            To provision your private instance of BLU Acceleration for Cloud you will require either a
-            <a href="http://www.softlayer.com/" target="_blank">SoftLayer</a>a or an
-            or <a href="https://www.amazon.com/ap/signin?openid.assoc_handle=aws&openid.return_to=https%3A%2F%2Fportal.aws.amazon.com%2Fgp%2Faws%2Fdeveloper%2Fregistration%2Findex.html&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.identity=" target="_blank">AWS account</a>. IBM software provided as part of the Solo plan is free of charges, however your account will be charged by the cloud provider for any cloud services you consume.
+              <span ng-bind-html="'bluSolo.launch.text1' | i18n"></span>
         </div>
         <div>
+            <span ng-bind-html="'bluSolo.launch.text2' | i18n"></span>
 
-            Kindly fill out the following form so that we can share the BLU Acceleration for Cloud image with your
-            <a href="https://imdemocloud.uservoice.com/knowledgebase/articles/323619" target="_blank">SoftLayer</a>
-            or <a href="https://imdemocloud.uservoice.com/knowledgebase/articles/323620" target="_blank">AWS account</a>.
-            Find your account number by clicking one of these two links: SoftLayer | AWS
         </div>
 
         <div class="register-marketplace" ng-show="execution.cloudProvider==='aws'">
@@ -36,9 +33,9 @@
 
         <div class="form">
         <!-- TODO : do form here -->
-            <div class="h2">BLU Acceleration for Cloud - Beta</div>
-            <div class="under-title">Please take a few moments to complete this request to participate in the IBM BLU Acceleration for Cloud beta program.</div>
-            <div class="hr"></div>
+
+
+
 
             <div class="controllers">
                 <div class="cloud-provider controller" control-focus>
@@ -86,10 +83,11 @@
                                 <input type="text" ng-model="execution.softlayerApiSecretKey" />
                             </div>
                         </div>
-                    </div>
-
+                    </div>0
                     <div class="controller" control-focus>
                         <div class="section">
+
+                            {{ 'datacenters.' + dataCenters[0].label | i18n }}
                             <div class="label">Data Center <span class="required">*</span></div>
                             <div class="control">
                                 <select ng-options="dc.id as ('datacenters.' + dc.label | i18n) for dc in dataCenters" ng-model="execution.dataCenter"></select>
@@ -150,58 +148,58 @@
 
                 </span>
 
-                <div class="controller" control-focus>
-                    <div class="section">
+                <!--<div class="controller" control-focus>-->
+                    <!--<div class="section">-->
 
-                        <div class="label">Email <span class="required">*</span></div>
-                        <div class="control">
-                            <input type="text" ng-model="execution.email"/>
-                        </div>
-                    </div>
-                </div>
+                        <!--<div class="label">Email <span class="required">*</span></div>-->
+                        <!--<div class="control">-->
+                            <!--<input type="text" ng-model="execution.email"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                <div class="controller visitor-name" control-focus>
-                    <div class="section">
-                        <div class="label">Name<span class="required">*</span></div>
-                        <div class="inputs">
-                            <div class="first">
-                                <input type="text" ng-model="execution.firstName"/>
-                            </div>
-                            <div class="second">
-                                <input type="text" ng-model="execution.lastName"/>
-                            </div>
-                        </div>
-                        <div class="instructions">
-                            <div class="first">
-                                First
-                            </div>
-                            <div class="second">
-                                Last
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="controller visitor-name" control-focus>-->
+                    <!--<div class="section">-->
+                        <!--<div class="label">Name<span class="required">*</span></div>-->
+                        <!--<div class="inputs">-->
+                            <!--<div class="first">-->
+                                <!--<input type="text" ng-model="execution.firstName"/>-->
+                            <!--</div>-->
+                            <!--<div class="second">-->
+                                <!--<input type="text" ng-model="execution.lastName"/>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="instructions">-->
+                            <!--<div class="first">-->
+                                <!--First-->
+                            <!--</div>-->
+                            <!--<div class="second">-->
+                                <!--Last-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                <div class="controller" control-focus>
-                    <div class="section">
-                        <div class="label">Company (Organization) Name<span class="required">*</span></div>
-                        <div class="control">
-                            <input type="text" ng-model="execution.companyName"/>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="controller" control-focus>-->
+                    <!--<div class="section">-->
+                        <!--<div class="label">Company (Organization) Name<span class="required">*</span></div>-->
+                        <!--<div class="control">-->
+                            <!--<input type="text" ng-model="execution.companyName"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
 
 
-                <div class="agreement controller" control-focus>
-                    <div class="section">
-                        <div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>
-                        <div class="control">
-                            <input type="checkbox" ng-model="execution.agreed"> I agree
-                        </div>
-                    </div>
-                </div>
-
+                <!--<div class="agreement controller" control-focus>-->
+                    <!--<div class="section">-->
+                        <!--<div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>-->
+                        <!--<div class="control">-->
+                            <!--<input type="checkbox" ng-model="execution.agreed"> I agree-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                {{$root.loaded}}
                 <div class="form-errors" ng-show="execution.error">
                     {{execution.error}}
                 </div>
@@ -212,7 +210,7 @@
                             You must agree to email communications to participate in this program.
                         </div>
                         <div class="form-actions">
-                            <button ng-click="submitForm()" ng-disabled="!formIsValid">Submit</button>
+                            <button ng-click="submitForm()">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -247,13 +245,18 @@
         </div>
 
 
+        <div class="comments" auto-resize-iframe>
+            hello world
+            <iframe src="/views/disqus/bluSoloFrame.html" frameborder="0" scrolling="no" border="0"></iframe>
+        </div>
         <div class="actions">
-            <button>Back to Plans & Pricing</button>
+            <a href="http://bluforcloud.com/plans/" target="_blank">Back to Plans & Pricing</a>
         </div>
     </div>
 
     <div class="footer content-width">
-        <img src="http://bluforcloud.com/wp-content/uploads/2013/10/ibm-e1382472155506.png"/>
+        <img src="http://bluforcloud.com/wp-content/uploads/2013/10/ibm-e1382472155506.png"/><br/>
+
     </div>
 
 </div>

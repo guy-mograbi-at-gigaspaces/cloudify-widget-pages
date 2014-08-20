@@ -24,6 +24,25 @@
         "quickstart":"Quick Start"
     },
 
+    "bluSolo" : {
+        "title" : "BLU Acceleration for Cloud",
+        "intro" : {
+            "text" : "Designed to meet demands of the most sophisticated enterprises, BLU Acceleration for Cloud Solo brings advanced data warehousing and analytics to an individual user. With the Solo plan you provision a private, dedicated data analytics and warehouse for your personal use… on the cloud of your choice (AWS or SoftLayer). Regardless of which cloud provider you choose to host your BLU Acceleration for Cloud Solo you will enjoy the same benefits.",
+            "item1" : "Use all of the capabilities: We held nothing back",
+            "item2" : "Single user configuration to keep the cost down without sacrificing function",
+            "item3" : "10GB of compressed database storage should accommodate 50GB or even larger data sets",
+            "item4" : "No charge for software. Only pay for your cloud resources",
+            "item5" : "Seamlessly upgrade to one of the business plans when you need more users or larger data sets"
+        },
+        "launch" : {
+            "title" : "Launch BLU Acceleration for Cloud",
+            "text1" : "To provision your private instance of BLU Acceleration for Cloud you will require either a <a href=\"http://www.softlayer.com/\">SoftLayer</a> or an <a href=\"https://www.amazon.com/ap/signin?openid.assoc_handle=aws&amp;openid.return_to=https%3A%2F%2Fportal.aws.amazon.com%2Fgp%2Faws%2Fdeveloper%2Fregistration%2Findex.html&amp;openid.mode=checkid_setup&amp;openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&amp;openid.identity=\">AWS account</a>. IBM software provided as part of the Solo plan is free of charges, however your account will be charged by the cloud provider for any cloud services you consume.",
+            "text2" : "Kindly fill in your credentials of AWS or SoftLayer account in the following Cloudify Widget to have an instance of BLU Acceleration for Cloud Solo -Beta :"
+        }
+
+
+    },
+
     "filesystemTypes" : {
         "hdfs" : "HDFS",
         "gpfs" : "GPFS"

@@ -7,9 +7,11 @@ basePath = '';
 files = [
     JASMINE,
     JASMINE_ADAPTER,
-    'app/bower_components/jquery/jquery.min.js',
+    'app/bower_components/jquery/dist/jquery.js',
     'app/bower_components/angular/angular.js',
+    'app/bower_components/i18next/release/i18next-1.7.1.js',
     'app/bower_components/angular-mocks/angular-mocks.js',
+    'app/bower_components/angular-route/angular-route.js',
     'app/bower_components/gs-ui-infra/app/scripts/**/*.js',
     'app/scripts/*.js',
     'app/scripts/**/*.js',

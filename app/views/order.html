@@ -56,7 +56,7 @@
 
 
                             <div class="col-sm-3">
-                                <select class="form-control" ng-model="input.locationId"
+                                <select class="form-control" ng-model="input.locationId"    ng-style="{'width': '100%'}"
                                         ng-options="datacenter.id as ('datacenters.' + datacenter.label | i18n) for datacenter in dataCenters"></select>
                                 <span help-popover content="help.locationId"> </span>
                             </div>

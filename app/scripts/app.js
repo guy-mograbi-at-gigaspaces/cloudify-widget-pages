@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp', ['ngRoute', 'gsUiInfraApp'])
+angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp']) // 'gsUiInfraApp'
     .config(function ($routeProvider) {
         $routeProvider
             .when('/order', {

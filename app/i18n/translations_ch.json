@@ -1,17 +1,5 @@
 {
-    "datacenters": {
-        "amsterdam1": "Amsterdam 1",
-        "dallas1": "Dallas 1",
-        "dallas5": "Dallas 5",
-        "dallas6": "Dallas 6",
-        "dallas7": "Dallas 7",
-        "hongkong2": "Hong Kong 2",
-        "sanjose1": "San Jose 1",
-        "seattle": "Seattle",
-        "singapore1": "Singapore 1",
-        "washington1": "Washington, DC 1"
 
-    },
     "languages":{
         "ch" : "中国的",
         "en" : "English"
@@ -22,6 +10,23 @@
         "standardProduction" : "Standard Production Environment",
         "standard" : "Standard Non-Production Environment",
         "quickstart":"Quick Start"
+    },
+
+    "bluSolo" : {
+        "title" : "BLU Acceleration for Cloud 单用户(试用版)",
+        "intro" : {
+            "text" : "BLU Acceleration for Cloud 单用户专注于复杂的企业应用场景，将最先进的数据仓库和商业分析功能提供给单个用户。 使用单用户云服务计划，您将在云平台上（亚马逊或者SoftLayer）拥有一个私人的，专用的数据仓库和分析平台。无论您选择哪个平台，将获得相同的功能和服务。",
+            "item1" : "您将拥有所有的功能：我们不限制任何功能的使用",
+            "item2" : "单用户的配置能够极大降低成本但不牺牲任何功能",
+            "item3" : "10GB的压缩数据容量能够允许装载50GB或者更多的原数据",
+            "item4" : "软件全免费。您只需要支付云平台资源",
+            "item5" : "当你需要更多的用户和更大的数据处理能力时，可以无缝升级到商业服务计划而无需任何的改动"
+        } ,
+        "launch" : {
+            "title" : "在Cloudify空间中开始使用BLU云服务",
+            "text1" : "为了使用私有的专用BLU Acceleration for Cloud 单用户试用版, 我们需要您提供您的 <a href=\"http://www.softlayer.com/\">SoftLayer</a> 或者 <a href=\"https://www.amazon.com/ap/signin?openid.assoc_handle=aws&amp;openid.return_to=https%3A%2F%2Fportal.aws.amazon.com%2Fgp%2Faws%2Fdeveloper%2Fregistration%2Findex.html&amp;openid.mode=checkid_setup&amp;openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&amp;openid.identity=\">AWS 账户信息</a>. IBM软件对于单用户云服务计划是免费的，但是您需要支付选择的云服务资源",
+            "text2" : "请在控件中输入你的云平台（亚马逊或者SoftLayer）用户名和密码，我们将为你创建一个BLU Acceleration for Cloud单用户（试用版）服务器："
+        }
     },
 
     "filesystemTypes" : {

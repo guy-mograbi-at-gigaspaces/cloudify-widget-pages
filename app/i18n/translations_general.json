@@ -1,0 +1,15 @@
+{
+    "datacenters": {
+        "amsterdam1": "Amsterdam 1",
+        "dallas1": "Dallas 1",
+        "dallas5": "Dallas 5",
+        "dallas6": "Dallas 6",
+        "dallas7": "Dallas 7",
+        "hongkong2": "Hong Kong 2",
+        "sanjose1": "San Jose 1",
+        "seattle": "Seattle",
+        "singapore1": "Singapore 1",
+        "washington1": "Washington, DC 1"
+
+    }
+}
