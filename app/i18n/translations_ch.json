@@ -1,9 +1,6 @@
 {
 
-    "languages":{
-        "ch" : "中国的",
-        "en" : "English"
-    },
+
     "biginsightsEditions" : {
         "enterpriseProduction" : "Enterprise Production Environment",
         "enterprise":"Enterprise Non-Production Environment",

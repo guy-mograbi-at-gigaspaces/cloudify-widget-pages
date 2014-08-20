@@ -1,4 +1,8 @@
 {
+    "languages":{
+        "ch" : "中国的",
+        "en" : "English"
+    },
     "datacenters": {
         "amsterdam1": "Amsterdam 1",
         "dallas1": "Dallas 1",

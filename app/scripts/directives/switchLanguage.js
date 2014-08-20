@@ -25,21 +25,16 @@ angular.module('ibmBiginsightsUiApp')
                     return $routeParams.lang;
                 }, function (newValue) {
 
-                    $timeout(function () {
+
                         I18next.setOptions(
-                            {lng: newValue },
-                            { fallbackLng: 'general'}
+                            {
+                                lng: newValue,
+                                resGetPath: 'i18n/__ns_____lng__.json?timestamp' + new Date().getTime(),
+                                fallbackLng:  'general' //todo : make this an array
+                            }
                         );
-                        I18next.getPromise().then(function () {
-                        }, function () {
-                        }, function () {
-                            $log.info('after i18n load. rendering');
-                            $rootScope.$render();
-                        });
-                    }, 0);
-//              $timeout(function(){I18next.setOptions({lng: newValue })}, 10);
-//              $timeout(function(){I18next.setOptions({lng: newValue })}, 100);
-//              $timeout(function(){I18next.setOptions({lng: newValue })}, 1000);
+
+
 
                 });
             }
