@@ -35,10 +35,13 @@ angular.module('ibmBiginsightsUiApp')
         ];
 
         DataCenterService.getDataCenters().then(function (result) {
+
             $scope.dataCenters = [_.find(result, { 'label': 'hongkong2'})];
-            $scope.execution.dataCenter = $scope.dataCenters[0];
+            $scope.execution.dataCenter = $scope.dataCenters[0].id;
         });
 
+
+        $scope.loginDetails = {};
         $scope.execution = {
             'cloudProvider': CloudProviders.Softlayer,
             'softlayerAccount': '',
@@ -121,7 +124,7 @@ angular.module('ibmBiginsightsUiApp')
 //        },true);
 
         function validateForm() {
-            if (!$scope.execution.softlayerApiKey || !$scope.execution.softlayerApiSecretKey || !$scope.execution.dataCenter) {
+            if (!$scope.loginDetails.softlayerApiKey || !$scope.loginDetails.softlayerApiSecretKey || !$scope.execution.dataCenter) {
                 _error('Value is missing');
             }
         }
@@ -135,9 +138,26 @@ angular.module('ibmBiginsightsUiApp')
             }
             $log.info('submitting form');
         };
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
+
+
+        $scope.$watch('loginDetails', function(){
+            postAdvancedData( { 'username' : $scope.loginDetails.softlayerApiKey , 'apiKey' : $scope.loginDetails.softlayerApiSecretKey}  );
+        },true);
+
+        function postAdvancedData( advancedData ){
+            // {'username':, 'apiKey':null}
+            _postMessage('widget_advanced_data', {'type':'softlayer', 'params' : advancedData } );
+        }
+
+        function _postMessage ( name, data ){
+            // {'type':'softlayer', 'params' : {'username':'guy', 'apiKey':null} }
+            // 'widget_advanced_data'
+            $('iframe')[0].contentWindow.postMessage( { 'name' : name, 'data' :  data } , '*');
+        }
+
+        function receiveMessage( e ){
+            $log.info('parent got message ', e.data );
+        }
+
+        window.addEventListener('message', receiveMessage, false);
     });

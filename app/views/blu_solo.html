@@ -71,7 +71,7 @@
                         <div class="section">
                             <div class="label">Sfotlayer API Key  <span class="required">*</span></div>
                             <div class="control">
-                                <input type="text" ng-model="execution.softlayerApiKey" />
+                                <input type="text" ng-model="loginDetails.softlayerApiKey" />
                             </div>
                         </div>
                     </div>
@@ -80,14 +80,14 @@
                         <div class="section">
                             <div class="label">Softlayer API Secret Key  <span class="required">*</span></div>
                             <div class="control">
-                                <input type="text" ng-model="execution.softlayerApiSecretKey" />
+                                <input type="text" ng-model="loginDetails.softlayerApiSecretKey" />
                             </div>
                         </div>
-                    </div>0
+                    </div>
+
                     <div class="controller" control-focus>
                         <div class="section">
 
-                            {{ 'datacenters.' + dataCenters[0].label | i18n }}
                             <div class="label">Data Center <span class="required">*</span></div>
                             <div class="control">
                                 <select ng-options="dc.id as ('datacenters.' + dc.label | i18n) for dc in dataCenters" ng-model="execution.dataCenter"></select>
@@ -199,7 +199,6 @@
                         <!--</div>-->
                     <!--</div>-->
                 <!--</div>-->
-                {{$root.loaded}}
                 <div class="form-errors" ng-show="execution.error">
                     {{execution.error}}
                 </div>
@@ -220,7 +219,8 @@
         </div>
 
         <div>
-            <iframe src="http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/0375c7bb-c070-4b80-970b-eaec99fccfc7/view?since=1408442996708" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>
+            <!--<iframe src="http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/0375c7bb-c070-4b80-970b-eaec99fccfc7/view?since=1408442996708" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>-->
+            <iframe src="http://localhost:3000/public-folder/angularApps/index.html#/widgets/2f6f8e68-5dd2-4623-a704-139dc0af7a7e/view?since=1408536907313" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>
         </div>
 
         <div class="h2">

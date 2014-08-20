@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .directive('switchLanguage', function (I18next, $routeParams, $timeout, $location, $rootScope, $log) {
+    .directive('switchLanguage', function (I18next, $routeParams, $timeout, $location) {
         return {
             templateUrl: 'views/directives/switchLanguage.html',
             restrict: 'C',
@@ -26,14 +26,13 @@ angular.module('ibmBiginsightsUiApp')
                 }, function (newValue) {
 
 
-                        I18next.setOptions(
-                            {
-                                lng: newValue,
-                                resGetPath: 'i18n/__ns_____lng__.json?timestamp' + new Date().getTime(),
-                                fallbackLng:  'general' //todo : make this an array
-                            }
-                        );
-
+                    I18next.setOptions(
+                        {
+                            lng: newValue,
+                            resGetPath: 'i18n/__ns_____lng__.json?timestamp' + new Date().getTime(),
+                            fallbackLng: 'general' //todo : make this an array
+                        }
+                    );
 
 
                 });
