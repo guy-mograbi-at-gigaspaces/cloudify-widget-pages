@@ -1,6 +1,8 @@
 // Generated on 2013-10-15 using generator-angular 0.3.0
 'use strict';
 var LIVERELOAD_PORT = 35739;
+var logger = require('log4js').getLogger('Gruntfile');
+var path = require('path');
 var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
@@ -24,13 +26,42 @@ module.exports = function (grunt) {
         dist: 'dist'
     };
 
+    var s3Config = {
+
+    };
+
     try {
         yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
     } catch (e) {
     }
 
+    try {
+        s3Config = require(process.env.IBM_PAGES_S3 || path.resolve('./dev/s3.json'));
+    }catch(e){
+        logger.error('s3 json is undefined, you will not be able to upload to s3');
+    }
+
+
     grunt.initConfig({
         yeoman: yeomanConfig,
+        s3: {
+            all: {
+                options: {
+                    key: s3Config.accessKey,
+                    secret: s3Config.secretKey,
+                    gzip:true,
+                    access: s3Config.access,
+                    bucket: s3Config.bucket
+                },
+                upload: [
+                    {
+                        src: 'dist/**/*.*',
+                        dest: '/',
+                        rel: 'dist'
+                    }
+                ]
+            }
+        },
         watch: {
             coffee: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
