@@ -80,10 +80,10 @@ module.exports = function (grunt) {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%= yeoman.app %>/{,*/}*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-                    '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= yeoman.app %>/**/*.html',
+                    '{.tmp,<%= yeoman.app %>}/styles/**/*.css',
+                    '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
+                    '<%= yeoman.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
         },
@@ -154,14 +154,46 @@ module.exports = function (grunt) {
             },
             server: '.tmp'
         },
+
         jshint: {
-            options: {
-                jshintrc: '.jshintrc'
+            main: {
+                options: {
+                    jshintrc: '.jshintrc'
+                },
+                files:  {
+                    'src':[
+                        'Gruntfile.js',
+                        '<%= yeoman.app %>/scripts/**/*.js'
+                    ]
+                }
             },
-            all: [
-                'Gruntfile.js',
-                '<%= yeoman.app %>/scripts/{,*/}*.js'
-            ]
+            test: {
+                options: {
+                    jshintrc: 'test.jshintrc'
+                },
+                files:  {
+                    'src':[
+                        'test/**/*.js'
+                    ]
+                }
+            }
+
+        },
+        html2js: {
+            options: {
+                // custom options, see below
+            },
+            main: {
+                src: ['app/views/**/*.html','app/views/*.html'],
+                dest: '.tmp/html2js/directives.js',
+                module: 'directives-templates',
+                options: {
+                    rename: function (moduleName) {
+                        var indexOf = moduleName.indexOf('views');
+                        return moduleName.substring(indexOf);
+                    }
+                }
+            }
         },
         coffee: {
             dist: {
@@ -299,7 +331,6 @@ module.exports = function (grunt) {
                         src: [
                             '*.{ico,png,txt}',
                             '.htaccess',
-                            'bower_components/**/*',
                             'i18n/{,*/}*.json',
                             'fonts/**/*',
                             'images/{,*/}*.{gif,webp,svg,PNG}',
@@ -396,6 +427,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:server',
+        'html2js:main',
         'concurrent:test',
         'connect:test',
         'karma'
@@ -413,11 +445,23 @@ module.exports = function (grunt) {
             'cssmin',
             'uglify',
             'rev',
-            'usemin'
+            'usemin',
+            'writeBuildId'
+
         ];
 
         grunt.task.run(tasks);
     });
+
+    grunt.registerTask('writeBuildId',
+        function(){
+            grunt.file.write('dist/build.json', JSON.stringify({ 'host' : require('os').hostname() , 'timestamp' : new Date().getTime() }) );
+        }
+    );
+
+    grunt.registerTask('deploy', [ 'default', 's3:all']
+
+    );
 
     grunt.registerTask('default', [
         'jshint',

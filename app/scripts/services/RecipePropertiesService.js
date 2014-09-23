@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .service('RecipePropertiesService', function RecipePropertiesService(ServerTypesService) {
+    .service('RecipePropertiesService', function RecipePropertiesService(ServerTypesService, BluSoloProperties) {
 
-
+        this.bluSolo = BluSoloProperties;
 
 
         // biginsights license ==== always equals the edition
@@ -26,8 +26,8 @@ angular.module('ibmBiginsightsUiApp')
                 properties.push({ 'key': key, 'value': value });
             }
 
-            add('locationId', input.locationId,10);
-            add('packageId', parseInt(input.masterPackage,10));
+            add('locationId', input.locationId, 10);
+            add('packageId', parseInt(input.masterPackage, 10));
 //            add('dataPackage', parseInt(input.dataPackage,10));
 
 
@@ -60,9 +60,9 @@ angular.module('ibmBiginsightsUiApp')
             add('smallHardwareId', masterHardwareIdValue);
             add('largeHardwareId', dataHardwareIdValue);
 
-            if ( isMasterBareMetal() && !!input.masterRaid ) {
+            if (isMasterBareMetal() && !!input.masterRaid) {
                 add('smallLinuxOtherHardDisksIDs', '14');
-            }else{
+            } else {
                 add('smallLinuxOtherHardDisksIDs', '');
             }
 
@@ -72,26 +72,26 @@ angular.module('ibmBiginsightsUiApp')
 
             var dataOtherHardDisksIDsArray = [];
 
-            if ( !!input.dataRaid && isDataBareMetal() ){
-                dataOtherHardDisksIDsArray.push(  '14' );
+            if (!!input.dataRaid && isDataBareMetal()) {
+                dataOtherHardDisksIDsArray.push('14');
             }
 
-            for ( var i = 0; i < dataNumberOfDisks; i ++ ){
+            for (var i = 0; i < dataNumberOfDisks; i++) {
                 dataOtherHardDisksIDsArray.push(dataDisks);
             }
             add('largeLinuxOtherHardDisksIDs', dataOtherHardDisksIDsArray.join(','));
 
 
-            if ( isMasterBareMetal() ) {
+            if (isMasterBareMetal()) {
                 add('masterDiskControllerID', 487);
-            }else{
+            } else {
                 add('masterDiskControllerID', '');
 
             }
 
-            if ( isDataBareMetal() ) {
+            if (isDataBareMetal()) {
                 add('dataDiskControllerID', 487);
-            }else{
+            } else {
                 add('dataDiskControllerID', '');
 
             }
@@ -118,24 +118,23 @@ angular.module('ibmBiginsightsUiApp')
 
             // recipes properties
             add('currentAppName', 'bi' + this.getRandomTag() + '_cloudify');
-            add('numOfDataNodes', parseInt(input.numOfDataNodes,10));
+            add('numOfDataNodes', parseInt(input.numOfDataNodes, 10));
 
             add('maxNumOfDataNodes', 10);
             add('masterComputeTemplate', input.masterComputeTemplate);
             add('dataNodesComputeTemplate', input.dataNodesComputeTemplate);
             add('infoFileName', input.infoFileName);
-            add('tag', this.getRandomTag() );
+            add('tag', this.getRandomTag());
             add('biAdminPassword', input.biAdminPassword);
 
             var myTag = this.getRandomTag();
 
-            function getPrefix( isBare, suffix ){
+            function getPrefix(isBare, suffix) {
                 return 'bi' + ( isBare ? 'bm' : 'cci' ) + myTag + suffix;
             }
 
-            add('MANAGER_PREFIX', getPrefix( isMasterBareMetal(), 'mngr'));
+            add('MANAGER_PREFIX', getPrefix(isMasterBareMetal(), 'mngr'));
             add('AGENT_PREFIX', getPrefix(isDataBareMetal(), 'agent'));
-
 
 
             return properties;

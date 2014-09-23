@@ -2,17 +2,17 @@
 
 describe('Service: RamService', function () {
 
-  // load the service's module
-  beforeEach(module('ibmBiginsightsUiApp'));
+    // load the service's module
+    beforeEach(module('ibmBiginsightsUiApp'));
 
-  // instantiate service
-  var RamService;
-  beforeEach(inject(function (_RamService_) {
-    RamService = _RamService_;
-  }));
+    // instantiate service
+    var mRamService;
+    beforeEach(inject(function (RamService) {
+        mRamService = RamService;
+    }));
 
-  it('should do something', function () {
-    expect(!!RamService).toBe(true);
-  });
+    it('should do something', function () {
+        expect(!!mRamService).toBe(true);
+    });
 
 });

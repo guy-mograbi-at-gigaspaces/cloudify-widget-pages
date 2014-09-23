@@ -18,6 +18,7 @@
     <!-- build:css(.tmp,app) styles/main.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- endbuild -->
 </head>
 <body ng-app="ibmBiginsightsUiApp">
@@ -40,6 +41,7 @@
 <!-- build:js scripts/modules.js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/lodash/dist/lodash.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -53,7 +55,9 @@
 
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
 <script src="scripts/app.js"></script>
+
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/order.js"></script>
 <script src="scripts/services/RecipePropertiesService.js"></script>
@@ -72,6 +76,11 @@
 <script src="scripts/directives/controlFocus.js"></script>
 <script src="scripts/directives/autoResizeIframe.js"></script>
 <script src="scripts/directives/switchLanguage.js"></script>
+
+<script src="scripts/directives/ibmPage.js"></script>
+
+<script src="scripts/services/properties/BluSoloProperties.js"></script>
+<script src="scripts/services/properties/BluSoloAwsProperties.js"></script>
 
 <!-- endbuild -->
 </body>

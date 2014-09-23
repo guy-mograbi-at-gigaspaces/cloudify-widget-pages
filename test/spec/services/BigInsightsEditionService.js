@@ -2,17 +2,17 @@
 
 describe('Service: BigInsightsEditionService', function () {
 
-  // load the service's module
-  beforeEach(module('ibmBiginsightsUiApp'));
+    // load the service's module
+    beforeEach(module('ibmBiginsightsUiApp'));
 
-  // instantiate service
-  var BigInsightsEditionService;
-  beforeEach(inject(function (_BigInsightsEditionService_) {
-    BigInsightsEditionService = _BigInsightsEditionService_;
-  }));
+    // instantiate service
+    var mBigInsightsEditionService;
+    beforeEach(inject(function (BigInsightsEditionService) {
+        mBigInsightsEditionService = BigInsightsEditionService;
+    }));
 
-  it('should do something', function () {
-    expect(!!BigInsightsEditionService).toBe(true);
-  });
+    it('should do something', function () {
+        expect(!!mBigInsightsEditionService).toBe(true);
+    });
 
 });

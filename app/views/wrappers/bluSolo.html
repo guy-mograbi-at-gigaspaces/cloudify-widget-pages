@@ -1,0 +1,76 @@
+<div id="blu_solo">
+    <div class="header">
+
+        <div class=" content-width">
+            BLU Acceleration for Cloud
+        </div>
+    </div>
+    <div class="content content-width">
+    <div class="switch-language"></div>
+        <div class="h2">{{ 'bluSolo.title' | i18n }}</div>
+        <div class="intro"> {{ 'bluSolo.intro.text' | i18n }}</div>
+        <ul>
+            <li>{{ 'bluSolo.intro.item1' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item2' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item3' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item4' | i18n }}</li>
+            <li>{{ 'bluSolo.intro.item5' | i18n }}</li>
+        </ul>
+        <div class="h2"> {{ 'bluSolo.launch.title' | i18n }}</div>
+        <div>
+              <span ng-bind-html="'bluSolo.launch.text1' | i18n"></span>
+        </div>
+        <div>
+            <span ng-bind-html="'bluSolo.launch.text2' | i18n"></span>
+
+        </div>
+
+        <div class="register-marketplace" ng-show="execution.cloudProvider==='aws'">
+            In order to use this service, you need to first sign up to this product in <a href="https://aws.amazon.com/marketplace/pp/B00A6KUVBW" target="_blank">AWS marketplace</a>. <br/>
+            <a href="https://aws.amazon.com/marketplace/pp/B00A6KUVBW" target="_blank">Click the link</a> and follow AWS instructions.
+
+        </div>
+
+        <iframe src="http://localhost:9001/index.html#/snippet/bluSolo" frameborder="none" height="800" width="1000"></iframe>
+
+        <div>
+            <!--<iframe src="http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/0375c7bb-c070-4b80-970b-eaec99fccfc7/view?since=1408442996708" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>-->
+            <!--<iframe src="http://localhost:3000/public-folder/angularApps/index.html#/widgets/2f6f8e68-5dd2-4623-a704-139dc0af7a7e/view?since=1408536907313" scrolling="no" width="600px" height="463px" frameborder="no"></iframe>-->
+        </div>
+
+        <div class="h2">
+            Additional Resources
+        </div>
+        <ul>
+            <li><a href="http://bluforcloud.com/forum/" target="_blank">Discussion and support forum</a></li>
+            <li><a href="http://bluforcloud.com/forum/" target="_blank">Read the blog</a></li>
+            <li>Configuration and Deployment Guides
+                <ul>
+                    <li> <a href="http://bluforcloud.com/plans/solo/softlayer-guide" target="_blank">Softlayer</a></li>
+                    <li> <a href="http://bluforcloud.com/plans/solo/aws-guide" target="_blank">AWS</a> </li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="disclaimer">
+            <div class="strong">DISCLAIMER</div>
+            <div class="content">
+                IBM’s statements regarding its plans, directions, and intent are subject to change or withdrawal without notice at IBM’s sole discretion. Information regarding potential future products is intended to outline our general product direction and it should not be relied on in making a purchasing decision. The information mentioned regarding potential future products is not a commitment, promise, or legal obligation to deliver any material, code or functionality. Information about potential future products may not be incorporated into any contract. The development, release, and timing of any future features or functionality described for our products remains at our sole discretion.
+            </div>
+        </div>
+
+
+        <div class="comments" auto-resize-iframe>
+            <iframe src="/views/disqus/bluSoloFrame.html" frameborder="0" scrolling="no" border="0"></iframe>
+        </div>
+        <div class="actions">
+            <a href="http://bluforcloud.com/plans/" target="_blank">Back to Plans & Pricing</a>
+        </div>
+    </div>
+
+    <div class="footer content-width">
+        <img src="http://bluforcloud.com/wp-content/uploads/2013/10/ibm-e1382472155506.png"/><br/>
+
+    </div>
+
+</div>

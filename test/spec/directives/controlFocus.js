@@ -1,29 +1,29 @@
 'use strict';
 
 describe('Directive: controlFocus', function () {
-  beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('ibmBiginsightsUiApp'));
 
-  var element;
+    var element;
 
-    function setup(){
-        inject(function( $rootScope, $compile ){
+    function setup() {
+        inject(function ($rootScope, $compile) {
             element = angular.element('<div control-focus><input/></div>');
             element = $compile(element)($rootScope);
-            $("body").append(element);
+            $('body').append(element);
             $rootScope.$digest();
         });
 
     }
 
-  it('should have class hovered when mouse enters', function () {
-      setup();
+    it('should have class hovered when mouse enters', function () {
+        setup();
 
-      element.trigger('mouseenter');
+        element.trigger('mouseenter');
 
-      expect(element.is('.hovered')).toBe(true);
-  });
+        expect(element.is('.hovered')).toBe(true);
+    });
 
-    it ( 'should have class focused when input/select is focused', inject(function( $log, $timeout ){
+    it('should have class focused when input/select is focused', inject(function (/*$log, $timeout*/) {
         setup();
 
         // todo this test.
@@ -48,5 +48,5 @@ describe('Directive: controlFocus', function () {
 //        element.remove();
 
 
-    }))
+    }));
 });

@@ -2,17 +2,17 @@
 
 describe('Service: RecipePropertiesService', function () {
 
-  // load the service's module
-  beforeEach(module('ibmBiginsightsUiApp'));
+    // load the service's module
+    beforeEach(module('ibmBiginsightsUiApp'));
 
-  // instantiate service
-  var RecipePropertiesService;
-  beforeEach(inject(function (_RecipePropertiesService_) {
-    RecipePropertiesService = _RecipePropertiesService_;
-  }));
+    // instantiate service
+    var mRecipePropertiesService;
+    beforeEach(inject(function (RecipePropertiesService) {
+        mRecipePropertiesService = RecipePropertiesService;
+    }));
 
-  it('should do something', function () {
-    expect(!!RecipePropertiesService).toBe(true);
-  });
+    it('should exist', function () {
+        expect(!!mRecipePropertiesService).toBe(true);
+    });
 
 });

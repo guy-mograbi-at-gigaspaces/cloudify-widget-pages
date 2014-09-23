@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('BluSoloCtrl', function ($scope, $log, DataCenterService) {
+    .controller('BluSoloCtrl', function ($scope, $log, DataCenterService, RecipePropertiesService) {
+
+        $scope.widgetLoaded = false;
 
 
         var CloudProviders = {
@@ -9,14 +11,14 @@ angular.module('ibmBiginsightsUiApp')
             'Softlayer': 'softlayer'
         };
         $scope.cloudProviders = [
-//            {
-//                'label' : 'AWS',
-//                'id' : CloudProviders.AWS
-//            },
             {
-                'label': 'Softlayer',
-                'id': CloudProviders.Softlayer
-            }
+                'label' : 'AWS',
+                'id' : CloudProviders.AWS
+            }//,
+//            {
+//                'label': 'Softlayer',
+//                'id': CloudProviders.Softlayer
+//            }
         ];
 
         $scope.regions = [
@@ -42,8 +44,9 @@ angular.module('ibmBiginsightsUiApp')
 
 
         $scope.loginDetails = {};
+        $scope.awsLoginDetails = {};
         $scope.execution = {
-            'cloudProvider': CloudProviders.Softlayer,
+            'cloudProvider': CloudProviders.AWS,
             'softlayerAccount': '',
             'region': 'us-east-1',
             'instanceType': 'm3.2xlarge'
@@ -60,9 +63,9 @@ angular.module('ibmBiginsightsUiApp')
 //            return $scope.execution.cloudProvider === CloudProviders.Softlayer;
 //        }
 
-        function _error(message) {
-            $scope.execution.error = message;
-        }
+//        function _error(message) {
+//            $scope.execution.error = message;
+//        }
 
 
 //        function validateAws(){
@@ -124,42 +127,71 @@ angular.module('ibmBiginsightsUiApp')
 //        },true);
 
         function validateForm() {
-            if (!$scope.loginDetails.softlayerApiKey || !$scope.loginDetails.softlayerApiSecretKey || !$scope.execution.dataCenter) {
-                _error('Value is missing');
-            }
+//            if (!$scope.loginDetails.softlayerApiKey || !$scope.loginDetails.softlayerApiSecretKey || !$scope.execution.dataCenter) {
+//                _error('Value is missing');
+//                return false;
+//            }
+            return true;
         }
 
 
         $scope.submitForm = function () {
-
             $scope.formIsValid = validateForm();
-            if ($scope.formIsValid) {
+            if (!$scope.formIsValid) {
                 return;
             }
             $log.info('submitting form');
             _postMessage('widget_play',{});
         };
 
+        function sendProperties(){
+            $log.info('posting properties');
+            _postMessage('widget_recipe_properties',  RecipePropertiesService.bluSolo.aws.toProperties($scope.execution));
+        }
+
+        $scope.$watch('execution', sendProperties ,true);
+
 
         $scope.$watch('loginDetails', function(){
+            $log.info('posting advanced data');
             postAdvancedData( { 'username' : $scope.loginDetails.softlayerApiKey , 'apiKey' : $scope.loginDetails.softlayerApiSecretKey}  );
         },true);
 
+
+        $scope.$watch('awsLoginDetails', function(){
+
+            $log.info('posting aws login details');
+//            {'type':'aws_ec2', 'params' : {'key':null, 'secretKey':null} }
+            postAdvancedData( { 'type' : 'aws_ec2' , 'params' : $scope.awsLoginDetails } );
+
+        }, true);
+
         function postAdvancedData( advancedData ){
             // {'username':, 'apiKey':null}
-            _postMessage('widget_advanced_data', {'type':'softlayer', 'params' : advancedData } );
+            _postMessage('widget_advanced_data', advancedData );
         }
 
         function _postMessage ( name, data ){
             // {'type':'softlayer', 'params' : {'username':'guy', 'apiKey':null} }
             // 'widget_advanced_data'
-            $('iframe')[0].contentWindow.postMessage( { 'name' : name, 'data' :  data } , '*');
+            try {
+                $('iframe')[0].contentWindow.postMessage({ 'name': name, 'data': data }, '*');
+            }catch(e){}
         }
 
 
 
         function receiveMessage( e ){
             $log.info('parent got message ', e.data );
+            var messageData = angular.fromJson(e.data);
+
+            if ( messageData.name === 'widget_loaded'){
+
+                $scope.widgetLoaded = true;
+                sendProperties();
+            }
+
+            $scope.$apply();
         }
 
         window.addEventListener('message', receiveMessage, false);

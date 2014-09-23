@@ -1,0 +1,84 @@
+#blu_solo {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+
+  min-height: 1000px;
+
+  .content-width {
+    width: 1036px;
+    margin: 0 auto;
+  }
+
+  .h2 {
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+
+  .content {
+    .intro {
+      padding-bottom: 20px;
+    }
+    .disclaimer {
+      margin-top: 20px;
+      background-color: #D9EDF7;
+      font-size: 10px;
+      line-height: 20px;
+      color: #3a87ad;
+      padding: 20px;
+      border: 1px solid #3a87ad;
+      .strong {
+        font-weight: bold;
+
+      }
+    }
+
+    .actions {
+      padding: 20px;
+
+      text-align: center;
+      button {
+        background-color: #3DA3C1;
+        padding: 20px;
+        font-size: 17px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+      }
+
+    }
+
+    .register-marketplace{
+      background-color:#DFF0D8;
+      padding:40px;
+      border:blue;
+      margin-top:30px;
+    }
+
+
+  }
+
+  .header {
+    min-height: 50px;
+    padding: 10px 0;
+    color: white;
+    font-weight: bold;
+    line-height: 25px;
+    font-size: 25px;
+    background-color: #5B8BC6;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 50px;
+  }
+
+  .comments{
+    padding-top: 30px;
+    padding-bottom:30px;
+    iframe{
+      width:100%;
+    }
+  }
+}
+

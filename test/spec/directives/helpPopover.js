@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: helpPopover', function () {
-  beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('ibmBiginsightsUiApp'));
 //
 //  var element;
 //

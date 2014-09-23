@@ -15,7 +15,18 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp']) // 'gsUiInfraA
                 templateUrl : 'views/blu_solo.html',
                 controller: 'BluSoloCtrl'
             })
+
+            .when('/wrapper/bluSolo', {
+                templateUrl : 'views/wrappers/bluSolo.html'
+            })
+
+            .when('/snippet/bluSolo', {
+                templateUrl : 'views/snippets/bluSolo.html',
+                controller: 'BluSoloCtrl'
+            })
+
             .otherwise({
+                controller: 'MainCtrl',
                 templateUrl: 'views/main.html'
             });
     });

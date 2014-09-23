@@ -2,17 +2,17 @@
 
 describe('Service: CpuService', function () {
 
-  // load the service's module
-  beforeEach(module('ibmBiginsightsUiApp'));
+    // load the service's module
+    beforeEach(module('ibmBiginsightsUiApp'));
 
-  // instantiate service
-  var CpuService;
-  beforeEach(inject(function (_CpuService_) {
-    CpuService = _CpuService_;
-  }));
+    // instantiate service
+    var mCpuService;
+    beforeEach(inject(function (CpuService) {
+        mCpuService = CpuService;
+    }));
 
-  it('should do something', function () {
-    expect(!!CpuService).toBe(true);
-  });
+    it('should do something', function () {
+        expect(!!mCpuService).toBe(true);
+    });
 
 });

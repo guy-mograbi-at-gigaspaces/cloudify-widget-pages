@@ -1,6 +1,22 @@
 
 
+#main{
+  background:#d1d3d4;
+  .content {
+    width: 800px;
+    margin: -30px auto 0 auto;
+    background:white;
+    padding: 30px 30px;
+    min-height:1000px;
+    line-height:25px;
+    font-size:20px;
+
+  }
+}
+
 @import './normalize';
 @import './order';
 @import './blu';
-@import './blu_solo';
+@import './blu_solo_wrapper';
+@import './blu_solo_snippet';
+@import './ibmpage';

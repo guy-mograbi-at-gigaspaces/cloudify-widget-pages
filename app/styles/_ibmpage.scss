@@ -1,0 +1,29 @@
+.ibm-page, [ibm-page]{
+
+  padding-top:20px;
+  margin-top:20px;
+  border-top:1px solid #CECECE;
+
+  .title{
+    font-size:25px;
+    font-weight:bold;
+    padding-top:10px;
+    padding-bottom: 10px;
+  }
+
+  .ibm-page-links{
+    float:right;
+    margin-top:-36px;
+    .link-wrapper, .link-snippet{
+      display:inline-block;
+    }
+    .link-snippet{
+      border-right:1px solid #CECECE;
+      padding-right:10px;
+      margin-right:5px;
+    }
+  }
+
+
+
+}

@@ -1,7 +1,36 @@
-<div>
-    <ul>
-        <li><a href="#/order">BigInsights</a></li>
-        <li><a href="#/blu">BLU Chinese</a></li>
-        <li><a href="#/blusolo">BLU Solo Chinese</a></li>
-    </ul>
+<div id="main">
+    <div class="content">
+        <div class="intro">
+            <h1> IBM Pages </h1>
+            <p ng-show="!!version">
+                This version is from {{version.host}} at {{version.timestamp | date:'medium'}}
+            </p>
+            <p>
+                A set of pages, frontend only, that use the widget. <br/>
+                The entire project can be uploaded to S3 CloudFront and embedded in other pages<br/>
+            </p>
+            <p>
+                To embed a page simply click on the <code>snippet</code> link, copy paste the url and generate<br/>
+                and iframe to embed it<br/>
+            </p>
+        </div>
+
+
+
+
+
+        <div ibm-page
+             name="BLU Solo"
+             snippet-link="#/snippet/bluSolo"
+             wrapper-link="#/wrapper/bluSolo"
+                >
+            Base on page - <a href="http://bluforcloud.com/plans/solo/">BLU For Cloud Solo</a> - this page is a snippet to replace the form in the middle of the page
+            <br/>
+            <br/>
+            <pre>&lt;iframe src="{{getFullUrl()}}">&lt;/iframe></pre>
+
+
+
+        </div>
+    </div>
 </div>

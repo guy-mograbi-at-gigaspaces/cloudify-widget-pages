@@ -2,17 +2,17 @@
 
 describe('Service: Client', function () {
 
-  // load the service's module
-  beforeEach(module('ibmBiginsightsUiApp'));
+    // load the service's module
+    beforeEach(module('ibmBiginsightsUiApp'));
 
-  // instantiate service
-  var Client;
-  beforeEach(inject(function (_Client_) {
-    Client = _Client_;
-  }));
+    // instantiate service
+    var mClient;
+    beforeEach(inject(function (Client) {
+        mClient = Client;
+    }));
 
-  it('should do something', function () {
-    expect(!!Client).toBe(true);
-  });
+    it('should do something', function () {
+        expect(!!mClient).toBe(true);
+    });
 
 });
