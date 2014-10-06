@@ -41,6 +41,22 @@ var driver = new webdriver.Builder().
 
 driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=');
 
+
+
+//todo : test click play
+
+
+
+// todo : test click play again (on environment that was already installed)
+
+
+// todo : test click "stop".
+
+
+// todo : nice to have:  add emails automated test. (use yopmail?)
+
+
+
 setTimeout(function(){
       driver.quit();
 }, 15000);
