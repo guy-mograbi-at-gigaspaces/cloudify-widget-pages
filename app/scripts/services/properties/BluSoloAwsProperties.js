@@ -8,8 +8,19 @@ angular.module('ibmBiginsightsUiApp')
         this.toProperties = function (execution) {
             var result = [];
 
-            if (!!execution.securityGroup) {
-                result.push({ 'key': 'BLU_EC2_SECURITY_GROUP', 'value': execution.securityGroup });
+            if ( !!execution.aws ) {
+                if (!!execution.aws.securityGroup) {
+                    result.push({ 'key': 'BLU_EC2_SECURITY_GROUP', 'value': execution.aws.securityGroup });
+                }
+
+
+                if (!!execution.aws.region) {
+                    result.push({'key': 'EC2_REGION', 'value': execution.aws.region });
+                }
+
+                if (!!execution.aws.instanceType) {
+                    result.push({'key': 'BLU_EC2_HARDWARE_ID', 'value': execution.aws.instanceType });
+                }
             }
 
             return result;

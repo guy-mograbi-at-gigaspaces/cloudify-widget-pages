@@ -2,6 +2,12 @@
     <div class="content">
         <div class="intro">
             <h1> IBM Pages </h1>
+            <div class="switch-language">
+
+            </div>
+            <p>
+                {{ 'proof' | i18n }}
+            </p>
             <p ng-show="!!version">
                 This version is from {{version.host}} at {{version.timestamp | date:'medium'}}
             </p>
@@ -15,14 +21,18 @@
             </p>
         </div>
 
+        <div>
+            <a href="#/softlayer/packages">See packages</a>
+        </div>
+
 
 
 
 
         <div ibm-page
              name="BLU Solo"
-             snippet-link="#/snippet/bluSolo"
-             wrapper-link="#/wrapper/bluSolo"
+             snippet-link="#/snippet/bluSolo?lang={{lang}}"
+             wrapper-link="#/wrapper/bluSolo?lang={{lang}}"
                 >
             Base on page - <a href="http://bluforcloud.com/plans/solo/">BLU For Cloud Solo</a> - this page is a snippet to replace the form in the middle of the page
             <br/>

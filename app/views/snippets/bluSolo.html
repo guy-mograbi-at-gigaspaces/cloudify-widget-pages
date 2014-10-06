@@ -1,136 +1,51 @@
-<div class="form" id="blu-solo-snippet">
-    <!-- TODO : do form here -->
+<!--{{genericWidgetModel.widgetStatus}}-->
+<div recipe-properties-display="sentProperties"></div>
 
 
+<div ng-show="!genericWidgetModel.loaded" style="padding-top:20px;">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+
+        </div>
+    </div>
+
+    <div style="font-size:18px; text-align:center;">
+         Looking for previous installations...
+    </div>
 
 
+</div>
+        <div ng-show="!!genericWidgetModel.loaded">
+<!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
+<div widget-raw-output-display="genericWidgetModel.widgetStatus.rawOutput" ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING'"></div>
+<div  id="blu-solo-snippet">
+
+
+     <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING'">
     <div class="controllers">
         <div class="cloud-provider controller" control-focus>
             <div class="section">
-                <div class="label">Cloud provider</div>
+                <div class="label">{{'labels.cloudProvider' | i18n }}</div>
                 <div class="control">
                     <select ng-options="cloudProvider.id as cloudProvider.label for cloudProvider in cloudProviders" ng-model="execution.cloudProvider"></select>
                 </div>
             </div>
             <div class="side-info">
-                Choose the cloud where you want to deploy your BLU Acceleration for Cloud
+                {{ 'bluSolo.chooseCloud' | i18n }}
             </div>
         </div>
         <!-- softlayer specific -->
                 <span ng-show="execution.cloudProvider==='softlayer'">
-                    <!--<div class="controller softlayer-account" control-focus >-->
-                        <!--<div class="section">-->
-                            <!--<div class="label">SoftLayer Account (e.g., 123456) <span class="required">*</span></div>-->
-                            <!--<div class="control">-->
-                                <!--<input type="text" ng-model="execution.softlayerAccount" maxlength="6"/>-->
-                            <!--</div>-->
-                            <!--<span class="instructions">-->
-                                <!--<span class="text">Maximum Allowed: 6 digits.</span>-->
-                                <!--<span class="current">Currently Used: {{execution.softlayerAccount.length}} digits.</span>-->
-                            <!--</span>-->
-                        <!--</div>-->
-                        <!--<div class="side-info">-->
-                            <!--You will find your Softlayer Account on the upper hand side of the Softlayer Control Portal <a href="https://control.softlayer.com/" target="_blank">https://control.softlayer.com/</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <div class="controller" control-focus >
-                        <div class="section">
-                            <div class="label">Sfotlayer API Key  <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" ng-model="loginDetails.softlayerApiKey" />
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="controller" control-focus >
-                        <div class="section">
-                            <div class="label">Softlayer API Secret Key  <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" ng-model="loginDetails.softlayerApiSecretKey" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="controller" control-focus>
-                        <div class="section">
-
-                            <div class="label">Data Center <span class="required">*</span></div>
-                            <div class="control">
-                                <select ng-options="dc.id as ('datacenters.' + dc.label | i18n) for dc in dataCenters" ng-model="execution.dataCenter"></select>
-                            </div>
-                        </div>
-                    </div>
-
-
+                   <div ng-include="'views/snippets/_bluSolo_softlayer.html'"></div>
                 </span>
                 <span ng-show="execution.cloudProvider==='aws'">
-
-                    <div class="controller" control-focus >
-                        <div class="section">
-                            <div class="label">Security Group <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" ng-model="execution.securityGroup" />
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="controller aws-account" control-focus >
-                        <div class="section">
-                            <div class="label">AWS Account Number (e.g., 1111-2222-3333)  <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" ng-model="execution.awsAccount"/>
-                            </div>
-                        </div>
-                        <div class="side-info">
-                            You will find your Account number at <a href="https://portal.aws.amazon.com/gp/aws/manageYourAccount" target="_blank">AWS Manager Your Account Page</a>
-                        </div>
-                    </div>
-
-                    <div class="controller" control-focus >
-                        <div class="section">
-                            <div class="label">AWS API Key  <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" ng-model="awsLoginDetails.key" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="controller " control-focus >
-                        <div class="section">
-                            <div class="label">AWS API Secret Key  <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="password" ng-model="awsLoginDetails.secretKey" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--<div class="controller" control-focus>-->
-                        <!--<div class="section">-->
-                            <!--<div class="label">Region <span class="required">*</span></div>-->
-                            <!--<div class="control">-->
-                                <!--<select ng-options="region.id as region.label for region in regions" ng-model="execution.region"></select>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="controller" control-focus>-->
-                        <!--<div class="section">-->
-                            <!--<div class="label">Instance Type <span class="required">*</span></div>-->
-                            <!--<div class="control">-->
-                                <!--<select ng-options="instanceType.id as instanceType.label for instanceType in instanceTypes" ng-model="execution.instanceType"></select>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-
+                    <div ng-include="'views/snippets/_bluSolo_aws.html'"></div>
                 </span>
 
         <div class="controller" control-focus>
             <div class="section">
 
-                <div class="label">Email <span class="required">*</span></div>
+                <div class="label">{{ 'labels.email' | i18n }} <span class="required">*</span></div>
                 <div class="control">
                     <input type="text" ng-model="execution.email"/>
                 </div>
@@ -139,7 +54,7 @@
 
         <div class="controller visitor-name" control-focus>
             <div class="section">
-                <div class="label">Name<span class="required">*</span></div>
+                <div class="label">{{ 'labels.name.top' | i18n }}<span class="required">*</span></div>
                 <div class="inputs">
                     <div class="first">
                         <input type="text" ng-model="execution.firstName"/>
@@ -150,10 +65,10 @@
                 </div>
                 <div class="instructions">
                     <div class="first">
-                        First
+                        {{ 'labels.name.first' | i18n }}
                     </div>
                     <div class="second">
-                        Last
+                        {{ 'labels.name.last' | i18n }}
                     </div>
                 </div>
             </div>
@@ -161,7 +76,7 @@
 
         <div class="controller" control-focus>
             <div class="section">
-                <div class="label">Company (Organization) Name<span class="required">*</span></div>
+                <div class="label">{{'labels.companyName' | i18n}}<span class="required">*</span></div>
                 <div class="control">
                     <input type="text" ng-model="execution.companyName"/>
                 </div>
@@ -185,18 +100,20 @@
         <div class="controller" control-focus>
             <div class="section">
                 <div class="you-must-agree">
-                    You must agree to email communications to participate in this program.
+                    {{'bluSolo.mustAgree' | i18n }}
                 </div>
                 <div class="form-actions">
-                    <i ng-show="!widgetLoaded" class="fa fa-spinner fa-spin"></i>
-                    <button ng-show="!!widgetLoaded" ng-click="submitForm()">Submit</button>
+                    <i ng-show="!genericWidgetModel.loaded" class="fa fa-spinner fa-spin"></i>
+                    <button ng-show="!!genericWidgetModel.loaded" ng-click="submitForm()">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <iframe src="http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/107c1ab8-6073-45af-b6cf-8da3d2add3c3/view?since=1411461713323" scrolling="no" width="800px" height="800px" frameborder="no" ></iframe>
-
+    <span ng-show="showWidget">
+        <div widget-iframe url="widgetUrl"></div>
+    </span>
+     </div>
+    </div>
 
 </div>

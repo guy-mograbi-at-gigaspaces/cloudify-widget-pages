@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp']) // 'gsUiInfraApp'
+angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidgetAngularController']) // 'gsUiInfraApp'
     .config(function ($routeProvider) {
         $routeProvider
             .when('/order', {
@@ -14,6 +14,11 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp']) // 'gsUiInfraA
             .when('/blusolo', {
                 templateUrl : 'views/blu_solo.html',
                 controller: 'BluSoloCtrl'
+
+            })
+            .when('/softlayer/packages',{
+                templateUrl : 'views/packageItems.html',
+                controller: 'SoftlayerPackageItemsCtrl'
             })
 
             .when('/wrapper/bluSolo', {
@@ -22,11 +27,20 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp']) // 'gsUiInfraA
 
             .when('/snippet/bluSolo', {
                 templateUrl : 'views/snippets/bluSolo.html',
-                controller: 'BluSoloCtrl'
+                controller: 'BluSoloCtrl',
+                reloadOnSearch:false
+            })
+            .when('/main', {
+                controller: 'MainCtrl',
+                templateUrl: 'views/main.html'
             })
 
             .otherwise({
-                controller: 'MainCtrl',
-                templateUrl: 'views/main.html'
+                'redirectTo' : '/main'
             });
+
+
+
     });
+
+

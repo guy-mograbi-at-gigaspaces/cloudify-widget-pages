@@ -16,7 +16,12 @@ describe('Controller: BluSoloCtrl', function () {
         });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
+    it('should have function submitForm', function () {
+        for ( var i in scope ){
+            if ( i[0]  !== '$') {
+                console.log(i);
+            }
+        }
         expect(typeof(scope.submitForm)).toBe('function');
     });
 });

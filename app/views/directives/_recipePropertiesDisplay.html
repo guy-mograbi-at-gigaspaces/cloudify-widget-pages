@@ -1,0 +1,13 @@
+<div class="recipe-properties" ng-show="showProperties()" style="float:right; position:fixed; top:0; right:0; background-color:orange;">
+    <h1>Recipe Properties</h1>
+    <table class="table" style="width:400px;">
+        <tr>
+            <td>Key</td>
+            <td>Value</td>
+        </tr>
+        <tr ng-repeat="prop in properties">
+            <td>{{prop.key}}</td>
+            <td>{{prop.value}}</td>
+        </tr>
+    </table>
+</div>

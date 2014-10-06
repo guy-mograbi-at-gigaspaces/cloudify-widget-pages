@@ -1,136 +1,116 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('BluSoloCtrl', function ($scope, $log, DataCenterService, RecipePropertiesService) {
+    .controller('BluSoloCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService) {
 
-        $scope.widgetLoaded = false;
+        $scope.data = CloudDataService;
+        $scope.showWidget = window === window.parent;
 
 
-        var CloudProviders = {
-            'AWS': 'aws',
-            'Softlayer': 'softlayer'
+        $controller('GsGenericWidgetCtrl', {$scope: $scope});
+        $scope.genericWidgetModel.element = function () {
+            return $('iframe')[0];
         };
+
+
         $scope.cloudProviders = [
             {
-                'label' : 'AWS',
-                'id' : CloudProviders.AWS
-            }//,
-//            {
-//                'label': 'Softlayer',
-//                'id': CloudProviders.Softlayer
-//            }
-        ];
-
-        $scope.regions = [
+                'label': 'AWS',
+                'id': AppConstants.CloudProviders.AWS
+            },
             {
-                'id': 'us-east-1',
-                'ami': 'blublu ami',
-                'label': 'US East 1'
+                'label': 'Softlayer',
+                'id': AppConstants.CloudProviders.Softlayer
             }
         ];
 
-        $scope.instanceTypes = [
+        $scope.data.softlayer.ram ={ 'data' :  [
             {
-                'id': 'm3.2xlarge',
-                'label': 'm3.2xlarge'
+                'id' : '1155',
+                'name' : '32gb'
+            },
+            {
+                'id' : '4468',
+                'name' : '48gb'
+            },
+            {
+                'id' : '1154',
+                'name' : '64gb'
             }
-        ];
+        ] } ;
 
-        DataCenterService.getDataCenters().then(function (result) {
+        $scope.data.softlayer.cores =  { 'data' : [
+            {
+                'id' : '860',
+                'name' : '8x2g'
+            },
+            {
+                'id' : '1198',
+                'name' : '12x2g'
+            },
+            {
+                'id' : '1194',
+                'name' : '16x2g'
+            }
+        ]};
 
-            $scope.dataCenters = result;
-            $scope.execution.dataCenter = _.find(result, { 'label': 'hongkong2'}).id;
+        $scope.data.softlayer.disks = {'data' : [
+            {
+                'id' : '865',
+                'name' : '100gbsan'
+            }
+        ]};
+
+
+        function changeWidgetUrl() {
+            $scope.widgetUrl = 'http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/' + widgetIds[$scope.execution.cloudProvider] + '/view?since=' + new Date().getTime();
+
+        }
+
+        var widgetIds = {};
+        widgetIds[AppConstants.CloudProviders.AWS] = '107c1ab8-6073-45af-b6cf-8da3d2add3c3';
+        widgetIds[AppConstants.CloudProviders.Softlayer] = '0375c7bb-c070-4b80-970b-eaec99fccfc7';
+
+        $scope.awsLoginDetails = { 'type' : 'aws_ec2' , 'params' : { 'key' : null, 'secretKey' : null } };
+        $scope.softlayerLoginDetails = { 'type' : 'softlayer' , 'params' : { 'username' : null, 'apiKey' : null } };
+
+        $scope.execution = {
+            'cloudProvider': $routeParams.cloudProvider || AppConstants.CloudProviders.AWS,
+            'softlayerAccount': '',
+            'aws' : {
+                'region': $scope.data.aws.region.data[0].id,
+                'instanceType': $scope.data.aws.instanceType.data[0].id
+            },
+            'softlayer' : {
+                'dataCenter' : $scope.data.softlayer.dataCenter.data[0].id,
+                'core' : $scope.data.softlayer.cores.data[0].id,
+                'ram' : $scope.data.softlayer.ram.data[0].id,
+                'disk' : $scope.data.softlayer.disks.data[0].id
+            }
+        };
+
+        changeWidgetUrl();
+
+        $scope.$watch('execution.cloudProvider', function( newValue , oldValue ){
+            if ( !!newValue && !!oldValue && newValue !== oldValue ){
+                $location.search('cloudProvider', newValue);
+            }
+
+            if ($scope.execution.cloudProvider === AppConstants.CloudProviders.AWS ){
+                $scope.genericWidgetModel.advancedData = $scope.awsLoginDetails;
+            }else{
+                $scope.genericWidgetModel.advancedData = $scope.softlayerLoginDetails;
+            }
         });
 
-
-        $scope.loginDetails = {};
-        $scope.awsLoginDetails = {};
-        $scope.execution = {
-            'cloudProvider': CloudProviders.AWS,
-            'softlayerAccount': '',
-            'region': 'us-east-1',
-            'instanceType': 'm3.2xlarge'
-
-        };
+        $scope.$watch(function(){ return $routeParams.cloudProvider; }, function(){
+            $scope.execution.cloudProvider = $routeParams.cloudProvider || AppConstants.CloudProviders.AWS;
+            changeWidgetUrl();
+        });
 
         $scope.formIsValid = false;
 
-//        function isAws(){
-//            return $scope.execution.cloudProvider ===  CloudProviders.AWS;
-//        }
-//
-//        function isSoftlayer(){
-//            return $scope.execution.cloudProvider === CloudProviders.Softlayer;
-//        }
-
-//        function _error(message) {
-//            $scope.execution.error = message;
-//        }
-
-
-//        function validateAws(){
-//             if ( !$scope.execution.awsAccount ){
-//                 $scope.execution.error = 'Account number is blank';
-//                 return;
-//             }
-//
-//            if ( !$scope.execution.awsApiKey ){
-//                $scope.execution.error = 'AWS API Key is blank';
-//                return;
-//            }
-//
-//            if ( !$scope.execution.awsApiSecretKey ){
-//                $scope.execution.error = 'AWS API Secret Key is missing';
-//            }
-//        }
-
-//        function validateSoftlayer(){
-//
-//        }
-
-//        function validateCommon(){
-//            function validateEmail(email) {
-//                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//                return re.test(email);
-//            }
-//
-//            if ( !$scope.execution.email ){
-//                $scope.execution.error = 'Email is blank';
-//                return;
-//            }
-//            if ( !validateEmail($scope.execution.email)){
-//                $scope.execution.error = 'Email is invalid';
-//                return;
-//            }
-//        }
-
-
-//        $scope.$watch('execution', function(){
-//
-//            $scope.execution.error = null;
-//            if ( isAws() ){
-//                validateAws();
-//            }
-//
-//            else if ( isSoftlayer() ){
-//                validateSoftlayer();
-//            }
-//
-//            $scope.formIsValid = !$scope.execution.error;
-//
-//            if ( !!$scope.formIsValid ){
-//                validateCommon();
-//            }
-//
-//            $scope.formIsValid = !$scope.execution.error;
-//
-//        },true);
-
         function validateForm() {
-//            if (!$scope.loginDetails.softlayerApiKey || !$scope.loginDetails.softlayerApiSecretKey || !$scope.execution.dataCenter) {
-//                _error('Value is missing');
-//                return false;
-//            }
             return true;
         }
 
@@ -141,58 +121,17 @@ angular.module('ibmBiginsightsUiApp')
                 return;
             }
             $log.info('submitting form');
-            _postMessage('widget_play',{});
+            $scope.playWidget();
+
         };
 
-        function sendProperties(){
-            $log.info('posting properties');
-            _postMessage('widget_recipe_properties',  RecipePropertiesService.bluSolo.aws.toProperties($scope.execution));
+        function updateProperties( newValue ){
+            $log.info('updating properties. widget loaded', newValue);
+            $scope.sentProperties = RecipePropertiesService.bluSolo.toProperties($scope.execution);
+            $scope.genericWidgetModel.recipeProperties = $scope.sentProperties;
         }
-
-        $scope.$watch('execution', sendProperties ,true);
-
-
-        $scope.$watch('loginDetails', function(){
-            $log.info('posting advanced data');
-            postAdvancedData( { 'username' : $scope.loginDetails.softlayerApiKey , 'apiKey' : $scope.loginDetails.softlayerApiSecretKey}  );
-        },true);
+        $scope.$watch('execution', updateProperties ,true);
+        $scope.$watch(function(){ return $scope.genericWidgetModel.loaded; }, updateProperties );
 
 
-        $scope.$watch('awsLoginDetails', function(){
-
-            $log.info('posting aws login details');
-//            {'type':'aws_ec2', 'params' : {'key':null, 'secretKey':null} }
-            postAdvancedData( { 'type' : 'aws_ec2' , 'params' : $scope.awsLoginDetails } );
-
-        }, true);
-
-        function postAdvancedData( advancedData ){
-            // {'username':, 'apiKey':null}
-            _postMessage('widget_advanced_data', advancedData );
-        }
-
-        function _postMessage ( name, data ){
-            // {'type':'softlayer', 'params' : {'username':'guy', 'apiKey':null} }
-            // 'widget_advanced_data'
-            try {
-                $('iframe')[0].contentWindow.postMessage({ 'name': name, 'data': data }, '*');
-            }catch(e){}
-        }
-
-
-
-        function receiveMessage( e ){
-            $log.info('parent got message ', e.data );
-            var messageData = angular.fromJson(e.data);
-
-            if ( messageData.name === 'widget_loaded'){
-
-                $scope.widgetLoaded = true;
-                sendProperties();
-            }
-
-            $scope.$apply();
-        }
-
-        window.addEventListener('message', receiveMessage, false);
     });

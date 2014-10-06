@@ -1,5 +1,5 @@
 {
-
+    "proof" : "the is the english translation",
     "biginsightsEditions" : {
         "enterpriseProduction" : "Enterprise Production Environment",
         "enterprise":"Enterprise Non-Production Environment",
@@ -9,6 +9,8 @@
     },
 
     "bluSolo" : {
+        "mustAgree" : "You must agree to email communications to participate in this program.",
+        "chooseCloud" : "Choose the cloud where you want to deploy your BLU Acceleration for Cloud",
         "title" : "BLU Acceleration for Cloud",
         "intro" : {
             "text" : "Designed to meet demands of the most sophisticated enterprises, BLU Acceleration for Cloud Solo brings advanced data warehousing and analytics to an individual user. With the Solo plan you provision a private, dedicated data analytics and warehouse for your personal use… on the cloud of your choice (AWS or SoftLayer). Regardless of which cloud provider you choose to host your BLU Acceleration for Cloud Solo you will enjoy the same benefits.",
@@ -93,6 +95,36 @@
         "masterRaid" :"Enabling RAID 1 provides a secondary hard drive for operating system data redundacy, this will improve system availability."
     },
 
+
+    "aws" : {
+     "regions" : {
+         "us-east-1": "US East 1"
+     }
+    },
+
+
+    "softlayer" : {
+        "datacenters" : {
+            "tor01": "Toronto 1",
+            "hkg02": "Hong Kong 2",
+            "lon02": "London 2",
+            "wdc01": "Washington 1"
+        },
+        "core" : {
+            "8x2g" : "8 x 2.0 GB",
+            "12x2g" : "12 x 2.0 GB",
+            "16x2g" : "16 x 2.0 GB"
+        },
+        "ram" : {
+            "32gb" : "32 GB",
+            "48gb" : "48 GB",
+            "64gb" : "64 GB"
+        },
+        "disk" : {
+            "100gbsan" :"100 GB (SAN)"
+        }
+    },
+
     "blu" : {
         "title": "BLU Acceleration for Cloud",
         "tryHeader": "Try BLU Acceleration for Cloud (Beta) directly in your web browser",
@@ -104,6 +136,24 @@
         "noteDetails": "You are advised not to upload sensitive data during your free trial of BLU Acceleration for Cloud.",
         "trialTitle": "BLU Acceleration For Cloud Trial",
         "trialEnds": "When your trial period ends, continue using BLU Acceleration for Cloud using the Solo or Business plans. "
+    },
+
+    "labels" : {
+        "name" : {
+            "top" : "Name",
+            "first" : "First",
+            "last" : "Last"
+        },
+        "companyName" : "Company (Organization) Name",
+        "region" : "Region",
+        "dataCenter" : "Data Center",
+        "softlayerUsername" : "Softlayer Username",
+        "softlayerApiKey" : "Softlayer API Key",
+        "disk" : "Disk",
+        "ram" : "RAM",
+        "core" : "CPU",
+        "cloudProvider" : "Cloud Provider",
+        "email" : "E-mail"
     }
 
 }

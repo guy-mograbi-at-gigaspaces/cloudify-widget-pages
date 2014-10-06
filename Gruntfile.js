@@ -75,6 +75,10 @@ module.exports = function (grunt) {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
             },
+            jshint: {
+                files: [ '{.tmp,<%= yeoman.app %>}/scripts/**/*.js', 'test/**/*.js' ],
+                tasks: ['jshint']
+            },
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT
@@ -366,6 +370,10 @@ module.exports = function (grunt) {
             }
         },
         concurrent: {
+            watchStuff: {
+                'tasks' : [ 'watch', 'watch:jshint' ],
+                'options' : { 'logConcurrentOutput' :true}
+            },
             server: [
                 'coffee:dist',
                 'compass:server'
@@ -421,7 +429,7 @@ module.exports = function (grunt) {
             'configureProxies',
             'connect:livereload',
             'open',
-            'watch'
+            'concurrent:watchStuff'
         ]);
     });
 
@@ -453,19 +461,23 @@ module.exports = function (grunt) {
         grunt.task.run(tasks);
     });
 
+    grunt.registerTask('updateSoftlayerData', function(){
+        var callback = this.async();
+        process.env.SOFTLAYER_PACKAGE_URL = process.env.SOFTLAYER_PACKAGE_URL || s3Config.softlayerDataUrl;
+        require('./build/digest_softlayer_package_items.js').execute( callback );
+    });
+
     grunt.registerTask('writeBuildId',
         function(){
             grunt.file.write('dist/build.json', JSON.stringify({ 'host' : require('os').hostname() , 'timestamp' : new Date().getTime() }) );
         }
     );
 
-    grunt.registerTask('deploy', [ 'default', 's3:all']
-
-    );
+    grunt.registerTask('deploy', [ 'default', 's3:all']);
 
     grunt.registerTask('default', [
         'jshint',
-        'test',
+//        'test',
         'build'
     ]);
 };

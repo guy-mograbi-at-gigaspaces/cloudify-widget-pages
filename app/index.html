@@ -15,11 +15,14 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- build:css(.tmp,app) styles/main.css -->
+    <!-- build:css styles/modules.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- endbuild -->
+
+    <!-- build:css(.tmp,app) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body ng-app="ibmBiginsightsUiApp">
 <!--[if lt IE 7]>
@@ -82,6 +85,19 @@
 <script src="scripts/services/properties/BluSoloProperties.js"></script>
 <script src="scripts/services/properties/BluSoloAwsProperties.js"></script>
 
+<script src="scripts/services/AwsRegionService.js"></script>
+<script src="scripts/services/AwsInstanceTypeService.js"></script>
+<script src="scripts/services/AwsData.js"></script>
+<script src="scripts/services/CloudDataService.js"></script>
+<script src="scripts/services/SoftlayerData.js"></script>
+<script src="scripts/services/properties/BluSoloSoftlayerProperties.js"></script>
+<script src="scripts/directives/recipePropertiesDisplay.js"></script>
+<script src="scripts/services/CloudProviders.js"></script>
+<script src="scripts/services/SoftlayerPackageItemsService.js"></script>
+<script src="scripts/controllers/SoftlayerPackageItems.js"></script>
+<script src="bower_components/cloudify-widget-angular-controller/index.js"></script>
+<script src="scripts/directives/widgetIframe.js"></script>
+<script src="scripts/directives/widgetRawOutputDisplay.js"></script>
 <!-- endbuild -->
 </body>
 </html>

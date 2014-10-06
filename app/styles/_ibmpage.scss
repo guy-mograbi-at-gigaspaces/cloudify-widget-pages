@@ -14,10 +14,10 @@
   .ibm-page-links{
     float:right;
     margin-top:-36px;
-    .link-wrapper, .link-snippet{
+    .link{
       display:inline-block;
     }
-    .link-snippet{
+    .link:not(:last-child){
       border-right:1px solid #CECECE;
       padding-right:10px;
       margin-right:5px;

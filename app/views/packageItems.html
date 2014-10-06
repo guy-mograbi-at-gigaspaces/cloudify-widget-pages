@@ -1,0 +1,25 @@
+<script src="data_digested.js"></script>
+<!--<script src="https://www.dropbox.com/s/k7tyl5iebg1r5a1/small_data.json?dl=1"></script>-->
+<div id="package-items">
+    <div class="content">
+            <table>
+                <tr>
+                    <td style="min-width:100px;">ID</td>
+                    <td>Category</td>
+                    <td title="Category Code">CC</td>
+                    <td>Description</td>
+                </tr>
+                <tr ng-repeat="item in softlayerItems">
+                    <td>{{item.itemId}}</td>
+                    <td>{{item.categoryName}} </td>
+                    <td>{{item.categoryCode}}</td>
+                    <td>{{item.description}}</td>
+                </tr>
+            </table>
+
+
+    </div>
+</div>
+
+
+

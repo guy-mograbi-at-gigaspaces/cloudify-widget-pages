@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .directive('switchLanguage', function (I18next, $routeParams, $timeout, $location) {
+    .directive('switchLanguage', function (I18next, $routeParams, $timeout, $location, $log) {
         return {
             templateUrl: 'views/directives/switchLanguage.html',
             restrict: 'C',
@@ -22,9 +22,10 @@ angular.module('ibmBiginsightsUiApp')
 
 
                 $scope.$watch(function () {
+
                     return $routeParams.lang;
                 }, function (newValue) {
-
+                    $log.info('setting lang', newValue);
 
                     I18next.setOptions(
                         {

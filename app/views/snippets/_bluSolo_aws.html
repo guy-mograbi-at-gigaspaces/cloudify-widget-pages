@@ -1,0 +1,59 @@
+
+<div class="controller" control-focus>
+    <div class="section">
+        <div class="label"> {{'labels.region' | i18n }} <span class="required">*</span></div>
+        <div class="control">
+            <select ng-options="region.id as ('aws.regions.' + region.id | i18n ) for region in data.aws.region.data" ng-model="execution.aws.region"></select>
+        </div>
+    </div>
+</div>
+<div class="controller" control-focus >
+    <div class="section">
+        <div class="label">Security Group <span class="required">*</span></div>
+        <div class="control">
+            <input type="text" ng-model="execution.aws.securityGroup" />
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="controller aws-account" control-focus >-->
+    <!--<div class="section">-->
+        <!--<div class="label">AWS Account Number (e.g., 1111-2222-3333)  <span class="required">*</span></div>-->
+        <!--<div class="control">-->
+            <!--<input type="text" ng-model="execution.aws.account"/>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="side-info">-->
+        <!--You will find your Account number at <a href="https://portal.aws.amazon.com/gp/aws/manageYourAccount" target="_blank">AWS Manager Your Account Page</a>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="controller" control-focus >
+    <div class="section">
+        <div class="label">AWS API Key  <span class="required">*</span></div>
+        <div class="control">
+            <input type="text" ng-model="awsLoginDetails.params.key" />
+        </div>
+    </div>
+</div>
+
+<div class="controller " control-focus >
+    <div class="section">
+        <div class="label">AWS API Secret Key  <span class="required">*</span></div>
+        <div class="control">
+            <input type="password" ng-model="awsLoginDetails.params.secretKey" />
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="controller" control-focus>-->
+<!--<div class="section">-->
+<!--<div class="label">Instance Type <span class="required">*</span></div>-->
+<!--<div class="control">-->
+<!--<select ng-options="instanceType.id as instanceType.label for instanceType in instanceTypes" ng-model="execution.instanceType"></select>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

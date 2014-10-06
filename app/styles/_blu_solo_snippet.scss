@@ -1,123 +1,124 @@
-#blu-solo-snippet.form {
+#blu-solo-snippet{
+  .form {
+      margin-top: 20px;
+      border-radius: 2px;
+      background-color: transparent;
+      min-height: 200px;
 
-
-    margin-top: 20px;
-  border-radius: 2px;
-  background-color: transparent;
-  min-height: 200px;
-
-  .label {
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    padding: 5px 0;
-    display: block;
-    text-align: left;
-  }
-  .h2 {
-    padding-bottom: 4px;
-  }
-  .under-title {
-    font-size: 10px;
-    padding-bottom: 10px;
-  }
-
-  .hr {
-    height: 1px;
-    border: 1px dotted #ABABAB;
-
-  }
-
-  .required {
-    color: red;
-  }
-
-  .side-info {
-    width: 300px;
-    //        top:0;
-    //        right:0;
-    //        position:absolute;
-    //        float:right;
-    border: 1px solid #ABABAB;
-    background-color: #EFEFEF;
-    padding: 20px;
-    margin-left: 10px;
-    display: none;
-    font-size: 13px;
-    vertical-align: top;
-  }
-  .controllers {
-    margin-top: 10px;
-    .controller {
-
-      position: relative;
-      margin-top: 0;
-
-      .section {
-
-        width: 630px;
-        display: inline-block;
-        padding: 10px 10px 10px 0;
+      .label {
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        padding: 5px 0;
+        display: block;
+        text-align: left;
       }
-
-      .control {
-        margin-top: -2px;
-        width: 300px;
-        input[type=text], input[type=password], select {
-          width: 100%;
-          height: 20px;
-          line-height: 20px;
-        }
+      .h2 {
+        padding-bottom: 4px;
       }
-
-      &.focused {
-        .side-info {
-          display: inline-block;
-        }
-        .section {
-          background-color: #FFF7C0;
-        }
-
-      }
-
-      &.visitor-name {
-        .first, .second, input {
-          display: inline-block;
-          width: 100px;
-        }
-      }
-
-      .instructions {
+      .under-title {
         font-size: 10px;
+        padding-bottom: 10px;
       }
+
+      .hr {
+        height: 1px;
+        border: 1px dotted #ABABAB;
+
+      }
+
+      .required {
+        color: red;
+      }
+
+      .side-info {
+        width: 300px;
+        //        top:0;
+        //        right:0;
+        //        position:absolute;
+        //        float:right;
+        border: 1px solid #ABABAB;
+        background-color: #EFEFEF;
+        padding: 20px;
+        margin-left: 10px;
+        display: none;
+        font-size: 13px;
+        vertical-align: top;
+      }
+      .controllers {
+        margin-top: 10px;
+        .controller {
+
+          position: relative;
+          margin-top: 0;
+
+          .section {
+
+            width: 630px;
+            display: inline-block;
+            padding: 10px 10px 10px 0;
+          }
+
+          .control {
+            margin-top: -2px;
+            width: 300px;
+            input[type=text], input[type=password], select {
+              width: 100%;
+              height: 20px;
+              line-height: 20px;
+            }
+          }
+
+          &.focused {
+            .side-info {
+              display: inline-block;
+            }
+            .section {
+              background-color: #FFF7C0;
+            }
+
+          }
+
+          &.visitor-name {
+            .first, .second, input {
+              display: inline-block;
+              width: 100px;
+            }
+          }
+
+          .instructions {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .form-actions {
+        button {
+          background-color: #5B8BC6;
+          color: white;
+          padding: 10px;
+          border-radius: 3px;
+          border: none;
+          font-size: 21px;
+          margin-top: 10px;
+
+        }
+      }
+      .softlayer-account .instructions .text {
+        min-width: 180px;
+        display: inline-block;
+      }
+
+      .form-errors {
+        background-color: #F2DEDE;
+        padding: 40px;
+        border: 1px solid red;
+      }
+
+      .fa-spinner{
+        font-size:30px;
+      }
+
     }
-  }
-
-  .form-actions {
-    button {
-      background-color: #5B8BC6;
-      color: white;
-      padding: 10px;
-      border-radius: 3px;
-      border: none;
-      font-size: 21px;
-      margin-top: 10px;
-
-    }
-  }
-  .softlayer-account .instructions .text {
-    min-width: 180px;
-    display: inline-block;
-  }
-
-  .form-errors {
-    background-color: #F2DEDE;
-    padding: 40px;
-    border: 1px solid red;
-  }
-
-  .fa-spinner{
-    font-size:30px;
-  }
 
 }

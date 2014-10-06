@@ -1,6 +1,6 @@
 {
 
-
+    "proof" : "the is the chinese translation",
     "biginsightsEditions" : {
         "enterpriseProduction" : "Enterprise Production Environment",
         "enterprise":"Enterprise Non-Production Environment",
