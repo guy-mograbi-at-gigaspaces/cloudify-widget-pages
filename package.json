@@ -34,7 +34,9 @@
     "grunt-ngmin": "~0.0.2",
     "grunt-connect-proxy": "~0.1.6",
     "grunt-s3": "~0.2.0-alpha.3",
-    "grunt-html2js": "~0.2.8"
+    "grunt-html2js": "~0.2.8",
+    "log4js": "~0.6.21",
+    "selenium-webdriver": "~2.43.5"
   },
   "engines": {
     "node": ">=0.8.0"
