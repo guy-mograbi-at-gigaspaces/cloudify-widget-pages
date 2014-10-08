@@ -27,7 +27,6 @@ var meJson = process.env['ME_JSON'] || path.resolve(__dirname, '../conf/dev/me.j
 var conf = require(meJson);
 
 var logger = require('log4js').getLogger('index');
-logger.info(conf);
 
 
 var webdriver = require('selenium-webdriver');

@@ -154,6 +154,13 @@
         "core" : "CPU",
         "cloudProvider" : "Cloud Provider",
         "email" : "E-mail"
+    },
+
+    "formErrors" : {
+        "pleaseReview" : "unable to submit. there are errors. please review and submit again",
+        "general" : {
+            "invalid" : "Value is missing"
+        }
     }
 
 }

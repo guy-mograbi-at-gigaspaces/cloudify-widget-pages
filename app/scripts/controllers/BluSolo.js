@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('BluSoloCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService) {
+    .controller('BluSoloCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService, BluSoloFormValidator) {
 
         $scope.data = CloudDataService;
         $scope.showWidget = window === window.parent;
@@ -111,7 +111,9 @@ angular.module('ibmBiginsightsUiApp')
         $scope.formIsValid = false;
 
         function validateForm() {
-            return true;
+            $scope.formErrors = null;
+            $scope.formErrors =  BluSoloFormValidator.validateForm($scope);
+            return !$scope.formErrors;
         }
 
 

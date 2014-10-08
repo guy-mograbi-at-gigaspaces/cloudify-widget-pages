@@ -1,10 +1,21 @@
 #blu-solo-snippet{
+  .widget-message{
+    padding:15px;
+    max-width:300px;
+    margin:0 auto;
+    border:1px solid #a94442;
+    text-align:center;
+
+  }
   .form {
       margin-top: 20px;
       border-radius: 2px;
       background-color: transparent;
       min-height: 200px;
 
+    .submit-error{
+      color:#a94442;
+    }
       .label {
         color: inherit;
         font-size: inherit;
@@ -50,13 +61,17 @@
         .controller {
 
           position: relative;
-          margin-top: 0;
+          margin-top: 2px;
 
           .section {
 
             width: 630px;
             display: inline-block;
             padding: 10px 10px 10px 0;
+            .error-message{
+              display:none;
+            }
+
           }
 
           .control {
@@ -89,7 +104,23 @@
           .instructions {
             font-size: 10px;
           }
+
+          &.has-error, &.focused.has-error {
+
+            .section{
+              background-color: #ffdfdf;
+              .error-message{
+                margin-top:10px;
+                margin-bottom:-5px;
+                color:#a94442;
+                display:block;
+              }
+            }
+          }
+
         }
+
+
       }
 
       .form-actions {

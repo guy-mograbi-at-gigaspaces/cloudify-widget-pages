@@ -14,21 +14,27 @@
 <!--</div>-->
 <!--</div>-->
 
-<div class="controller" control-focus >
+<div class="controller" control-focus control-error="formErrors.username">
     <div class="section">
         <div class="label">{{ 'labels.softlayerUsername' | i18n }} <span class="required">*</span></div>
         <div class="control">
-            <input type="text" ng-model="softlayerLoginDetails.params.username" />
+            <input type="text" class="form-control" ng-model="softlayerLoginDetails.params.username" />
+        </div>
+        <div class="error-message">
+            {{'formErrors.general.' + formErrors.username | i18n }}
         </div>
     </div>
 </div>
 
 
-<div class="controller" control-focus >
+<div class="controller" control-focus control-error="formErrors.apiKey">
     <div class="section">
         <div class="label"> {{ 'labels.softlayerApiKey' | i18n }}<span class="required">*</span></div>
         <div class="control">
-            <input type="password" ng-model="softlayerLoginDetails.params.apiKey" />
+            <input type="password" class="form-control" ng-model="softlayerLoginDetails.params.apiKey" />
+        </div>
+        <div class="error-message">
+            {{'formErrors.general.' + formErrors.apiKey | i18n }}
         </div>
     </div>
 </div>
@@ -40,6 +46,7 @@
         <div class="control">
             <select ng-options="dc.id as ('softlayer.datacenters.' + dc.name | i18n) for dc in data.softlayer.dataCenter.data" ng-model="execution.softlayer.dataCenter"></select>
         </div>
+
     </div>
 </div>
 
