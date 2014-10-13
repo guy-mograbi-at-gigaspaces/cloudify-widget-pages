@@ -16,7 +16,7 @@ var awsJson =  ( awsJsonEnv && path.resolve(__dirname+'/../../', awsJsonEnv) ) |
  * }
  */
 
-logger.info('running with configuration',require(awsJson));
+
 AWS.config.update(require(awsJson));
 var ec2 = new AWS.EC2();
 
