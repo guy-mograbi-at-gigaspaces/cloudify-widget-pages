@@ -44,7 +44,7 @@ var MINUTE=60*SECOND;
 
 var assert = require('assert');
 var path = require('path');
-var meJson = path.resolve(__dirname, process.env['ME_JSON']) || path.resolve(__dirname, '../conf/dev/me.json');
+var meJson = path.resolve(__dirname+"/../../", process.env['ME_JSON']) || path.resolve(__dirname, '../conf/dev/me.json');
 var async = require('async');
 var conf = require(meJson);
 
