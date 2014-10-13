@@ -184,7 +184,7 @@ describe('snippet tests', function () {
 
     // AWS tests
 
-    xdescribe("AWS tests", function () {
+    describe("AWS tests", function () {
         beforeEach(function (done) {
             driver = new webdriver.Builder().
                 usingServer(conf.selenium.serverAddress).
@@ -204,7 +204,7 @@ describe('snippet tests', function () {
             }, 3000);
         })
 
-        xit("Run with missing security group", function (done) {
+        it("Run with missing security group", function (done) {
             var fills = conf.fills["AWS Missing Security Group"];
 
             runTest(done, fills, function(callback) {
@@ -224,7 +224,7 @@ describe('snippet tests', function () {
             });
         })
 
-        xit("Run with valid data", function (done) {
+        it("Run with valid data", function (done) {
             var fills = conf.fills["AWS Valid Data"];
 
             runTest(done, fills, function(callback) {
