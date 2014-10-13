@@ -94,6 +94,10 @@ angular.module('ibmBiginsightsUiApp')
                 result.company = 'invalid';
             }
 
+            if ( !$scope.execution.agreed ){
+                result.agreed = 'invalid';
+            }
+
             return _.isEmpty(result) ? null : result;
         };
     });

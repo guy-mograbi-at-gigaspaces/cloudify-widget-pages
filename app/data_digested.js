@@ -192,6 +192,18 @@ var softlayerItems = [
         "description": "cPanel/WHM with Softaculous and RVskin "
     },
     {
+        "itemId": 5878,
+        "categoryName": "Control Panel Software",
+        "categoryCode": "control_panel",
+        "description": "Parallels Plesk Panel 12 (Linux) 100 Domain w/ Power Pack"
+    },
+    {
+        "itemId": 5880,
+        "categoryName": "Control Panel Software",
+        "categoryCode": "control_panel",
+        "description": "Parallels Plesk Panel 12 (Linux) Unlimited Domain w/ Power Pack"
+    },
+    {
         "itemId": 518,
         "categoryName": "Control Panel Addon(s)",
         "categoryCode": "controlpanel_addon",

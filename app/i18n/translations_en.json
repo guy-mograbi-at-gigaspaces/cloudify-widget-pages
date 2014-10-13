@@ -8,6 +8,9 @@
         "quickstart":"Quick Start"
     },
 
+
+    "lookingForPrevious":"Looking for previous installations...",
+    "startedMightTakeWhile" : "BLU Installation started. Please wait, this might take a while...",
     "bluSolo" : {
         "mustAgree" : "You must agree to email communications to participate in this program.",
         "chooseCloud" : "Choose the cloud where you want to deploy your BLU Acceleration for Cloud",

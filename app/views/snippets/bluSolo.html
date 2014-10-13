@@ -4,22 +4,12 @@
 
 
         {{formErrors}}
-<div ng-show="!genericWidgetModel.loaded" style="padding-top:20px;">
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+<div loding-widget="genericWidgetModel"></div>
 
-        </div>
-    </div>
-
-    <div style="font-size:18px; text-align:center;">
-         Looking for previous installations...
-    </div>
-
-
-</div>
-        <div ng-show="!!genericWidgetModel.loaded">
+ <div ng-show="!!genericWidgetModel.loaded">
 <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
 <div widget-raw-output-display="genericWidgetModel.widgetStatus.rawOutput" ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING'"></div>
+
 <div  id="blu-solo-snippet">
     <div ng-show="!!genericWidgetModel.widgetStatus.message" class="bg-danger widget-message">
         {{genericWidgetModel.widgetStatus.message}}
@@ -84,7 +74,7 @@
             </div>
         </div>
 
-        <div class="controller" control-focus ng-class="{'has-error' : !!formErrors.company}">
+        <div class="controller" control-focus control-error="formErrors.company">
             <div class="section">
                 <div class="label">{{'labels.companyName' | i18n}}<span class="required">*</span></div>
                 <div class="control">
@@ -98,13 +88,17 @@
 
 
 
-        <!--<div class="agreement controller" control-focus>-->
-        <!--<div class="section">-->
-        <!--<div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>-->
-        <!--<div class="control">-->
-        <!--<input type="checkbox" ng-model="execution.agreed"> I agree-->
-        <!--</div>-->
-        <!--</div>-->
+        <div class="agreement controller" control-focus control-error="formErrors.agreed">
+                <div class="section">
+                <div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>
+                <div class="control" style="padding-top:20px; padding-left:7px;">
+                    <input type="checkbox" ng-model="execution.agreed"> <span style="padding-left:10px;">I agree</span>
+                </div>
+                <div class="error-message">
+                    {{'formErrors.general.' + formErrors.company | i18n }}
+                </div>
+            </div>
+        </div>
         <!--</div>-->
         <div class="form-errors" ng-show="execution.error">
             {{execution.error}}

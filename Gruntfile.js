@@ -338,7 +338,8 @@ module.exports = function (grunt) {
                             'i18n/{,*/}*.json',
                             'fonts/**/*',
                             'images/{,*/}*.{gif,webp,svg,PNG}',
-                            'styles/fonts/*'
+                            'styles/fonts/*',
+                            'data_digested.js'
                         ]
                     },
                     {
@@ -473,7 +474,7 @@ module.exports = function (grunt) {
         }
     );
 
-    grunt.registerTask('deploy', [ 'default', 's3:all']);
+    grunt.registerTask('deploy', [ 'updateSoftlayerData', 'default', 's3:all']);
 
     grunt.registerTask('default', [
         'jshint',

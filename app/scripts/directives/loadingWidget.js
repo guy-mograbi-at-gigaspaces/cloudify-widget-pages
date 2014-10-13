@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .directive('widgetRawOutputDisplay', function () {
+    .directive('loadingWidget', function () {
         return {
-            templateUrl: 'views/directives/_widgetOutputDisplay.html',
+            templateUrl: 'views/directives/_loadingWidget.html',
             restrict: 'A',
             scope: {
-                'source': '=widgetRawOutputDisplay'
+                'genericWidgetModel': '=loadingWidget'
             },
             link: function postLink(/*scope, element, attrs*/) {
             }
