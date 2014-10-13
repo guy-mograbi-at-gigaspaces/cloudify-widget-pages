@@ -224,7 +224,7 @@ describe('snippet tests', function () {
             });
         })
 
-        xit("Run with valid data", function (done) {
+        it("Run with valid data", function (done) {
             var fills = conf.fills["AWS Valid Data"];
 
             runTest(done, fills, function(callback) {
@@ -253,7 +253,7 @@ describe('snippet tests', function () {
 
     // Softlayer tests
 
-    xdescribe("Softlayer tests", function () {
+    describe("Softlayer tests", function () {
 
         beforeEach(function (done) {
             driver = new webdriver.Builder().
