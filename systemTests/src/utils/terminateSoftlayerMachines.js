@@ -1,4 +1,4 @@
-http://sldn.softlayer.com/article/rest
+//http://sldn.softlayer.com/article/rest
 
 var http = require('https');
 var _ = require('lodash');
