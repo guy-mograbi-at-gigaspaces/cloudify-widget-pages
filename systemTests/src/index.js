@@ -2,8 +2,8 @@
 // https://code.google.com/p/selenium/wiki/WebDriverJs
 
 'use strict';
-var SECOND=1000;
-var MINUTE=60*SECOND;
+var SECOND = 1000;
+var MINUTE = 60 * SECOND;
 /**
  *
  *
@@ -42,18 +42,20 @@ var MINUTE=60*SECOND;
 
  */
 
+var lodash = require('lodash');
 var assert = require('assert');
 var path = require('path');
-var meJson = path.resolve(__dirname+"/../../", process.env['ME_JSON']) || path.resolve(__dirname, '../conf/dev/me.json');
+var meJson = process.env['ME_JSON'] && path.resolve(__dirname + "/../../", process.env['ME_JSON']) || path.resolve(__dirname, '../conf/dev/me.json');
 var async = require('async');
 var conf = require(meJson);
-
+var ec2 = require("./utils/terminateEc2Machines");
 var logger = require('log4js').getLogger('index');
 
 
 var webdriver = require('selenium-webdriver');
 var By = webdriver.By;
 var driver;
+var seleniumServerAddress = process.env['SELENIUM_SERVER_ADDRESS'] || conf.selenium.serverAddress;
 
 function getConfiguration(fills) {
     for (var config in conf.executionOptions) {
@@ -63,25 +65,41 @@ function getConfiguration(fills) {
     }
     throw new Error("Configuration with name [" + name + "] couldn't be found");
 }
+//cloudProviderSelectElement.findElement(By.css("option[value='" + value + "']")).click();
+function getFill(fillName) {
+    if (conf.fills[fillName].hasOwnProperty("fillWithBase")) {
+        return lodash.merge({}, conf.fills[fillName], conf.fills[conf.fills[fillName].fillWithBase]);
+    } else {
+        return conf.fills[fillName];
+    }
 
-function fillSelect(ngModel, value) {
-    logger.debug("SELECT [ng-model='" + ngModel + "', value='"+value+"']");
-    var cloudProviderSelectElement = driver.findElement(By.css("select[ng-model='" + ngModel + "']"));
-    cloudProviderSelectElement.click();
-    //cloudProviderSelectElement.findElement(By.css("option[value='" + value + "']")).click();
-    return cloudProviderSelectElement.findElement(By.xpath("//option[contains(., '" + value + "')]")).click();
 }
 
+function fillSelect(ngModel, value) {
+    logger.debug("SELECT [ng-model='" + ngModel + "', value='" + value + "']");
+    var cloudProviderSelectElement = driver.findElement(By.css("select[ng-model='" + ngModel + "']"));
+    cloudProviderSelectElement.click();
+    return cloudProviderSelectElement.findElement(By.xpath("//option[contains(., '" + value + "')]")).click();
+}
+function fillCheckbox(ngModel, value) {
+    logger.debug("CHECKBOX [ng-model='" + ngModel + "', status='" + value + "']");
+    if (value == "checked") {
+        return driver.findElement(By.css("input[ng-model='" + ngModel + "']")).click();
+    } else {
+        return driver.findElement(By.css("input[ng-model='" + ngModel + "']")).clear();
+    }
+}
 function fillInput(ngModel, value) {
     driver.findElement(By.css("input[ng-model='" + ngModel + "']")).getAttribute("type").then(function (type) {
         if (type != 'password') {
-            logger.debug("INPUT [ng-model='" + ngModel + "', value='"+value+"']");
+            logger.debug("INPUT [ng-model='" + ngModel + "', value='" + value + "']");
         } else {
             logger.debug("INPUT [ng-model='" + ngModel + "'] (value is hidden) ");
         }
     });
     return driver.findElement(By.css("input[ng-model='" + ngModel + "']")).sendKeys(value);
 }
+
 
 function fillData(fills, callback) {
     var executionOption = getConfiguration(fills);
@@ -91,35 +109,47 @@ function fillData(fills, callback) {
 
     var options = fills.data;
     async.eachSeries(Object.keys(options), function (field, callbackDone) {
-            if (requiredOptions.hasOwnProperty(field)) {
-                if (requiredOptions[field] == 'select') {
-                    fillSelect(field, options[field]).then(callbackDone);
-                } else if (requiredOptions[field] == 'input') {
-                    fillInput(field, options[field]).then(callbackDone);
-                } else {
-                    throw new Error("Required field [" + field + "] is not well configured in tests");
-                }
-            } else if (optionalOptions.hasOwnProperty(field)) {
-                if (optionalOptions[field] == 'select') {
-                    fillSelect(field, options[field]).then(callbackDone);
-                } else if (optionalOptions[field] == 'input') {
-                    fillInput(field, options[field]).then(callbackDone);
-                } else {
-                    throw new Error("Optional field [" + field + "] is not well configured in tests");
-                }
+        if (requiredOptions.hasOwnProperty(field)) {
+            if (requiredOptions[field] == 'select') {
+                fillSelect(field, options[field]).then(callbackDone);
+            } else if (requiredOptions[field] == 'input') {
+                fillInput(field, options[field]).then(callbackDone);
+            } else if (requiredOptions[field] == 'checkbox') {
+                fillCheckbox(field, options[field]).then(callbackDone);
             } else {
-                throw new Error("Unable to find configuration for field [" + field + "]");
+                throw new Error("Required field [" + field + "] is not well configured in tests");
             }
-        }, callback);
+        } else if (optionalOptions.hasOwnProperty(field)) {
+            if (optionalOptions[field] == 'select') {
+                fillSelect(field, options[field]).then(callbackDone);
+            } else if (optionalOptions[field] == 'input') {
+                fillInput(field, options[field]).then(callbackDone);
+            } else if (optionalOptions[field] == 'checkbox') {
+                fillCheckbox(field, options[field]).then(callbackDone);
+            } else {
+                throw new Error("Optional field [" + field + "] is not well configured in tests");
+            }
+        } else {
+            throw new Error("Unable to find configuration for field [" + field + "]");
+        }
+    }, callback);
 }
 
+function stepTerminateInstances(fill, callback) {
+    if (fill.name == 'AWS') {
+        ec2.terminate();
+    } else {
+        throw new Error("Unknown fill [" + fill.name + "]");
+    }
+    callback();
+}
 
 function runTest(done, fills, validationFunction) {
-    async.waterfall([
+    var steps = [
         function waitForProgressBar(callback) {
             driver.wait(function () {
-                return driver.isElementPresent(By.className("progress"));
-            }, 3000, "Unable to find initial loading progress bar").then(function () {
+                return driver.isElementPresent(By.xpath("//div[@class='progress']/.."));
+            }, 15000, "Unable to find initial loading progress bar").then(function () {
                 logger.debug("Found");
                 callback();
             });
@@ -159,24 +189,66 @@ function runTest(done, fills, validationFunction) {
                     assert.equal(text, fills.data["softlayerLoginDetails.params.apiKey"]);
                 });
             } else {
-                throw new Error("Unknown widget ["+fills.name+"]");
+                throw new Error("Unknown widget [" + fills.name + "]");
             }
 
             driver.switchTo().defaultContent().then(callback);
 
         },
+        function validateRecipeProperties(callback) {
+            logger.info("Validating recipe properties");
+
+            driver.wait(function () {
+                return driver.findElement(By.xpath("//button[contains(., 'Show Properties')]")).isDisplayed().then(function (isDisplayed) {
+                    return isDisplayed;
+                })
+            }, 1 * SECOND, "Unable to find displayed 'Show Properties' button");
+
+            driver.findElement(By.xpath("//div[contains(@style, 'background-color:orange')]/button[contains(., 'Show Properties')]/..")).isDisplayed().then(function (isDisplayed) {
+                assert.equal(isDisplayed, true, "Unable to find the orange box of the recipe properties");
+            })
+
+            driver.findElement(By.xpath("//button[contains(., 'Show Properties')]")).click().then(function () {
+                driver.findElement(By.xpath("//button[contains(., 'Show Properties')]")).isDisplayed().then(function (isDisplayed) {
+                    assert.equal(false, isDisplayed, "The 'Show Properties' button still displayed!");
+                }).then(function () {
+                    driver.findElement(By.css("div.recipe-properties")).isDisplayed().then(function (isDisplayed) {
+                        assert.equal(true, isDisplayed, "The properties box is not displayed");
+                    })
+                    driver.findElement(By.xpath("//button[contains(., 'Hide')]")).isDisplayed().then(function (isDisplayed) {
+                        assert.equal(true, isDisplayed, "The 'Hide' button is not displayed");
+                    })
+                })
+            }).then(function () {
+                if (fills.name == 'AWS') {
+                    var keyValue = {
+                        "EC2_REGION": getConfiguration(fills)["RecipeProperties"]["Region"],
+                        "BLU_EC2_HARDWARE_ID": getConfiguration(fills)["RecipeProperties"]["HardwareId"]
+                    }
+                    async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
+                        driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'"+key+"')]/../td[last()]")).getInnerHtml().then(function (value) {
+                            assert.equal(value,keyValue[key], "Unexpected value for recipe property ["+key+"]");
+                        }).then(callbackDone);
+                    })
+                }
+            }).then(callback)
+        },
         function clickSubmit(callback) {
             logger.info("Click on submit");
-            driver.findElement(By.tagName("button")).click();
+            driver.findElement(By.xpath("//button[contains(., 'Submit')]")).click();
             callback();
-        },
-        validationFunction,
-        function finishTest(callback) {
-            logger.info("Finishing test");
-            done();
-            callback();
-        }
-    ]);
+        }]
+        .concat(validationFunction)
+        .concat(
+        [
+            function finishTest(callback) {
+                logger.info("Finishing test");
+                done();
+                callback();
+            }
+        ]
+    );
+    async.waterfall(steps);
 }
 
 
@@ -185,9 +257,11 @@ describe('snippet tests', function () {
     // AWS tests
 
     describe("AWS tests", function () {
+
+
         beforeEach(function (done) {
             driver = new webdriver.Builder().
-                usingServer(conf.selenium.serverAddress).
+                usingServer(seleniumServerAddress).
                 withCapabilities(webdriver.Capabilities.chrome()).//todo : support other browsers with configuration
                 build();
             driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=');
@@ -196,68 +270,73 @@ describe('snippet tests', function () {
 
         afterEach(function (done) {
             setTimeout(function () {
-                logger.info("Closing1");
                 driver.close().then(function () {
-                    logger.info("Closing2");
+                    logger.info("Closing web browser");
                     done();
                 });
             }, 3000);
         })
 
         it("Run with missing security group", function (done) {
-            var fills = conf.fills["AWS Missing Security Group"];
+            var fill = getFill("AWS Missing Security Group");
 
-            runTest(done, fills, function(callback) {
-                logger.info("Validating run");
+            runTest(done, fill, [
+                function (callback) {
+                    logger.info("Validating run");
 
 
-                driver.wait(function() {
-                    //return driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/parent::*/parent::*/child::div[@class='error-message ng-binding']")).isDisplayed().then(function (isDisplayed) {
-                    return driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/../../div[@class='error-message ng-binding']")).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
-                }, 2 * SECOND);
+                    driver.wait(function () {
+                        //return driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/parent::*/parent::*/child::div[@class='error-message ng-binding']")).isDisplayed().then(function (isDisplayed) {
+                        return driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/../../div[@class='error-message ng-binding']")).isDisplayed().then(function (isDisplayed) {
+                            return isDisplayed;
+                        });
+                    }, 2 * SECOND, "Unable to find error message box for securityGroups");
 
-                driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/parent::*/parent::*/child::div[@class='error-message ng-binding']")).getInnerHtml().then(function (innerHTML) {
-                    assert.equal(innerHTML.trim(), "Value is missing");
-                }).then(callback);
-            });
+                    driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/parent::*/parent::*/child::div[@class='error-message ng-binding']")).getInnerHtml().then(function (innerHTML) {
+                        assert.equal(innerHTML.trim(), "Value is missing");
+                    }).then(callback);
+                }
+            ]);
         })
 
         it("Run with valid data", function (done) {
-            var fills = conf.fills["AWS Valid Data"];
+            var fill = getFill("AWS Valid Data");
 
-            runTest(done, fills, function(callback) {
-                logger.info("Validating run");
-                driver.wait(function () {
-                    /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
-                    return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']")).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
-                }, 5000, "output div is not displayed");
+            runTest(done, fill, [
+                function (callback) {
+                    logger.info("Validating run");
+                    driver.wait(function () {
+                        /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
+                        return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel']")).isDisplayed().then(function (isDisplayed) {
+                            return isDisplayed;
+                        });
+                    }, 5000, "output div is not displayed");
 
-                driver.wait(function() {
-                    return driver.findElement(By.css("div.widget-message")).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
+                    driver.wait(function () {
+                        return driver.findElement(By.xpath("//div[@class='widget-output-display']/pre[@class='pre']")).isDisplayed().then(function (isDisplayed) {
+                            return isDisplayed;
+                        });
 
-                }, 15*MINUTE, "Widget message is not shown, installation might not be completed.");
+                    }, 15 * MINUTE, "Widget message is not shown, installation might not be completed.");
 
-                driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
-                    assert.equal(innerHTML.trim(), "Good Bye!");
-                }).then(callback);
-            });
-
+                    driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
+                        assert.equal(innerHTML.trim(), "Good Bye!");
+                    }).then(callback);
+                },
+                function (callback) {
+                    stepTerminateInstances(fill, callback);
+                }
+            ]);
         })
     });
 
     // Softlayer tests
 
-    describe("Softlayer tests", function () {
+    xdescribe("Softlayer tests", function () {
 
         beforeEach(function (done) {
             driver = new webdriver.Builder().
-                usingServer(conf.selenium.serverAddress).
+                usingServer(seleniumServerAddress).
                 withCapabilities(webdriver.Capabilities.chrome()).//todo : support other browsers with configuration
                 build();
             driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=');
@@ -266,31 +345,30 @@ describe('snippet tests', function () {
 
         afterEach(function (done) {
             setTimeout(function () {
-                logger.info("Closing1");
                 driver.close().then(function () {
-                    logger.info("Closing2");
+                    logger.info("Closing web browser");
                     done();
                 });
-            }, 3000);
+            }, 10000);
         })
 
         it("Run with valid data", function (done) {
-            var fills = conf.fills["Softlayer Valid Data"];
-            runTest(done, fills, function(callback) {
+            var fills = getFill("Softlayer Valid Data");
+            runTest(done, fills, function (callback) {
                 logger.info("Validating run");
                 driver.wait(function () {
                     /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
-                    return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']")).isDisplayed().then(function (isDisplayed) {
+                    return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel']")).isDisplayed().then(function (isDisplayed) {
                         return isDisplayed;
                     });
                 }, 5000, "output div is not displayed");
 
-                driver.wait(function() {
+                driver.wait(function () {
                     return driver.findElement(By.css("div.widget-message")).isDisplayed().then(function (isDisplayed) {
                         return isDisplayed;
                     });
 
-                }, 15*MINUTE, "Widget message is not shown, installation might not be completed.");
+                }, 15 * MINUTE, "Widget message is not shown, installation might not be completed.");
 
                 driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
                     assert.equal(innerHTML.trim(), "Good Bye!");
@@ -300,23 +378,23 @@ describe('snippet tests', function () {
         })
 
         it("Run with invalid credentials", function (done) {
-            var fills = conf.fills["Softlayer Invalid Credentials"];
+            var fills = getFill("Softlayer Invalid Credentials");
 
-            runTest(done, fills, function(callback) {
+            runTest(done, fills, function (callback) {
                 logger.info("Validating run");
                 driver.wait(function () {
                     /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
-                    return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']")).isDisplayed().then(function (isDisplayed) {
+                    return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel']")).isDisplayed().then(function (isDisplayed) {
                         return isDisplayed;
                     });
                 }, 5000, "output div is not displayed");
 
-                driver.wait(function() {
+                driver.wait(function () {
                     return driver.findElement(By.css("div.widget-message")).isDisplayed().then(function (isDisplayed) {
                         return isDisplayed;
                     });
 
-                }, 15*MINUTE, "Widget message is not shown, installation might not be completed.");
+                }, 15 * MINUTE, "Widget message is not shown, installation might not be completed.");
 
                 driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
                     assert.equal(innerHTML.trim(), "Operation failed.");
