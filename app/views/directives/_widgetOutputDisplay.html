@@ -1,4 +1,61 @@
+<div class="widget-output-display">
+
+<div class="messages" ng-class="{'with-pem' : source.widgetStatus.hasPemFile}">
+    <div ng-show="source.widgetStatus.hasPemFile" class="pem-file">
+        <div class="message">You have a new private key</div>
+        <div class="actions">
+            <button class="btn btn-info" ng-click="page.showPemFileContent = true"><i class="fa fa-align-justify"></i>View</button>
+            <a class="btn btn-info" href="{{source.widgetStatus.pemDownloadLink}}" download="private_key.pem"><i class="fa fa-download"></i>Download</a>
+        </div>
+    </div>
+
+    <div class="something-is-wrong" style="text-align: center">
+        <button class="btn btn-primary" ng-show="!page.showSomethingIsWrong" ng-click="page.showSomethingIsWrong=true">
+            <i class="fa fa-bug"></i>Something gone wrong?
+        </button>
+        <div dialog show="page.showSomethingIsWrong">
+            <button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">Close</button>
+            <div>We are very sorry to hear that something is wrong.<br/><span style="font-size:17px"> Here is what you can do about it..</span></div>
+            <div style="text-align:center; margin-top:30px;">
+                <button class="btn btn-primary stop-widget" ng-click="callStop()" >
+                    <i class="fa fa-stop"></i>Stop and try again
+                </button>
+            </div>
+            <div class="warning" style="font-size:10px; padding:10px;">Machines should be terminated manually</div>
+            <div style="margin-top:10px;">
+                <button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">My mistake, everything is fine</button>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div dialog show="page.stopping" class="stopping-widget">
+        <i class="fa fa-refresh fa-spin"></i>
+        <div>stopping...</div>
+    </div>
+
+</div>
+
+    <div dialog show="page.showPemFileContent" class="pem-content">
+        <div class="popup-content">
+            <div class="instructions">Copy and paste the content of the private key <button class="btn btn-link" ng-click="page.showPemFileContent=false">Close</button> </div>
+            <pre><code>{{source.widgetStatus.pemFileContent}}</code></pre>
+        </div>
+    </div>
+    <!--<div class="ng-modal" ng-show="!!showPemFileContent ">
+        <div class="ng-modal-overlay"></div>
+        <div class="pem-content ng-modal-dialog" >
+            <div class="popup-content">
+                <div class="instructions">Copy and paste the content of the private key <button class="btn btn-link" ng-click="showPemFileContent=false">Close</button> </div>
+                <pre><code>{{source.widgetStatus.pemFileContent}}</code></pre>
+            </div>
+        </div>
+    </div>-->
+
 <pre class="pre">
-    <span>{{'startedMightTakeWhile' | i18n }}&#10;</span>
-    <div ng-repeat="line in lines"></div>
+    <div>{{'startedMightTakeWhile' | i18n }}&#10;</div>
+
+    <div ng-repeat="line in source.widgetStatus.rawOutput track by $index">{{line}}</div>
 </pre>
+</div>

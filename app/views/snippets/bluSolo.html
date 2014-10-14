@@ -1,21 +1,26 @@
+<div id="blu-solo-snippet">
 <!--{{genericWidgetModel.widgetStatus}}-->
 <div recipe-properties-display="sentProperties"></div>
 
-
-
-        {{formErrors}}
-<div loding-widget="genericWidgetModel"></div>
+<div loading-widget="genericWidgetModel"></div>
 
  <div ng-show="!!genericWidgetModel.loaded">
-<!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
-<div widget-raw-output-display="genericWidgetModel.widgetStatus.rawOutput" ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING'"></div>
 
-<div  id="blu-solo-snippet">
+
+<div  >
     <div ng-show="!!genericWidgetModel.widgetStatus.message" class="bg-danger widget-message">
-        {{genericWidgetModel.widgetStatus.message}}
+        <div>
+            {{genericWidgetModel.widgetStatus.message}}
+        </div>
+        <button ng-show="!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = true"><i class="fa fa-tasks" style="padding-right:10px;"></i>Show complete log</button>
+        <button ng-show="!!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = false"><i class="fa fa-arrow-circle-o-left" style="padding-right:10px;"></i>Back to form</button>
     </div>
 
-     <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING'">
+    <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
+    <div widget-raw-output-display="genericWidgetModel" stop="stopWidget()"
+         ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING' || showCompleteLog"></div>
+
+     <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING' && !showCompleteLog">
     <div class="controllers">
         <div class="cloud-provider controller" control-focus>
             <div class="section">
@@ -123,5 +128,7 @@
     </span>
      </div> <!--form-->
     </div>
+
+</div>
 
 </div>

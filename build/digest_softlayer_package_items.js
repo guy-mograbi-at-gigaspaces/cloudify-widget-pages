@@ -1,3 +1,4 @@
+var _ = require('lodash');
 exports.execute = function execute( callback ) {
     var http = require('https');
 
@@ -52,6 +53,8 @@ exports.execute = function execute( callback ) {
             }
             return 0;
         });
+
+        result = _.sortBy(result,'itemId');
 
         require('fs').writeFile(require('path').resolve(__dirname, '../app/data_digested.js'), 'var softlayerItems = ' + JSON.stringify(result, {}, 4) + ';', function (err) {
             if (!!err) {
