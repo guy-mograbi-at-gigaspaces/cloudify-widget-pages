@@ -10,7 +10,7 @@ var awsJson =  ( awsJsonEnv && path.resolve(__dirname+'/../../', awsJsonEnv) ) |
 /**
  * {
  *  'accessKeyId': __accessKeyId__,
-  *  'secreatAccessKey' : __secretAccessKey__,
+  *  'secretAccessKey' : __secretAccessKey__,
   *  'region' : 'us-east-1',
  *
  * }
