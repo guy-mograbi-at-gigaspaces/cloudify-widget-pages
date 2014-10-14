@@ -75,6 +75,10 @@ function processList( data, callback ){
     var result = _.map(data, function(item){
         return { 'id' : item.id, 'hostname' : item.hostname };
     });
+
+    result = _.filter(result,function( item ){
+        return item.hostname.indexOf('widget-cloudify-manager1') === 0;
+    });
     callback(null, result);
 }
 

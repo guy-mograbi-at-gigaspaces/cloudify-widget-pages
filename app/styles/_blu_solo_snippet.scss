@@ -35,22 +35,65 @@
   .widget-output-display{
 
 
-    font-size:22px;
+    font-size:15px;
     .messages{
-      padding:20px;
+      padding:20px 0;
       height:100px;
+      display:table;
+      width:100%;
+
+      .message-items{
+        display:table-row;
+        .message-item{
+          display:table-cell;
+          width:33%;
+          vertical-align: bottom;
+        }
+      }
+
+
       &.with-pem{
         height:230px;
       }
       .something-is-wrong{
-        float:right;
+//        float:right;
         z-index:300;
+        text-align:center;
+        float:right;
+        .we-are-sorry{
+          span{
+            font-size:13px;
+          }
+        }
+        .stop-wrapper{
+          text-align:center;
+          margin-top:30px;
+        }
+
+        .warning{
+          font-size:10px;
+          padding:10px;
+        }
+
+        .my-mistake{
+          margin-top:10px;
+        }
+      }
+
+      .finished-successfully{
+        width:370px;
+        font-size:15px;
+        margin:0 auto;
+        text-align:center;
+        .message{
+          padding:0 20px 20px 20px;
+        }
       }
       .warning{
         font-size:13px;
       }
       i.fa {
-        padding-right:20px;
+        padding-right:10px;
       }
 
       .stopping-widget{
@@ -68,22 +111,13 @@
       }
 
       .pem-file{
-        float:left;
-        width:400px;
-        border: 2px solid #5B8BC6;
+//        float:left;
+//        width:400px;
         border-radius: 5px;
-        padding:20px;
-        text-align:center;
-        .message{
-          padding:20px;
-          text-align:center;
-        }
-        .actions{
-          .btn, button{
-            padding:20px;
-            font-size:22px;
-          }
+        padding:0;
 
+        .message{
+          padding:0 20px 20px 0;
         }
       }
     }
