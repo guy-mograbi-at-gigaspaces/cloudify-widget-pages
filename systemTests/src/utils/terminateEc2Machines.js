@@ -4,29 +4,42 @@ var async = require('async');
 var path = require('path');
 var logger = require('log4js').getLogger('terminateMachines');
 
-var awsJsonEnv = process.env['AWS_JSON'];
-var awsJson =  ( awsJsonEnv && path.resolve(__dirname+'/../../', awsJsonEnv) ) || path.resolve(__dirname, '../conf/dev/aws.json');
+var ec2=null;
 
-/**
- * {
+function configure(callback) {
+
+    var awsJsonEnv = process.env['AWS_JSON'];
+    var awsJson = ( awsJsonEnv && path.resolve(__dirname + '/../../', awsJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/aws.json');
+
+    /**
+     * {
  *  'accessKeyId': __accessKeyId__,
   *  'secretAccessKey' : __secretAccessKey__,
   *  'region' : 'us-east-1',
  *
  * }
- */
+     */
 
 
-AWS.config.update(require(awsJson));
-var ec2 = new AWS.EC2();
-
+    AWS.config.update(require(awsJson));
+    ec2 = new AWS.EC2();
+    callback();
+}
 function terminate( instanceIds, callback ){
+    if (instanceIds.length == 0) {
+        logger.info("There are no machines to terminate.");
+        callback(null, 0);
+        return;
+    }
+
     logger.info('terminating', instanceIds);
     var params = {
         InstanceIds: instanceIds,
         DryRun: false
     };
-    ec2.terminateInstances(params, callback);
+    ec2.terminateInstances(params, function() {
+        callback(null, instanceIds.length);
+    });
 }
 
 
@@ -58,18 +71,17 @@ function processList( data, callback ){
     callback( null,  toRemoveIds );
 }
 
-if (require.main === module) {
-    async.waterfall([
-        listAll,
-        processList,
-        terminate
-    ], function(err){
-        if ( !!err ){
-            logger.error('unable to terminate',err);
-            return;
-        }
-        logger.info('terminated successfully!!');
-    });
-
+exports.terminate = function() {
+        async.waterfall([
+            configure,
+            listAll,
+            processList,
+            terminate
+        ], function (err, numOfTerminatedMachines) {
+            if (!!err) {
+                logger.error('unable to terminate', err);
+                return;
+            }
+            logger.info('['+numOfTerminatedMachines+'] instances were terminated successfully!!');
+        });
 }
-
