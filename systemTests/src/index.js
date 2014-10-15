@@ -223,29 +223,32 @@ function runTest(done, fills, validationFunction) {
                 var recipeProperties = getConfiguration(fills)["RecipeProperties"];
                 if (fills.name == 'AWS') {
                     var keyValue = {
-                        "Key" : "Value",
+                        "Key": "Value",
                         "EC2_REGION": recipeProperties["Region"],
                         "BLU_EC2_HARDWARE_ID": recipeProperties["HardwareId"]
                     }
                     async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
-                        driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'"+key+"')]/../td[last()]")).getInnerHtml().then(function (value) {
-                            assert.equal(value,keyValue[key], "Unexpected value for recipe property ["+key+"]");
+                        driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'" + key + "')]/../td[last()]")).getInnerHtml().then(function (value) {
+                            assert.equal(value, keyValue[key], "Unexpected value for recipe property [" + key + "]");
                         }).then(callbackDone);
                     })
                 } else if (fills.name == 'Softlayer') {
                     var keyValue = {
-                        "Key" : "Value",
+                        "Key": "Value",
                         "locationId": recipeProperties["DataCenter"][fills.data["execution.softlayer.dataCenter"]],
                         "hardwareId": recipeProperties["CPU"][fills.data["execution.softlayer.core"]] + "," + recipeProperties["RAM"][fills.data["execution.softlayer.ram"]] + "," + recipeProperties["Disk"][fills.data["execution.softlayer.disk"]]
                     }
                     async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
-                        driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'"+key+"')]/../td[last()]")).getInnerHtml().then(function (value) {
-                            assert.equal(value,keyValue[key], "Unexpected value for recipe property ["+key+"]");
+                        driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'" + key + "')]/../td[last()]")).getInnerHtml().then(function (value) {
+                            assert.equal(value, keyValue[key], "Unexpected value for recipe property [" + key + "]");
                         }).then(callbackDone);
                     })
                 } else {
-                    throw new Error("Unknown option ["+fills.name+"] for recipe properties");
+                    throw new Error("Unknown option [" + fills.name + "] for recipe properties");
                 }
+            }).then(function () {
+                driver.findElement(By.xpath("//button[contains(., 'Hide')]")).click();
+                //TODO nice to have - add verifications for Show/Hide click results
             }).then(callback)
         },
         function clickSubmit(callback) {
@@ -266,12 +269,96 @@ function runTest(done, fills, validationFunction) {
     async.waterfall(steps);
 }
 
+function stepCheckErrorBox(expectedErrorMessage, callback) {
+    function checkFormIsDisplayedAndOutputIsNot(innerCallback) {
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/div[text()[contains(.,'" + expectedErrorMessage + "')]]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, true, "Unexpected error message");
+        }).then(function () {
+            logger.debug("Checking that widget output is hidden");
+        })
+
+        driver.findElement(By.xpath("//div[@class='widget-output-display']")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, false, "Expecting the widget output to be hidden");
+        }).then(function () {
+            logger.debug("Checking that the form is displayed");
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class,'form')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, true, "Expecting the form to be visible");
+        }).then(function () {
+            logger.debug("Checking that the 'Show complete log' button is visible");
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Show complete log')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, true, "Expecting the 'Show complete log' button to be visible")
+        }).then(function () {
+            logger.debug("Checking that the 'Back to form' button is invisible")
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Back to form')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, false, "Expecting the 'Back to form' button to be invisible")
+        }).then(function() {
+            innerCallback();
+        })
+    }
+
+    function checkOutputIsDisplayedAndFormIsNot(innerCallback) {
+        logger.debug("Checking that widget output is visible");
+        //Validate
+        driver.findElement(By.xpath("//div[@class='widget-output-display']")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, true, "Expecting the widget output to be visible");
+        }).then(function () {
+            logger.debug("Checking that the form is hidden");
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class,'form')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, false, "Expecting the form to be hidden");
+        }).then(function () {
+            logger.debug("Checking that the 'Show complete log' button is invisible");
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Show complete log')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, false, "Expecting the 'Show complete log' button to be invisible")
+        }).then(function () {
+            logger.debug("Checking that the 'Back to form' button is visible")
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Back to form')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, true, "Expecting the 'Back to form' button to be visible")
+        }).then(innerCallback)
+    }
+
+    function clickOnShowCompleteLogButton(innerCallback) {
+        //Click on 'Show complete log' button in the error-message-box
+        logger.debug("Clicking on the 'Show complete log' button");
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Show complete log')]")).click()
+            .then(innerCallback);
+    }
+    function clickOnBackToFormButton(innerCallback) {
+        //Click on 'Back to form' button in the error-message-box
+        logger.debug("Clicking on the 'Back to form' button");
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Back to form')]")).click()
+            .then(innerCallback);
+    }
+    async.waterfall([
+        checkFormIsDisplayedAndOutputIsNot,
+        clickOnShowCompleteLogButton,
+        checkOutputIsDisplayedAndFormIsNot,
+        clickOnBackToFormButton,
+        checkFormIsDisplayedAndOutputIsNot,
+        function(cb) {
+            callback();
+            cb();
+        }
+    ])
+}
+
 
 describe('snippet tests', function () {
 
     // AWS tests
 
-    xdescribe("AWS tests", function () {
+    describe("AWS tests", function () {
 
 
         beforeEach(function (done) {
@@ -292,7 +379,7 @@ describe('snippet tests', function () {
             }, 3000);
         })
 
-        it("Run with missing security group", function (done) {
+        xit("Run with missing security group", function (done) {
             var fill = getFill("AWS Missing Security Group");
 
             runTest(done, fill, [
@@ -314,7 +401,7 @@ describe('snippet tests', function () {
             ]);
         })
 
-        it("Run with valid data", function (done) {
+        xit("Run with valid data", function (done) {
             var fill = getFill("AWS Valid Data");
 
             runTest(done, fill, [
@@ -327,12 +414,30 @@ describe('snippet tests', function () {
                         });
                     }, 5000, "output div is not displayed");
 
+                    driver.findElement(By.xpath("//div[@class='widget-output-display']/pre[@class='pre']")).isDisplayed().then(function (isDisplayed) {
+                        assert.equal(isDisplayed, true, "Widget output is not displayed!");
+                    });
+
+
+                    driver.findElement(By.xpath("//div[text()[contains(.,'" + conf.messages["installationInProgressMessage"] + "')]]")).isDisplayed().then(function (isDisplayed) {
+                        assert.equal(isDisplayed, true, "The text [" + conf.messages["installationInProgressMessage"] + "] is not displayed");
+                    });
+
+                    driver.findElement(By.xpath("//div[text()[contains(.,'" + conf.messages["installationInProgressMessage"] + "')]]/../div[@class='progress']/div[contains(@class, 'progress-bar') and contains(@class, 'progress-bar-success')]")).isDisplayed().then(function (isDisplayed) {
+                        assert.equal(isDisplayed, true, "The green progress bar is not displayed");
+                    });
+
+
+                    driver.findElement(By.xpath("//div[@class='widget-output-display']/pre[@class='pre' and contains(.,'" + conf.messages["installationStartedMessage"] + "')]")).isDisplayed().then(function (isDisplayed) {
+                        assert.equal(isDisplayed, true, "The message [" + conf.messages["installationStartedMessage"] + "] is not displayed in the widget output");
+                    });
+
                     driver.wait(function () {
-                        return driver.findElement(By.xpath("//div[@class='widget-output-display']/pre[@class='pre']")).isDisplayed().then(function (isDisplayed) {
+                        return driver.isElementPresent(By.xpath("//div[@class='widget-output-display']/pre[@class='pre' and contains(.,'Good Bye!')]")).then(function (isDisplayed) {
                             return isDisplayed;
                         });
+                    }, 15 * MINUTE, "Unable to find [Good Bye!] in the widget output");
 
-                    }, 15 * MINUTE, "Widget message is not shown, installation might not be completed.");
 
                     driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
                         assert.equal(innerHTML.trim(), "Good Bye!");
@@ -367,7 +472,7 @@ describe('snippet tests', function () {
             }, 10000);
         })
 
-        it("Run with valid data", function (done) {
+        xit("Run with valid data", function (done) { //TODO still not updated!
             var fills = getFill("Softlayer Valid Data");
             runTest(done, fills, function (callback) {
                 logger.info("Validating run");
@@ -379,11 +484,11 @@ describe('snippet tests', function () {
                 }, 5000, "output div is not displayed");
 
                 driver.wait(function () {
-                    return driver.findElement(By.css("div.widget-message")).isDisplayed().then(function (isDisplayed) {
+                    //TODO Change to good bye...
+                    return driver.isElementPresent(By.xpath("//div[contains(@class, 'widget-message')]/div[text()[contains(.,'Invalid Credentials')]]")).then(function (isDisplayed) {
                         return isDisplayed;
                     });
-
-                }, 15 * MINUTE, "Widget message is not shown, installation might not be completed.");
+                }, 5 * MINUTE, "Widget message is not shown, installation might not be completed.");
 
                 driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
                     assert.equal(innerHTML.trim(), "Good Bye!");
@@ -392,30 +497,34 @@ describe('snippet tests', function () {
 
         })
 
-        xit("Run with invalid credentials", function (done) {
+        it("Run with invalid credentials", function (done) {
             var fills = getFill("Softlayer Invalid Credentials");
 
-            runTest(done, fills, function (callback) {
-                logger.info("Validating run");
-                driver.wait(function () {
-                    /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
-                    return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel']")).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
+            runTest(done, fills, [
+                function (callback) {
+                    logger.info("Validating run");
+
+                    logger.debug("Will wait 5 seconds for the widget output");
+                    driver.wait(function () {
+                        /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
+                        return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel']")).isDisplayed().then(function (isDisplayed) {
+                            return isDisplayed;
+                        });
+                    }, 5 * SECOND, "output div is not displayed").then(function () {
+                        logger.debug("will wait 5 minutes for the error message box")
                     });
-                }, 5000, "output div is not displayed");
 
-                driver.wait(function () {
-                    return driver.findElement(By.css("div.widget-message")).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
 
-                }, 15 * MINUTE, "Widget message is not shown, installation might not be completed.");
-
-                driver.findElement(By.css("div.widget-message")).getInnerHtml().then(function (innerHTML) {
-                    assert.equal(innerHTML.trim(), "Operation failed.");
-                }).then(callback);
-            });
-
+                    driver.wait(function () {
+                        return driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]")).isDisplayed();
+                    }, 5 * MINUTE, "Widget message box is not displayed").then(function () {
+                        logger.debug("Checking error message box content");
+                    }).then(callback);
+                },
+                function (callback) {
+                    stepCheckErrorBox("Invalid Credentials", callback);
+                }
+            ]);
         })
     });
 
