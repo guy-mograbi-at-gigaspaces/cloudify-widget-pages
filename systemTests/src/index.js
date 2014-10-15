@@ -220,16 +220,31 @@ function runTest(done, fills, validationFunction) {
                     })
                 })
             }).then(function () {
+                var recipeProperties = getConfiguration(fills)["RecipeProperties"];
                 if (fills.name == 'AWS') {
                     var keyValue = {
-                        "EC2_REGION": getConfiguration(fills)["RecipeProperties"]["Region"],
-                        "BLU_EC2_HARDWARE_ID": getConfiguration(fills)["RecipeProperties"]["HardwareId"]
+                        "Key" : "Value",
+                        "EC2_REGION": recipeProperties["Region"],
+                        "BLU_EC2_HARDWARE_ID": recipeProperties["HardwareId"]
                     }
                     async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
                         driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'"+key+"')]/../td[last()]")).getInnerHtml().then(function (value) {
                             assert.equal(value,keyValue[key], "Unexpected value for recipe property ["+key+"]");
                         }).then(callbackDone);
                     })
+                } else if (fills.name == 'Softlayer') {
+                    var keyValue = {
+                        "Key" : "Value",
+                        "locationId": recipeProperties["DataCenter"][fills.data["execution.softlayer.dataCenter"]],
+                        "hardwareId": recipeProperties["CPU"][fills.data["execution.softlayer.core"]] + "," + recipeProperties["RAM"][fills.data["execution.softlayer.ram"]] + "," + recipeProperties["Disk"][fills.data["execution.softlayer.disk"]]
+                    }
+                    async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
+                        driver.findElement(By.xpath("//div[@class='recipe-properties']/table/tbody/tr/td[contains(.,'"+key+"')]/../td[last()]")).getInnerHtml().then(function (value) {
+                            assert.equal(value,keyValue[key], "Unexpected value for recipe property ["+key+"]");
+                        }).then(callbackDone);
+                    })
+                } else {
+                    throw new Error("Unknown option ["+fills.name+"] for recipe properties");
                 }
             }).then(callback)
         },
@@ -256,7 +271,7 @@ describe('snippet tests', function () {
 
     // AWS tests
 
-    describe("AWS tests", function () {
+    xdescribe("AWS tests", function () {
 
 
         beforeEach(function (done) {
@@ -332,7 +347,7 @@ describe('snippet tests', function () {
 
     // Softlayer tests
 
-    xdescribe("Softlayer tests", function () {
+    describe("Softlayer tests", function () {
 
         beforeEach(function (done) {
             driver = new webdriver.Builder().
@@ -377,7 +392,7 @@ describe('snippet tests', function () {
 
         })
 
-        it("Run with invalid credentials", function (done) {
+        xit("Run with invalid credentials", function (done) {
             var fills = getFill("Softlayer Invalid Credentials");
 
             runTest(done, fills, function (callback) {
