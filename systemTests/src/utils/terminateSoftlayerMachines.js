@@ -36,10 +36,53 @@ if (!String.prototype.format) {
 
 //http://sldn.softlayer.com/reference/services/SoftLayer_Virtual_Guest/deleteObject
 
+function fillInRequestOpts( opts ){
+    return _.merge(
+        {
+            hostname: 'api.softlayer.com',
+            auth : conf.apiKey + ':' + conf.apiSecretKey,
+            port: 443,
+            method: 'GET'
+        }, opts
+    );
+}
 
 // DELETE    api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest/Object/:id.json
 function terminate( instanceIds, callback ){
-   logger.info('terminating');
+    _.each(instanceIds, function( instance ){
+        logger.info('terminating ', instance );
+        var myPath = '/rest/v3/SoftLayer_Virtual_Guest/{0}.json'.format(instance.id);
+        console.log('running', myPath);
+        var req = http.request(
+            fillInRequestOpts({
+                path: myPath,
+                method :'DELETE'
+            }), function (res) {
+            var datas = [];
+
+            res.on('data', function (data) {
+                datas.push(data.toString());
+            });
+
+            res.on('end', function () {
+                console.log('response ended',res.statusCode);
+                var dataObj = JSON.parse(datas.join(''));
+                console.log( 'got object of length ',arguments,  dataObj.length);
+                if ( res.statusCode !== 200 ){
+                    callback( dataObj );
+                    return;
+                }
+
+                callback(null, dataObj)
+            })
+        }).on('error', function (e) {
+            console.log("Got error: " + e.message);
+            callback(e);
+            return;
+        });
+        req.write('');
+        req.end();
+    });
 }
 
 
@@ -59,7 +102,7 @@ function listAll( callback ){
 
         res.on('end', function () {
             var dataObj = JSON.parse(datas.join(''));
-            console.log( 'got object of length ', dataObj.length);
+
             callback(null, dataObj)
         })
     }).on('error', function (e) {
@@ -83,23 +126,19 @@ function processList( data, callback ){
 }
 
 if (require.main === module) {
-    listAll(function(err, result){
 
-        processList(result, function(err, processed){
-            logger.info(processed);
-        });
+    async.waterfall([
+        listAll,
+        processList,
+        terminate
+    ], function(err){
+        console.log(arguments);
+        if ( !!err ){
+            logger.error('unable to terminate',err);
+            return;
+        }
+        logger.info('terminated successfully!!');
     });
-//    async.waterfall([
-//        listAll,
-//        processList,
-//        terminate
-//    ], function(err){
-//        if ( !!err ){
-//            logger.error('unable to terminate',err);
-//            return;
-//        }
-//        logger.info('terminated successfully!!');
-//    });
 
 }
 
