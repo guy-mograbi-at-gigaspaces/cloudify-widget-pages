@@ -152,7 +152,7 @@ function runTest(done, fills, validationFunction) {
         function waitForProgressBar(callback) {
             driver.wait(function () {
                 return driver.isElementPresent(By.xpath("//div[@class='progress']/.."));
-            }, 15000, "Unable to find initial loading progress bar").then(function () {
+            }, 2 * MINUTE, "Unable to find initial loading progress bar").then(function () {
                 logger.debug("Found");
                 callback();
             });
@@ -278,8 +278,14 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
     function checkFormIsDisplayedAndOutputIsNot(innerCallback) {
         //Check Error message
         logger.debug("Checking the error message");
-        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/div[text()[contains(.,'" + expectedErrorMessage + "')]]")).isDisplayed().then(function (isDisplayed) {
-            assert.equal(isDisplayed, true, "Unexpected error message");
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]")).isDisplayed().then(function (isDisplayed) {
+            assert.equal(isDisplayed, true, "Error message box should be displayed");
+        }).then(function () {
+            logger.debug("Checking the error message")
+        })
+
+        driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/div")).getInnerHtml().then(function (innerHTML) {
+            assert.equal(innerHTML.trim(), expectedErrorMessage, "Unexpected error message")
         }).then(function () {
             logger.debug("Checking that widget output is hidden");
         })
@@ -308,14 +314,14 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
         //Check that "Back to form" button is not displayed
         driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Back to form')]")).isDisplayed().then(function (isDisplayed) {
             assert.equal(isDisplayed, false, "Expecting the 'Back to form' button to be invisible")
-        }).then(function() {
+        }).then(function () {
             logger.debug("Checking that the Green progress bar is not displayed")
         })
 
         //Check that the green progress bar is not displayed
-        driver.findElement(By.xpath("//div[@class='messages']//div[@class='progress']/div[contains(@class, 'progress-bar') and contains(@class, 'progress-bar-success')]")).isDisplayed().then(function(isDisplayed) {
+        driver.findElement(By.xpath("//div[@class='messages']//div[@class='progress']/div[contains(@class, 'progress-bar') and contains(@class, 'progress-bar-success')]")).isDisplayed().then(function (isDisplayed) {
             assert.equal(isDisplayed, false, "Expecting the green progress bar to be invisible");
-        }).then(function() {
+        }).then(function () {
             logger.debug("Checking that the progress message is not displayed");
         })
 
@@ -351,14 +357,14 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
         //Check that the "Back to form" button is displayed
         driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Back to form')]")).isDisplayed().then(function (isDisplayed) {
             assert.equal(isDisplayed, true, "Expecting the 'Back to form' button to be visible")
-        }).then(function() {
+        }).then(function () {
             logger.debug("Checking that the Green progress bar is not displayed")
         })
 
         //Check that the green progress bar is not displayed
-        driver.findElement(By.xpath("//div[@class='messages']//div[@class='progress']/div[contains(@class, 'progress-bar') and contains(@class, 'progress-bar-success')]")).isDisplayed().then(function(isDisplayed) {
+        driver.findElement(By.xpath("//div[@class='messages']//div[@class='progress']/div[contains(@class, 'progress-bar') and contains(@class, 'progress-bar-success')]")).isDisplayed().then(function (isDisplayed) {
             assert.equal(isDisplayed, false, "Expecting the green progress bar to be invisible");
-        }).then(function() {
+        }).then(function () {
             logger.debug("Checking that the progress message is not displayed");
         })
 
@@ -374,19 +380,21 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
         driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Show complete log')]")).click()
             .then(innerCallback);
     }
+
     function clickOnBackToFormButton(innerCallback) {
         //Click on 'Back to form' button in the error-message-box
         logger.debug("Clicking on the 'Back to form' button");
         driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/button[contains(.,'Back to form')]")).click()
             .then(innerCallback);
     }
+
     async.waterfall([
         checkFormIsDisplayedAndOutputIsNot,
         clickOnShowCompleteLogButton,
         checkOutputIsDisplayedAndFormIsNot,
         clickOnBackToFormButton,
         checkFormIsDisplayedAndOutputIsNot,
-        function(cb) {
+        function (cb) {
             callback();
             cb();
         }
@@ -403,8 +411,7 @@ describe('snippet tests', function () {
                 usingServer(seleniumServerAddress).
                 withCapabilities(webdriver.Capabilities.chrome()).//todo : support other browsers with configuration
                 build();
-            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=');
-            done();
+            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=').then(done);
         })
 
         afterEach(function (done) {
@@ -416,10 +423,10 @@ describe('snippet tests', function () {
             }, 3000);
         })
 
-        afterEach(function(done) {
+        afterEach(function (done) {
             if (forceMachinesShutdown) {
                 logger.info("Terminating EC2 machines")
-                ec2.terminate(function(numOfTerminatedInstances) {
+                ec2.terminate(function (numOfTerminatedInstances) {
                     if (numOfTerminatedInstances > 0) {
                         logger.error("There were un-terminated instances [" + numOfTerminatedInstances + "]");
                     }
@@ -449,7 +456,7 @@ describe('snippet tests', function () {
                     }).then(callback);
                 },
                 function (callback) {
-                    stepCheckErrorBox("Invalid Credentials", callback);
+                    stepCheckErrorBox("Missing Credentials", callback);
                 }
             ]);
         })
@@ -460,15 +467,15 @@ describe('snippet tests', function () {
             runTest(done, fill, [
                 function (callback) {
                     logger.info("Validating run");
-                    
+
                     //Check that output div is displayed
                     driver.wait(function () {
                         /*return driver.findElement(By.xpath("//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*")).isDisplayed().then(function (isDisplayed) {*/
                         return driver.findElement(By.css("div[widget-raw-output-display='genericWidgetModel']")).isDisplayed().then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 5*SECOND, "output div is not displayed");
-                    
+                    }, 5 * SECOND, "output div is not displayed");
+
                     //Check that the output message is displayed (inside the output-div)
                     driver.findElement(By.xpath("//div[@class='widget-output-display']/pre[@class='pre']")).isDisplayed().then(function (isDisplayed) {
                         assert.equal(isDisplayed, true, "Widget output is not displayed!");
@@ -505,7 +512,7 @@ describe('snippet tests', function () {
                     //Save the innerHTML of the private key
                     //Download the file
                     //Compare it's content with the saved innerHTML
-                    driver.findElement(By.xpath("//div[text()[contains(.,'You have a new private key')]]/../descendant::button[text()[contains(.,'View')]]")).click().then(function() {
+                    driver.findElement(By.xpath("//div[text()[contains(.,'You have a new private key')]]/../descendant::button[text()[contains(.,'View')]]")).click().then(function () {
                         //Check that the pem content is displayed
                         driver.findElement(By.xpath("//div[contains(@class,'pem-content')]")).isDisplayed().then(function (isDisplayed) {
                             assert.equal(isDisplayed, true, "Expecting the pem-content div to be displayed");
@@ -515,25 +522,25 @@ describe('snippet tests', function () {
                         driver.findElement(By.xpath("//code[text()[contains(.,'BEGIN RSA PRIVATE KEY')]]")).getInnerHtml().then(function (innerHTML) {
                             assert.equal(0, innerHTML.indexOf("-----BEGIN RSA PRIVATE KEY-----"), "Downloaded file doest not start with [-----BEGIN RSA PRIVATE KEY-----]");
                             async.waterfall([
-                                function(callback) { // Click on close
+                                function (callback) { // Click on close
                                     driver.findElement(By.xpath("//div[contains(@class,'pem-content')]/descendant::div[@class='instructions']/button[text()[contains(.,'Close')]]")).click()
                                         .then(callback);
                                 },
-                                function(callback) {
-                                    driver.findElement(By.xpath("//div[text()[contains(.,'You have a new private key')]]/../descendant::a[text()[contains(.,'Download')]]")).getAttribute("href").then(function(href) {
+                                function (callback) {
+                                    driver.findElement(By.xpath("//div[text()[contains(.,'You have a new private key')]]/../descendant::a[text()[contains(.,'Download')]]")).getAttribute("href").then(function (href) {
                                         callback(null, href)
                                     });
                                 },
-                                function(link, callback) {
-                                    var request = http.get(link, function(response) {
+                                function (link, callback) {
+                                    var request = http.get(link, function (response) {
                                         var file = fs.createWriteStream("file.pem");
                                         response.pipe(file);
-                                        file.on('finish', function() {
+                                        file.on('finish', function () {
                                             file.close(callback);
                                         })
                                     });
                                 },
-                                function(callback) {
+                                function (callback) {
                                     fs.readFile('file.pem', 'utf8', function (err, data) {
                                         if (err) {
                                             logger.error(err);
@@ -564,8 +571,7 @@ describe('snippet tests', function () {
                 usingServer(seleniumServerAddress).
                 withCapabilities(webdriver.Capabilities.chrome()).//todo : support other browsers with configuration
                 build();
-            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=');
-            done();
+            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=').then(done);
         })
 
         afterEach(function (done) {
