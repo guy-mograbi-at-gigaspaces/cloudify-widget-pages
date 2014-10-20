@@ -418,7 +418,7 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
     ]);
 }
 
-xdescribe('snippet tests', function () {
+describe('snippet tests', function () {
     // AWS tests
 
     describe('AWS tests', function () {
