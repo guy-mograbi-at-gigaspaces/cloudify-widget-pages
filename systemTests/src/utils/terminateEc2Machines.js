@@ -47,7 +47,21 @@ function terminate(instanceIds, callback) {
 
 function listAll(callback) {
     var params = {
-        DryRun: false
+        DryRun:false,
+        Filters: [
+            {
+                Name: 'instance-state-name',
+                Values: [
+                    'running'
+                ]
+            },
+            {
+                Name: 'instance-state-name',
+                Values: [
+                    'pending'
+                ]
+            }
+        ]
     };
     ec2.describeInstances(params, callback);
 }
