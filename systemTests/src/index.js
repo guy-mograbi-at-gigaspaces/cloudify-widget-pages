@@ -163,8 +163,37 @@ function stepTerminateInstances(fill, callback) {
     callback();
 }
 
+function stepValidateInstallationButtons(fill, callback) {
+    driver.findElement(By.xpath('//div[text()[contains(.,\'Installation completed successfully.\')]]')).isDisplayed().then(function(isDisplayed) {
+        assert.equal(isDisplayed, true, 'Expecting to find the message [Installation completed successfully.]');
+    });
+
+    driver.findElement(By.xpath('//*[text()[contains(.,\'BLU Solo\')]]')).isDisplayed().then(function (isDisplayed) {
+        assert.equal(isDisplayed, true, 'Expecting to find a link with content [BLU Solo]');
+    });
+
+    driver.findElement(By.xpath('//*[text()[contains(.,\'Monitor with Cloudify\')]]')).isDisplayed().then(function (isDisplayed) {
+        assert.equal(isDisplayed, true, 'Expecting to find a link with content [Monitor with Cloudify]');
+    });
+
+    driver.findElement(By.xpath('//*[text()[contains(.,\'BLU Solo\')]]')).click().then(function () {
+        driver.wait(function() {
+            return driver.findElement(By.xpath('//*[text()[contains(.,\'Please Log in\')]]')).isDisplayed();
+        }, 5 * SECOND);
+
+        driver.navigate().back();
+    });
+
+/*
+    driver.wait(function() {
+        return driver.getTitle().then(function(title) {
+            return title === 'webdriver - Google Search';
+        });
+    }, 1000);*/
+}
+
 function stepValidateAWSOutput(fill, callback) {
-    var recipeProperties = getConfiguration(fills).RecipeProperties;
+    var recipeProperties = getConfiguration(fill).RecipeProperties;
     var props = {
         'image': recipeProperties.ImageID,
         'location': recipeProperties.Region,
@@ -602,6 +631,9 @@ describe('snippet tests', function () {
                 },
                 function (callback) {
                     stepValidateAWSOutput(fill, callback);
+                },
+                function (callback) {
+                    stepValidateInstallationButtons(fill, callback);
                 },
                 function (callback) {
                     stepTerminateInstances(fill, callback);
