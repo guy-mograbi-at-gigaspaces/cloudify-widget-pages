@@ -71,7 +71,7 @@ function processList( data, callback ){
     callback( null,  toRemoveIds );
 }
 
-exports.terminate = function() {
+exports.terminate = function(callback) {
         async.waterfall([
             configure,
             listAll,
@@ -83,5 +83,9 @@ exports.terminate = function() {
                 return;
             }
             logger.info('['+numOfTerminatedMachines+'] instances were terminated successfully!!');
+
+            if (!!callback) {
+                callback(numOfTerminatedMachines);
+            }
         });
 }
