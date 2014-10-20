@@ -204,7 +204,7 @@ function stepValidateAWSOutput(fill, callback) {
     };
 
     function checkExistence(text) {
-        driver.wait(function () {
+        return driver.wait(function () {
             return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'' + text + '\')]'));
         }, 15 * MINUTE, 'Unable to find ['+text+'] in the widget output');
     }
