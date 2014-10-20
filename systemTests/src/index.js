@@ -49,7 +49,16 @@ var meJson = process.env['ME_JSON'] && path.resolve(__dirname + "/../../", proce
 var async = require('async');
 var conf = require(meJson);
 var ec2 = require("./utils/terminateEc2Machines");
-var logger = require('log4js').getLogger('index');
+var log4js = require('log4js');
+
+log4js.configure({
+    appenders: [
+        { 'type': 'console' }
+    ],
+    'replaceConsole' : true
+});
+
+var logger = log4js.getLogger('index');
 var http = require('http');
 var fs = require('fs');
 
