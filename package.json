@@ -42,7 +42,8 @@
     "async": "~0.9.0",
     "lodash": "~2.4.1",
     "aws-sdk": "~2.0.19",
-    "reporter-file" : "*"
+    "reporter-file" : "*",
+     "jshint-stylish" : "*"
   },
   "engines": {
     "node": ">=0.8.0"

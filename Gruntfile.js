@@ -160,6 +160,9 @@ module.exports = function (grunt) {
         },
 
         jshint: {
+            options:{
+                reporter: require('jshint-stylish')
+            },
             main: {
                 options: {
                     jshintrc: '.jshintrc'
@@ -178,6 +181,16 @@ module.exports = function (grunt) {
                 files:  {
                     'src':[
                         'test/**/*.js'
+                    ]
+                }
+            },
+            systemTests:{
+                options: {
+                    jshintrc: 'systemTests.jshintrc'
+                },
+                files: {
+                    'src' : [
+                        'systemTests/**/*.js'
                     ]
                 }
             }

@@ -1,3 +1,4 @@
+'use strict';
 //http://sldn.softlayer.com/article/rest
 
 var http = require('https');
@@ -6,8 +7,8 @@ var async = require('async');
 var path = require('path');
 var logger = require('log4js').getLogger('terminateMachines');
 
-var softlayerJsonEnv = process.env['SOFTLAYER_JSON'];
-var confPath =  ( softlayerJsonEnv && path.resolve(__dirname+'/../../../', softlayerJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/softlayer.json');
+var softlayerJsonEnv = process.env.SOFTLAYER_JSON;
+var confPath = ( softlayerJsonEnv && path.resolve(__dirname + '/../../../', softlayerJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/softlayer.json');
 var conf = require(confPath);
 
 /**
@@ -22,13 +23,10 @@ var conf = require(confPath);
 // First, checks if it isn't implemented yet.
 if (!String.prototype.format) {
     logger.info('defining format');
-    String.prototype.format = function() {
+    String.prototype.format = function () {
         var args = arguments;
-        return this.replace(/{(\d+)}/g, function(match, number) {
-            return typeof args[number] != 'undefined'
-                ? args[number]
-                : match
-                ;
+        return this.replace(/{(\d+)}/g, function (match, number) {
+            return typeof args[number] !== undefined ? args[number] : match;
         });
     };
 }
@@ -36,11 +34,11 @@ if (!String.prototype.format) {
 
 //http://sldn.softlayer.com/reference/services/SoftLayer_Virtual_Guest/deleteObject
 
-function fillInRequestOpts( opts ){
+function fillInRequestOpts(opts) {
     return _.merge(
         {
             hostname: 'api.softlayer.com',
-            auth : conf.apiKey + ':' + conf.apiSecretKey,
+            auth: conf.apiKey + ':' + conf.apiSecretKey,
             port: 443,
             method: 'GET'
         }, opts
@@ -48,48 +46,48 @@ function fillInRequestOpts( opts ){
 }
 
 // DELETE    api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest/Object/:id.json
-function terminate( instanceIds, callback ){
-    _.each(instanceIds, function( instance ){
-        logger.info('terminating ', instance );
+function terminate(instanceIds, callback) {
+    _.each(instanceIds, function (instance) {
+        logger.info('terminating ', instance);
         var myPath = '/rest/v3/SoftLayer_Virtual_Guest/{0}.json'.format(instance.id);
         console.log('running', myPath);
         var req = http.request(
             fillInRequestOpts({
                 path: myPath,
-                method :'DELETE'
+                method: 'DELETE'
             }), function (res) {
-            var datas = [];
+                var datas = [];
 
-            res.on('data', function (data) {
-                datas.push(data.toString());
+                res.on('data', function (data) {
+                    datas.push(data.toString());
+                });
+
+                res.on('end', function () {
+                    console.log('response ended', res.statusCode);
+                    var dataObj = JSON.parse(datas.join(''));
+                    console.log('got object of length ', arguments, dataObj.length);
+                    if (res.statusCode !== 200) {
+                        callback(dataObj);
+                        return;
+                    }
+
+                    callback(null, dataObj);
+                });
+            }).on('error', function (e) {
+                console.log('Got error: ' + e.message);
+                callback(e);
+                return;
             });
-
-            res.on('end', function () {
-                console.log('response ended',res.statusCode);
-                var dataObj = JSON.parse(datas.join(''));
-                console.log( 'got object of length ',arguments,  dataObj.length);
-                if ( res.statusCode !== 200 ){
-                    callback( dataObj );
-                    return;
-                }
-
-                callback(null, dataObj)
-            })
-        }).on('error', function (e) {
-            console.log("Got error: " + e.message);
-            callback(e);
-            return;
-        });
         req.write('');
         req.end();
     });
 }
 
 
-function toApiCall( route ){
-    return ('https://{0}:{1}@' + route).format(conf.apiKey,conf.apiSecretKey);
+function toApiCall(route) {
+    return ('https://{0}:{1}@' + route).format(conf.apiKey, conf.apiSecretKey);
 }
-function listAll( callback ){
+function listAll(callback) {
 
     var key = toApiCall('api.softlayer.com/rest/v3/SoftLayer_Account/VirtualGuests.json');
 
@@ -103,23 +101,23 @@ function listAll( callback ){
         res.on('end', function () {
             var dataObj = JSON.parse(datas.join(''));
 
-            callback(null, dataObj)
-        })
+            callback(null, dataObj);
+        });
     }).on('error', function (e) {
-        console.log("Got error: " + e.message);
+        console.log('Got error: ' + e.message);
         callback(e);
         return;
     });
 
 }
 
-function processList( data, callback ){
-    debugger;
-    var result = _.map(data, function(item){
-        return { 'id' : item.id, 'hostname' : item.hostname };
+function processList(data, callback) {
+
+    var result = _.map(data, function (item) {
+        return { 'id': item.id, 'hostname': item.hostname };
     });
 
-    result = _.filter(result,function( item ){
+    result = _.filter(result, function (item) {
         return item.hostname.indexOf('widget-cloudify-manager1') === 0;
     });
     callback(null, result);
@@ -131,10 +129,10 @@ if (require.main === module) {
         listAll,
         processList,
         terminate
-    ], function(err){
+    ], function (err) {
         console.log(arguments);
-        if ( !!err ){
-            logger.error('unable to terminate',err);
+        if (!!err) {
+            logger.error('unable to terminate', err);
             return;
         }
         logger.info('terminated successfully!!');
