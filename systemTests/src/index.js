@@ -64,6 +64,9 @@ var http = require('http');
 var fs = require('fs');
 
 
+process.on("exit", function(){ console.log('terminating'); log4js.shutdown(); });
+
+
 var webdriver = require('selenium-webdriver');
 var By = webdriver.By;
 var driver;
