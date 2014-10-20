@@ -415,10 +415,18 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
 }
 
 
-describe('snippet tests', function () {
+describe('sanity', function(){
+    it ('should fail', function(){
+        assert.equal(1,2);
+    })
+});
+
+xdescribe('snippet tests', function () {
     // AWS tests
 
     describe("AWS tests", function () {
+
+
         beforeEach(function (done) {
             driver = new webdriver.Builder().
                 usingServer(seleniumServerAddress).
