@@ -1,4 +1,22 @@
+.another-way-please{
+  font-family:Arial; font-size: 13px;
+  padding:17px 0;
+  width: 330px;
+  background-color:#CECECE;
+  text-align: center;
+  margin: 0 auto 10px auto;
 
+  div{
+    padding-bottom:5px;
+  }
+  a{
+    text-decoration: none;
+    padding:0;
+    margin-top:10px;
+    color:#5B8BC6;
+    display:inline-block;
+  }
+}
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;

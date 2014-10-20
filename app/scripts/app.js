@@ -7,6 +7,9 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidget
                 templateUrl: 'views/order.html',
                 controller: 'OrderCtrl'
             })
+            .when('/wufoo/bluSolo', {
+                templateUrl: 'views/blusolo/wufoo.html'
+            })
             .when('/blu', {
                 templateUrl: 'views/blu.html',
                 controller: 'BluCtrl'

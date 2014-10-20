@@ -92,5 +92,7 @@
     <div>{{'startedMightTakeWhile' | i18n }}&#10;</div>
 
     <div ng-repeat="line in source.widgetStatus.rawOutput track by $index">{{line}}</div>
+    <div ng-show="!source.widgetStatus.completed">{{source.widgetStatus.ellipsis}}</div>
+    <div ng-show="source.widgetStatus.completed">Installation Completed. Look for more details at the top.</div>
 </pre>
 </div>
