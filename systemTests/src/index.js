@@ -414,13 +414,6 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
     ])
 }
 
-
-describe('sanity', function(){
-    it ('should fail', function(){
-        assert.equal(1,2);
-    })
-});
-
 xdescribe('snippet tests', function () {
     // AWS tests
 
