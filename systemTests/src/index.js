@@ -51,12 +51,13 @@ var conf = require(meJson);
 var ec2 = require("./utils/terminateEc2Machines");
 var log4js = require('log4js');
 
-log4js.configure({
-    appenders: [
-        { 'type': 'console' }
-    ],
-    'replaceConsole' : true
-});
+try {
+    if ( !!conf && !!conf.log4js ) {
+        log4js.configure(conf.log4js);
+    }
+}catch(e){
+    console.log('error while configuring log4js', e);
+}
 
 var logger = log4js.getLogger('index');
 var http = require('http');
