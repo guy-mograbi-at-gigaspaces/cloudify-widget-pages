@@ -11,7 +11,7 @@ var ec2 = null;
 function configure(callback) {
 
     var awsJsonEnv = process.env.AWS_JSON;
-    var awsJson = ( awsJsonEnv && path.resolve(__dirname + '../../../', awsJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/aws.json');
+    var awsJson = ( awsJsonEnv && path.resolve(__dirname + '/../../../', awsJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/aws.json');
 
     /**
      * {
