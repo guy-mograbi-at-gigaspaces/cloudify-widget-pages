@@ -158,9 +158,34 @@ function stepTerminateInstances(fill, callback) {
     if (fill.name === 'AWS') {
         ec2.terminate();
     } else {
-        throw new Error('Unknown fill [' + fill.name + ']');
+        throw new Error('Unable to terminate instances of fill [' + fill.name + ']: Unknown fill!');
     }
     callback();
+}
+
+function stepValidateAWSOutput(fill, callback) {
+    var recipeProperties = getConfiguration(fills).RecipeProperties;
+    var props = {
+        'image': recipeProperties.ImageID,
+        'location': recipeProperties.Region,
+        'hardware': recipeProperties.HardwareId,
+        'providerName': 'aws-ec2',
+        'template': 'BLU_EC2',
+        'securityGroup': fill.data['execution.aws.securityGroup']
+    };
+
+    function checkExistence(text) {
+        driver.wait(function () {
+            return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'' + text + '\')]'));
+        }, 15 * MINUTE, 'Unable to find ['+text+'] in the widget output');
+    }
+
+    checkExistence('Validating provider name "'+props.providerName+'" [OK]')
+        .then(checkExistence('Validating image "'+props.image+'" and hardware "'+props.hardware+'" for location "'+props.location+'" [OK]'))
+        .then(checkExistence('Starting validation of template "'+props.template+'"'))
+        .then(checkExistence('Validating security group "'+props.securityGroup+'" [OK]'))
+        .then(callback);
+
 }
 
 function runTest(done, fills, validationFunction) {
@@ -285,7 +310,13 @@ function runTest(done, fills, validationFunction) {
             }
         ]
     );
-    async.waterfall(steps);
+    async.waterfall(steps, function (err) {
+        if (!!err) {
+            logger.error('Error occurred on runTest', err);
+            return;
+        }
+        logger.info('Test finishes successfully');
+    });
 }
 
 function stepCheckErrorBox(expectedErrorMessage, callback) {
@@ -485,7 +516,6 @@ describe('snippet tests', function () {
 
                     //Check that output div is displayed
                     driver.wait(function () {
-                        /*return driver.findElement(By.xpath('//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*')).isDisplayed().then(function (isDisplayed) {*/
                         return driver.findElement(By.css('div[widget-raw-output-display=\'genericWidgetModel\']')).isDisplayed().then(function (isDisplayed) {
                             return isDisplayed;
                         });
@@ -513,10 +543,10 @@ describe('snippet tests', function () {
 
                     //Check that the output message contains 'Service 'blustratus' successfully installed'
                     driver.wait(function () {
-                        return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service \'blustratus\' successfully installed\')]')).then(function (isDisplayed) {
+                        return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 15 * MINUTE, 'Unable to find [Service \'blustratus\' successfully installed] in the widget output');
+                    }, 15 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
 
 
                     //Check the private key
@@ -569,6 +599,9 @@ describe('snippet tests', function () {
                             ]);
                         });
                     }).then(callback);
+                },
+                function (callback) {
+                    stepValidateAWSOutput(fill, callback);
                 },
                 function (callback) {
                     stepTerminateInstances(fill, callback);
