@@ -278,21 +278,11 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
     function checkFormIsDisplayedAndOutputIsNot(innerCallback) {
         //Check Error message
         logger.debug("Checking the error message");
-        driver.wait(function() {
-            return driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]")).isDisplayed().then(function (isDisplayed) {
-                return isDisplayed;
-            })
-        }, 2*SECOND).then(function () {
-            logger.debug("Checking the error message");
-        });
-/*
-
         driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]")).isDisplayed().then(function (isDisplayed) {
             assert.equal(isDisplayed, true, "Error message box should be displayed");
         }).then(function () {
             logger.debug("Checking the error message")
         })
-*/
 
         driver.findElement(By.xpath("//div[contains(@class, 'widget-message')]/div")).getInnerHtml().then(function (innerHTML) {
             assert.equal(innerHTML.trim(), expectedErrorMessage, "Unexpected error message")
