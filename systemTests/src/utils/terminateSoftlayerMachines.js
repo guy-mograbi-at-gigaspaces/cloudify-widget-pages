@@ -8,7 +8,7 @@ var path = require('path');
 var logger = require('log4js').getLogger('terminateMachines');
 
 var softlayerJsonEnv = process.env.SOFTLAYER_JSON;
-var confPath = ( softlayerJsonEnv && path.resolve(__dirname + '/../../../', softlayerJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/softlayer.json');
+var confPath = ( softlayerJsonEnv && path.resolve(__dirname + '../../../', softlayerJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/softlayer.json');
 var conf = require(confPath);
 
 /**
