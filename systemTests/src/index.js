@@ -454,9 +454,6 @@ describe('snippet tests', function () {
                     driver.findElement(By.xpath("//input[@ng-model='execution.aws.securityGroup']/parent::*/parent::*/child::div[@class='error-message ng-binding']")).getInnerHtml().then(function (innerHTML) {
                         assert.equal(innerHTML.trim(), "Value is missing");
                     }).then(callback);
-                },
-                function (callback) {
-                    stepCheckErrorBox("Missing Credentials", callback);
                 }
             ]);
         })
