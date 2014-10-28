@@ -274,6 +274,10 @@
 
           }
 
+          .side-info:hover{ /** extremely important.. enables click on the side info **/
+            display:inline-block;
+          }
+
           &.visitor-name {
             .first, .second, input {
               display: inline-block;

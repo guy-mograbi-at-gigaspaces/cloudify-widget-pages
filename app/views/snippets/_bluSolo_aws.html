@@ -17,6 +17,9 @@
             {{'formErrors.general.' + formErrors.securityGroup | i18n }}
         </div>
     </div>
+    <div class="side-info">
+        <span ng-bind-html="  'bluSolo.securityGroup' | i18n  "></span>
+    </div>
 </div>
 
 
@@ -38,9 +41,14 @@
         <div class="control">
             <input type="text" class="form-control" ng-model="awsLoginDetails.params.key" />
         </div>
+
         <div class="error-message">
             {{'formErrors.general.' + formErrors.key | i18n }}
         </div>
+    </div>
+    <div class="side-info">
+        <span ng-bind-html="  'bluSolo.awsApiKey' | i18n  "></span>
+
     </div>
 </div>
 
