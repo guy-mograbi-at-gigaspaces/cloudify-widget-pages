@@ -8,6 +8,9 @@ angular.module('ibmBiginsightsUiApp')
         this.toProperties = function (execution) {
             var result = [];
 
+            // according to provider section "managementGroup"
+            result.push({'key' : 'MANAGEMENT_NAME_PREFIX' , 'value' : 'blusolomanager-' + new Date().getTime() });
+
             if ( !!execution.aws ) {
                 if (!!execution.aws.securityGroup) {
                     result.push({ 'key': 'BLU_EC2_SECURITY_GROUP', 'value': execution.aws.securityGroup });

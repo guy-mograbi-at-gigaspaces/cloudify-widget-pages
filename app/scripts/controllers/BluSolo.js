@@ -120,9 +120,9 @@ angular.module('ibmBiginsightsUiApp')
         $scope.$watch( function(){ return $scope.genericWidgetModel.leadDetails; }, function updateLoginDetails(){
 
             $scope.genericWidgetModel.loginDetails = {
-              'email' : $scope.genericWidgetModel.leadDetails.email,
-              'name' : $scope.genericWidgetModel.leadDetails.firstName,
-              'lastName' : $scope.genericWidgetModel.leadDetails.lastName
+                'email': $scope.genericWidgetModel.leadDetails.email,
+                'name': $scope.genericWidgetModel.leadDetails.firstName,
+                'lastName': $scope.genericWidgetModel.leadDetails.lastName
             };
 
         }, true);

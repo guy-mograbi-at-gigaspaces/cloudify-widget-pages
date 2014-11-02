@@ -3294,6 +3294,12 @@ var softlayerItems = [
         "description": "Vyatta 6.6 Community Edition (64 bit)"
     },
     {
+        "itemId": 4497,
+        "categoryName": "Eighteenth Hard Drive",
+        "categoryCode": "disk17",
+        "description": "960GB SSD"
+    },
+    {
         "itemId": 4508,
         "categoryName": "Database Software",
         "categoryCode": "database",
@@ -3724,5 +3730,35 @@ var softlayerItems = [
         "categoryName": "Control Panel Software",
         "categoryCode": "control_panel",
         "description": "Parallels Plesk Panel 12 (Linux) Unlimited Domain w/ Power Pack"
+    },
+    {
+        "itemId": 5900,
+        "categoryName": "Server",
+        "categoryCode": "server",
+        "description": "Quad Processor Intel Xeon E7-4890 v2 (Ivy Bridge), 2.80GHz, 15 Cores w/HT, 37.5MB Cache"
+    },
+    {
+        "itemId": 5904,
+        "categoryName": "RAM",
+        "categoryCode": "ram",
+        "description": "1024 GB DDR3 Registered 1600"
+    },
+    {
+        "itemId": 5906,
+        "categoryName": "RAM",
+        "categoryCode": "ram",
+        "description": "2048 GB DDR3 Registered 1600"
+    },
+    {
+        "itemId": 5920,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 7.x (64 bit)"
+    },
+    {
+        "itemId": 5930,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "Red Hat Enterprise Linux 6.5 (64 bit) version-locked (per-processor licensing)"
     }
 ];
