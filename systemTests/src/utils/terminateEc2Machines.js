@@ -27,7 +27,7 @@ function configure(callback) {
     ec2 = new AWS.EC2();
     callback();
 }
-function terminate(instanceIds, callback) {
+function terminateInstances(instanceIds, callback) {
     if (instanceIds.length === 0) {
         logger.info('There are no machines to terminate.');
         callback(null, 0);
@@ -86,7 +86,7 @@ function processList(data, callback) {
     callback(null, toRemoveIds);
 }
 
-function terminate (callback) {
+function terminateInstances (callback) {
     async.waterfall([
         configure,
         listAll,
@@ -105,7 +105,7 @@ function terminate (callback) {
     });
 }
 
-exports.terminate = terminate;
+exports.terminate = terminateInstances;
 if (require.main === module) {
-    terminate();
+    terminateInstances();
 }

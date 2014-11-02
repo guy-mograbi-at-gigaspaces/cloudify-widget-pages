@@ -47,6 +47,7 @@ function fillInRequestOpts(opts) {
 
 // DELETE    api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest/Object/:id.json
 function terminate(instanceIds, callback) {
+    logger.debug("1");
     _.each(instanceIds, function (instance) {
         logger.info('terminating ', instance);
         var myPath = '/rest/v3/SoftLayer_Virtual_Guest/{0}.json'.format(instance.id);
@@ -124,7 +125,8 @@ function processList(data, callback) {
 }
 
 
-function terminate (callback) {
+function terminateInstances (callback) {
+    logger.info('Terminate is called!');
     async.waterfall([
         listAll,
         processList,
@@ -143,8 +145,8 @@ function terminate (callback) {
 
 }
 
-exports.terminate = terminate;
+exports.terminate = terminateInstances;
 
 if (require.main === module) {
-    terminate();
+    terminateInstances();
 }
