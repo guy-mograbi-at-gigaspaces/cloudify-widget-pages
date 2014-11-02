@@ -237,6 +237,15 @@ exports.stepValidateInstallationButtons = stepValidateInstallationButtons;
  * @param callback - callback of runTest (Which is the same callback for a function in the waterfall)
  */
 function stepValidateWidgetOutput(conf, fill, callback) {
+
+    function checkTextExistenceInWidgetOutput(text) {
+        logger.debug('Looking for [' + text + '] in the widget output');
+        return driver.wait(function () {
+            return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'' + text + '\')]'));
+        }, 15 * SECOND, 'Unable to find [' + text + '] in the widget output');
+    }
+
+
     var recipeProperties = globalFunctions.getConfigurationByFill(conf, fill).RecipeProperties;
     var props = null;
 
@@ -249,33 +258,34 @@ function stepValidateWidgetOutput(conf, fill, callback) {
             'template': 'BLU_EC2',
             'securityGroup': fill.data['execution.aws.securityGroup']
         };
+
+
+        checkTextExistenceInWidgetOutput('Validating provider name "' + props.providerName + '" [OK]');
+        checkTextExistenceInWidgetOutput('Validating image "' + props.image + '" and hardware "' + props.hardware + '" for location "' + props.location + '" [OK]');
+        checkTextExistenceInWidgetOutput('Starting validation of template "' + props.template + '"');
+        checkTextExistenceInWidgetOutput('Validating security group "' + props.securityGroup + '" [OK]').then(function () {
+            logger.info('All strings exit');
+            callback();
+        });
     } else if (fill.name === 'Softlayer') { //TODO check with the real output
         props = {
             'image': recipeProperties.ImageID,
             'location': recipeProperties.DataCenter[fill.data['execution.softlayer.dataCenter']],
             'hardware': recipeProperties.CPU[fill.data['execution.softlayer.core']] + ',' + recipeProperties.RAM[fill.data['execution.softlayer.ram']] + ',' + recipeProperties.Disk[fill.data['execution.softlayer.disk']],
             'providerName': 'softlayer',
-            'template': 'BLU_EC2',
-            'securityGroup': fill.data['execution.aws.securityGroup']
+            'template': 'BLU_FOR_CLOUD'
         };
+
+
+        checkTextExistenceInWidgetOutput('Validating provider name "' + props.providerName + '" [OK]');
+        checkTextExistenceInWidgetOutput('Validating image "' + props.image + '" and hardware "' + props.hardware + '" for location "' + props.location + '" [OK]');
+        checkTextExistenceInWidgetOutput('Starting validation of template "' + props.template + '"').then(function () {
+            logger.info('All strings exit');
+            callback();
+        });
     } else {
         throw new Error('stepValidateWidgetOutput: Unknown fill ['+fill.name+']');
     }
-
-    function checkTextExistenceInWidgetOutput(text) {
-        logger.debug('Looking for [' + text + '] in the widget output');
-        return driver.wait(function () {
-            return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'' + text + '\')]'));
-        }, 15 * SECOND, 'Unable to find [' + text + '] in the widget output');
-    }
-
-    checkTextExistenceInWidgetOutput('Validating provider name "' + props.providerName + '" [OK]');
-    checkTextExistenceInWidgetOutput('Validating image "' + props.image + '" and hardware "' + props.hardware + '" for location "' + props.location + '" [OK]');
-    checkTextExistenceInWidgetOutput('Starting validation of template "' + props.template + '"');
-    checkTextExistenceInWidgetOutput('Validating security group "' + props.securityGroup + '" [OK]').then(function () {
-        logger.info('All strings exit');
-        callback();
-    });
 }
 
 exports.stepValidateWidgetOutput = stepValidateWidgetOutput;

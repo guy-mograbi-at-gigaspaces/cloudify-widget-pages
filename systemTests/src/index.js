@@ -476,7 +476,7 @@ describe('snippet tests', function () {
                 }, 5000, 'output div is not displayed');
 
                 driver.wait(function () {
-                    //TODO Change to good bye...
+                    //TODO Change to good bye... - There was a problem with the softlayer - pending fix
                     return driver.isElementPresent(By.xpath('//div[contains(@class, \'widget-message\')]/div[text()[contains(.,\'Invalid Credentials\')]]')).then(function (isDisplayed) {
                         return isDisplayed;
                     });
