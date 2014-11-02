@@ -286,18 +286,18 @@ function runTest(done, fill, validationFunctions) {
 
 describe('snippet tests', function () {
     // AWS tests
-/*
+    /*
 
-    afterEach(function (done) {
-        logger.info('Terminating EC2 machines');
-        ec2.terminate(function (numOfTerminatedInstances) {
-            if (numOfTerminatedInstances > 0) {
-                logger.warning('There were un-terminated instances [' + numOfTerminatedInstances + ']');
-            }
-            done();
-        });
-    });
-*/
+     afterEach(function (done) {
+     logger.info('Terminating EC2 machines');
+     ec2.terminate(function (numOfTerminatedInstances) {
+     if (numOfTerminatedInstances > 0) {
+     logger.warning('There were un-terminated instances [' + numOfTerminatedInstances + ']');
+     }
+     done();
+     });
+     });
+     */
 
 
     describe('AWS tests', function () {
@@ -307,7 +307,7 @@ describe('snippet tests', function () {
             driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=').then(done);
         });
 
-      /*  afterEach(function (done) {
+        afterEach(function (done) {
             setTimeout(function () {
                 driver.close().then(function () {
                     logger.info('Closing web browser');
@@ -315,7 +315,7 @@ describe('snippet tests', function () {
                 });
             }, 3000);
         });
-*/
+
         xit('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Missing Security Group');
 
@@ -375,7 +375,7 @@ describe('snippet tests', function () {
                         return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 15 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
+                    }, 20 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
 
                     //Check the private key
                     driver.wait(function () {
@@ -528,7 +528,7 @@ describe('snippet tests', function () {
                         return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 15 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
+                    }, 60 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
 
                     //Check the private key
                     driver.wait(function () {
@@ -584,7 +584,7 @@ describe('snippet tests', function () {
                             ]);
                         });
                     }).then(callback);
-                },function (callback) {
+                }, function (callback) {
                     globalSteps.stepValidateWidgetOutput(conf, fill, callback);
                 },
                 function (callback) {
