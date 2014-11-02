@@ -11,7 +11,7 @@ var ec2 = null;
 function configure(callback) {
 
     var awsJsonEnv = process.env.AWS_JSON;
-    var awsJson = ( awsJsonEnv && path.resolve(__dirname + '/../../', awsJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/aws.json');
+    var awsJson = ( awsJsonEnv && path.resolve(__dirname + '/../../../', awsJsonEnv) ) || path.resolve(__dirname, '../../conf/dev/aws.json');
 
     /**
      * {
@@ -47,7 +47,21 @@ function terminate(instanceIds, callback) {
 
 function listAll(callback) {
     var params = {
-        DryRun: false
+        DryRun:false,
+        Filters: [
+            {
+                Name: 'instance-state-name',
+                Values: [
+                    'running'
+                ]
+            },
+            {
+                Name: 'instance-state-name',
+                Values: [
+                    'pending'
+                ]
+            }
+        ]
     };
     ec2.describeInstances(params, callback);
 }
