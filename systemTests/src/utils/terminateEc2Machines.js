@@ -54,13 +54,13 @@ function listAll(callback) {
                 Values: [
                     'running'
                 ]
-            },
+            }/*,
             {
                 Name: 'instance-state-name',
                 Values: [
                     'pending'
                 ]
-            }
+            }*/
         ]
     };
     ec2.describeInstances(params, callback);
