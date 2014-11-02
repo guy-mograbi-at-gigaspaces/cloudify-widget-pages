@@ -27,7 +27,7 @@ function configure(callback) {
     ec2 = new AWS.EC2();
     callback();
 }
-function terminateInstances(instanceIds, callback) {
+function terminate(instanceIds, callback) {
     if (instanceIds.length === 0) {
         logger.info('There are no machines to terminate.');
         callback(null, 0);
