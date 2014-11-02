@@ -1,6 +1,7 @@
 'use strict';
 var lodash = require('lodash');
-
+var log4js = require('log4js');
+var logger = log4js.getLogger('globalFunctions');
 /**
  * Gets the fill from the fills and returns the executionOption that matches.
  * @param fill

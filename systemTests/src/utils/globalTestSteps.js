@@ -1,13 +1,32 @@
 'use strict';
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
+var log4js = require('log4js');
+var logger = log4js.getLogger('globalTestSteps');
+var async = require('async');
+var globalFunctions = require('./globalFunctions');
+var webdriver = require('selenium-webdriver');
+var By = webdriver.By;
+var assert = require('assert');
+
+var driver = null;
+
+function getChromeDriver(seleniumServerAddress) {
+    driver = new webdriver.Builder().
+        usingServer(seleniumServerAddress).
+        withCapabilities(webdriver.Capabilities.chrome()).//todo : support other browsers with configuration
+        build();
+    return driver;
+}
+
+exports.getChromeDriver = getChromeDriver;
 
 /**
  * Gets a fill/permutation and fills it's values to the proper html elements
  * @param fill
  * @param callback - callback of waterfall
  */
-function fillData(fill, callback) {
+function fillData(conf, fill, callback) {
 
     /**
      * Gets ngModel value of a <select ngModel="..."> element and choose/clicks on <option> with text "value"
@@ -54,7 +73,7 @@ function fillData(fill, callback) {
         return driver.findElement(By.css('input[ng-model=\'' + ngModel + '\']')).sendKeys(value);
     }
 
-    var executionOption = getConfigurationByFill(fill);
+    var executionOption = globalFunctions.getConfigurationByFill(conf, fill);
     logger.debug('Test type: ' + executionOption.name);
     var requiredOptions = executionOption.fields.required;
     var optionalOptions = executionOption.fields.optional;
@@ -116,7 +135,7 @@ function stepValidateInstallationButtons(callback) {
 
     driver.wait(function () {
         return driver.findElement(By.xpath('//div[text()[contains(.,\'Installation completed successfully.\')]]')).isDisplayed();
-    }, 50 * SECOND, 'Unable to find [Installation complete successfully.] message');
+    }, 20 * SECOND, 'Unable to find [Installation complete successfully.] message');
 
     /*driver.findElement(By.xpath('//div[text()[contains(.,\'Installation completed successfully.\')]]')).isDisplayed().then(function(isDisplayed) {
      assert.equal(isDisplayed, true, 'Expecting to find the message [Installation completed successfully.]');
@@ -217,16 +236,31 @@ exports.stepValidateInstallationButtons = stepValidateInstallationButtons;
  * @param fill
  * @param callback - callback of runTest (Which is the same callback for a function in the waterfall)
  */
-function stepValidateAWSOutput(fill, callback) {
-    var recipeProperties = getConfigurationByFill(fill).RecipeProperties;
-    var props = {
-        'image': recipeProperties.ImageID,
-        'location': recipeProperties.Region,
-        'hardware': recipeProperties.HardwareId,
-        'providerName': 'aws-ec2',
-        'template': 'BLU_EC2',
-        'securityGroup': fill.data['execution.aws.securityGroup']
-    };
+function stepValidateWidgetOutput(conf, fill, callback) {
+    var recipeProperties = globalFunctions.getConfigurationByFill(conf, fill).RecipeProperties;
+    var props = null;
+
+    if (fill.name === 'AWS') {
+        props = {
+            'image': recipeProperties.ImageID,
+            'location': recipeProperties.Region,
+            'hardware': recipeProperties.HardwareId,
+            'providerName': 'aws-ec2',
+            'template': 'BLU_EC2',
+            'securityGroup': fill.data['execution.aws.securityGroup']
+        };
+    } else if (fill.name === 'Softlayer') { //TODO check with the real output
+        props = {
+            'image': recipeProperties.ImageID,
+            'location': recipeProperties.DataCenter[fill.data['execution.softlayer.dataCenter']],
+            'hardware': recipeProperties.CPU[fill.data['execution.softlayer.core']] + ',' + recipeProperties.RAM[fill.data['execution.softlayer.ram']] + ',' + recipeProperties.Disk[fill.data['execution.softlayer.disk']],
+            'providerName': 'softlayer',
+            'template': 'BLU_EC2',
+            'securityGroup': fill.data['execution.aws.securityGroup']
+        };
+    } else {
+        throw new Error('stepValidateWidgetOutput: Unknown fill ['+fill.name+']');
+    }
 
     function checkTextExistenceInWidgetOutput(text) {
         logger.debug('Looking for [' + text + '] in the widget output');
@@ -244,7 +278,7 @@ function stepValidateAWSOutput(fill, callback) {
     });
 }
 
-exports.stepValidateAWSOutput = stepValidateAWSOutput;
+exports.stepValidateWidgetOutput = stepValidateWidgetOutput;
 
 /**
  * Check the error box content, 'Show complete log' and 'Back to form' buttons
