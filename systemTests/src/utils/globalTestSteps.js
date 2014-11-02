@@ -8,6 +8,7 @@ var globalFunctions = require('./globalFunctions');
 var webdriver = require('selenium-webdriver');
 var By = webdriver.By;
 var assert = require('assert');
+var ec2 = require('./terminateEc2Machines');
 
 var driver = null;
 

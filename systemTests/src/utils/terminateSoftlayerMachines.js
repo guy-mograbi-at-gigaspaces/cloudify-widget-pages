@@ -139,7 +139,7 @@ function terminate (callback) {
         if (!!callback) {
             callback(numOfTerminatedMachines);
         }
-    })
+    });
 
 }
 
