@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .service('BluSoloSoftlayerProperties', function BluSoloSoftlayerProperties( $log ) {
+    .service('BluSoloSoftlayerProperties', function BluSoloSoftlayerProperties( /*$log*/ ) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.toProperties = function (execution) {
             var result = [];
-            $log.info('turning to properties');
+
+            // according to provider section "managementGroup"
+            result.push({'key' : 'widgetManagementGroup' , 'value' : 'blusolomanager-' + new Date().getTime() });
+
             if ( !!execution.softlayer ){
                 if ( !!execution.softlayer.dataCenter ){
                     result.push({'key' : 'locationId' , 'value' : execution.softlayer.dataCenter });

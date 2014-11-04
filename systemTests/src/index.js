@@ -286,6 +286,7 @@ function runTest(done, fill, validationFunctions) {
 
 describe('snippet tests', function () {
     // AWS tests
+    
 
     describe('AWS tests', function () {
 
@@ -401,7 +402,7 @@ describe('snippet tests', function () {
                         return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 15 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
+                    }, 20 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
 
                     //Check the private key
                     driver.wait(function () {
@@ -585,7 +586,7 @@ describe('snippet tests', function () {
                             ]);
                         });
                     }).then(callback);
-                },function (callback) {
+                }, function (callback) {
                     globalSteps.stepValidateWidgetOutput(conf, fill, callback);
                 },
                 function (callback) {
