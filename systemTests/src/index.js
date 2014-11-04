@@ -363,7 +363,7 @@ describe('snippet tests', function () {
 */
 
 
-        xit('Run with valid data', function (done) {
+        it('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Valid Data');
 
             runTest(done, fill, [
@@ -474,7 +474,7 @@ describe('snippet tests', function () {
 
     // Softlayer tests
 
-    xdescribe('Softlayer tests', function () {
+    describe('Softlayer tests', function () {
 
         beforeEach(function (done) {
             driver = globalSteps.getChromeDriver(seleniumServerAddress);
@@ -491,7 +491,7 @@ describe('snippet tests', function () {
             }, 10000);
         });
 
-         xit('Run with valid data', function (done) {
+         it('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'Softlayer Valid Data');
 
             runTest(done, fill, [
