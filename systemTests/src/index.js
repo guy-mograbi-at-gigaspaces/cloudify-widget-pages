@@ -303,7 +303,7 @@ describe('snippet tests', function () {
          });
          }, 3000);
          });
-
+/*
         afterEach(function (done) {
             logger.info('Terminating EC2 machines');
             ec2.terminate(function (numOfTerminatedInstances) {
@@ -312,7 +312,7 @@ describe('snippet tests', function () {
                 }
                 done();
             });
-        });
+        });*/
 
         it('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Missing Security Group');
@@ -363,7 +363,7 @@ describe('snippet tests', function () {
 */
 
 
-        it('Run with valid data', function (done) {
+        xit('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Valid Data');
 
             runTest(done, fill, [
@@ -474,7 +474,7 @@ describe('snippet tests', function () {
 
     // Softlayer tests
 
-    describe('Softlayer tests', function () {
+    xdescribe('Softlayer tests', function () {
 
         beforeEach(function (done) {
             driver = globalSteps.getChromeDriver(seleniumServerAddress);
