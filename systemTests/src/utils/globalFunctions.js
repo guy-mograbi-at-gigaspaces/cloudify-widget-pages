@@ -8,6 +8,7 @@ var logger = log4js.getLogger('globalFunctions');
  * @returns {*}
  */
 function getConfigurationByFill(conf, fill) {
+    logger.debug('Getting configuration for fill: '+ fill.name);
     for (var config in conf.executionOptions) {
         if (conf.executionOptions[config].name === fill.name) {
             return conf.executionOptions[config];
@@ -24,6 +25,7 @@ exports.getConfigurationByFill = getConfigurationByFill;
  * @returns {*}
  */
 function getFillByFillname(conf, fillName) {
+    logger.debug('Getting fill for fill name: '+ fillName);
     if (conf.fills[fillName].hasOwnProperty('fillWithBase')) {
         return lodash.merge({}, conf.fills[fillName], conf.fills[conf.fills[fillName].fillWithBase]);
     } else {

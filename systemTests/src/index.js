@@ -286,19 +286,7 @@ function runTest(done, fill, validationFunctions) {
 
 describe('snippet tests', function () {
     // AWS tests
-/*
-
-    afterEach(function (done) {
-        logger.info('Terminating EC2 machines');
-        ec2.terminate(function (numOfTerminatedInstances) {
-            if (numOfTerminatedInstances > 0) {
-                logger.warning('There were un-terminated instances [' + numOfTerminatedInstances + ']');
-            }
-            done();
-        });
-    });
-*/
-
+    
 
     describe('AWS tests', function () {
 
@@ -307,16 +295,26 @@ describe('snippet tests', function () {
             driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=').then(done);
         });
 
-      /*  afterEach(function (done) {
-            setTimeout(function () {
-                driver.close().then(function () {
-                    logger.info('Closing web browser');
-                    done();
-                });
-            }, 3000);
+         afterEach(function (done) {
+         setTimeout(function () {
+         driver.close().then(function () {
+         logger.info('Closing web browser');
+         done();
+         });
+         }, 3000);
+         });
+
+        afterEach(function (done) {
+            logger.info('Terminating EC2 machines');
+            ec2.terminate(function (numOfTerminatedInstances) {
+                if (numOfTerminatedInstances > 0) {
+                    logger.warning('There were un-terminated instances [' + numOfTerminatedInstances + ']');
+                }
+                done();
+            });
         });
-*/
-        xit('Run with missing security group', function (done) {
+
+        it('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Missing Security Group');
 
             runTest(done, fill, [
@@ -335,6 +333,35 @@ describe('snippet tests', function () {
                 }
             ]);
         });
+
+/* No need for this scenario at the moment
+        it('Run with existing machine', function(done) {
+            var fill = globalFunctions.getFillByFillname(conf, 'AWS Valid Data');
+
+            runTest(done, fill, [
+                function stepWaitToShowUp(callback) {
+                    logger.info('waiting for bar to appear');
+                    driver.wait(
+                        function () {
+                            logger.info('no double creation run');
+                            return driver.isElementPresent(By.css('div[class=\'finished-successfully\']'));
+                        }
+                        , 60 * SECOND, 'USEFUL MSG').then(function() {
+                            callback();
+                        });
+                },
+                function stepCheckForNotVisible(callback) {
+                    driver.findElement(By.css('div[class=\'pem-file ng-hide\']')).isDisplayed().then(
+                        function (isDisplayed) {
+                            assert.equal(isDisplayed, false, 'No new key was graned - as it should be');
+                        }).then(function() {
+                            callback();
+                        });
+                }
+            ])
+        });
+*/
+
 
         it('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Valid Data');
@@ -375,7 +402,7 @@ describe('snippet tests', function () {
                         return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 15 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
+                    }, 20 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
 
                     //Check the private key
                     driver.wait(function () {
@@ -447,7 +474,7 @@ describe('snippet tests', function () {
 
     // Softlayer tests
 
-    xdescribe('Softlayer tests', function () {
+    describe('Softlayer tests', function () {
 
         beforeEach(function (done) {
             driver = globalSteps.getChromeDriver(seleniumServerAddress);
@@ -464,32 +491,7 @@ describe('snippet tests', function () {
             }, 10000);
         });
 
-        xit('Run with valid data', function (done) { //TODO fix me - still not updated!
-            var fills = globalFunctions.getFillByFillname(conf, 'Softlayer Valid Data');
-            runTest(done, fills, function (callback) {
-                logger.info('Validating run');
-                driver.wait(function () {
-                    /*return driver.findElement(By.xpath('//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*')).isDisplayed().then(function (isDisplayed) {*/
-                    return driver.findElement(By.css('div[widget-raw-output-display=\'genericWidgetModel\']')).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
-                }, 5000, 'output div is not displayed');
-
-                driver.wait(function () {
-                    //TODO Change to good bye...
-                    return driver.isElementPresent(By.xpath('//div[contains(@class, \'widget-message\')]/div[text()[contains(.,\'Invalid Credentials\')]]')).then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
-                }, 5 * MINUTE, 'Widget message is not shown, installation might not be completed.');
-
-                driver.findElement(By.css('div.widget-message')).getInnerHtml().then(function (innerHTML) {
-                    assert.equal(innerHTML.trim(), 'Good Bye!');
-                }).then(callback);
-            });
-
-        });
-
-        it('Run with valid data', function (done) {
+         xit('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'Softlayer Valid Data');
 
             runTest(done, fill, [
@@ -528,7 +530,7 @@ describe('snippet tests', function () {
                         return driver.isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 15 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
+                    }, 90 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
 
                     //Check the private key
                     driver.wait(function () {
@@ -584,7 +586,7 @@ describe('snippet tests', function () {
                             ]);
                         });
                     }).then(callback);
-                },function (callback) {
+                }, function (callback) {
                     globalSteps.stepValidateWidgetOutput(conf, fill, callback);
                 },
                 function (callback) {
@@ -606,7 +608,6 @@ describe('snippet tests', function () {
 
                     logger.debug('Will wait 5 seconds for the widget output');
                     driver.wait(function () {
-                        /*return driver.findElement(By.xpath('//div[@widget-raw-output-display='genericWidgetModel.widgetStatus.rawOutput']/parent::*')).isDisplayed().then(function (isDisplayed) {*/
                         return driver.findElement(By.css('div[widget-raw-output-display=\'genericWidgetModel\']')).isDisplayed().then(function (isDisplayed) {
                             return isDisplayed;
                         });

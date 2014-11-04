@@ -54,13 +54,13 @@ function listAll(callback) {
                 Values: [
                     'running'
                 ]
-            },
+            }/*,
             {
                 Name: 'instance-state-name',
                 Values: [
                     'pending'
                 ]
-            }
+            }*/
         ]
     };
     ec2.describeInstances(params, callback);
@@ -77,7 +77,7 @@ function processList(data, callback) {
     var toRemove = _.filter(instances, function (inst) {
 
         var name = _.find(inst.Tags, {'Key': 'Name'});
-        return name.Value.indexOf('ec2blu') === 0;
+        return name.Value.indexOf('blusolomanager') === 0;
     });
 
     var toRemoveIds = _.map(toRemove, 'InstanceId');
@@ -86,7 +86,7 @@ function processList(data, callback) {
     callback(null, toRemoveIds);
 }
 
-exports.terminate = function (callback) {
+function terminateInstances (callback) {
     async.waterfall([
         configure,
         listAll,
@@ -103,4 +103,9 @@ exports.terminate = function (callback) {
             callback(numOfTerminatedMachines);
         }
     });
-};
+}
+
+exports.terminate = terminateInstances;
+if (require.main === module) {
+    terminateInstances();
+}

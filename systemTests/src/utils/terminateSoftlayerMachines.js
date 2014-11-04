@@ -47,6 +47,7 @@ function fillInRequestOpts(opts) {
 
 // DELETE    api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest/Object/:id.json
 function terminate(instanceIds, callback) {
+    logger.debug("1");
     _.each(instanceIds, function (instance) {
         logger.info('terminating ', instance);
         var myPath = '/rest/v3/SoftLayer_Virtual_Guest/{0}.json'.format(instance.id);
@@ -65,13 +66,13 @@ function terminate(instanceIds, callback) {
                 res.on('end', function () {
                     console.log('response ended', res.statusCode);
                     var dataObj = JSON.parse(datas.join(''));
-                    console.log('got object of length ', arguments, dataObj.length);
+                    console.log('got object of length ', arguments, datas.length);
                     if (res.statusCode !== 200) {
                         callback(dataObj);
                         return;
                     }
 
-                    callback(null, dataObj);
+                    callback(null, datas.length);
                 });
             }).on('error', function (e) {
                 console.log('Got error: ' + e.message);
@@ -118,25 +119,34 @@ function processList(data, callback) {
     });
 
     result = _.filter(result, function (item) {
-        return item.hostname.indexOf('widget-cloudify-manager1') === 0;
+        return item.hostname.indexOf('blusolomanager') === 0;
     });
     callback(null, result);
 }
 
-if (require.main === module) {
 
+function terminateInstances (callback) {
+    logger.info('Terminate is called!');
     async.waterfall([
         listAll,
         processList,
         terminate
-    ], function (err) {
-        console.log(arguments);
+    ], function (err, numOfTerminatedMachines) {
         if (!!err) {
             logger.error('unable to terminate', err);
             return;
         }
-        logger.info('terminated successfully!!');
+        logger.info('[' + numOfTerminatedMachines + '] instances were terminated successfully!!');
+
+        if (!!callback) {
+            callback(numOfTerminatedMachines);
+        }
     });
 
 }
 
+exports.terminate = terminateInstances;
+
+if (require.main === module) {
+    terminateInstances();
+}
