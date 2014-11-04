@@ -491,7 +491,7 @@ describe('snippet tests', function () {
             }, 10000);
         });
 
-         it('Run with valid data', function (done) {
+         xit('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'Softlayer Valid Data');
 
             runTest(done, fill, [
