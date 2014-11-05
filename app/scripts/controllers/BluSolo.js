@@ -91,6 +91,10 @@ angular.module('ibmBiginsightsUiApp')
 
         changeWidgetUrl();
 
+        $scope.$watch('execution.aws.securityGroup', function( newValue/*, oldValue*/ ){
+            $scope.genericWidgetModel.ec2Details.securityGroupName = newValue;
+        });
+
         $scope.$watch('execution.cloudProvider', function( newValue , oldValue ){
             if ( !!newValue && !!oldValue && newValue !== oldValue ){
                 $location.search('cloudProvider', newValue);
