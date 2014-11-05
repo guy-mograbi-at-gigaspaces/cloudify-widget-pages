@@ -12,9 +12,17 @@ describe('Directive: controlError', function () {
         scope = $rootScope.$new();
     }));
 
-    it('should make hidden element visible', inject(function ($compile) {
-        element = angular.element('<control-error></control-error>');
+    it('should put class has-error on element if error exists', inject(function ($compile) {
+        scope.myError = false;
+        element = angular.element('<div control-error="myError"></div>');
         element = $compile(element)(scope);
-        expect(element.text()).toBe('this is the controlError directive');
+        scope.$digest();
+        expect(element.hasClass('has-error')).toBe(false);
+
+        scope.myError = true;
+        scope.$digest();
+        expect(element.hasClass('has-error')).toBe(true);
+
+
     }));
 });
