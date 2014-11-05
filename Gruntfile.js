@@ -489,9 +489,10 @@ module.exports = function (grunt) {
 
     grunt.registerTask('deploy', [ 'updateSoftlayerData', 'default', 's3:all']);
 
+
     grunt.registerTask('default', [
-        'jshint',
-//        'test',
+        'jshint:main',
+        'test',
         'build'
     ]);
 };

@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: recipePropertiesDisplay', function () {
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('ibmBiginsightsUiApp', 'directives-templates'));
 
     var element;
 

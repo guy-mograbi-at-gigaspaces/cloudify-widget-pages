@@ -3,7 +3,7 @@
 describe('Directive: loadingWidget', function () {
 
     // load the directive's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('ibmBiginsightsUiApp','directives-templates'));
 
     var element,
         scope;
@@ -12,9 +12,18 @@ describe('Directive: loadingWidget', function () {
         scope = $rootScope.$new();
     }));
 
-    it('should make hidden element visible', inject(function ($compile) {
-        element = angular.element('<loading-widget></loading-widget>');
+    it('should display as long as widget is not loaded', inject(function ($compile) {
+        scope.myWidget = {
+                loaded : false
+        };
+        element = angular.element('<div loading-widget="myWidget"></div>');
         element = $compile(element)(scope);
-        expect(element.text()).toBe('this is the loadingWidget directive');
+        scope.$digest();
+        expect(element.children().hasClass('ng-hide')).toBe(false);
+
+        scope.myWidget.loaded = true;
+        scope.$digest();
+        expect(element.children().hasClass('ng-show')).toBe(false);
+        expect(element.children().hasClass('ng-hide')).toBe(true);
     }));
 });

@@ -12,10 +12,6 @@ angular.module('ibmBiginsightsUiApp')
             link: function postLink(scope/*, element, attrs*/) {
                 scope.page = {};
 
-                scope.isRunning = function(){
-                    scope.source.widgetStatus.state = 'RUNNING';
-                };
-
                 scope.callStop = function(){
                     scope.page.showSomethingIsWrong = false;
                     scope.page.stopping = true;

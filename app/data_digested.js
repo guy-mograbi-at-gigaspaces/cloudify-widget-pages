@@ -1080,30 +1080,6 @@ var softlayerItems = [
         "description": "Red Hat Enterprise Linux 5.x - LAMP Install (64 bit)"
     },
     {
-        "itemId": 887,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Debian GNU/Linux 5.x Lenny/Stable - Minimal Install (32 bit)"
-    },
-    {
-        "itemId": 888,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Debian GNU/Linux 5.x Lenny/Stable - Minimal Install (64 bit)"
-    },
-    {
-        "itemId": 889,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Debian GNU/Linux 5.x Lenny/Stable - LAMP Install (32 bit)"
-    },
-    {
-        "itemId": 890,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Debian GNU/Linux 5.x Lenny/Stable - LAMP Install (64 bit)"
-    },
-    {
         "itemId": 915,
         "categoryName": "Fifth Disk",
         "categoryCode": "guest_disk4",
@@ -2730,12 +2706,6 @@ var softlayerItems = [
         "description": "CloudPlatform Management Server 3.0"
     },
     {
-        "itemId": 4190,
-        "categoryName": "OS-Specific Addon",
-        "categoryCode": "os_addon",
-        "description": "CloudPlatform Service 3.0"
-    },
-    {
         "itemId": 4195,
         "categoryName": "Control Panel Software",
         "categoryCode": "control_panel",
@@ -2776,12 +2746,6 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "Windows Server 2012 Datacenter Edition (64bit)"
-    },
-    {
-        "itemId": 4238,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "MongoDB 2.2 "
     },
     {
         "itemId": 4247,
@@ -2830,12 +2794,6 @@ var softlayerItems = [
         "categoryName": "Uplink Port Speeds",
         "categoryCode": "port_speed",
         "description": "1 Gbps Dual Public & Private Network Uplinks (Unbonded)"
-    },
-    {
-        "itemId": 4264,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Citrix XenServer 6.0.2 - version-locked"
     },
     {
         "itemId": 4272,
@@ -2952,18 +2910,6 @@ var softlayerItems = [
         "description": "Red Hat Enterprise Linux 6.x (64 bit) (per-processor licensing)"
     },
     {
-        "itemId": 4324,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Red Hat Enterprise Linux - ES 4 (32 bit) (per-processor licensing)"
-    },
-    {
-        "itemId": 4325,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "Red Hat Enterprise Linux - ES 4 (64 bit) (per-processor licensing)"
-    },
-    {
         "itemId": 4326,
         "categoryName": "Operating System",
         "categoryCode": "os",
@@ -3060,12 +3006,6 @@ var softlayerItems = [
         "description": "800GB SSD"
     },
     {
-        "itemId": 4363,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Riak 1.3.0"
-    },
-    {
         "itemId": 4369,
         "categoryName": "Operating System",
         "categoryCode": "os",
@@ -3112,12 +3052,6 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "CloudLinux 6.x (64 bit)"
-    },
-    {
-        "itemId": 4384,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Basho Riak Enterprise Standard (Monthly)"
     },
     {
         "itemId": 4385,
@@ -3228,36 +3162,6 @@ var softlayerItems = [
         "description": "48 GB"
     },
     {
-        "itemId": 4470,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "MongoDB 2.2 with Standard Support"
-    },
-    {
-        "itemId": 4471,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "MongoDB 2.2 Enterprise with Enterprise Support"
-    },
-    {
-        "itemId": 4472,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "MongoDB 2.4 "
-    },
-    {
-        "itemId": 4473,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "MongoDB 2.4 Enterprise with Enterprise Support"
-    },
-    {
-        "itemId": 4474,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "MongoDB 2.4 with Standard Support"
-    },
-    {
         "itemId": 4478,
         "categoryName": "Disk Controller",
         "categoryCode": "disk_controller",
@@ -3268,18 +3172,6 @@ var softlayerItems = [
         "categoryName": "Public Bandwidth",
         "categoryCode": "bandwidth",
         "description": "0 GB Bandwidth"
-    },
-    {
-        "itemId": 4490,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Standard"
-    },
-    {
-        "itemId": 4491,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Agent"
     },
     {
         "itemId": 4495,
@@ -3300,166 +3192,16 @@ var softlayerItems = [
         "description": "960GB SSD"
     },
     {
-        "itemId": 4508,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core (CDH + Cloudera Manager) 8x5 Monthly"
-    },
-    {
-        "itemId": 4509,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core (CDH + Cloudera Manager) 24x7 Monthly"
-    },
-    {
         "itemId": 4514,
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "Vyatta 6.x Subscription Edition (64 bit)"
     },
     {
-        "itemId": 4517,
-        "categoryName": "Disk Controller",
-        "categoryCode": "disk_controller",
-        "description": "Disk Controller"
-    },
-    {
-        "itemId": 4519,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTD (HBase) 8x5 Monthly"
-    },
-    {
-        "itemId": 4520,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTD (HBase) 24x7 Monthly"
-    },
-    {
-        "itemId": 4521,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTQ (Impala) 8x5 Monthly"
-    },
-    {
-        "itemId": 4522,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTQ (Impala) 24x7 Monthly"
-    },
-    {
-        "itemId": 4523,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMCN (Navigator) 8x5 Monthly"
-    },
-    {
-        "itemId": 4524,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMCN (Navigator) 24x7 Monthly"
-    },
-    {
-        "itemId": 4525,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMBD (BDR, back-up and disaster recovery) 8x5 Monthly"
-    },
-    {
-        "itemId": 4526,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMBD (BDR, back-up and disaster recovery) 24x7 Monthly"
-    },
-    {
         "itemId": 4532,
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "CentOS 6.4 - Minimal Install (64 bit) - version-locked"
-    },
-    {
-        "itemId": 4533,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core (CDH + Cloudera Manager) 8x5 Annual"
-    },
-    {
-        "itemId": 4534,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core (CDH + Cloudera Manager) 24x7 Annual"
-    },
-    {
-        "itemId": 4535,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core 8x5 Annual (Agent)"
-    },
-    {
-        "itemId": 4536,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core 24x7 Annual (Agent)"
-    },
-    {
-        "itemId": 4537,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core 8x5 Monthly (Agent)"
-    },
-    {
-        "itemId": 4538,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Cloudera Enterprise Core 24x7 Monthly (Agent)"
-    },
-    {
-        "itemId": 4539,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTD (HBase) 8x5 Annual"
-    },
-    {
-        "itemId": 4540,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTD (HBase) 24x7 Annual"
-    },
-    {
-        "itemId": 4541,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTQ (Impala) 8x5 Annual"
-    },
-    {
-        "itemId": 4542,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera RTQ (Impala) 24x7 Annual"
-    },
-    {
-        "itemId": 4543,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMCN (Navigator) 8x5 Annual"
-    },
-    {
-        "itemId": 4544,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMCN (Navigator) 24x7 Annual"
-    },
-    {
-        "itemId": 4545,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMBD (BDR, back-up and disaster recovery) 8x5 Annual"
-    },
-    {
-        "itemId": 4546,
-        "categoryName": "Service",
-        "categoryCode": "service",
-        "description": "Cloudera SMBD (BDR, back-up and disaster recovery) 24x7 Annual"
     },
     {
         "itemId": 4547,
@@ -3756,9 +3498,27 @@ var softlayerItems = [
         "description": "CentOS 7.x (64 bit)"
     },
     {
+        "itemId": 5926,
+        "categoryName": "Control Panel Software",
+        "categoryCode": "control_panel",
+        "description": "Parallels Plesk Panel 12 (Windows) Unlimited Domain w/ Power Pack"
+    },
+    {
+        "itemId": 5928,
+        "categoryName": "Control Panel Software",
+        "categoryCode": "control_panel",
+        "description": "Parallels Plesk Panel 12 (Windows) 100 Domain w/ Power Pack"
+    },
+    {
         "itemId": 5930,
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "Red Hat Enterprise Linux 6.5 (64 bit) version-locked (per-processor licensing)"
+    },
+    {
+        "itemId": 5948,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "Red Hat Enterprise Linux 6.5 - LAMP Install (64 bit) - version-locked"
     }
 ];
