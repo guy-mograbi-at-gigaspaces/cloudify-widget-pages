@@ -22,7 +22,7 @@ describe('Controller: SoftlayerPackageItemsCtrl', function () {
         $timeout.flush();
         runs( function(){
             expect(scope.softlayerItems).toBe('this is softlayer items');
-        })
+        });
 
     }));
 });

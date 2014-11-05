@@ -286,7 +286,7 @@ function runTest(done, fill, validationFunctions) {
 
 describe('snippet tests', function () {
     // AWS tests
-    
+
 
     describe('AWS tests', function () {
 
@@ -295,24 +295,24 @@ describe('snippet tests', function () {
             driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=').then(done);
         });
 
+        afterEach(function (done) {
+            setTimeout(function () {
+                driver.close().then(function () {
+                    logger.info('Closing web browser');
+                    done();
+                });
+            }, 3000);
+        });
+        /*
          afterEach(function (done) {
-         setTimeout(function () {
-         driver.close().then(function () {
-         logger.info('Closing web browser');
+         logger.info('Terminating EC2 machines');
+         ec2.terminate(function (numOfTerminatedInstances) {
+         if (numOfTerminatedInstances > 0) {
+         logger.warning('There were un-terminated instances [' + numOfTerminatedInstances + ']');
+         }
          done();
          });
-         }, 3000);
-         });
-/*
-        afterEach(function (done) {
-            logger.info('Terminating EC2 machines');
-            ec2.terminate(function (numOfTerminatedInstances) {
-                if (numOfTerminatedInstances > 0) {
-                    logger.warning('There were un-terminated instances [' + numOfTerminatedInstances + ']');
-                }
-                done();
-            });
-        });*/
+         });*/
 
         it('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'AWS Missing Security Group');
@@ -334,33 +334,33 @@ describe('snippet tests', function () {
             ]);
         });
 
-/* No need for this scenario at the moment
-        it('Run with existing machine', function(done) {
-            var fill = globalFunctions.getFillByFillname(conf, 'AWS Valid Data');
+        /* No need for this scenario at the moment
+         it('Run with existing machine', function(done) {
+         var fill = globalFunctions.getFillByFillname(conf, 'AWS Valid Data');
 
-            runTest(done, fill, [
-                function stepWaitToShowUp(callback) {
-                    logger.info('waiting for bar to appear');
-                    driver.wait(
-                        function () {
-                            logger.info('no double creation run');
-                            return driver.isElementPresent(By.css('div[class=\'finished-successfully\']'));
-                        }
-                        , 60 * SECOND, 'USEFUL MSG').then(function() {
-                            callback();
-                        });
-                },
-                function stepCheckForNotVisible(callback) {
-                    driver.findElement(By.css('div[class=\'pem-file ng-hide\']')).isDisplayed().then(
-                        function (isDisplayed) {
-                            assert.equal(isDisplayed, false, 'No new key was graned - as it should be');
-                        }).then(function() {
-                            callback();
-                        });
-                }
-            ])
-        });
-*/
+         runTest(done, fill, [
+         function stepWaitToShowUp(callback) {
+         logger.info('waiting for bar to appear');
+         driver.wait(
+         function () {
+         logger.info('no double creation run');
+         return driver.isElementPresent(By.css('div[class=\'finished-successfully\']'));
+         }
+         , 60 * SECOND, 'USEFUL MSG').then(function() {
+         callback();
+         });
+         },
+         function stepCheckForNotVisible(callback) {
+         driver.findElement(By.css('div[class=\'pem-file ng-hide\']')).isDisplayed().then(
+         function (isDisplayed) {
+         assert.equal(isDisplayed, false, 'No new key was graned - as it should be');
+         }).then(function() {
+         callback();
+         });
+         }
+         ])
+         });
+         */
 
 
         it('Run with valid data', function (done) {
@@ -491,7 +491,7 @@ describe('snippet tests', function () {
             }, 10000);
         });
 
-         xit('Run with valid data', function (done) {
+        xit('Run with valid data', function (done) {
             var fill = globalFunctions.getFillByFillname(conf, 'Softlayer Valid Data');
 
             runTest(done, fill, [

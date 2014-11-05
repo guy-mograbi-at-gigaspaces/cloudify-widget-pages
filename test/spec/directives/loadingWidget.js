@@ -14,7 +14,7 @@ describe('Directive: loadingWidget', function () {
 
     it('should display as long as widget is not loaded', inject(function ($compile) {
         scope.myWidget = {
-                loaded : false
+            loaded: false
         };
         element = angular.element('<div loading-widget="myWidget"></div>');
         element = $compile(element)(scope);

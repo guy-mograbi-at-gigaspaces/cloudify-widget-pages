@@ -47,7 +47,7 @@ function fillInRequestOpts(opts) {
 
 // DELETE    api.softlayer.com/rest/v3/SoftLayer_Virtual_Guest/Object/:id.json
 function terminate(instanceIds, callback) {
-    logger.debug("1");
+    logger.debug('1');
     _.each(instanceIds, function (instance) {
         logger.info('terminating ', instance);
         var myPath = '/rest/v3/SoftLayer_Virtual_Guest/{0}.json'.format(instance.id);
