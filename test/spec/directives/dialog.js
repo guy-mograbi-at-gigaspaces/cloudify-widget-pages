@@ -3,7 +3,7 @@
 describe('Directive: dialog', function () {
 
     // load the directive's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('ibmBiginsightsUiApp','directives-templates'));
 
     var element,
         scope;
@@ -12,9 +12,17 @@ describe('Directive: dialog', function () {
         scope = $rootScope.$new();
     }));
 
-    it('should make hidden element visible', inject(function ($compile) {
-        element = angular.element('<div dialog></div>');
+    it('should put modal-open class on body when it is open', inject(function ($compile) {
+        scope.show = false;
+        element = angular.element('<div dialog show="show"></div>');
         element = $compile(element)(scope);
-        expect(element.text()).toBe('this is the dialog directive');
+        scope.$digest();
+
+        expect($('body').hasClass('modal-open')).toBe(false);
+
+        scope.show=true;
+        scope.$digest();
+
+        expect($('body').hasClass('modal-open')).toBe(true);
     }));
 });
