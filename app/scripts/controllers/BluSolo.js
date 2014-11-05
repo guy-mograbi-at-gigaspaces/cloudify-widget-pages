@@ -63,7 +63,7 @@ angular.module('ibmBiginsightsUiApp')
 
 
         function changeWidgetUrl() {
-            $scope.widgetUrl = 'http://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/' + widgetIds[$scope.execution.cloudProvider] + '/view?since=' + new Date().getTime();
+            $scope.widgetUrl = 'https://ibmhkstaging.gsdev.info/public-folder/angularApps/index.html#/widgets/' + widgetIds[$scope.execution.cloudProvider] + '/view?since=' + new Date().getTime();
 
         }
 

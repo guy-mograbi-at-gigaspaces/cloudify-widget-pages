@@ -147,7 +147,7 @@ var softlayerItems = [
         "itemId": 59,
         "categoryName": "Second Hard Drive",
         "categoryCode": "disk1",
-        "description": "150GB SATA Raptor 10k"
+        "description": "150GB SATA Raptor 10K RPM"
     },
     {
         "itemId": 79,
@@ -471,7 +471,7 @@ var softlayerItems = [
         "itemId": 472,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "74GB SATA Raptor 10k"
+        "description": "74GB SATA Raptor 10K RPM"
     },
     {
         "itemId": 473,
@@ -771,7 +771,7 @@ var softlayerItems = [
         "itemId": 737,
         "categoryName": "Second Hard Drive",
         "categoryCode": "disk1",
-        "description": "300GB SATA Raptor 10k"
+        "description": "300GB SATA Raptor 10K RPM"
     },
     {
         "itemId": 738,
@@ -2700,12 +2700,6 @@ var softlayerItems = [
         "description": "1500GB EVault Disk to Disk Enterprise Backup"
     },
     {
-        "itemId": 4189,
-        "categoryName": "OS-Specific Addon",
-        "categoryCode": "os_addon",
-        "description": "CloudPlatform Management Server 3.0"
-    },
-    {
         "itemId": 4195,
         "categoryName": "Control Panel Software",
         "categoryCode": "control_panel",
@@ -2758,12 +2752,6 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "Windows Server 2008 Standard SP1 with R2 (64 bit)"
-    },
-    {
-        "itemId": 4250,
-        "categoryName": "Operating System",
-        "categoryCode": "os",
-        "description": "CentOS 6.2 (64 bit) - version locked"
     },
     {
         "itemId": 4251,
@@ -2992,12 +2980,6 @@ var softlayerItems = [
         "categoryName": "CDP Addon",
         "categoryCode": "cdp_backup",
         "description": "Idera Backup Agent 25 Pack"
-    },
-    {
-        "itemId": 4354,
-        "categoryName": "Database Software",
-        "categoryCode": "database",
-        "description": "Riak Enterprise 1.3.0"
     },
     {
         "itemId": 4356,
@@ -3333,7 +3315,7 @@ var softlayerItems = [
         "itemId": 4678,
         "categoryName": "Eighth Hard Drive",
         "categoryCode": "disk7",
-        "description": "300 GB SAS/SCSI 15K RPM HDD"
+        "description": "300GB SA-SCSI 15K RPM"
     },
     {
         "itemId": 4680,
@@ -3520,5 +3502,35 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "Red Hat Enterprise Linux 6.5 - LAMP Install (64 bit) - version-locked"
+    },
+    {
+        "itemId": 5950,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 7.x - LAMP Install (64 bit)"
+    },
+    {
+        "itemId": 5952,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 7.x - Minimal Install (64 bit)"
+    },
+    {
+        "itemId": 5954,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "Red Hat Enterprise Linux 6.5 - Minimal Install (64 bit) version-locked (per-processor licensing)"
+    },
+    {
+        "itemId": 5956,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 7.x - LAMP Install (64 bit)"
+    },
+    {
+        "itemId": 5958,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 7.x - Minimal Install (64 bit)"
     }
 ];
