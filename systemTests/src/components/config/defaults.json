@@ -1,0 +1,7 @@
+{
+    "pageUrl" : "ibmpages.gsdev.info",
+    "selenium" : {
+        "serverUrl" : "http://localhost:4444/wd/hub",
+        "browserType" : "chrome"
+    }
+}

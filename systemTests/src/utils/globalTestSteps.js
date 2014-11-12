@@ -22,6 +22,9 @@ function getChromeDriver(seleniumServerAddress) {
 
 exports.getChromeDriver = getChromeDriver;
 
+exports.setDriver = function (d) {
+    driver = d;
+}
 /**
  * Gets a fill/permutation and fills it's values to the proper html elements
  * @param fill

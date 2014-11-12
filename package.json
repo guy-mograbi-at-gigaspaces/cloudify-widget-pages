@@ -41,7 +41,8 @@
     "karma-script-launcher": "~0.1.0",
     "lodash": "~2.4.1",
     "log4js": "~0.6.21",
-    "matchdep": "~0.1.2",
+    "q": "~1.0.1",
+      "matchdep": "~0.1.2",
     "mocha": "~1.21.4",
     "reporter-file": "*",
     "selenium-webdriver": "~2.43.5"
