@@ -22,8 +22,20 @@ var MINUTE = 60 * SECOND;
 
 describe('Sanity test for softlayer', function() {
 
+    before(function () {
+        logger.info('initializing');
+        components.init().then(function () {
+            globalSteps.setDriver(driver.get());
+            components.ui.page.loadWidgetPage().then(done);
+        });
+    });
+
+    after(function () {
+        components.driver.quit();
+    });
+
     xit('Run with invalid credentials', function (done) {
-        var fills = globalFunctions.getFillByFillname(conf, 'Softlayer Invalid Credentials');
+        var fills = globalFunctions.getFillByFillname(config, 'Softlayer Invalid Credentials');
 
         components.ui.layout.runTest(done, fills, [
             function (callback) {

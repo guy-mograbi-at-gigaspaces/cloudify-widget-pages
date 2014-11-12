@@ -20,7 +20,7 @@ var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
 
-xdescribe('Sanity test for aws', function () {
+describe('Sanity test for aws', function () {
 
     before(function () {
         logger.info('initializing');
