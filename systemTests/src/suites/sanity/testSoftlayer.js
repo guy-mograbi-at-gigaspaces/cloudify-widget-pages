@@ -22,7 +22,7 @@ describe('Sanity test for softlayer', function() {
     xit('Run with valid data', function (done) {
         var fill = globalFunctions.getFillByFillname(conf, 'Softlayer Valid Data');
 
-        runTest(done, fill, [
+        components.ui.layout.runTest(done, fill, [
             function (callback) {
                 logger.info('Validating run');
 
@@ -119,40 +119,10 @@ describe('Sanity test for softlayer', function() {
             },
             function (callback) {
                 globalSteps.stepValidateInstallationButtons(callback);
-            },
+            }/*,
             function (callback) {
                 globalSteps.stepTerminateInstances(fill, callback);
-            }
-        ]);
-    });
-
-
-    it('Run with invalid credentials', function (done) {
-        var fills = globalFunctions.getFillByFillname(conf, 'Softlayer Invalid Credentials');
-
-        runTest(done, fills, [
-            function (callback) {
-                logger.info('Validating run');
-
-                logger.debug('Will wait 5 seconds for the widget output');
-                driver.wait(function () {
-                    return driver.findElement(By.css('div[widget-raw-output-display=\'genericWidgetModel\']')).isDisplayed().then(function (isDisplayed) {
-                        return isDisplayed;
-                    });
-                }, 5 * SECOND, 'output div is not displayed').then(function () {
-                    logger.debug('will wait 5 minutes for the error message box');
-                });
-
-
-                driver.wait(function () {
-                    return driver.findElement(By.xpath('//div[contains(@class, \'widget-message\')]')).isDisplayed();
-                }, 5 * MINUTE, 'Widget message box is not displayed').then(function () {
-                    logger.debug('Checking error message box content');
-                }).then(callback);
-            },
-            function (callback) {
-                globalSteps.stepCheckErrorBox('Invalid Credentials', callback);
-            }
+            }*/
         ]);
     });
 
