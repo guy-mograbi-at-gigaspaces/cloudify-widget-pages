@@ -11,12 +11,12 @@ beforeEach(function(done){
     logger.info('initializing');
    components.init().then(function(){
        globalSteps.setDriver(driver.get());
-       components.ui.page.loadWidgetPage().then(done);
+       components.ui.page.loadWidgetPage().then(function(){done()});
    });
 }, components.config.timeout );
 
 afterEach(function( done ){
-    components.driver.quit().then(done);
+    components.driver.quit().then(function(){done()});
 }, components.config.timeout);
 
 

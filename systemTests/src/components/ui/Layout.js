@@ -45,7 +45,8 @@ exports.runTest = function(done, fill, validationFunctions) {
         function waitForProgressBar(callback) {
             logger.info('Locating the initial loading progress bar');
             driver.wait(function () {
-                return driver.isElementPresent(By.xpath('//div[@class=\'progress\']/..'));
+               //By.xpath('//div[@class=\'progress\']/..')
+                return driver.isElementPresent(By.css('#blu-solo-snippet > div:nth-child(3) > div > div.progress'));
             }, 2 * MINUTE, 'Unable to find initial loading progress bar').then(function () {
                 logger.debug('Found');
                 callback();
@@ -54,7 +55,8 @@ exports.runTest = function(done, fill, validationFunctions) {
         function waitForProgressBarToDisappear(callback) {
             logger.info('Waiting for the loading progress bar to disappear');
             driver.wait(function () {
-                return driver.findElement(By.xpath('//div[@class=\'progress\']/..')).isDisplayed().then(function (isDisplayed) {
+                // xpath: '//div[@class=\'progress\']/..'
+                return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div')).isDisplayed().then(function (isDisplayed) {
                     return !isDisplayed;
                 });
             }, 5000, 'Initial loading progress bar did not disappeared').then(function () {
@@ -95,17 +97,21 @@ exports.runTest = function(done, fill, validationFunctions) {
             logger.info('Validating recipe properties');
 
             driver.wait(function () {
-                return driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
+                //xpath: //button[contains(., \'Show Properties\')]
+                //#blu-solo-snippet > div:nth-child(2) > div > div > button
+                return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).isDisplayed().then(function (isDisplayed) {
                     return isDisplayed;
                 });
             }, 1 * SECOND, 'Unable to find displayed \'Show Properties\' button');
 
-            driver.findElement(By.xpath('//div[contains(@style, \'background-color:orange\')]/button[contains(., \'Show Properties\')]/..')).isDisplayed().then(function (isDisplayed) {
+            //xpath: ('//div[contains(@style, \'background-color:orange\')]/button[contains(., \'Show Properties\')]/..')
+            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).isDisplayed().then(function (isDisplayed) {
                 assert.equal(isDisplayed, true, 'Unable to find the orange box of the recipe properties');
             });
 
+            //#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)
             //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).click().then(function () {
-            driver.findElement(By.css('button:contains(\'Show Properties\')')).click().then(function(){
+            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)')).click().then(function(){
                 //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
                 driver.findElement(By.css('button:contains(\'Show Properties\')')).isDisplayed().then(function (isDisplayed) {
                     assert.equal(false, isDisplayed, 'The \'Show Properties\' button still displayed!');
