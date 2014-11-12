@@ -435,7 +435,7 @@ module.exports = function (grunt) {
                 options: {
                     timeout: 1800000,
                     reporter: 'spec',
-                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    captureFile: 'systemTests/output/sanity-test-results.txt', // Optionally capture the reporter output to a file
                     quiet: false, // Optionally suppress output to standard out (defaults to false)
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
                 },
@@ -446,7 +446,7 @@ module.exports = function (grunt) {
                 options: {
                     timeout: 1800000,
                     reporter: 'spec',
-                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    captureFile: 'systemTests/output/failure-test-results.txt', // Optionally capture the reporter output to a file
                     quiet: false, // Optionally suppress output to standard out (defaults to false)
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
                 },
