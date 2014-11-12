@@ -20,7 +20,7 @@ var MINUTE = 60 * SECOND;
 
 describe('Sanity test for softlayer', function() {
 
-    it('Run with invalid credentials', function (done) {
+    xit('Run with invalid credentials', function (done) {
         var fills = globalFunctions.getFillByFillname(conf, 'Softlayer Invalid Credentials');
 
         components.ui.layout.runTest(done, fills, [

@@ -431,7 +431,7 @@ module.exports = function (grunt) {
             }
         },
         mochaTest: {
-            test: {
+            sanity: {
                 options: {
                     timeout: 1800000,
                     reporter: 'spec',
@@ -439,9 +439,21 @@ module.exports = function (grunt) {
                     quiet: false, // Optionally suppress output to standard out (defaults to false)
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
                 },
-                src: ['systemTests/src/suites/**/*.spec.js']
+                src: ['systemTests/src/suites/sanity/*.spec.js']
+                //src: ['systemTests/src/index.js']
+            },
+            failures: {
+                options: {
+                    timeout: 1800000,
+                    reporter: 'spec',
+                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    quiet: false, // Optionally suppress output to standard out (defaults to false)
+                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+                },
+                src: ['systemTests/src/suites/failure-checks/*.spec.js']
                 //src: ['systemTests/src/index.js']
             }
+
         }
     });
 
@@ -511,7 +523,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('mocha', function(target) {
         grunt.task.run([
-            'mochaTest'
+            'mochaTest:sanity'
         ]);
     });
 };

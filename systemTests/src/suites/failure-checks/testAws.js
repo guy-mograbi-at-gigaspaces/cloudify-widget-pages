@@ -19,7 +19,7 @@ var MINUTE = 60 * SECOND;
 
 describe('Sanity test for aws', function() {
 
-    it('Run with missing security group', function (done) {
+    xit('Run with missing security group', function (done) {
         var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Security Group');
 
         components.ui.layout.runTest(done, fill, [

@@ -104,8 +104,10 @@ exports.runTest = function(done, fill, validationFunctions) {
                 assert.equal(isDisplayed, true, 'Unable to find the orange box of the recipe properties');
             });
 
-            driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).click().then(function () {
-                driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
+            //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).click().then(function () {
+            driver.findElement(By.css('button:contains(\'Show Properties\')')).click().then(function(){
+                //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
+                driver.findElement(By.css('button:contains(\'Show Properties\')')).isDisplayed().then(function (isDisplayed) {
                     assert.equal(false, isDisplayed, 'The \'Show Properties\' button still displayed!');
                 }).then(function () {
                     driver.findElement(By.css('div.recipe-properties')).isDisplayed().then(function (isDisplayed) {
@@ -147,6 +149,7 @@ exports.runTest = function(done, fill, validationFunctions) {
                 driver.findElement(By.xpath('//button[contains(., \'Hide\')]')).click();
                 //TODO nice to have - add verifications for Show/Hide click results
             }).then(callback);
+
         },
         function submitForm(callback) {
             logger.info('Click on submit');
