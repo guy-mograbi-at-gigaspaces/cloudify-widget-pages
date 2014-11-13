@@ -407,6 +407,10 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'karma.conf.js',
                 singleRun: true
+            },
+            debug: {
+                configFile: 'karma.conf.js',
+                singleRun: false
             }
         },
         ngmin: {
@@ -452,7 +456,7 @@ module.exports = function (grunt) {
         'html2js:main',
         'concurrent:test',
         'connect:test',
-        'karma'
+        'karma:unit'
     ]);
 
     grunt.registerTask('build', function () {

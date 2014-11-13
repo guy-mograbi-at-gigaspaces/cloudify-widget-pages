@@ -88,10 +88,12 @@
         </div>
     </div>-->
 
-<pre class="pre">
+<pre class="pre" style="max-height:400px;">
     <div>{{'startedMightTakeWhile' | i18n }}&#10;</div>
 
-    <div ng-repeat="line in source.widgetStatus.rawOutput track by $index">{{line}}</div>
+    <!-- we show a digested version of the output -->
+    <div ng-repeat="line in digestedOutput track by $index">{{line}}</div>
+    <!--<div ng-repeat="line in source.widgetStatus.rawOutput track by $index">{{line}}</div>-->
     <div ng-show="!source.widgetStatus.completed">{{source.widgetStatus.ellipsis}}</div>
     <div ng-show="source.widgetStatus.completed">Installation Completed. Look for more details at the top.</div>
 </pre>

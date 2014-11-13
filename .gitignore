@@ -8,3 +8,4 @@ app/bower_components
 atlassian*
 dev
 xunit.xml
+*.iml
