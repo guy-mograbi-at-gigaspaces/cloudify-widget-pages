@@ -89,7 +89,7 @@ describe('Sanity test for aws', function () {
             }, 20 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output').then(done);
         });
 
-        xit('validate ', function () {
+        xit('validate private key', function () {
             //Check the private key
             driver.get().wait(function () {
                 return driver.get().findElement(By.xpath('//div[text()[contains(.,\'You have a new private key\')]]/..')).isDisplayed().then(function (isDisplayed) {

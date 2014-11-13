@@ -526,4 +526,11 @@ module.exports = function (grunt) {
             'mochaTest:sanity'
         ]);
     });
+
+
+    grunt.registerTask('mochaFails', function(target) {
+        grunt.task.run([
+            'mochaTest:failures'
+        ]);
+    });
 };
