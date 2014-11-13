@@ -93,7 +93,8 @@ exports.runTest = function(done, fill, validationFunctions) {
             driver.switchTo().defaultContent().then(callback);
 
         },
-        function validateRecipeProperties(callback) {
+
+ /*       function validateRecipeProperties(callback) {
             logger.info('Validating recipe properties');
 
             driver.wait(function () {
@@ -111,6 +112,7 @@ exports.runTest = function(done, fill, validationFunctions) {
 
             //#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)
             //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).click().then(function () {
+
             driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)')).click().then(function(){
                 //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
                 driver.findElement(By.css('button:contains(\'Show Properties\')')).isDisplayed().then(function (isDisplayed) {
@@ -156,10 +158,12 @@ exports.runTest = function(done, fill, validationFunctions) {
                 //TODO nice to have - add verifications for Show/Hide click results
             }).then(callback);
 
-        },
+        }, */
         function submitForm(callback) {
             logger.info('Click on submit');
-            driver.findElement(By.xpath('//button[contains(., \'Submit\')]')).click();
+            // #blu-solo-snippet > div:nth-child(4) > div > div.form.ng-hide > div > div:nth-child(9) > div > div.form-actions > button
+            //By.xpath('//button[contains(., \'Submit\')]')
+            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div:nth-child(9) > div > div.form-actions > button')).click();
             callback();
         }
     ].concat(validationFunctions)
