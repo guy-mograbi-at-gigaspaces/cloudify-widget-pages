@@ -433,6 +433,18 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        mochaTest: {
+            test: {
+                options: {
+                    timeout: 1800000,
+                    reporter: 'spec',
+                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    quiet: false, // Optionally suppress output to standard out (defaults to false)
+                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+                },
+                src: ['systemTests/src']
+            }
         }
     });
 
@@ -499,4 +511,10 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('mocha', function(target) {
+        grunt.task.run([
+            'mochaTest'
+        ]);
+    });
 };
