@@ -25,4 +25,17 @@ describe('Controller: SoftlayerPackageItemsCtrl', function () {
         });
 
     }));
+
+    it('should load cached items from dropbox', inject(function($httpBackend){
+        $httpBackend.expectGET('https://www.dropbox.com/s/if4akhffs2m4avb/data.json?dl=1').respond( 'this is data');
+        scope.loadCachedItems();
+        $httpBackend.flush();
+        expect(scope.items).toBe('this is data');
+    }));
+
+    it('should load items', inject(function(SoftlayerPackageItemsService){
+        spyOn(SoftlayerPackageItemsService,'getItems').andReturn();
+        scope.loadItems();
+        expect(SoftlayerPackageItemsService.getItems).toHaveBeenCalled();
+    }));
 });

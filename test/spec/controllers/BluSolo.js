@@ -136,5 +136,5 @@ describe('Controller: BluSoloCtrl', function () {
 
         var iframes = scope.genericWidgetModel.element();
         expect(iframes).toBe(undefined);
-    })
+    });
 });
