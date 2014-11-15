@@ -10,3 +10,4 @@ dev
 xunit.xml
 results.txt
 *.iml
+coverage

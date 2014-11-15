@@ -161,7 +161,7 @@ describe('Directive: widgetRawOutputDisplay', function () {
         try{$timeout.flush();}catch(e){}
         try{$rootScope.$digest();}catch(e){}
 
-        console.log('this is digested scope', isolateScope.digestedOutput);
+        // we see that the output was decreased between 79 lines to 22.
         expect(isolateScope.digestedOutput.length).toBe(22);
     }));
 });

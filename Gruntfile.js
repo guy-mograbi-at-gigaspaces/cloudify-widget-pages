@@ -410,7 +410,8 @@ module.exports = function (grunt) {
             },
             debug: {
                 configFile: 'karma.conf.js',
-                singleRun: false
+                singleRun: false,
+                reporters: ['failed']
             }
         },
         ngmin: {
@@ -512,7 +513,7 @@ module.exports = function (grunt) {
         'build'
     ]);
 
-    grunt.registerTask('mocha', function(target) {
+    grunt.registerTask('mocha', function() {
         grunt.task.run([
             'mochaTest'
         ]);
