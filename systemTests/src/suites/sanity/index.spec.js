@@ -6,9 +6,9 @@ var logger = require('log4js').getLogger('index.spec');
 var driver = require('../../components/driver');
 var globalSteps = require('../../utils/globalTestSteps');
 
+
 describe('sanity suite', function(){
     require('./testAws');
     require('./testSoftlayer');
 });
-
 
