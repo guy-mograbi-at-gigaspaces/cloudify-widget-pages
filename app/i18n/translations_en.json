@@ -166,6 +166,28 @@
         "general" : {
             "invalid" : "Value is missing"
         }
+    },
+
+    "causes" : {
+        "imageUnauthorized" : {
+            "error": "You have yet to register on the image in marketplace",
+            "action": "Register image on marketplace"
+        },
+        "callSupport" : {
+            "action" : "Contact support at: imcloud@ca.ibm.com"
+        },
+        "notRegisteredToMarketplace" : {
+            "error" : "You are not registered to AWS Marketplace",
+            "action" : "Please register to AWS marketplace"
+        },
+        "invalidSecurityGroup" : {
+            "error" : "The security group you supplied does not answer requirements",
+            "action" : "Validate your security group answers requirements"
+        }
+    },
+    "errorsDetected" : {
+        "intro": "You have encountered an error. Possible reasons are:",
+        "possibleActions" : "Please take the following steps and try again:"
     }
 
 }

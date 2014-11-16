@@ -1,0 +1,10 @@
+<div ng-show="!!data" class="bg-danger widget-message">
+    <div>{{'errorsDetected.intro' | i18n}}</div>
+    <ul>
+        <li ng-show="!!err.error" ng-repeat="err in data track by $index">{{err.error | i18n }}</li>
+    </ul>
+    <div>{{'errorsDetected.possibleActions' | i18n }}</div>
+    <ul>
+        <li ng-repeat="err in data track by $index">{{err.action | i18n }}</li>
+    </ul>
+</div>

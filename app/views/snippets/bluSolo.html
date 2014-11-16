@@ -16,13 +16,17 @@
 
 
 <div  >
-    <div ng-show="!!genericWidgetModel.widgetStatus.message" class="bg-danger widget-message">
-        <div>
-            {{genericWidgetModel.widgetStatus.message}}
-        </div>
-        <button ng-show="!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = true"><i class="fa fa-tasks" style="padding-right:10px;"></i>Show complete log</button>
-        <button ng-show="!!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = false"><i class="fa fa-arrow-circle-o-left" style="padding-right:10px;"></i>Back to form</button>
-    </div>
+
+    <div possible-errors="possibleErrors"></div>
+
+
+    <!--<div ng-show="!!genericWidgetModel.widgetStatus.message" class="bg-danger widget-message">-->
+        <!--<div>-->
+            <!--{{genericWidgetModel.widgetStatus.message}}-->
+        <!--</div>-->
+        <!--<button ng-show="!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = true"><i class="fa fa-tasks" style="padding-right:10px;"></i>Show complete log</button>-->
+        <!--<button ng-show="!!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = false"><i class="fa fa-arrow-circle-o-left" style="padding-right:10px;"></i>Back to form</button>-->
+    <!--</div>-->
 
     <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
     <div widget-raw-output-display="genericWidgetModel" stop="stopWidget()"
