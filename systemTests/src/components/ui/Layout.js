@@ -94,7 +94,7 @@ exports.runTest = function(done, fill, validationFunctions) {
 
         },
 
- /*       function validateRecipeProperties(callback) {
+        function validateRecipeProperties(callback) {
             logger.info('Validating recipe properties');
 
             driver.wait(function () {
@@ -113,15 +113,17 @@ exports.runTest = function(done, fill, validationFunctions) {
             //#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)
             //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).click().then(function () {
 
-            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)')).click().then(function(){
+            //driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)')).click().then(function(){
+            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).click().then(function(element){
                 //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
-                driver.findElement(By.css('button:contains(\'Show Properties\')')).isDisplayed().then(function (isDisplayed) {
+                driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).isDisplayed().then(function (isDisplayed) {
                     assert.equal(false, isDisplayed, 'The \'Show Properties\' button still displayed!');
                 }).then(function () {
                     driver.findElement(By.css('div.recipe-properties')).isDisplayed().then(function (isDisplayed) {
                         assert.equal(true, isDisplayed, 'The properties box is not displayed');
                     });
-                    driver.findElement(By.xpath('//button[contains(., \'Hide\')]')).isDisplayed().then(function (isDisplayed) {
+                    //driver.findElement(By.xpath('//button[contains(., \'Hide\')]')).isDisplayed().then(function (isDisplayed) {
+                    driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > span > button')).isDisplayed().then(function (isDisplayed) {
                         assert.equal(true, isDisplayed, 'The \'Hide\' button is not displayed');
                     });
                 });
@@ -134,10 +136,19 @@ exports.runTest = function(done, fill, validationFunctions) {
                         'EC2_REGION': recipeProperties.Region,
                         'BLU_EC2_HARDWARE_ID': recipeProperties.HardwareId
                     };
-                    async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
-                        driver.findElement(By.xpath('//div[@class=\'recipe-properties\']/table/tbody/tr/td[contains(.,\'' + key + '\')]/../td[last()]')).getInnerHtml().then(function (value) {
-                            assert.equal(value, keyValue[key], 'Unexpected value for recipe property [' + key + ']');
-                        }).then(callbackDone);
+
+                    driver.findElements(By.css('div.recipe-properties table tbody tr')).then(function (rows) {
+                        //driver.findElements(By.css('div.recipe-properties table tbody tr td:nth-child(2) ')).then(function(valueElements){
+                            async.eachSeries(rows,function(row,callbackDone) {
+                                row.findElement(By.css('td:nth-child(1)')).getInnerHtml().then(function(key){
+                                    row.findElement(By.css('td:nth-child(2)')).getInnerHtml().then(function(value){
+                                        var valueOfKey = keyValue[key];
+                                        if (valueOfKey) {
+                                            assert.equal(value, valueOfKey, 'Unexpected value for recipe property [' + key + ']');
+                                        };
+                                    }).then(callbackDone);
+                                });
+                            });
                     });
                 } else if (fill.name === 'Softlayer') {
                     keyValue = {
@@ -145,10 +156,19 @@ exports.runTest = function(done, fill, validationFunctions) {
                         'locationId': recipeProperties.DataCenter[fill.data['execution.softlayer.dataCenter']],
                         'hardwareId': recipeProperties.CPU[fill.data['execution.softlayer.core']] + ',' + recipeProperties.RAM[fill.data['execution.softlayer.ram']] + ',' + recipeProperties.Disk[fill.data['execution.softlayer.disk']]
                     };
-                    async.eachSeries(Object.keys(keyValue), function (key, callbackDone) {
-                        driver.findElement(By.xpath('//div[@class=\'recipe-properties\']/table/tbody/tr/td[contains(.,\'' + key + '\')]/../td[last()]')).getInnerHtml().then(function (value) {
-                            assert.equal(value, keyValue[key], 'Unexpected value for recipe property [' + key + ']');
-                        }).then(callbackDone);
+
+                    driver.findElements(By.css('div.recipe-properties table tbody tr')).then(function (rows) {
+                        //driver.findElements(By.css('div.recipe-properties table tbody tr td:nth-child(2) ')).then(function(valueElements){
+                        async.eachSeries(rows,function(row,callbackDone) {
+                            row.findElement(By.css('td:nth-child(1)')).getInnerHtml().then(function(key){
+                                row.findElement(By.css('td:nth-child(2)')).getInnerHtml().then(function(value){
+                                    var valueOfKey = keyValue[key];
+                                    if (valueOfKey) {
+                                        assert.equal(value, valueOfKey, 'Unexpected value for recipe property [' + key + ']');
+                                    };
+                                }).then(callbackDone);
+                            });
+                        });
                     });
                 } else {
                     throw new Error('Unknown option [' + fill.name + '] for recipe properties');
@@ -158,7 +178,7 @@ exports.runTest = function(done, fill, validationFunctions) {
                 //TODO nice to have - add verifications for Show/Hide click results
             }).then(callback);
 
-        }, */
+        },
         function submitForm(callback) {
             logger.info('Click on submit');
             // #blu-solo-snippet > div:nth-child(4) > div > div.form.ng-hide > div > div:nth-child(9) > div > div.form-actions > button
