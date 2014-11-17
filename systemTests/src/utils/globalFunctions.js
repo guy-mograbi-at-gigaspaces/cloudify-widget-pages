@@ -1,5 +1,5 @@
 'use strict';
-var lodash = require('lodash');
+var _ = require('lodash');
 var log4js = require('log4js');
 var logger = log4js.getLogger('globalFunctions');
 /**
@@ -27,7 +27,7 @@ exports.getConfigurationByFill = getConfigurationByFill;
 function getFillByFillname(conf, fillName) {
     logger.debug('Getting fill for fill name: '+ fillName);
     if (conf.fills[fillName].hasOwnProperty('fillWithBase')) {
-        return lodash.merge({}, conf.fills[fillName], conf.fills[conf.fills[fillName].fillWithBase]);
+        return _.merge({}, conf.fills[fillName], conf.fills[conf.fills[fillName].fillWithBase]);
     } else {
         return conf.fills[fillName];
     }
