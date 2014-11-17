@@ -39,6 +39,11 @@ angular.module('ibmBiginsightsUiApp')
                 'pattern': 'unable to parse ec2 execution details',
                 'error': null,
                 'action': 'causes.callSupport.action'
+            },
+            {
+                'pattern' : 'Failed validating prices combinations',
+                'error' : 'causes.failedPriceValidation.error',
+                'actions' : 'causes.failedPriceValidation.action'
             }
         ];
 
@@ -51,22 +56,23 @@ angular.module('ibmBiginsightsUiApp')
             }
         }
 
-        this.detect = function (output, message) {
-            if (!output || output.length === 0) {
-                return null;
-            }
-            var result = [];
-            _.each(output, function (line) {
-                _.each(items, function (item) {
-                    addToResult(result, item, line);
-                });
-            });
 
-            _.each(items, function (item) {
-                if (message.match(item) !== null) {
-                    addToResult(result, item, message);
-                }
-            });
+        this.detect = function (output, message) {
+            debugger;
+            var result = [];
+            if ( !!output && !!output.length && output.length > 0 ) {
+                _.each(output, function (line) {
+                    _.each(items, function (item) {
+                        addToResult(result, item, line);
+                    });
+                });
+            }
+
+            if ( !!message ) {
+                _.each(items, function (item) {
+                    addToResult(result, item, message );
+                });
+            }
 
             return result.length === 0 ? null : result;
         };

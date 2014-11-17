@@ -12,9 +12,20 @@ describe('Directive: possibleErrors', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<possible-errors></possible-errors>');
-    element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the possibleErrors directive');
+  function compile( ){
+      inject(function($compile){
+          element = angular.element('<div possible-errors="errors"></div>');
+          element = $compile(element)(scope);
+
+      })
+  }
+
+  it('should make hidden element visible', function(){
+      compile();
+      expect(element.text()).toBe('this is the possibleErrors directive');
+  });
+
+  it('should not show title if no possible reasons', inject(function(){
+      compile();
   }));
 });

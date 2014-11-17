@@ -134,7 +134,7 @@ angular.module('ibmBiginsightsUiApp')
 
         // lets scan for possible errors in the output and add possible errors.
         $scope.$watch('[genericWidgetModel.widgetStatus.rawOutput,genericWidgetModel.widgetStatus.message]', function( newValue ){
-            $scope.possibleErrors = PossibleErrorsService.detect( $sccope.genericWidgetModel.widgetStatus.rawOutput, $scope.genericWidgetModel.widgetStatus.message );
+            $scope.possibleErrors = PossibleErrorsService.detect( $scope.genericWidgetModel.widgetStatus.rawOutput, $scope.genericWidgetModel.widgetStatus.message );
         },true);
 
 

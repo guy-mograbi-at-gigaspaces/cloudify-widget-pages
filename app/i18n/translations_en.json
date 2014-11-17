@@ -183,6 +183,10 @@
         "invalidSecurityGroup" : {
             "error" : "The security group you supplied does not answer requirements",
             "action" : "Validate your security group answers requirements"
+        },
+        "failedPriceValidation" : {
+            "error" : "Validating data against Softlayer failed. It might mean Softlayer is unstable or the data we have is old",
+            "action" : "Try again to eliminate the option it is Softlayer."
         }
     },
     "errorsDetected" : {

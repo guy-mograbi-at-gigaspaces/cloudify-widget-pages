@@ -1,11 +1,5 @@
 var softlayerItems = [
     {
-        "itemId": 13,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "250GB SATA II"
-    },
-    {
         "itemId": 14,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
@@ -144,12 +138,6 @@ var softlayerItems = [
         "description": "NOC Monitoring"
     },
     {
-        "itemId": 59,
-        "categoryName": "Second Hard Drive",
-        "categoryCode": "disk1",
-        "description": "150GB SATA Raptor 10K RPM"
-    },
-    {
         "itemId": 79,
         "categoryName": "Database Software",
         "categoryCode": "database",
@@ -240,24 +228,6 @@ var softlayerItems = [
         "description": "1 Gbps Public & Private Network Uplinks"
     },
     {
-        "itemId": 190,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "750GB SATA II"
-    },
-    {
-        "itemId": 219,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "73GB SA-SCSI 10K RPM"
-    },
-    {
-        "itemId": 220,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "73GB SA-SCSI 15K RPM"
-    },
-    {
         "itemId": 249,
         "categoryName": "Public Bandwidth",
         "categoryCode": "bandwidth",
@@ -298,12 +268,6 @@ var softlayerItems = [
         "categoryName": "Second Processor",
         "categoryCode": "second_processor",
         "description": "Dual Core Xeon 5050 - 3.00GHz  (Dempsey) - 4 x 2MB cache - HT"
-    },
-    {
-        "itemId": 269,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "147GB SA-SCSI 15K RPM"
     },
     {
         "itemId": 279,
@@ -408,12 +372,6 @@ var softlayerItems = [
         "description": "McAfee VirusScan Anti-Virus - Windows"
     },
     {
-        "itemId": 401,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "300GB SA-SCSI 10K RPM"
-    },
-    {
         "itemId": 419,
         "categoryName": "Operating System",
         "categoryCode": "os",
@@ -466,18 +424,6 @@ var softlayerItems = [
         "categoryName": "Second Hard Drive",
         "categoryCode": "disk1",
         "description": "1.00TB SATA II"
-    },
-    {
-        "itemId": 472,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "74GB SATA Raptor 10K RPM"
-    },
-    {
-        "itemId": 473,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "147GB SA-SCSI 10K RPM"
     },
     {
         "itemId": 487,
@@ -574,12 +520,6 @@ var softlayerItems = [
         "categoryName": "Control Panel Addon(s)",
         "categoryCode": "controlpanel_addon",
         "description": "Sitebuilder - Windows"
-    },
-    {
-        "itemId": 537,
-        "categoryName": "Second Hard Drive",
-        "categoryCode": "disk1",
-        "description": "400GB SA-SCSI 10K RPM"
     },
     {
         "itemId": 542,
@@ -768,12 +708,6 @@ var softlayerItems = [
         "description": "Microsoft SQL Server 2008 Web"
     },
     {
-        "itemId": 737,
-        "categoryName": "Second Hard Drive",
-        "categoryCode": "disk1",
-        "description": "300GB SATA Raptor 10K RPM"
-    },
-    {
         "itemId": 738,
         "categoryName": "Parallels Virtuozzo",
         "categoryCode": "virtuozzo",
@@ -856,18 +790,6 @@ var softlayerItems = [
         "categoryName": "Public Static IPv6 Addresses",
         "categoryCode": "static_ipv6_addresses",
         "description": "/64 Block Static Public IPv6 Addresses"
-    },
-    {
-        "itemId": 810,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "32GB SSD"
-    },
-    {
-        "itemId": 811,
-        "categoryName": "Thirteenth Hard Drive",
-        "categoryCode": "disk12",
-        "description": "64GB SSD"
     },
     {
         "itemId": 818,
@@ -1482,12 +1404,6 @@ var softlayerItems = [
         "description": "2.00TB SATA II"
     },
     {
-        "itemId": 1093,
-        "categoryName": "Eighth Hard Drive",
-        "categoryCode": "disk7",
-        "description": "450GB SA-SCSI 15K RPM"
-    },
-    {
         "itemId": 1094,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
@@ -2056,18 +1972,6 @@ var softlayerItems = [
         "categoryName": "RAM",
         "categoryCode": "ram",
         "description": "32 GB DDR3 1333"
-    },
-    {
-        "itemId": 3809,
-        "categoryName": "Thirteenth Hard Drive",
-        "categoryCode": "disk12",
-        "description": "50GB SSD"
-    },
-    {
-        "itemId": 3810,
-        "categoryName": "Thirteenth Hard Drive",
-        "categoryCode": "disk12",
-        "description": "100GB SSD"
     },
     {
         "itemId": 3811,
@@ -2910,6 +2814,12 @@ var softlayerItems = [
         "description": "Riak 1.x"
     },
     {
+        "itemId": 4328,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 5.6 (64 bit) - version-locked"
+    },
+    {
         "itemId": 4331,
         "categoryName": "Uplink Port Speeds",
         "categoryCode": "port_speed",
@@ -3264,6 +3174,12 @@ var softlayerItems = [
         "description": "cPanel/WHM with Softaculous and RVskin "
     },
     {
+        "itemId": 4636,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 6.5 (64 bit) - version locked"
+    },
+    {
         "itemId": 4638,
         "categoryName": "Operating System",
         "categoryCode": "os",
@@ -3408,6 +3324,12 @@ var softlayerItems = [
         "description": "10 Gbps Dual Public & Private Network Uplinks (Unbonded)"
     },
     {
+        "itemId": 5110,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "Red Hat Enterprise Linux 5.6 (64 bit) (per-processor licensing) - version-locked"
+    },
+    {
         "itemId": 5118,
         "categoryName": "Uplink Port Speeds",
         "categoryCode": "port_speed",
@@ -3532,5 +3454,17 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "CentOS 7.x - Minimal Install (64 bit)"
+    },
+    {
+        "itemId": 5964,
+        "categoryName": "First Disk",
+        "categoryCode": "guest_disk0",
+        "description": "50 GB (SAN)"
+    },
+    {
+        "itemId": 5966,
+        "categoryName": "First Disk",
+        "categoryCode": "guest_disk0",
+        "description": "50 GB (LOCAL)"
     }
 ];
