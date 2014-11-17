@@ -6,19 +6,15 @@ describe('Service: PossibleErrorsService', function () {
     beforeEach(module('ibmBiginsightsUiApp'));
 
     // instantiate service
-    var scope;
-    var PossibleErrorsService;
+    var mPossibleErrorsService;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope) {
-        scope = $rootScope.$new();
-        PossibleErrorsService = $controller('PossibleErrorsService', {
-            $scope: scope
-        });
+    beforeEach(inject(function (PossibleErrorsService) {
+        mPossibleErrorsService = PossibleErrorsService;
     }));
 
     it('should do something', function () {
-        expect(!!PossibleErrorsService).toBe(true);
+        expect(!!mPossibleErrorsService).toBe(true);
     });
 
 });

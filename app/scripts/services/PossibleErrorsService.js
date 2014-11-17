@@ -58,7 +58,6 @@ angular.module('ibmBiginsightsUiApp')
 
 
         this.detect = function (output, message) {
-            debugger;
             var result = [];
             if ( !!output && !!output.length && output.length > 0 ) {
                 _.each(output, function (line) {

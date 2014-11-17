@@ -18,7 +18,7 @@ angular.module('ibmBiginsightsUiApp')
                         }
                     });
                     return itemWithError !== null;
-                }
+                };
 
             }
         };
