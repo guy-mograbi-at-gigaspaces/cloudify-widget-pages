@@ -72,7 +72,7 @@ describe('failure-checks test for aws', function() {
         });
 
         //AWS Missing Name
-        it('Run with missing user name', function (done) {
+        xit('Run with missing user name', function (done) {
             components.ui.page.loadWidgetPage().then(function(){
                 var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Name');
 
@@ -96,7 +96,7 @@ describe('failure-checks test for aws', function() {
 
         });
 
-        it('Run with missing Email', function (done) {
+        xit('Run with missing Email', function (done) {
             components.ui.page.loadWidgetPage().then(function() {
                 var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Email');
 

@@ -22,7 +22,7 @@ var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
 
-describe('Sanity test for softlayer', function() {
+xdescribe('failure-checks test for softlayer', function() {
 
     before(function () {
         logger.info('initializing');
@@ -36,7 +36,7 @@ describe('Sanity test for softlayer', function() {
         components.driver.quit();
     });
 
-    xit('Run with invalid credentials', function (done) {
+    it('Run with invalid credentials', function (done) {
         var fills = globalFunctions.getFillByFillname(config, 'Softlayer Invalid Credentials');
 
         testRunner.runTest(done, fills, [
@@ -44,8 +44,8 @@ describe('Sanity test for softlayer', function() {
                 logger.info('Validating run');
 
                 logger.debug('Will wait 5 seconds for the widget output');
-                driver.wait(function () {
-                    return driver.findElement(By.css('div[widget-raw-output-display=\'genericWidgetModel\']')).isDisplayed().then(function (isDisplayed) {
+                driver.get().wait(function () {
+                    return components.ui.layout.getElementIsDisplayed('div[widget-raw-output-display=\'genericWidgetModel\']').then(function (isDisplayed) {
                         return isDisplayed;
                     });
                 }, 5 * SECOND, 'output div is not displayed').then(function () {
@@ -53,8 +53,8 @@ describe('Sanity test for softlayer', function() {
                 });
 
 
-                driver.wait(function () {
-                    return driver.findElement(By.xpath('//div[contains(@class, \'widget-message\')]')).isDisplayed();
+                driver.get().wait(function () {
+                    return components.ui.layout.getElementIsDisplayed('.widget-message)]');
                 }, 5 * MINUTE, 'Widget message box is not displayed').then(function () {
                     logger.debug('Checking error message box content');
                 }).then(callback);
