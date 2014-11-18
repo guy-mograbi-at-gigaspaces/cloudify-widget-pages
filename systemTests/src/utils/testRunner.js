@@ -14,6 +14,7 @@ var globalFunctions = require('./globalFunctions');
 
 var conf = require('../components/config');
 
+var components = require('../components');
 
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
@@ -45,8 +46,9 @@ exports.runTest = function(done, fill, validationFunctions) {
         function waitForProgressBar(callback) {
             logger.info('Locating the initial loading progress bar');
             driver.wait(function () {
-                //By.xpath('//div[@class=\'progress\']/..')
-                return driver.isElementPresent(By.css('#blu-solo-snippet > div:nth-child(3) > div > div.progress'));
+                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div > div.progress').then(function(isDisplayed){
+                    return isDisplayed;
+                });
             }, 2 * MINUTE, 'Unable to find initial loading progress bar').then(function () {
                 logger.debug('Found');
                 callback();
@@ -55,11 +57,10 @@ exports.runTest = function(done, fill, validationFunctions) {
         function waitForProgressBarToDisappear(callback) {
             logger.info('Waiting for the loading progress bar to disappear');
             driver.wait(function () {
-                // xpath: '//div[@class=\'progress\']/..'
-                return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div')).isDisplayed().then(function (isDisplayed) {
+                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div').then(function (isDisplayed){
                     return !isDisplayed;
                 });
-            }, 5000, 'Initial loading progress bar did not disappeared').then(function () {
+            }, 2 * MINUTE, 'Initial loading progress bar did not disappeared').then(function () {
                 logger.debug('Done!');
                 callback();
             });
@@ -73,17 +74,18 @@ exports.runTest = function(done, fill, validationFunctions) {
             driver.switchTo().frame(0);
 
             if (fill.name === 'AWS') {
-                driver.findElement(By.css('input[ng-model=\'advancedParams.AWS_EC2.params.key\']')).getAttribute('value').then(function (text) {
+
+                components.ui.layout.getElementAttribute('input[ng-model=\'advancedParams.AWS_EC2.params.key\']','value').then(function (text) {
                     assert.equal(text, fill.data['awsLoginDetails.params.key']);
                 });
-                driver.findElement(By.css('input[ng-model=\'advancedParams.AWS_EC2.params.secretKey\']')).getAttribute('value').then(function (text) {
+                components.ui.layout.getElementAttribute('input[ng-model=\'advancedParams.AWS_EC2.params.secretKey\']','value').then(function(text){
                     assert.equal(text, fill.data['awsLoginDetails.params.secretKey']);
                 });
             } else if (fill.name === 'Softlayer') {
-                driver.findElement(By.css('input[ng-model=\'advancedParams.SOFTLAYER.params.username\']')).getAttribute('value').then(function (text) {
+                components.ui.layout.getElementAttribute('input[ng-model=\'advancedParams.SOFTLAYER.params.username\']','value').then(function(text){
                     assert.equal(text, fill.data['softlayerLoginDetails.params.username']);
                 });
-                driver.findElement(By.css('input[ng-model=\'advancedParams.SOFTLAYER.params.apiKey\']')).getAttribute('value').then(function (text) {
+                components.ui.layout.getElementAttribute('input[ng-model=\'advancedParams.SOFTLAYER.params.apiKey\']','value').then(function(text){
                     assert.equal(text, fill.data['softlayerLoginDetails.params.apiKey']);
                 });
             } else {
@@ -98,32 +100,23 @@ exports.runTest = function(done, fill, validationFunctions) {
             logger.info('Validating recipe properties');
 
             driver.wait(function () {
-                //xpath: //button[contains(., \'Show Properties\')]
-                //#blu-solo-snippet > div:nth-child(2) > div > div > button
-                return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).isDisplayed().then(function (isDisplayed) {
+                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function (isDisplayed) {
                     return isDisplayed;
                 });
             }, 1 * SECOND, 'Unable to find displayed \'Show Properties\' button');
 
-            //xpath: ('//div[contains(@style, \'background-color:orange\')]/button[contains(., \'Show Properties\')]/..')
-            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).isDisplayed().then(function (isDisplayed) {
+            components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function (isDisplayed) {
                 assert.equal(isDisplayed, true, 'Unable to find the orange box of the recipe properties');
             });
 
-            //#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)
-            //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).click().then(function () {
-
-            //driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)')).click().then(function(){
-            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).click().then(function(element){
-                //driver.findElement(By.xpath('//button[contains(., \'Show Properties\')]')).isDisplayed().then(function (isDisplayed) {
-                driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > button')).isDisplayed().then(function (isDisplayed) {
+            components.ui.layout.clickElement('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function() {
+                components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function (isDisplayed) {
                     assert.equal(false, isDisplayed, 'The \'Show Properties\' button still displayed!');
                 }).then(function () {
-                    driver.findElement(By.css('div.recipe-properties')).isDisplayed().then(function (isDisplayed) {
+                    components.ui.layout.getElementIsDisplayed('div.recipe-properties').then(function (isDisplayed) {
                         assert.equal(true, isDisplayed, 'The properties box is not displayed');
                     });
-                    //driver.findElement(By.xpath('//button[contains(., \'Hide\')]')).isDisplayed().then(function (isDisplayed) {
-                    driver.findElement(By.css('#blu-solo-snippet > div:nth-child(2) > div > div > span > button')).isDisplayed().then(function (isDisplayed) {
+                    components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > span > button').then(function (isDisplayed) {
                         assert.equal(true, isDisplayed, 'The \'Hide\' button is not displayed');
                     });
                 });
@@ -137,11 +130,10 @@ exports.runTest = function(done, fill, validationFunctions) {
                         'BLU_EC2_HARDWARE_ID': recipeProperties.HardwareId
                     };
 
-                    driver.findElements(By.css('div.recipe-properties table tbody tr')).then(function (rows) {
-                        //driver.findElements(By.css('div.recipe-properties table tbody tr td:nth-child(2) ')).then(function(valueElements){
+                    components.ui.layout.findElements('div.recipe-properties table tbody tr').then(function(rows){
                         async.eachSeries(rows,function(row,callbackDone) {
-                            row.findElement(By.css('td:nth-child(1)')).getInnerHtml().then(function(key){
-                                row.findElement(By.css('td:nth-child(2)')).getInnerHtml().then(function(value){
+                            components.ui.layout.getElementInnerHtml('td:nth-child(1)',row).then(function(key){
+                                components.ui.layout.getElementInnerHtml('td:nth-child(2)',row).then(function(value){
                                     var valueOfKey = keyValue[key];
                                     if (valueOfKey) {
                                         assert.equal(value, valueOfKey, 'Unexpected value for recipe property [' + key + ']');
@@ -157,11 +149,10 @@ exports.runTest = function(done, fill, validationFunctions) {
                         'hardwareId': recipeProperties.CPU[fill.data['execution.softlayer.core']] + ',' + recipeProperties.RAM[fill.data['execution.softlayer.ram']] + ',' + recipeProperties.Disk[fill.data['execution.softlayer.disk']]
                     };
 
-                    driver.findElements(By.css('div.recipe-properties table tbody tr')).then(function (rows) {
-                        //driver.findElements(By.css('div.recipe-properties table tbody tr td:nth-child(2) ')).then(function(valueElements){
+                    components.ui.layout.findElements('div.recipe-properties table tbody tr').then(function(rows){
                         async.eachSeries(rows,function(row,callbackDone) {
-                            row.findElement(By.css('td:nth-child(1)')).getInnerHtml().then(function(key){
-                                row.findElement(By.css('td:nth-child(2)')).getInnerHtml().then(function(value){
+                            components.ui.layout.getElementInnerHtml('td:nth-child(1)',row).then(function(key){
+                                components.ui.layout.getElementInnerHtml('td:nth-child(2)',row).then(function(value){
                                     var valueOfKey = keyValue[key];
                                     if (valueOfKey) {
                                         assert.equal(value, valueOfKey, 'Unexpected value for recipe property [' + key + ']');
@@ -181,9 +172,7 @@ exports.runTest = function(done, fill, validationFunctions) {
         },
         function submitForm(callback) {
             logger.info('Click on submit');
-            // #blu-solo-snippet > div:nth-child(4) > div > div.form.ng-hide > div > div:nth-child(9) > div > div.form-actions > button
-            //By.xpath('//button[contains(., \'Submit\')]')
-            driver.findElement(By.css('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div:nth-child(9) > div > div.form-actions > button')).click();
+            components.ui.layout.clickElement('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div:nth-child(9) > div > div.form-actions > button');
             callback();
         }
     ].concat(validationFunctions)

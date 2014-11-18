@@ -52,29 +52,32 @@ describe('Sanity test for aws', function () {
         it('Validate output layout', function (done) {
             //Check that output div is displayed
             driver.get().wait(function () {
-                return driver.get().findElement(By.css('div[widget-raw-output-display=\'genericWidgetModel\']')).isDisplayed().then(function (isDisplayed) {
+                return components.ui.layout.getElementIsDisplayed('div[widget-raw-output-display=\'genericWidgetModel\']').then(function (isDisplayed) {
                     return isDisplayed;
                 });
             }, 5 * SECOND, 'output div is not displayed');
 
             //Check that the output message is displayed (inside the output-div)
-            driver.get().findElement(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\']')).isDisplayed().then(function (isDisplayed) {
+            components.ui.layout.getElementIsDisplayed('.widget-output-display pre.pre').then(function(isDisplayed){
                 assert.equal(isDisplayed, true, 'Widget output is not displayed!');
             });
 
             //Check that the 'We are working hard to get your instance up and running with BLU' message is displayed
-            driver.get().findElement(By.xpath('//div[text()[contains(.,\'We are working hard to get your instance up and running with BLU\')]]')).isDisplayed().then(function (isDisplayed) {
-                assert.equal(isDisplayed, true, 'The text [We are working hard to get your instance up and running with BLU] is not displayed');
+            components.ui.layout.getElementInnerHtml('.message-items .message-item:nth-child(2) > div > div >div:nth-child(2)').then(function(innerHtml){
+                assert.equal(innerHTML.trim(),'We are working hard to get your instance up and running with BLU','The text [We are working hard to get your instance up and running with BLU] isnt in the right place');
+                components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) > div > div >div:nth-child(2)').then(function(isDisplayed) {
+                    assert.equal(isDisplayed, true, 'The text [We are working hard to get your instance up and running with BLU] is not displayed');
+                });
             });
 
             //Check that the green progress bar is displayed
-            driver.get().findElement(By.xpath('//div[text()[contains(.,\'We are working hard to get your instance up and running with BLU\')]]/../div[@class=\'progress\']/div[contains(@class, \'progress-bar\') and contains(@class, \'progress-bar-success\')]')).isDisplayed().then(function (isDisplayed) {
+            components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) > div > div >div:nth-child(1)').then(function(isDisplayed) {
                 assert.equal(isDisplayed, true, 'The green progress bar is not displayed');
             });
 
             //Check that the output message contains 'BLU Installation started. Please wait, this might take a while...'
-            driver.get().findElement(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'BLU Installation started. Please wait, this might take a while...\')]')).isDisplayed().then(function (isDisplayed) {
-                assert.equal(isDisplayed, true, 'The message [BLU Installation started. Please wait, this might take a while...] is not displayed in the widget output');
+            components.ui.layout.getElementInnerHtml('.widget-output-display pre.pre').then(function(innerHtml){
+                assert.contains(innerHTML,'BLU Installation started. Please wait, this might take a while...','The message [BLU Installation started. Please wait, this might take a while...] is not displayed in the widget output');
             });
 
             done();
@@ -84,42 +87,43 @@ describe('Sanity test for aws', function () {
 
             //Check that the output message contains finished successfully message
             driver.get().wait(function () {
-                return driver.get().findElement(By.css('.message-items .message-item:nth-child(2) .finished-successfully .message')).isDisplayed().then(function(isDisplayed){
+                return components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) .finished-successfully .message').then(function(isDisplayed){
                     return isDisplayed;
                 });
-            }, 20 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output').then(done);
+            }, 30 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
+
+            done();
         });
 
-        it('validate private key', function (done) {
+        // TODO there is a problem with the popup window, need to enlarge screen to see close button
+        xit('validate private key', function (done) {
             //Check the private key
             driver.get().wait(function () {
-                return driver.get().findElement(By.css('.message-items .message-item.pem-cell > div > .message')).isDisplayed().then(function (isDisplayed) {
+                return components.ui.layout.getElementIsDisplayed(By.css('.message-items .message-item.pem-cell > div > .message')).then(function (isDisplayed) {
                     return isDisplayed;
-                    //assert.equal(isDisplayed, true, 'Expecting the private key div to be visible');
                 });
-            }, 1 * MINUTE);
+            }, 1 * MINUTE,'Expecting the private key div to be visible');
 
 
             //Save the innerHTML of the private key
             //Download the file
             //Compare it's content with the saved innerHTML
 
-            driver.get().findElement(By.css('.message-items .message-item.pem-cell > div > .actions button')).click().then(function(){
+            components.ui.layout.clickElement('.message-items .message-item.pem-cell > div > .actions button').click().then(function(){
                 //Check that the pem content is displayed
-                driver.get().findElement(By.css('.pem-content')).isDisplayed().then(function (isDisplayed) {
+                components.ui.layout.getElementIsDisplayed('.pem-content').then(function (isDisplayed) {
                     assert.equal(isDisplayed, true, 'Expecting the pem-content div to be displayed');
                 });
 
                 //Validating the pem content - Check that the downloadable pem file contains the same content as the pem-content div
-                driver.get().findElement(By.css('code')).getInnerHtml().then(function (innerHTML) {
+                components.ui.layout.getElementInnerHtml('code').then(function (innerHTML) {
                     assert.equal(0, innerHTML.indexOf('-----BEGIN RSA PRIVATE KEY-----'), 'Downloaded file doest not start with [-----BEGIN RSA PRIVATE KEY-----]');
                     async.waterfall([
                         function clickClose(callback) { // Click on close
-                            driver.get().findElement(By.css('.pem-content .instructions button')).click()
-                                .then(callback);
+                            components.ui.layout.clickElement('.pem-content .instructions button').then(callback);
                         },
                         function extractHref(callback) {
-                            driver.get().findElement(By.css('.message-items .message-item.pem-cell > div > .actions a')).getAttribute('href').then(function (href) {
+                            components.ui.layout.getElementAttribute('.message-items .message-item.pem-cell > div > .actions a','href').then(function (href) {
                                 callback(null, href);
                             });
                         },
