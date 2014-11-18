@@ -23,8 +23,21 @@ var MINUTE = 60 * SECOND;
 
 
 describe('failure-checks test for aws', function() {
+//
+//    beforeEach(function () {
+//        logger.info('initializing');
+//        components.init().then(function () {
+//            globalSteps.setDriver(driver.get());
+//            components.ui.page.loadWidgetPage().then(done);
+//        });
+//    });
+//
+//    afterEach(function () {
+//        components.driver.quit();
+//    });
 
-    beforeEach(function () {
+
+    before(function () {
         logger.info('initializing');
         components.init().then(function () {
             globalSteps.setDriver(driver.get());
@@ -32,7 +45,7 @@ describe('failure-checks test for aws', function() {
         });
     });
 
-    afterEach(function () {
+    after(function () {
         components.driver.quit();
     });
 
@@ -44,24 +57,13 @@ describe('failure-checks test for aws', function() {
             testRunner.runTest(done, fill, [
                 function (callback) {
 
-
-//                driver.get().wait(function() {
-//                    components.ui.layout.getElementIsDisplayed(By.xpath('//input[@ng-model=\'execution.aws.securityGroup\']/../../div[@class=\'error-message ng-binding\']')).then(function(value){
-//                        assert.equal(value,true, 'Unable to find error message box for securityGroups');
-//
-//                        components.ui.layout.getElementInnerHtml(By.xpath('//input[@ng-model=\'execution.aws.securityGroup\']/parent::*/parent::*/child::div[@class=\'error-message ng-binding\']')).then(function(value){
-//                            assert.equal(value, 'Value is missing');
-//                        }).then(callback);
-//                    });
-//                },2 * SECOND);
-
                     driver.get().wait(function () {
-                        return driver.get().findElement(By.css('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > span:nth-child(3) > div > div:nth-child(2) > div.section > div.error-message.ng-binding')).isDisplayed().then(function (isDisplayed) {
+                        return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > span:nth-child(3) > div > div:nth-child(3) > div.section > div.error-message.ng-binding').then(function (isDisplayed) {
                             return isDisplayed;
                         });
-                    }, 5 * SECOND, 'output div is not displayed');
+                    }, 5 * SECOND, 'Unable to find error message box for securityGroups');
 
-                    driver.get().findElement(By.css('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > span:nth-child(3) > div > div:nth-child(2) > div.section > div.error-message.ng-binding')).getInnerHtml().then(function (innerHTML) {
+                    components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > span:nth-child(3) > div > div:nth-child(3) > div.section > div.error-message.ng-binding').then(function (innerHTML) {
                         assert.equal(innerHTML.trim(), 'Value is missing');
                     }).then(callback);
 
@@ -70,45 +72,50 @@ describe('failure-checks test for aws', function() {
         });
 
         //AWS Missing Name
-
         it('Run with missing user name', function (done) {
-            var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Name');
+            components.ui.page.loadWidgetPage().then(function(){
+                var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Name');
 
-            testRunner.runTest(done, fill, [
-                function (callback) {
-                    logger.info('Validating -Value is missing- msg for userName');
+                testRunner.runTest(done, fill, [
+                    function (callback) {
+                        logger.info('Validating -Value is missing- msg for userName');
 
-                    driver.get().wait(function () {
+                        driver.get().wait(function () {
+                            return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (isDisplayed) {
+                                return isDisplayed;
+                            });
 
-                        driver.get().findElement(By.css('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding')).getInnerHtml().then(function (innerHTML) {
+                        } , 10 * SECOND, "Unable to find error message box for securityGroups");
+
+                        components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
                             assert.equal(innerHTML.trim(), 'Value is missing');
                         }).then(callback);
+                    }
+                ]);
+            });
 
-                    } , 10 * SECOND, "");
-
-
-                }
-            ]);
         });
 
-        xit('Run with missing Email', function (done) {
-            var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Email');
+        it('Run with missing Email', function (done) {
+            components.ui.page.loadWidgetPage().then(function() {
+                var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Email');
 
-            testRunner.runTest(done, fill, [
-                function (callback) {
-                    logger.info('Validating -Value is missing- msg for Email');
+                testRunner.runTest(done, fill, [
+                    function (callback) {
 
-                    driver.get().wait(function () {
+                        driver.get().wait(function () {
+                            return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (isDisplayed) {
+                                return isDisplayed;
+                            });
+                        }, 5 * SECOND, 'Unable to find error message box for missing email');
 
-                        driver.get().findElement(By.css('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.ng-isolate-scope.has-error.hovered > div > div.error-message.ng-binding')).getInnerHtml().then(function (innerHTML) {
+                        components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
                             assert.equal(innerHTML.trim(), 'Value is missing');
                         }).then(callback);
 
-                    } , 10 * SECOND, "");
-
-
-                }
-            ]);
+                    }
+                ]);
+            });
         });
 
     });
