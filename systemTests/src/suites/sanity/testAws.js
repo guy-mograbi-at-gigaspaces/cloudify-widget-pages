@@ -99,7 +99,7 @@ describe('Sanity test for aws', function () {
         xit('validate private key', function (done) {
             //Check the private key
             driver.get().wait(function () {
-                return components.ui.layout.getElementIsDisplayed(By.css('.message-items .message-item.pem-cell > div > .message')).then(function (isDisplayed) {
+                return components.ui.layout.getElementIsDisplayed('.message-items .message-item.pem-cell > div > .message').then(function (isDisplayed) {
                     return isDisplayed;
                 });
             }, 1 * MINUTE,'Expecting the private key div to be visible');
