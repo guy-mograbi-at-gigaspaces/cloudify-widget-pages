@@ -15,6 +15,7 @@ var By = require('selenium-webdriver').By;
 var assert = require('assert');
 var async = require('async');
 
+var testRunner = require('../../utils/testRunner');
 
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
@@ -40,7 +41,7 @@ describe('Sanity test for aws', function () {
 
         //it('Run with valid data', function (done) {
         it('Fill form and submit', function (done) {
-            components.ui.layout.runTest(done, fill, [
+            testRunner.runTest(done, fill, [
                 function (callback) {
                     callback();
                 }
@@ -81,18 +82,18 @@ describe('Sanity test for aws', function () {
 
         it('Wait and validate output', function (done) {
 
-            //Check that the output message contains 'Service 'blustratus' successfully installed'
+            //Check that the output message contains finished successfully message
             driver.get().wait(function () {
-                return driver.get().isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
+                return driver.get().findElement(By.css('.message-items .message-item:nth-child(2) .finished-successfully .message')).isDisplayed().then(function(isDisplayed){
                     return isDisplayed;
                 });
             }, 20 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output').then(done);
         });
 
-        xit('validate private key', function () {
+        it('validate private key', function (done) {
             //Check the private key
             driver.get().wait(function () {
-                return driver.get().findElement(By.xpath('//div[text()[contains(.,\'You have a new private key\')]]/..')).isDisplayed().then(function (isDisplayed) {
+                return driver.get().findElement(By.css('.message-items .message-item.pem-cell > div > .message')).isDisplayed().then(function (isDisplayed) {
                     return isDisplayed;
                     //assert.equal(isDisplayed, true, 'Expecting the private key div to be visible');
                 });
@@ -103,22 +104,22 @@ describe('Sanity test for aws', function () {
             //Download the file
             //Compare it's content with the saved innerHTML
 
-            driver.get().findElement(By.xpath('//div[text()[contains(.,\'You have a new private key\')]]/../descendant::button[text()[contains(.,\'View\')]]')).click().then(function () {
+            driver.get().findElement(By.css('.message-items .message-item.pem-cell > div > .actions button')).click().then(function(){
                 //Check that the pem content is displayed
-                driver.get().findElement(By.xpath('//div[contains(@class,\'pem-content\')]')).isDisplayed().then(function (isDisplayed) {
+                driver.get().findElement(By.css('.pem-content')).isDisplayed().then(function (isDisplayed) {
                     assert.equal(isDisplayed, true, 'Expecting the pem-content div to be displayed');
                 });
 
                 //Validating the pem content - Check that the downloadable pem file contains the same content as the pem-content div
-                driver.get().findElement(By.xpath('//code[text()[contains(.,\'BEGIN RSA PRIVATE KEY\')]]')).getInnerHtml().then(function (innerHTML) {
+                driver.get().findElement(By.css('code')).getInnerHtml().then(function (innerHTML) {
                     assert.equal(0, innerHTML.indexOf('-----BEGIN RSA PRIVATE KEY-----'), 'Downloaded file doest not start with [-----BEGIN RSA PRIVATE KEY-----]');
                     async.waterfall([
                         function clickClose(callback) { // Click on close
-                            driver.get().findElement(By.xpath('//div[contains(@class,\'pem-content\')]/descendant::div[@class=\'instructions\']/button[text()[contains(.,\'Close\')]]')).click()
+                            driver.get().findElement(By.css('.pem-content .instructions button')).click()
                                 .then(callback);
                         },
                         function extractHref(callback) {
-                            driver.get().findElement(By.xpath('//div[text()[contains(.,\'You have a new private key\')]]/../descendant::a[text()[contains(.,\'Download\')]]')).getAttribute('href').then(function (href) {
+                            driver.get().findElement(By.css('.message-items .message-item.pem-cell > div > .actions a')).getAttribute('href').then(function (href) {
                                 callback(null, href);
                             });
                         },

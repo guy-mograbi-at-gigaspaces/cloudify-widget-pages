@@ -15,6 +15,9 @@ var By = require('selenium-webdriver').By;
 var assert = require('assert');
 var async = require('async');
 
+var testRunner = require('../../utils/testRunner');
+
+
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
@@ -38,7 +41,7 @@ describe('failure-checks test for aws', function() {
         it('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Security Group');
 
-            components.ui.layout.runTest(done, fill, [
+            testRunner.runTest(done, fill, [
                 function (callback) {
 
 
@@ -71,7 +74,7 @@ describe('failure-checks test for aws', function() {
         it('Run with missing user name', function (done) {
             var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Name');
 
-            components.ui.layout.runTest(done, fill, [
+            testRunner.runTest(done, fill, [
                 function (callback) {
                     logger.info('Validating -Value is missing- msg for userName');
 
@@ -91,7 +94,7 @@ describe('failure-checks test for aws', function() {
         xit('Run with missing Email', function (done) {
             var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Email');
 
-            components.ui.layout.runTest(done, fill, [
+            testRunner.runTest(done, fill, [
                 function (callback) {
                     logger.info('Validating -Value is missing- msg for Email');
 

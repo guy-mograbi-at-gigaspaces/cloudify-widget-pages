@@ -16,6 +16,8 @@ var By = require('selenium-webdriver').By;
 var assert = require('assert');
 var async = require('async');
 
+var testRunner = require('../../utils/testRunner');
+
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
@@ -37,7 +39,7 @@ describe('Sanity test for softlayer', function() {
     xit('Run with invalid credentials', function (done) {
         var fills = globalFunctions.getFillByFillname(config, 'Softlayer Invalid Credentials');
 
-        components.ui.layout.runTest(done, fills, [
+        testRunner.runTest(done, fills, [
             function (callback) {
                 logger.info('Validating run');
 

@@ -16,12 +16,14 @@ var By = require('selenium-webdriver').By;
 var assert = require('assert');
 var async = require('async');
 
+var testRunner = require('../../utils/testRunner');
+
 
 var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
 
-describe('Sanity test for softlayer', function() {
+xdescribe('Sanity test for softlayer', function() {
 
     before(function () {
         logger.info('initializing');
@@ -40,7 +42,7 @@ describe('Sanity test for softlayer', function() {
 
         //it('Run with valid data', function (done) {
         it('Fill form and submit', function (done) {
-            components.ui.layout.runTest(done, fill, [
+            testRunner.runTest(done, fill, [
                 function (callback) {
                     callback();
                 }
@@ -81,9 +83,13 @@ describe('Sanity test for softlayer', function() {
         it('Wait and validate output', function (done) {
             //Check that the output message contains 'Service 'blustratus' successfully installed'
             driver.get().wait(function () {
-                return driver.get().isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
+                return driver.get().findElement(By.css('.message-items .message-item:nth-child(2) .finished-successfully .message')).isDisplayed().then(function(isDisplayed){
                     return isDisplayed;
                 });
+
+//                return driver.get().isElementPresent(By.xpath('//div[@class=\'widget-output-display\']/pre[@class=\'pre\' and contains(.,\'Service "blustratus" successfully installed\')]')).then(function (isDisplayed) {
+//                    return isDisplayed;
+//                });
             }, 90 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output').then(done);
         });
 
