@@ -7,7 +7,7 @@ var driver = require('../../components/driver');
 var globalSteps = require('../../utils/globalTestSteps');
 
 
-describe('sanity suite', function(){
+describe('failure suite', function(){
     require('./testAws');
     require('./testSoftlayer');
 });
