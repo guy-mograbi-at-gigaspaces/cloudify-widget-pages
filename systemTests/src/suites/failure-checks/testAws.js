@@ -37,7 +37,7 @@ describe('failure-checks test for aws', function() {
 //    });
 
 
-    before(function () {
+    beforeEach(function () {
         logger.info('initializing');
         components.init().then(function () {
             globalSteps.setDriver(driver.get());
@@ -51,7 +51,7 @@ describe('failure-checks test for aws', function() {
 
     describe('Run with missing values', function() {
 
-        it('Run with missing security group', function (done) {
+       it('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Security Group');
 
             testRunner.runTest(done, fill, [
@@ -72,8 +72,10 @@ describe('failure-checks test for aws', function() {
         });
 
         //AWS Missing Name
-        xit('Run with missing user name', function (done) {
+        it('Run with missing user name', function (done) {
             components.ui.page.loadWidgetPage().then(function(){
+
+
                 var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Name');
 
                 testRunner.runTest(done, fill, [
@@ -96,7 +98,7 @@ describe('failure-checks test for aws', function() {
 
         });
 
-        xit('Run with missing Email', function (done) {
+        it('Run with missing Email', function (done) {
             components.ui.page.loadWidgetPage().then(function() {
                 var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Email');
 
