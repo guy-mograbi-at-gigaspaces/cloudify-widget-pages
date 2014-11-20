@@ -6,6 +6,7 @@
 
 var components = require('../../components');
 var logger = require('log4js').getLogger('testAws');
+var yopmail = require('../../components/external/yopmail');
 var q = require('q');
 var globalFunctions = require('../../utils/globalFunctions');
 var globalSteps = require('../../utils/globalTestSteps');
@@ -33,7 +34,8 @@ describe('Sanity test for aws', function () {
 
     after(function () {
         components.driver.quit();
-    });
+
+           });
 
     describe('Run with valid data', function () {
 
@@ -157,9 +159,55 @@ describe('Sanity test for aws', function () {
         });
 
         it('validate installation buttons', function (done) {
+
             globalSteps.stepValidateInstallationButtons(done);
+
+        });
+
+
+        it('verify mail was received ', function(done){
+
+            var webdriver;
+
+            components.init().then( function () {
+                webdriver = driver.get();
+                globalSteps.setDriver(webdriver);
+                    yopmail.loginToYopMailInbox(webdriver, function(){
+                        logger.info("next step: ");
+                        yopmail.getLatestMessageDayAsString(webdriver, function(day)
+
+                        {
+                            logger.info("Mail Day: "  + day);
+                            var currDate = new Date();
+                            var currDayOfMonth = currDate.getDate();
+
+                            assert.equal(currDayOfMonth, day);
+
+                        });
+                        yopmail.getLatestMessageHourAsString(webdriver, function(hour){
+
+                            logger.info("Mail hour: "  + hour);
+                            var currDate = new Date();
+                            var currhour = currDate.getHours();
+
+                            assert.equal(currhour, hour);
+
+                            done();
+
+                        });
+
+                    });
+            } ) ;
+
+
         });
 
     });
 
 });
+
+
+
+
+
+
