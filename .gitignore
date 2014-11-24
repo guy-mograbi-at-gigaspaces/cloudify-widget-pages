@@ -9,5 +9,6 @@ atlassian*
 dev
 xunit.xml
 results.txt
+systemTests/output
 *.iml
 coverage
