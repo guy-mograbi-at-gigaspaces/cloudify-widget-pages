@@ -46,7 +46,7 @@ exports.runTest = function(done, fill, validationFunctions) {
         function waitForProgressBar(callback) {
             logger.info('Locating the initial loading progress bar');
             driver.wait(function () {
-                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div > div.progress').then(function(isDisplayed){
+                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div.progress').then(function(isDisplayed){
                     return isDisplayed;
                 });
             }, 2 * MINUTE, 'Unable to find initial loading progress bar').then(function () {
@@ -57,7 +57,7 @@ exports.runTest = function(done, fill, validationFunctions) {
         function waitForProgressBarToDisappear(callback) {
             logger.info('Waiting for the loading progress bar to disappear');
             driver.wait(function () {
-                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div').then(function (isDisplayed){
+                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div').then(function (isDisplayed){
                     return !isDisplayed;
                 });
             }, 2 * MINUTE, 'Initial loading progress bar did not disappeared').then(function () {
@@ -100,23 +100,23 @@ exports.runTest = function(done, fill, validationFunctions) {
             logger.info('Validating recipe properties');
 
             driver.wait(function () {
-                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function (isDisplayed) {
+                return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(1) > div > div > button').then(function (isDisplayed) {
                     return isDisplayed;
                 });
             }, 1 * SECOND, 'Unable to find displayed \'Show Properties\' button');
 
-            components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function (isDisplayed) {
+            components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(1) > div > div > button').then(function (isDisplayed) {
                 assert.equal(isDisplayed, true, 'Unable to find the orange box of the recipe properties');
             });
 
-            components.ui.layout.clickElement('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function() {
-                components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > button').then(function (isDisplayed) {
+            components.ui.layout.clickElement('#blu-solo-snippet > div:nth-child(1) > div > div > button').then(function() {
+                components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(1) > div > div > button').then(function (isDisplayed) {
                     assert.equal(false, isDisplayed, 'The \'Show Properties\' button still displayed!');
                 }).then(function () {
                     components.ui.layout.getElementIsDisplayed('div.recipe-properties').then(function (isDisplayed) {
                         assert.equal(true, isDisplayed, 'The properties box is not displayed');
                     });
-                    components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(2) > div > div > span > button').then(function (isDisplayed) {
+                    components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(1) > div > div > span > button').then(function (isDisplayed) {
                         assert.equal(true, isDisplayed, 'The \'Hide\' button is not displayed');
                     });
                 });
@@ -172,7 +172,7 @@ exports.runTest = function(done, fill, validationFunctions) {
         },
         function submitForm(callback) {
             logger.info('Click on submit');
-            components.ui.layout.clickElement('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div:nth-child(9) > div > div.form-actions > button');
+            components.ui.layout.clickElement('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > div:nth-child(9) > div > div.form-actions > button');
             callback();
         }
     ].concat(validationFunctions)
