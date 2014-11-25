@@ -12,7 +12,8 @@
     "lookingForPrevious":"Looking for previous installations...",
     "startedMightTakeWhile" : "BLU Installation started. Please wait, this might take a while...",
     "bluSolo" : {
-        "awsApiKey" : "<a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html\" target=\"_blank\">How  to get your AWS API Key ? </a><br/> <a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html\" target=\"_blank\">How  to get your  AWS API Secret ? </a>",
+        "awsApiKey" : "<a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html\" target=\"_blank\">How  to get your AWS API Key ? </a>",
+        "awsApiSecret" : "<a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html\" target=\"_blank\">How  to get your  AWS API Secret ? </a>",
         "securityGroup" : "<a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\" target=\"_blank\">What is security group ?</a><br/> <a href='https://www.youtube.com/watch?v=925n0IykcMA' target='_blank'>See how to create a security group video</a></br> The following ports to be open in the given security group : 22, 25, 80, 389, 8787, 9443, 8443, 50000, 50001, 443, 9300, 8100, 8099.<br/> Go to  <a href=\"https://eu-west-1.console.aws.amazon.com/ec2/v2/home?region=eu-west-1#SecurityGroups:sort=groupId\" target=\"_blank\">AWS site groups</a>",
         "softlayeruser" : "<a href=\"http://knowledgelayer.softlayer.com/procedure/add-new-user-customer-portal-account\" target=\"_blank\">How to get SoftLayer API username ?</a>",
         "softlayerkey" : "<a href=\"http://knowledgelayer.softlayer.com/procedure/add-new-user-customer-portal-account\" target=\"_blank\">How to get SoftLayer API key  ?</a>",
