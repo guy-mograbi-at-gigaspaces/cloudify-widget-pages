@@ -8,9 +8,9 @@
         <div class="message-item pem-cell">
 
             <div ng-show="source.widgetStatus.hasPemFile" class="pem-file">
-                <div class="message">You have a new private key</div>
+                <div class="message" title="A generated new private key for this instance">Private key file</div>
                 <div class="actions">
-                    <button class="btn btn-info" ng-click="page.showPemFileContent = true"><i class="fa fa-align-justify"></i>View</button>
+                    <!--<button class="btn btn-info" ng-click="page.showPemFileContent = true"><i class="fa fa-align-justify"></i>View</button>-->
                     <a class="btn btn-info" href="{{source.widgetStatus.pemDownloadLink}}" download="private_key.pem"><i class="fa fa-download"></i>Download</a>
                 </div>
             </div>
@@ -25,19 +25,20 @@
                         </div>
                     </div>
 
-                    <div style="font-size:18px; text-align:center;">
+                    <div style="font-size:18px; text-align:center;" ng-show="!source.widgetStatus.completed">
                         {{'workingHard'|i18n}}
                     </div>
                 </div>
             </div>
             <div class="finished-successfully" ng-show="source.widgetStatus.completed">
                 <div class="message">
-                    Installation completed successfully.
+                        {{ 'installComplete' | i18n}}
                 </div>
                 <div>
+                    <!--
                     <a class="btn btn-success" href="{{source.widgetStatus.consoleLink.url}}" target="_blank"><i class="fa fa-angle-double-right"></i>{{source.widgetStatus.consoleLink.title}}</a>
                     <a class="btn btn-success" href="http://{{source.widgetStatus.publicIp}}:8099" target="_blank"><i class="fa fa-cloud" style="padding-right:20px;"></i>Monitor with Cloudify</a>
-
+                    -->
                 </div>
             </div>
         </div>
@@ -45,20 +46,26 @@
 
             <div class="something-is-wrong">
                 <button class="btn btn-primary" ng-show="!page.showSomethingIsWrong" ng-click="page.showSomethingIsWrong=true">
-                    <i class="fa fa-bug"></i>Troubleshooting
+                    <i class="fa fa-bug"></i>Stop and try again
                 </button>
                 <div dialog show="page.showSomethingIsWrong">
-                    <button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">Close</button>
+                    <div style="padding: 5px;background-color: rgb(229, 228, 228);margin-bottom: 5px;">Confirmation</div>
+                    <!--
                     <div class="we-are-sorry">We are very sorry to hear that something is wrong.<br/><span style="font-size:17px"> Here is what you can do about it..</span></div>
-                    <div class="stop-wrapper" style="">
+                    <button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">Close</button>
+                    -->
+                    <div class="we-are-sorry">Are you sure that you want to stop the provisioning ?</div>
+
+                    <div class="stop-wrapper" style="margin-bottom: 10px;">
                         <button class="btn btn-primary stop-widget" ng-click="callStop()" >
-                            <i class="fa fa-stop"></i>Stop and try again
+                            <i class="fa fa-stop"></i>Yes
                         </button>
+                        <button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">No</button>
                     </div>
-                    <div class="warning">Machines should be terminated manually</div>
-                    <div class="my-mistake">
-                        <button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">My mistake, everything is fine</button>
-                    </div>
+                    <!--<div class="warning">Machines should be terminated manually</div>-->
+                    <!--<div class="my-mistake">-->
+                        <!--<button class="btn btn-link" ng-click="page.showSomethingIsWrong=false">My mistake, everything is fine</button>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

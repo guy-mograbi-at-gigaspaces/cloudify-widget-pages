@@ -8,7 +8,8 @@
         "quickstart":"Quick Start"
     },
 
-    "workingHard" : "We are working hard to get your instance up and running with BLU",
+    "workingHard" : "BLU Acceleration for Cloud Solo is being prepared ...",
+    "installComplete" : "BLU Acceleration for Cloud Solo is  prepared successfully, and please follow the instructions in the notification email to proceed. ",
     "lookingForPrevious":"Looking for previous installations...",
     "startedMightTakeWhile" : "BLU Installation started. Please wait, this might take a while...",
     "bluSolo" : {

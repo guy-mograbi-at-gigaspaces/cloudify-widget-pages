@@ -31,7 +31,7 @@
     <!--</div>-->
 
     <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
-    <div widget-raw-output-display="genericWidgetModel" stop="stopWidget()"
+    <div widget-raw-output-display="genericWidgetModel" stop="stopWidget(true)"
          ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING' || showCompleteLog"></div>
 
      <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING' && !showCompleteLog">
