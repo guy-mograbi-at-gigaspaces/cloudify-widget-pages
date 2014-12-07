@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .directive('widgetRawOutputDisplay', function ($log) {
+    .directive('widgetRawOutputDisplay', function ($log, OutputFilterService ) {
         return {
             templateUrl: 'views/directives/_widgetOutputDisplay.html',
             restrict: 'A',
@@ -28,22 +28,7 @@ angular.module('ibmBiginsightsUiApp')
 
                 scope.$watch('source.widgetStatus.rawOutput', function () {
                     if (!!scope.source && !!scope.source.widgetStatus && !!scope.source.widgetStatus.rawOutput) {
-                        var hasException = false;
-                        scope.digestedOutput = _.reject(scope.source.widgetStatus.rawOutput, function isAfterException(item) {
-                            try {
-
-                                // we want to return all lines up to the exception (including the exception line.. )
-                                if (!hasException) {
-                                    hasException = item.indexOf('Exception') >= 0;
-                                    return false;
-                                } else {
-                                    return hasException;
-                                }
-
-                            } catch (e) {
-                                $log.warn('while filtering exception from output', e);
-                            }
-                        });
+                        scope.digestedOutput = OutputFilterService.filter(scope.source.widgetStatus.rawOutput);
                     }
                 }, true);
 
