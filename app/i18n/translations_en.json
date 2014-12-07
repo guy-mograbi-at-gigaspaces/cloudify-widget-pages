@@ -189,8 +189,16 @@
             "action" : "Validate your security group answers requirements"
         },
         "failedPriceValidation" : {
-            "error" : "Validating data against Softlayer failed. It might mean Softlayer is unstable or the data we have is old",
-            "action" : "Try again to eliminate the option it is Softlayer."
+            "error" : "Softlayer failed to validate the request. It might mean Softlayer is unstable or the data we have is old",
+            "action" : "Try again in a couple of minutes to eliminate the option it is Softlayer."
+        },
+        "credentialsInvalid" : {
+            "error" : "Incorrect credentials",
+            "action" : "Make sure you entered correct credentials"
+        },
+        "foundExistingManager" : {
+            "error" : "Cached information",
+            "action" : "Refresh the page and try again"
         }
     },
     "errorsDetected" : {

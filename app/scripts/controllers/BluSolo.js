@@ -139,6 +139,7 @@ angular.module('ibmBiginsightsUiApp')
 
 
         $scope.submitForm = function () {
+            updateProperties('from submit');
             $scope.formIsValid = validateForm();
             if (!$scope.formIsValid) {
                 return;

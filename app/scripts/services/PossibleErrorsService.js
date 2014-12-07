@@ -43,7 +43,12 @@ angular.module('ibmBiginsightsUiApp')
             {
                 'pattern' : 'Failed validating prices combinations',
                 'error' : 'causes.failedPriceValidation.error',
-                'actions' : 'causes.failedPriceValidation.action'
+                'action' : 'causes.failedPriceValidation.action'
+            },
+            {
+                'pattern' : 'Cloud API credentials not valid',
+                'error' : 'causes.credentialsInvalid.error',
+                'action' : 'causes.credentialsInvalid.action'
             }
         ];
 
