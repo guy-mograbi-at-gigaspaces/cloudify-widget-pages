@@ -10,7 +10,6 @@ angular.module('ibmBiginsightsUiApp')
 
         // returns true iff pattern not found in illegalPatterns
         function isValidOutput(line) {
-            debugger;
             var foundMatch = _.find(illegalPatterns, function (item) {
                 return line.match(item);
             });
