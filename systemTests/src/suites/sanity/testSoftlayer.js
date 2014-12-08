@@ -23,7 +23,7 @@ var SECOND = 1000;
 var MINUTE = 60 * SECOND;
 
 
-describe('Sanity test for softlayer', function() {
+xdescribe('Sanity test for softlayer', function() {
 
     before(function () {
         logger.info('initializing');

@@ -47,11 +47,11 @@ describe('failure-checks test for aws', function() {
 
     after(function () {
         components.driver.quit();
-    });
+  });
 
     describe('Run with missing values', function() {
 
-       it('Run with missing security group', function (done) {
+        it('Run with missing security group', function (done) {
             var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Security Group');
 
             testRunner.runTest(done, fill, [
@@ -68,6 +68,7 @@ describe('failure-checks test for aws', function() {
                     }).then(callback);
 
                 }
+
             ]);
         });
 
@@ -114,7 +115,6 @@ describe('failure-checks test for aws', function() {
                         components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
                             assert.equal(innerHTML.trim(), 'Value is missing');
                         }).then(callback);
-
                     }
                 ]);
             });

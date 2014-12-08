@@ -9,7 +9,7 @@ var globalSteps = require('../../utils/globalTestSteps');
 
 describe('failure suite', function(){
     require('./testAws');
-    require('./testSoftlayer');
+   require('./testSoftlayer');
 });
 
 
