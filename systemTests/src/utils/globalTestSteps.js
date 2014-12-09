@@ -1,6 +1,5 @@
 'use strict';
 var SECOND = 1000;
-var MINUTE = 60 * SECOND;
 var log4js = require('log4js');
 var logger = log4js.getLogger('globalTestSteps');
 var async = require('async');
@@ -24,7 +23,7 @@ exports.getChromeDriver = getChromeDriver;
 
 exports.setDriver = function (d) {
     driver = d;
-}
+};
 /**
  * Gets a fill/permutation and fills it's values to the proper html elements
  * @param fill
@@ -143,14 +142,14 @@ function stepValidateInstallationButtons(callback) {
     }, 20 * SECOND, 'Unable to find [Installation complete successfully.] message');
 
 
-  /*  driver.close().then(function () {
-        logger.debug('Switching back to the widget page');
-    });
+    /*  driver.close().then(function () {
+     logger.debug('Switching back to the widget page');
+     });
 
-    driver.wait(function () {
-        return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div > div:nth-child(2) > div > div.messages.with-pem > div.message-items > div:nth-child(3) > div > button')).isDisplayed();
-    }, 20 * SECOND, 'Unable to find [stop and try again.] button');
-*/
+     driver.wait(function () {
+     return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div > div:nth-child(2) > div > div.messages.with-pem > div.message-items > div:nth-child(3) > div > button')).isDisplayed();
+     }, 20 * SECOND, 'Unable to find [stop and try again.] button');
+     */
 //
     driver.getAllWindowHandles().then(function (handles) {
         driver.switchTo().window(handles[0]);
@@ -216,7 +215,7 @@ function stepValidateWidgetOutput(conf, fill, callback) {
             callback();
         });
     } else {
-        throw new Error('stepValidateWidgetOutput: Unknown fill ['+fill.name+']');
+        throw new Error('stepValidateWidgetOutput: Unknown fill [' + fill.name + ']');
     }
 }
 
