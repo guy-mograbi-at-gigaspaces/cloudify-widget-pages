@@ -36,6 +36,11 @@ angular.module('ibmBiginsightsUiApp')
                 'action': 'causes.invalidSecurityGroup.action'
             },
             {
+                'pattern': 'invalid security group. make sure you follow the instructions',
+                'error': 'causes.invalidCredentials.error',
+                'action': 'causes.invalidCredentials.action'
+            },
+            {
                 'pattern': 'unable to parse ec2 execution details',
                 'error': null,
                 'action': 'causes.callSupport.action'

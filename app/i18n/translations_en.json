@@ -199,6 +199,10 @@
         "foundExistingManager" : {
             "error" : "Cached information",
             "action" : "Refresh the page and try again"
+        },
+        "invalidCredentials" : {
+            "error" : "The credentials you provided are incorrect.",
+            "action" : "Make sure you provide the correct credentials with the correct permissions."
         }
     },
     "errorsDetected" : {
