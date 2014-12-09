@@ -7,14 +7,18 @@
 var components = require('../../components');
 var logger = require('log4js').getLogger('testAws');
 var yopmail = require('../../components/external/yopmail');
-var q = require('q');
+//var q = require('q');
 var globalFunctions = require('../../utils/globalFunctions');
 var globalSteps = require('../../utils/globalTestSteps');
 var config = require('../../components/config');
 var driver = require('../../components/driver');
-var By = require('selenium-webdriver').By;
+//var By = require('selenium-webdriver').By;
 var assert = require('assert');
 var async = require('async');
+var fs = require('fs');
+var http = require('http');
+var before = require('mocha').before;
+var after = require('mocha').after;
 
 var testRunner = require('../../utils/testRunner');
 
@@ -28,14 +32,14 @@ describe('Sanity test for aws', function () {
         logger.info('initializing');
         components.init().then(function () {
             globalSteps.setDriver(driver.get());
-            components.ui.page.loadWidgetPage().then(done);
+            components.ui.page.loadWidgetPage().then();
         });
     });
 
     after(function () {
         components.driver.quit();
 
-           });
+    });
 
     describe('Run with valid data', function () {
 
@@ -60,26 +64,26 @@ describe('Sanity test for aws', function () {
             }, 5 * SECOND, 'output div is not displayed');
 
             //Check that the output message is displayed (inside the output-div)
-            components.ui.layout.getElementIsDisplayed('.widget-output-display pre.pre').then(function(isDisplayed){
+            components.ui.layout.getElementIsDisplayed('.widget-output-display pre.pre').then(function (isDisplayed) {
                 assert.equal(isDisplayed, true, 'Widget output is not displayed!');
             });
 
             //Check that the 'We are working hard to get your instance up and running with BLU' message is displayed
-            components.ui.layout.getElementInnerHtml('.message-items .message-item:nth-child(2) > div > div >div:nth-child(2)').then(function(innerHtml){
-                assert.equal(innerHTML.trim(),'We are working hard to get your instance up and running with BLU','The text [We are working hard to get your instance up and running with BLU] isnt in the right place');
-                components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) > div > div >div:nth-child(2)').then(function(isDisplayed) {
+            components.ui.layout.getElementInnerHtml('.message-items .message-item:nth-child(2) > div > div >div:nth-child(2)').then(function (innerHTML) {
+                assert.equal(innerHTML.trim(), 'We are working hard to get your instance up and running with BLU', 'The text [We are working hard to get your instance up and running with BLU] isnt in the right place');
+                components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) > div > div >div:nth-child(2)').then(function (isDisplayed) {
                     assert.equal(isDisplayed, true, 'The text [We are working hard to get your instance up and running with BLU] is not displayed');
                 });
             });
 
             //Check that the green progress bar is displayed
-            components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) > div > div >div:nth-child(1)').then(function(isDisplayed) {
+            components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) > div > div >div:nth-child(1)').then(function (isDisplayed) {
                 assert.equal(isDisplayed, true, 'The green progress bar is not displayed');
             });
 
             //Check that the output message contains 'BLU Installation started. Please wait, this might take a while...'
-            components.ui.layout.getElementInnerHtml('.widget-output-display pre.pre').then(function(innerHtml){
-                assert.contains(innerHTML,'BLU Installation started. Please wait, this might take a while...','The message [BLU Installation started. Please wait, this might take a while...] is not displayed in the widget output');
+            components.ui.layout.getElementInnerHtml('.widget-output-display pre.pre').then(function (innerHTML) {
+                assert.contains(innerHTML, 'BLU Installation started. Please wait, this might take a while...', 'The message [BLU Installation started. Please wait, this might take a while...] is not displayed in the widget output');
             });
 
             done();
@@ -89,7 +93,7 @@ describe('Sanity test for aws', function () {
 
             //Check that the output message contains finished successfully message
             driver.get().wait(function () {
-                return components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) .finished-successfully .message').then(function(isDisplayed){
+                return components.ui.layout.getElementIsDisplayed('.message-items .message-item:nth-child(2) .finished-successfully .message').then(function (isDisplayed) {
                     return isDisplayed;
                 });
             }, 30 * MINUTE, 'Unable to find [Service "blustratus" successfully installed] in the widget output');
@@ -104,14 +108,14 @@ describe('Sanity test for aws', function () {
                 return components.ui.layout.getElementIsDisplayed('.message-items .message-item.pem-cell > div > .message').then(function (isDisplayed) {
                     return isDisplayed;
                 });
-            }, 1 * MINUTE,'Expecting the private key div to be visible');
+            }, 1 * MINUTE, 'Expecting the private key div to be visible');
 
 
             //Save the innerHTML of the private key
             //Download the file
             //Compare it's content with the saved innerHTML
 
-            components.ui.layout.clickElement('.message-items .message-item.pem-cell > div > .actions button').click().then(function(){
+            components.ui.layout.clickElement('.message-items .message-item.pem-cell > div > .actions button').click().then(function () {
                 //Check that the pem content is displayed
                 components.ui.layout.getElementIsDisplayed('.pem-content').then(function (isDisplayed) {
                     assert.equal(isDisplayed, true, 'Expecting the pem-content div to be displayed');
@@ -125,7 +129,7 @@ describe('Sanity test for aws', function () {
                             components.ui.layout.clickElement('.pem-content .instructions button').then(callback);
                         },
                         function extractHref(callback) {
-                            components.ui.layout.getElementAttribute('.message-items .message-item.pem-cell > div > .actions a','href').then(function (href) {
+                            components.ui.layout.getElementAttribute('.message-items .message-item.pem-cell > div > .actions a', 'href').then(function (href) {
                                 callback(null, href);
                             });
                         },
@@ -165,39 +169,37 @@ describe('Sanity test for aws', function () {
         });
 
 
-        it('verify mail was received ', function(done){
+        it('verify mail was received ', function (done) {
 
             var webdriver;
 
-            components.init().then( function () {
+            components.init().then(function () {
                 webdriver = driver.get();
                 globalSteps.setDriver(webdriver);
-                    yopmail.loginToYopMailInbox(webdriver, function(){
-                        logger.info("next step: ");
-                        yopmail.getLatestMessageDayAsString(webdriver, function(day)
+                yopmail.loginToYopMailInbox(webdriver, function () {
+                    logger.info('next step: ');
+                    yopmail.getLatestMessageDayAsString(webdriver, function (day) {
+                        logger.info('Mail Day: ' + day);
+                        var currDate = new Date();
+                        var currDayOfMonth = currDate.getDate();
 
-                        {
-                            logger.info("Mail Day: "  + day);
-                            var currDate = new Date();
-                            var currDayOfMonth = currDate.getDate();
-
-                            assert.equal(currDayOfMonth, day);
-
-                        });
-                        yopmail.getLatestMessageHourAsString(webdriver, function(hour){
-
-                            logger.info("Mail hour: "  + hour);
-                            var currDate = new Date();
-                            var currhour = currDate.getHours();
-
-                            assert.equal(currhour, hour);
-
-                            done();
-
-                        });
+                        assert.equal(currDayOfMonth, day);
 
                     });
-            } ) ;
+                    yopmail.getLatestMessageHourAsString(webdriver, function (hour) {
+
+                        logger.info('Mail hour: ' + hour);
+                        var currDate = new Date();
+                        var currhour = currDate.getHours();
+
+                        assert.equal(currhour, hour);
+
+                        done();
+
+                    });
+
+                });
+            });
 
 
         });
