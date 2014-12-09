@@ -1,9 +1,7 @@
 'use strict';
 
-var q= require('q');
 var sDriver = require('../components/driver');
 var logger = require('log4js').getLogger('Layout');
-var css = require('selenium-webdriver').By.css;
 var By = require('selenium-webdriver').By;
 
 var async = require('async');
@@ -137,7 +135,7 @@ exports.runTest = function(done, fill, validationFunctions) {
                                     var valueOfKey = keyValue[key];
                                     if (valueOfKey) {
                                         assert.equal(value, valueOfKey, 'Unexpected value for recipe property [' + key + ']');
-                                    };
+                                    }
                                 }).then(callbackDone);
                             });
                         });
@@ -156,7 +154,7 @@ exports.runTest = function(done, fill, validationFunctions) {
                                     var valueOfKey = keyValue[key];
                                     if (valueOfKey) {
                                         assert.equal(value, valueOfKey, 'Unexpected value for recipe property [' + key + ']');
-                                    };
+                                    }
                                 }).then(callbackDone);
                             });
                         });
