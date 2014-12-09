@@ -292,7 +292,9 @@ describe('snippet tests', function () {
 
         beforeEach(function (done) {
             driver = globalSteps.getChromeDriver(seleniumServerAddress);
-            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang   =').then(function(){ done() });
+            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang   =').then(function () {
+                done();
+            });
         });
 
         afterEach(function (done) {
