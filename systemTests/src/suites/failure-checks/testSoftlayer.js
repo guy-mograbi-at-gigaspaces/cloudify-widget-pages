@@ -7,14 +7,14 @@
 
 var components = require('../../components');
 var logger = require('log4js').getLogger('testSoftlayer');
-var q= require('q');
+//var q= require('q');
 var globalFunctions = require('../../utils/globalFunctions');
 var globalSteps = require('../../utils/globalTestSteps');
 var config = require('../../components/config');
 var driver = require('../../components/driver');
-var By = require('selenium-webdriver').By;
-var assert = require('assert');
-var async = require('async');
+//var By = require('selenium-webdriver').By;
+//var assert = require('assert');
+//var async = require('async');
 
 var testRunner = require('../../utils/testRunner');
 
@@ -24,17 +24,17 @@ var MINUTE = 60 * SECOND;
 
 describe('failure-checks test for softlayer', function() {
 
-    before(function () {
+    beforeEach(function () {
         logger.info('initializing');
         components.init().then(function () {
             globalSteps.setDriver(driver.get());
-            components.ui.page.loadWidgetPage().then(done);
+            components.ui.page.loadWidgetPage().then();
         });
     });
 
-    after(function () {
+/*    after(function () {
         components.driver.quit();
-    });
+    });*/
 
     it('Run with invalid credentials', function (done) {
         var fills = globalFunctions.getFillByFillname(config, 'Softlayer Invalid Credentials');
