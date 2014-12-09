@@ -151,7 +151,7 @@ function stepValidateInstallationButtons(callback) {
         return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div > div:nth-child(2) > div > div.messages.with-pem > div.message-items > div:nth-child(3) > div > button')).isDisplayed();
     }, 20 * SECOND, 'Unable to find [stop and try again.] button');
 */
-
+//
     driver.getAllWindowHandles().then(function (handles) {
         driver.switchTo().window(handles[0]);
     }).then(function () {
