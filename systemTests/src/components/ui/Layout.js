@@ -1,12 +1,11 @@
 'use strict';
 
-var q= require('q');
+var q = require('q');
 var sDriver = require('../driver');
-var logger = require('log4js').getLogger('Layout');
 var css = require('selenium-webdriver').By.css;
 
 
-exports.getElementInnerHtml = function(cssSelector,parentElement) {
+exports.getElementInnerHtml = function (cssSelector, parentElement) {
     var deferred = q.defer();
 
     if (parentElement) {
@@ -22,7 +21,7 @@ exports.getElementInnerHtml = function(cssSelector,parentElement) {
     return deferred.promise;
 };
 
-exports.getElementAttribute = function(cssSelector,attribute) {
+exports.getElementAttribute = function (cssSelector, attribute) {
     var deferred = q.defer();
 
     sDriver.get().findElement(css(cssSelector)).getAttribute(attribute).then(function (value) {
@@ -32,7 +31,7 @@ exports.getElementAttribute = function(cssSelector,attribute) {
     return deferred.promise;
 };
 
-exports.getElementIsDisplayed = function(cssSelector) {
+exports.getElementIsDisplayed = function (cssSelector) {
     var deferred = q.defer();
 
     sDriver.get().findElement(css(cssSelector)).isDisplayed().then(function (isDisplayed) {
@@ -42,7 +41,7 @@ exports.getElementIsDisplayed = function(cssSelector) {
     return deferred.promise;
 };
 
-exports.isElementPresent = function(cssSelector) {
+exports.isElementPresent = function (cssSelector) {
     var deferred = q.defer();
 
     sDriver.get().isElementPresent(css(cssSelector)).then(function () {
@@ -54,7 +53,7 @@ exports.isElementPresent = function(cssSelector) {
     return deferred.promise;
 };
 
-exports.clickElement = function( cssSelector) {
+exports.clickElement = function (cssSelector) {
     var deferred = q.defer();
 
     sDriver.get().findElement(css(cssSelector)).click().then(function () {
@@ -62,9 +61,9 @@ exports.clickElement = function( cssSelector) {
     });
 
     return deferred.promise;
-}
+};
 
-exports.findElements = function(cssSelector) {
+exports.findElements = function (cssSelector) {
     var deferred = q.defer();
 
     sDriver.get().findElements(css(cssSelector)).then(function (elements) {
@@ -73,6 +72,6 @@ exports.findElements = function(cssSelector) {
 
     return deferred.promise;
 
-}
+};
 
 
