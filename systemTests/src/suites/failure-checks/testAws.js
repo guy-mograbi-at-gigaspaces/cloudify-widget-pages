@@ -23,18 +23,6 @@ var MINUTE = 60 * SECOND;
 
 
 describe('failure-checks test for aws', function() {
-//
-//    beforeEach(function () {
-//        logger.info('initializing');
-//        components.init().then(function () {
-//            globalSteps.setDriver(driver.get());
-//            components.ui.page.loadWidgetPage().then(done);
-//        });
-//    });
-//
-//    afterEach(function () {
-//        components.driver.quit();
-//    });
 
 
     beforeEach(function () {
@@ -45,8 +33,8 @@ describe('failure-checks test for aws', function() {
         });
     });
 
-    after(function () {
-        components.driver.quit();
+  after(function () {
+        driver.quit();
   });
 
     describe('Run with missing values', function() {
@@ -58,14 +46,17 @@ describe('failure-checks test for aws', function() {
                 function (callback) {
 
                     driver.get().wait(function () {
-                        return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > span:nth-child(3) > div > div:nth-child(3) > div.section > div.error-message.ng-binding').then(function (isDisplayed) {
-                            return isDisplayed;
+                        return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > span:nth-child(3) > div > div.controller.ng-scope.ng-isolate-scope.has-error > div.section > div.error-message.ng-binding').then(function (isDisplayed) {
+                            return isDisplayed;  //
                         });
-                    }, 5 * SECOND, 'Unable to find error message box for securityGroups');
+                    }, 10 * SECOND, 'Unable to find error message box for securityGroups');
 
-                    components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > span:nth-child(3) > div > div:nth-child(3) > div.section > div.error-message.ng-binding').then(function (innerHTML) {
+                    components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > span:nth-child(3) > div > div.controller.ng-scope.ng-isolate-scope.has-error > div.section > div.error-message.ng-binding').then(function (innerHTML) {
                         assert.equal(innerHTML.trim(), 'Value is missing');
-                    }).then(callback);
+                    }).then(callback)/*(function(){
+                        driver.quit();
+                        callback();
+                    });*/
 
                 }
 
@@ -73,7 +64,7 @@ describe('failure-checks test for aws', function() {
         });
 
         //AWS Missing Name
-        it('Run with missing user name', function (done) {
+        xit('Run with missing user name', function (done) {
             components.ui.page.loadWidgetPage().then(function(){
 
 
@@ -84,13 +75,13 @@ describe('failure-checks test for aws', function() {
                         logger.info('Validating -Value is missing- msg for userName');
 
                         driver.get().wait(function () {
-                            return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (isDisplayed) {
+                            return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (isDisplayed) {
                                 return isDisplayed;
                             });
 
-                        } , 10 * SECOND, "Unable to find error message box for securityGroups");
+                        } , 10 * SECOND, "Unable to find error message box for securityGroups")
 
-                        components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
+                        components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > div.controller.visitor-name.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
                             assert.equal(innerHTML.trim(), 'Value is missing');
                         }).then(callback);
                     }
@@ -99,7 +90,7 @@ describe('failure-checks test for aws', function() {
 
         });
 
-        it('Run with missing Email', function (done) {
+        xit('Run with missing Email', function (done) {
             components.ui.page.loadWidgetPage().then(function() {
                 var fill = globalFunctions.getFillByFillname(config, 'AWS Missing Email');
 
@@ -107,12 +98,12 @@ describe('failure-checks test for aws', function() {
                     function (callback) {
 
                         driver.get().wait(function () {
-                            return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (isDisplayed) {
+                            return components.ui.layout.getElementIsDisplayed('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (isDisplayed) {
                                 return isDisplayed;
                             });
-                        }, 5 * SECOND, 'Unable to find error message box for missing email');
+                        }, 10 * SECOND, 'Unable to find error message box for missing email');
 
-                        components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(4) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
+                        components.ui.layout.getElementInnerHtml('#blu-solo-snippet > div:nth-child(3) > div > div.form > div > div.controller.ng-isolate-scope.has-error > div > div.error-message.ng-binding').then(function (innerHTML) {
                             assert.equal(innerHTML.trim(), 'Value is missing');
                         }).then(callback);
                     }

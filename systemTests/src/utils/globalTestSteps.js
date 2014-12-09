@@ -128,6 +128,7 @@ function stepTerminateInstances(fill, callback) {
 }
 exports.stepTerminateInstances = stepTerminateInstances;
 
+// Liron: the following is irrelevant for the latest changes of the widget ui - removed redundant code.
 /**
  * Validate the installation buttons - the BLU and Cloudify links/buttons
  * Check that a new tab is opened when clicking on each button.
@@ -138,93 +139,18 @@ function stepValidateInstallationButtons(callback) {
     logger.debug('Looking for [Installation completed successfully.] message');
 
     driver.wait(function () {
-        return driver.findElement(By.xpath('//div[text()[contains(.,\'Installation completed successfully.\')]]')).isDisplayed();
+        return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div > div:nth-child(2) > div > div.messages.with-pem > div.message-items > div:nth-child(2) > div.finished-successfully > div.message.ng-binding')).isDisplayed();
     }, 20 * SECOND, 'Unable to find [Installation complete successfully.] message');
 
-    /*driver.findElement(By.xpath('//div[text()[contains(.,\'Installation completed successfully.\')]]')).isDisplayed().then(function(isDisplayed) {
-     assert.equal(isDisplayed, true, 'Expecting to find the message [Installation completed successfully.]');
-     }).then(function() {
-     logger.debug('Looking for a link with content [BLU Solo]');
-     });*/
 
-    driver.findElement(By.xpath('//*[text()[contains(.,\'BLU Solo\')]]')).isDisplayed().then(function (isDisplayed) {
-        assert.equal(isDisplayed, true, 'Expecting to find a link with content [BLU Solo]');
-    }).then(function () {
-        logger.debug('Looking for a link with content [Monitor with Cloudify]');
-    });
-
-    driver.findElement(By.xpath('//*[text()[contains(.,\'Monitor with Cloudify\')]]')).isDisplayed().then(function (isDisplayed) {
-        assert.equal(isDisplayed, true, 'Expecting to find a link with content [Monitor with Cloudify]');
-    }).then(function () {
-        logger.debug('Clicking on the [Monitor with Cloudify] button');
-    });
-
-    //Click on the [Monitor with Cloudify] button
-    driver.findElement(By.xpath('//*[text()[contains(.,\'Monitor with Cloudify\')]]')).click().then(function () {
-        logger.debug('Waiting for new tab to be opened');
-    });
-
-    driver.wait(function () {
-        return driver.getAllWindowHandles().then(function (handles) {
-            return (handles.length === 2);
-        });
-    }, 20 * SECOND, 'New tab did not opened').then(function () {
-        logger.debug('Switching to the new tab');
-    });
-
-    driver.getAllWindowHandles().then(function (handles) {
-        driver.switchTo().window(handles[1]);
-    }).then(function () {
-        logger.debug('Waiting for Cloudify webui to be visible. Checking if the text [Please Log in] is present');
-    });
-
-    driver.wait(function () {
-        return driver.isElementPresent(By.xpath('//*[text()[contains(.,\'Please Log in\')]]'));
-    }, 1 * MINUTE).then(function () {
-        logger.debug('Closing tab');
-    });
-
-    driver.close().then(function () {
+  /*  driver.close().then(function () {
         logger.debug('Switching back to the widget page');
     });
 
-    driver.getAllWindowHandles().then(function (handles) {
-        driver.switchTo().window(handles[0]);
-    }).then(function () {
-        logger.debug('Clicking on the [BLU Solo] button');
-    });
-
-    //Click on the [BLU Solo] button
-    driver.findElement(By.xpath('//*[text()[contains(.,\'BLU Solo\')]]')).click().then(function () {
-        logger.debug('Waiting for new tab of [BLU Solo] to be opened');
-    });
-
     driver.wait(function () {
-        return driver.getAllWindowHandles().then(function (handles) {
-            return (handles.length === 2);
-        });
-    }, 20 * SECOND, 'New tab [BLU Solo] did not opened').then(function () {
-        logger.debug('Switching to the new tab [BLU Solo]');
-    });
-
-    driver.getAllWindowHandles().then(function (handles) {
-        driver.switchTo().window(handles[1]);
-    }).then(function () {
-        logger.debug('Waiting for BLU page to be visible. Checking if the title is [BLU Acceleration for Cloud]');
-    });
-/*
-TODO re-enable this when it is fixed
-    driver.wait(function() {
-        return driver.getTitle().then(function(title) {
-            return title === 'BLU Acceleration for Cloud';
-        });
-    }, 15 * SECOND, 'Unexpected title for the BLU webpage. Expecting: [BLU Acceleration for Cloud]');
+        return driver.findElement(By.css('#blu-solo-snippet > div:nth-child(3) > div > div:nth-child(2) > div > div.messages.with-pem > div.message-items > div:nth-child(3) > div > button')).isDisplayed();
+    }, 20 * SECOND, 'Unable to find [stop and try again.] button');
 */
-
-
-    driver.close().then(function () {
-        logger.debug('Switching back to the widget page');
-    });
 
     driver.getAllWindowHandles().then(function (handles) {
         driver.switchTo().window(handles[0]);
@@ -417,6 +343,7 @@ function stepCheckErrorBox(expectedErrorMessage, callback) {
         driver.findElement(By.xpath('//div[contains(@class, \'widget-message\')]/button[contains(.,\'Back to form\')]')).click()
             .then(innerCallback);
     }
+
 
     async.waterfall([
         checkFormIsDisplayedAndOutputIsNot,
