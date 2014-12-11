@@ -407,6 +407,11 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'karma.conf.js',
                 singleRun: true
+            },
+            debug: {
+                configFile: 'karma.conf.js',
+                singleRun: false,
+                reporters: ['failed']
             }
         },
         ngmin: {
@@ -453,7 +458,6 @@ module.exports = function (grunt) {
                 src: ['systemTests/src/suites/failure-checks/*.spec.js']
                 //src: ['systemTests/src/index.js']
             }
-
         }
     });
 
@@ -477,12 +481,11 @@ module.exports = function (grunt) {
         'html2js:main',
         'concurrent:test',
         'connect:test',
-        'karma'
-
+        'karma:unit'
     ]);
 
     grunt.registerTask('build', function () {
-       // grunt
+
         var tasks = [
             'clean:dist',
             'useminPrepare',

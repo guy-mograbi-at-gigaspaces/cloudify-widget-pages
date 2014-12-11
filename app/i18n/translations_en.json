@@ -8,12 +8,16 @@
         "quickstart":"Quick Start"
     },
 
-    "workingHard" : "We are working hard to get your instance up and running with BLU",
+    "workingHard" : "BLU Acceleration for Cloud Solo is being prepared ...",
+    "installComplete" : "BLU Acceleration for Cloud Solo is  prepared successfully, and please follow the instructions in the notification email to proceed. ",
     "lookingForPrevious":"Looking for previous installations...",
     "startedMightTakeWhile" : "BLU Installation started. Please wait, this might take a while...",
     "bluSolo" : {
-        "awsApiKey" : "Go to <a href=\"https://console.aws.amazon.com/iam/home?#security_credential\" target=\"_blank\">AWS API credentials </a>",
-        "securityGroup" : "We require the following ports to be open: 22, 25, 80, 389, 8787, 9443, 8443, 50000, 50001, 443, 9300, 8100, 8099.<br/> <a href='https://www.youtube.com/watch?v=925n0IykcMA' target='_blank'>See how to create a security group video</a><br/> Go to  <a href=\"https://eu-west-1.console.aws.amazon.com/ec2/v2/home?region=eu-west-1#SecurityGroups:sort=groupId\" target=\"_blank\">AWS site groups</a>",
+        "awsApiKey" : "<a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html\" target=\"_blank\">How  to get your AWS API Key ? </a>",
+        "awsApiSecret" : "<a href=\"http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSGettingStartedGuide/AWSCredentials.html\" target=\"_blank\">How  to get your  AWS API Secret ? </a>",
+        "securityGroup" : "<a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\" target=\"_blank\">What is security group ?</a><br/> <a href='https://www.youtube.com/watch?v=925n0IykcMA' target='_blank'>See how to create a security group video</a></br> The following ports to be open in the given security group : 22, 25, 80, 389, 8787, 9443, 8443, 50000, 50001, 443, 9300, 8100, 8099.",
+        "softlayeruser" : "<a href=\"http://knowledgelayer.softlayer.com/procedure/add-new-user-customer-portal-account\" target=\"_blank\">How to get SoftLayer API username ?</a>",
+        "softlayerkey" : "<a href=\"http://knowledgelayer.softlayer.com/procedure/add-new-user-customer-portal-account\" target=\"_blank\">How to get SoftLayer API key  ?</a>",
         "mustAgree" : "You must agree to email communications to participate in this program.",
         "chooseCloud" : "Choose the cloud where you want to deploy your BLU Acceleration for Cloud",
         "title" : "BLU Acceleration for Cloud",
@@ -166,6 +170,44 @@
         "general" : {
             "invalid" : "Value is missing"
         }
+    },
+
+    "causes" : {
+        "imageUnauthorized" : {
+            "error": "You have yet to register on the image in marketplace",
+            "action": "Register image on marketplace"
+        },
+        "callSupport" : {
+            "action" : "Contact support at: imcloud@ca.ibm.com"
+        },
+        "notRegisteredToMarketplace" : {
+            "error" : "You are not registered to AWS Marketplace",
+            "action" : "Please register to AWS marketplace"
+        },
+        "invalidSecurityGroup" : {
+            "error" : "The security group you supplied does not answer requirements",
+            "action" : "Validate your security group answers requirements"
+        },
+        "failedPriceValidation" : {
+            "error" : "Softlayer failed to validate the request. It might mean Softlayer is unstable or the data we have is old",
+            "action" : "Try again in a couple of minutes to eliminate the option it is Softlayer."
+        },
+        "credentialsInvalid" : {
+            "error" : "Incorrect credentials",
+            "action" : "Make sure you entered correct credentials"
+        },
+        "foundExistingManager" : {
+            "error" : "Cached information",
+            "action" : "Refresh the page and try again"
+        },
+        "invalidCredentials" : {
+            "error" : "The credentials you provided are incorrect.",
+            "action" : "Make sure you provide the correct credentials with the correct permissions."
+        }
+    },
+    "errorsDetected" : {
+        "intro": "You have encountered an error. Possible reasons are:",
+        "possibleActions" : "Please take the following steps and try again:"
     }
 
 }

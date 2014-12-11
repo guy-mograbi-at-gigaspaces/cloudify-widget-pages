@@ -23,7 +23,7 @@
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-contrib-watch": "~0.4.0",
     "grunt-html2js": "~0.2.8",
-    "grunt-karma": "~0.4.3",
+    "grunt-karma": "*",
     "grunt-mocha-test": "^0.12.2",
     "grunt-ngmin": "~0.0.2",
     "grunt-open": "~0.2.0",
@@ -31,7 +31,7 @@
     "grunt-s3": "~0.2.0-alpha.3",
     "grunt-usemin": "~0.1.11",
     "jshint-stylish": "*",
-    "karma": "~0.10.2",
+    "karma": "~0.12.0",
     "karma-chrome-launcher": "~0.1.0",
     "karma-coffee-preprocessor": "~0.1.0",
     "karma-firefox-launcher": "~0.1.0",
@@ -45,7 +45,9 @@
     "mocha": "~1.21.4",
     "q": "~1.0.1",
     "reporter-file": "*",
-    "selenium-webdriver": "~2.43.5"
+    "selenium-webdriver": "~2.43.5",
+    "karma-coverage": "~0.2.6",
+    "karma-failed-reporter": "0.0.2"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -1,15 +1,9 @@
 var softlayerItems = [
     {
-        "itemId": 13,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "250GB SATA II"
-    },
-    {
         "itemId": 14,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "500GB SATA II"
+        "description": "500 GB SATA II"
     },
     {
         "itemId": 15,
@@ -144,12 +138,6 @@ var softlayerItems = [
         "description": "NOC Monitoring"
     },
     {
-        "itemId": 59,
-        "categoryName": "Second Hard Drive",
-        "categoryCode": "disk1",
-        "description": "150GB SATA Raptor 10K RPM"
-    },
-    {
         "itemId": 79,
         "categoryName": "Database Software",
         "categoryCode": "database",
@@ -240,24 +228,6 @@ var softlayerItems = [
         "description": "1 Gbps Public & Private Network Uplinks"
     },
     {
-        "itemId": 190,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "750GB SATA II"
-    },
-    {
-        "itemId": 219,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "73GB SA-SCSI 10K RPM"
-    },
-    {
-        "itemId": 220,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "73GB SA-SCSI 15K RPM"
-    },
-    {
         "itemId": 249,
         "categoryName": "Public Bandwidth",
         "categoryCode": "bandwidth",
@@ -267,25 +237,25 @@ var softlayerItems = [
         "itemId": 253,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "2 GB FB-DIMM Registered 533/667"
+        "description": "2 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 254,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "4 GB FB-DIMM Registered 533/667"
+        "description": "4 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 255,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "6 GB FB-DIMM Registered 533/667"
+        "description": "6 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 256,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "8 GB FB-DIMM Registered 533/667"
+        "description": "8 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 259,
@@ -300,22 +270,16 @@ var softlayerItems = [
         "description": "Dual Core Xeon 5050 - 3.00GHz  (Dempsey) - 4 x 2MB cache - HT"
     },
     {
-        "itemId": 269,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "147GB SA-SCSI 15K RPM"
-    },
-    {
         "itemId": 279,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "12 GB FB-DIMM Registered 533/667"
+        "description": "12 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 280,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "16 GB FB-DIMM Registered 533/667"
+        "description": "16 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 297,
@@ -379,9 +343,9 @@ var softlayerItems = [
     },
     {
         "itemId": 352,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "300GB SA-SCSI 15K RPM"
+        "categoryName": "Second Hard Drive",
+        "categoryCode": "disk1",
+        "description": "300 GB SA-SCSI 15K RPM"
     },
     {
         "itemId": 355,
@@ -406,12 +370,6 @@ var softlayerItems = [
         "categoryName": "Anti-Virus & Spyware Protection",
         "categoryCode": "av_spyware_protection",
         "description": "McAfee VirusScan Anti-Virus - Windows"
-    },
-    {
-        "itemId": 401,
-        "categoryName": "First Hard Drive",
-        "categoryCode": "disk0",
-        "description": "300GB SA-SCSI 10K RPM"
     },
     {
         "itemId": 419,
@@ -465,19 +423,7 @@ var softlayerItems = [
         "itemId": 471,
         "categoryName": "Second Hard Drive",
         "categoryCode": "disk1",
-        "description": "1.00TB SATA II"
-    },
-    {
-        "itemId": 472,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "74GB SATA Raptor 10K RPM"
-    },
-    {
-        "itemId": 473,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "147GB SA-SCSI 10K RPM"
+        "description": "1.00 TB SATA II"
     },
     {
         "itemId": 487,
@@ -513,13 +459,13 @@ var softlayerItems = [
         "itemId": 492,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "24 GB FB-DIMM Registered 533/667"
+        "description": "24 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 493,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "32 GB FB-DIMM Registered 533/667"
+        "description": "32 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 495,
@@ -574,12 +520,6 @@ var softlayerItems = [
         "categoryName": "Control Panel Addon(s)",
         "categoryCode": "controlpanel_addon",
         "description": "Sitebuilder - Windows"
-    },
-    {
-        "itemId": 537,
-        "categoryName": "Second Hard Drive",
-        "categoryCode": "disk1",
-        "description": "400GB SA-SCSI 10K RPM"
     },
     {
         "itemId": 542,
@@ -729,13 +669,13 @@ var softlayerItems = [
         "itemId": 646,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "48 GB FB-DIMM Registered 533/667"
+        "description": "48 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 671,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "96 GB FB-DIMM Registered 533/667"
+        "description": "96 GB Registered (FB) DDR2 667"
     },
     {
         "itemId": 681,
@@ -766,12 +706,6 @@ var softlayerItems = [
         "categoryName": "Database Software",
         "categoryCode": "database",
         "description": "Microsoft SQL Server 2008 Web"
-    },
-    {
-        "itemId": 737,
-        "categoryName": "Second Hard Drive",
-        "categoryCode": "disk1",
-        "description": "300GB SATA Raptor 10K RPM"
     },
     {
         "itemId": 738,
@@ -858,18 +792,6 @@ var softlayerItems = [
         "description": "/64 Block Static Public IPv6 Addresses"
     },
     {
-        "itemId": 810,
-        "categoryName": "Eighteenth Hard Drive",
-        "categoryCode": "disk17",
-        "description": "32GB SSD"
-    },
-    {
-        "itemId": 811,
-        "categoryName": "Thirteenth Hard Drive",
-        "categoryCode": "disk12",
-        "description": "64GB SSD"
-    },
-    {
         "itemId": 818,
         "categoryName": "Server",
         "categoryCode": "server",
@@ -897,43 +819,43 @@ var softlayerItems = [
         "itemId": 823,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "6 GB DDR3 Registered 1333"
+        "description": "6 GB Registered DDR3 1333"
     },
     {
         "itemId": 824,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "12 GB DDR3 Registered 1333"
+        "description": "12 GB Registered DDR3 1333"
     },
     {
         "itemId": 825,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "18 GB DDR3 Registered 1333"
+        "description": "18 GB Registered DDR3 1333"
     },
     {
         "itemId": 826,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "24 GB DDR3 Registered 1333"
+        "description": "24 GB Registered DDR3 1333"
     },
     {
         "itemId": 827,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "36 GB DDR3 Registered 1333"
+        "description": "36 GB Registered DDR3 1333"
     },
     {
         "itemId": 828,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "48 GB DDR3 Registered 1333"
+        "description": "48 GB Registered DDR3 1333"
     },
     {
         "itemId": 829,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "72 GB DDR3 Registered 1333"
+        "description": "72 GB Registered DDR3 1333"
     },
     {
         "itemId": 831,
@@ -1095,19 +1017,19 @@ var softlayerItems = [
         "itemId": 917,
         "categoryName": "Fifth Disk",
         "categoryCode": "guest_disk4",
-        "description": "1,000 GB (SAN)"
+        "description": "1.00 TB (SAN)"
     },
     {
         "itemId": 918,
         "categoryName": "Fifth Disk",
         "categoryCode": "guest_disk4",
-        "description": "1,500 GB (SAN)"
+        "description": "1.50 TB (SAN)"
     },
     {
         "itemId": 919,
         "categoryName": "Fourth Disk",
         "categoryCode": "guest_disk3",
-        "description": "2,000 GB (SAN)"
+        "description": "2.00 TB (SAN)"
     },
     {
         "itemId": 920,
@@ -1191,7 +1113,7 @@ var softlayerItems = [
         "itemId": 948,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "60 GB DDR3 Registered 1333"
+        "description": "60 GB Registered DDR3 1333"
     },
     {
         "itemId": 950,
@@ -1245,7 +1167,7 @@ var softlayerItems = [
         "itemId": 1011,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "144 GB DDR3 Registered 1333"
+        "description": "144 GB Registered DDR3 1333"
     },
     {
         "itemId": 1012,
@@ -1329,7 +1251,7 @@ var softlayerItems = [
         "itemId": 1034,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "20 GB DDR3 Registered 1333"
+        "description": "20 GB Registered DDR3 1333"
     },
     {
         "itemId": 1036,
@@ -1347,19 +1269,19 @@ var softlayerItems = [
         "itemId": 1039,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "4 GB DDR3 Registered 1333"
+        "description": "4 GB Registered DDR3 1333"
     },
     {
         "itemId": 1040,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "8 GB DDR3 Registered 1333"
+        "description": "8 GB Registered DDR3 1333"
     },
     {
         "itemId": 1041,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "16 GB DDR3 Registered 1333"
+        "description": "16 GB Registered DDR3 1333"
     },
     {
         "itemId": 1044,
@@ -1395,7 +1317,7 @@ var softlayerItems = [
         "itemId": 1050,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "96 GB DDR3 Registered 1333"
+        "description": "96 GB Registered DDR3 1333"
     },
     {
         "itemId": 1065,
@@ -1479,19 +1401,13 @@ var softlayerItems = [
         "itemId": 1091,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "2.00TB SATA II"
-    },
-    {
-        "itemId": 1093,
-        "categoryName": "Eighth Hard Drive",
-        "categoryCode": "disk7",
-        "description": "450GB SA-SCSI 15K RPM"
+        "description": "2.00 TB SATA II"
     },
     {
         "itemId": 1094,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "600GB SA-SCSI 15K RPM"
+        "description": "600 GB SA-SCSI 15K RPM"
     },
     {
         "itemId": 1107,
@@ -1575,25 +1491,25 @@ var softlayerItems = [
         "itemId": 1131,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "32 GB DDR3 Registered 1066"
+        "description": "32 GB Registered DDR3 1066"
     },
     {
         "itemId": 1132,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "64 GB DDR3 Registered 1066"
+        "description": "64 GB Registered DDR3 1066"
     },
     {
         "itemId": 1133,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "128 GB DDR3 Registered 1066"
+        "description": "128 GB Registered DDR3 1066"
     },
     {
         "itemId": 1134,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "256 GB DDR3 Registered 1066"
+        "description": "256 GB Registered DDR3 1066"
     },
     {
         "itemId": 1136,
@@ -1659,13 +1575,13 @@ var softlayerItems = [
         "itemId": 1146,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "96 GB DDR3 Registered 1066"
+        "description": "96 GB Registered DDR3 1066"
     },
     {
         "itemId": 1147,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "192 GB DDR3 Registered 1066"
+        "description": "192 GB Registered DDR3 1066"
     },
     {
         "itemId": 1154,
@@ -1875,19 +1791,19 @@ var softlayerItems = [
         "itemId": 1230,
         "categoryName": "Fifth Disk",
         "categoryCode": "guest_disk4",
-        "description": "1,000 GB (SAN)"
+        "description": "1.00 TB (SAN)"
     },
     {
         "itemId": 1231,
         "categoryName": "Fifth Disk",
         "categoryCode": "guest_disk4",
-        "description": "1,500 GB (SAN)"
+        "description": "1.50 TB (SAN)"
     },
     {
         "itemId": 1232,
         "categoryName": "Fifth Disk",
         "categoryCode": "guest_disk4",
-        "description": "2,000 GB (SAN)"
+        "description": "2.00 TB (SAN)"
     },
     {
         "itemId": 1238,
@@ -1971,13 +1887,13 @@ var softlayerItems = [
         "itemId": 1307,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "128 GB DDR3 Registered 1333"
+        "description": "128 GB Registered DDR3 1333"
     },
     {
         "itemId": 1319,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "512 GB DDR3 Registered 1066"
+        "description": "512 GB Registered DDR3 1066"
     },
     {
         "itemId": 1322,
@@ -2049,7 +1965,7 @@ var softlayerItems = [
         "itemId": 3801,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "16 GB DDR3 1333 "
+        "description": "16 GB DDR3 1333"
     },
     {
         "itemId": 3805,
@@ -2058,22 +1974,10 @@ var softlayerItems = [
         "description": "32 GB DDR3 1333"
     },
     {
-        "itemId": 3809,
-        "categoryName": "Thirteenth Hard Drive",
-        "categoryCode": "disk12",
-        "description": "50GB SSD"
-    },
-    {
-        "itemId": 3810,
-        "categoryName": "Thirteenth Hard Drive",
-        "categoryCode": "disk12",
-        "description": "100GB SSD"
-    },
-    {
         "itemId": 3811,
         "categoryName": "Thirteenth Hard Drive",
         "categoryCode": "disk12",
-        "description": "200GB SSD"
+        "description": "200 GB SSD"
     },
     {
         "itemId": 3832,
@@ -2367,7 +2271,7 @@ var softlayerItems = [
         "itemId": 3989,
         "categoryName": "First Hard Drive",
         "categoryCode": "disk0",
-        "description": "3.00TB SATA III"
+        "description": "3.00 TB SATA III"
     },
     {
         "itemId": 4060,
@@ -2379,7 +2283,7 @@ var softlayerItems = [
         "itemId": 4064,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "32 GB DDR3 Registered 1333"
+        "description": "32 GB Registered DDR3 1333"
     },
     {
         "itemId": 4088,
@@ -2481,13 +2385,13 @@ var softlayerItems = [
         "itemId": 4111,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "64 GB DDR3 Registered 1333"
+        "description": "64 GB Registered DDR3 1333"
     },
     {
         "itemId": 4112,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "192 GB DDR3 Registered 1333"
+        "description": "192 GB Registered DDR3 1333"
     },
     {
         "itemId": 4113,
@@ -2523,7 +2427,7 @@ var softlayerItems = [
         "itemId": 4123,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "256 GB DDR3 Registered 1333"
+        "description": "256 GB Registered DDR3 1333"
     },
     {
         "itemId": 4132,
@@ -2673,7 +2577,7 @@ var softlayerItems = [
         "itemId": 4181,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "400GB SSD"
+        "description": "400 GB SSD"
     },
     {
         "itemId": 4182,
@@ -2769,7 +2673,7 @@ var softlayerItems = [
         "itemId": 4255,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "512 GB DDR3 Registered 1333"
+        "description": "512 GB Registered DDR3 1333"
     },
     {
         "itemId": 4258,
@@ -2793,7 +2697,7 @@ var softlayerItems = [
         "itemId": 4281,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "4.00TB SATA III"
+        "description": "4.00 TB SATA III"
     },
     {
         "itemId": 4288,
@@ -2910,6 +2814,12 @@ var softlayerItems = [
         "description": "Riak 1.x"
     },
     {
+        "itemId": 4328,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 5.6 (64 bit) - version-locked"
+    },
+    {
         "itemId": 4331,
         "categoryName": "Uplink Port Speeds",
         "categoryCode": "port_speed",
@@ -2985,7 +2895,7 @@ var softlayerItems = [
         "itemId": 4356,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "800GB SSD"
+        "description": "800 GB SSD"
     },
     {
         "itemId": 4369,
@@ -3034,6 +2944,12 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "CloudLinux 6.x (64 bit)"
+    },
+    {
+        "itemId": 4381,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "Red Hat Enterprise Linux 5.8 (64 bit) (per-processor licensing) - version-locked"
     },
     {
         "itemId": 4385,
@@ -3171,7 +3087,7 @@ var softlayerItems = [
         "itemId": 4497,
         "categoryName": "Eighteenth Hard Drive",
         "categoryCode": "disk17",
-        "description": "960GB SSD"
+        "description": "960 GB SSD"
     },
     {
         "itemId": 4514,
@@ -3264,6 +3180,12 @@ var softlayerItems = [
         "description": "cPanel/WHM with Softaculous and RVskin "
     },
     {
+        "itemId": 4636,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "CentOS 6.5 (64 bit) - version locked"
+    },
+    {
         "itemId": 4638,
         "categoryName": "Operating System",
         "categoryCode": "os",
@@ -3315,7 +3237,7 @@ var softlayerItems = [
         "itemId": 4678,
         "categoryName": "Eighth Hard Drive",
         "categoryCode": "disk7",
-        "description": "300GB SA-SCSI 15K RPM"
+        "description": "300 GB SA-SCSI 15K RPM"
     },
     {
         "itemId": 4680,
@@ -3408,6 +3330,12 @@ var softlayerItems = [
         "description": "10 Gbps Dual Public & Private Network Uplinks (Unbonded)"
     },
     {
+        "itemId": 5110,
+        "categoryName": "Operating System",
+        "categoryCode": "os",
+        "description": "Red Hat Enterprise Linux 5.6 (64 bit) (per-processor licensing) - version-locked"
+    },
+    {
         "itemId": 5118,
         "categoryName": "Uplink Port Speeds",
         "categoryCode": "port_speed",
@@ -3465,13 +3393,13 @@ var softlayerItems = [
         "itemId": 5904,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "1024 GB DDR3 Registered 1600"
+        "description": "1024 GB Registered DDR3 1600"
     },
     {
         "itemId": 5906,
         "categoryName": "RAM",
         "categoryCode": "ram",
-        "description": "2048 GB DDR3 Registered 1600"
+        "description": "2048 GB Registered DDR3 1600"
     },
     {
         "itemId": 5920,
@@ -3532,5 +3460,17 @@ var softlayerItems = [
         "categoryName": "Operating System",
         "categoryCode": "os",
         "description": "CentOS 7.x - Minimal Install (64 bit)"
+    },
+    {
+        "itemId": 5964,
+        "categoryName": "First Disk",
+        "categoryCode": "guest_disk0",
+        "description": "50 GB (SAN)"
+    },
+    {
+        "itemId": 5966,
+        "categoryName": "First Disk",
+        "categoryCode": "guest_disk0",
+        "description": "50 GB (LOCAL)"
     }
 ];
