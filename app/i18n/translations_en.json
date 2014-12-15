@@ -13,7 +13,7 @@
     "startedMightTakeWhile" : "BLU Installation started. Please wait, this might take a while...",
     "bluSolo" : {
         "awsApiKey" : "Go to <a href=\"https://console.aws.amazon.com/iam/home?#security_credential\" target=\"_blank\">AWS API credentials </a>",
-        "securityGroup" : "We require the following ports to be open: 22, 25, 80, 389, 8787, 9443, 8443, 50000, 50001, 443, 9300, 8100, 8099.<br/> <a href='https://www.youtube.com/watch?v=925n0IykcMA' target='_blank'>See how to create a security group video</a><br/> Go to  <a href=\"https://eu-west-1.console.aws.amazon.com/ec2/v2/home?region=eu-west-1#SecurityGroups:sort=groupId\" target=\"_blank\">AWS site groups</a>",
+        "securityGroup" : "<a href='http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html'> What is security group ?</a><br/><a href='https://www.youtube.com/watch?v=925n0IykcMA' target='_blank'>How to create a security group(video)</a><br/>The following ports to be open in the given security group : 22, 25, 80, 389, 8787, 9443, 8443, 50000, 50001, 443, 9300, 8100, 8099.",
         "mustAgree" : "You must agree to email communications to participate in this program.",
         "chooseCloud" : "Choose the cloud where you want to deploy your BLU Acceleration for Cloud",
         "title" : "BLU Acceleration for Cloud",
