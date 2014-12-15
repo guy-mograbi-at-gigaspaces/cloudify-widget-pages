@@ -33,6 +33,11 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidget
                 controller: 'BluSoloCtrl',
                 reloadOnSearch:false
             })
+            .when('/snippet/bluSoloNew', {
+                templateUrl : 'views/snippets/bluSoloNew.html',
+                controller: 'BluSoloNewCtrl',
+                reloadOnSearch:false
+            })
             .when('/main', {
                 controller: 'MainCtrl',
                 templateUrl: 'views/main.html'
