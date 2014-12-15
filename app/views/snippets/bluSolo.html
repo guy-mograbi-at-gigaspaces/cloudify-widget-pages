@@ -40,7 +40,7 @@
             <div class="section">
                 <div class="label">{{'labels.cloudProvider' | i18n }}</div>
                 <div class="control">
-                    <select ng-options="cloudProvider.id as cloudProvider.label for cloudProvider in cloudProviders" ng-model="execution.cloudProvider"></select>
+                    <select ng-options="cloudProvider.id as cloudProvider.label for cloudProvider in cloudProviders" ng-model="execution.cloudProvider" tabindex=1></select>
                 </div>
             </div>
             <div class="side-info">
@@ -60,7 +60,7 @@
 
                 <div class="label">{{ 'labels.email' | i18n }} <span class="required">*</span></div>
                 <div class="control">
-                    <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.email"/>
+                    <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.email" tabindex=5/>
                 </div>
                 <div class="error-message">
                     {{'formErrors.general.' + formErrors.email | i18n }}
@@ -73,10 +73,10 @@
                 <div class="label">{{ 'labels.name.top' | i18n }}<span class="required">*</span></div>
                 <div class="inputs">
                     <div class="first control">
-                        <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.firstName"/>
+                        <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.firstName" tabindex=6/>
                     </div>
                     <div class="second control">
-                        <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.lastName"/>
+                        <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.lastName" tabindex=7/>
                     </div>
                 </div>
                 <div class="instructions">
@@ -97,7 +97,7 @@
             <div class="section">
                 <div class="label">{{'labels.companyName' | i18n}}<span class="required">*</span></div>
                 <div class="control">
-                    <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.companyName"/>
+                    <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.companyName" tabindex=8/>
                 </div>
                 <div class="error-message">
                     {{'formErrors.general.' + formErrors.company | i18n }}
@@ -111,7 +111,7 @@
                 <div class="section">
                 <div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>
                 <div class="control" style="padding-top:20px; padding-left:7px;">
-                    <input type="checkbox" ng-model="execution.agreed"> <span style="padding-left:10px;">I agree</span>
+                    <input type="checkbox" ng-model="execution.agreed" tabindex=9> <span style="padding-left:10px;">I agree</span>
                 </div>
                 <div class="error-message">
                     {{'formErrors.general.' + formErrors.company | i18n }}
@@ -130,7 +130,7 @@
                 </div>
                 <div class="form-actions">
                     <i ng-show="!genericWidgetModel.loaded" class="fa fa-spinner fa-spin"></i>
-                    <button ng-show="!!genericWidgetModel.loaded" ng-click="submitForm()">Submit</button>
+                    <button ng-show="!!genericWidgetModel.loaded" ng-click="submitForm()" tabindex=10>Submit</button>
                     <span class="submit-error" ng-show="!!formErrors" >{{'formErrors.pleaseReview' | i18n }}</span>
                 </div>
             </div>
