@@ -9,7 +9,7 @@
     },
 
     "workingHard" : "We are working hard to get your instance up and running with BLU",
-    "lookingForPrevious":"Looking for previous installations...",
+    "lookingForPrevious":"Loading...",
     "startedMightTakeWhile" : "BLU Installation started. Please wait, this might take a while...",
     "bluSolo" : {
         "awsApiKey" : "Go to <a href=\"https://console.aws.amazon.com/iam/home?#security_credential\" target=\"_blank\">AWS API credentials </a>",
