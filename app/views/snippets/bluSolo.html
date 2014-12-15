@@ -9,46 +9,45 @@
     </div>
     -->
 
-    <!--{{genericWidgetModel.widgetStatus}}-->
-    <div recipe-properties-display="sentProperties"></div>
+<!--{{genericWidgetModel.widgetStatus}}-->
+<div recipe-properties-display="sentProperties"></div>
 
-    <div loading-widget="genericWidgetModel"></div>
+<div loading-widget="genericWidgetModel"></div>
 
-    <div ng-show="!!genericWidgetModel.loaded">
-
-
-        <div>
-
-            <div possible-errors="possibleErrors" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING'"></div>
+ <div ng-show="!!genericWidgetModel.loaded">
 
 
-            <!--<div ng-show="!!genericWidgetModel.widgetStatus.message" class="bg-danger widget-message">-->
-            <!--<div>-->
+<div  >
+
+    <div possible-errors="possibleErrors" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING'"></div>
+
+
+    <!--<div ng-show="!!genericWidgetModel.widgetStatus.message" class="bg-danger widget-message">-->
+        <!--<div>-->
             <!--{{genericWidgetModel.widgetStatus.message}}-->
-            <!--</div>-->
-            <!--<button ng-show="!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = true"><i class="fa fa-tasks" style="padding-right:10px;"></i>Show complete log</button>-->
-            <!--<button ng-show="!!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = false"><i class="fa fa-arrow-circle-o-left" style="padding-right:10px;"></i>Back to form</button>-->
-            <!--</div>-->
+        <!--</div>-->
+        <!--<button ng-show="!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = true"><i class="fa fa-tasks" style="padding-right:10px;"></i>Show complete log</button>-->
+        <!--<button ng-show="!!showCompleteLog" class="btn btn-link" ng-click="showCompleteLog = false"><i class="fa fa-arrow-circle-o-left" style="padding-right:10px;"></i>Back to form</button>-->
+    <!--</div>-->
 
-            <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
-            <div widget-raw-output-display="genericWidgetModel" stop="stopWidget(true)"
-                 ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING' || showCompleteLog"></div>
+    <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
+    <div widget-raw-output-display="genericWidgetModel" stop="stopWidget(true)"
+         ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING' || showCompleteLog"></div>
 
-            <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING' && !showCompleteLog">
-                <div class="controllers">
-                    <div class="cloud-provider controller" control-focus>
-                        <div class="section">
-                            <div class="label">{{'labels.cloudProvider' | i18n }}</div>
-                            <div class="control">
-                                <select ng-options="cloudProvider.id as cloudProvider.label for cloudProvider in cloudProviders"
-                                        ng-model="execution.cloudProvider"></select>
-                            </div>
-                        </div>
-                        <div class="side-info">
-                            {{ 'bluSolo.chooseCloud' | i18n }}
-                        </div>
-                    </div>
-                    <!-- softlayer specific -->
+     <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING' && !showCompleteLog">
+    <div class="controllers">
+        <div class="cloud-provider controller" control-focus>
+            <div class="section">
+                <div class="label">{{'labels.cloudProvider' | i18n }}</div>
+                <div class="control">
+                    <select ng-options="cloudProvider.id as cloudProvider.label for cloudProvider in cloudProviders" ng-model="execution.cloudProvider" tabindex=1></select>
+                </div>
+            </div>
+            <div class="side-info">
+                {{ 'bluSolo.chooseCloud' | i18n }}
+            </div>
+        </div>
+        <!-- softlayer specific -->
                 <span ng-show="execution.cloudProvider==='softlayer'">
                    <div ng-include="'views/snippets/_bluSolo_softlayer.html'"></div>
                 </span>
@@ -56,100 +55,94 @@
                     <div ng-include="'views/snippets/_bluSolo_aws.html'"></div>
                 </span>
 
-                    <div class="controller" control-focus control-error="formErrors.email">
-                        <div class="section">
+        <div class="controller" control-focus control-error="formErrors.email">
+            <div class="section">
 
-                            <div class="label">{{ 'labels.email' | i18n }} <span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" class="form-control"
-                                       ng-model="genericWidgetModel.leadDetails.email"/>
-                            </div>
-                            <div class="error-message">
-                                {{'formErrors.general.' + formErrors.email | i18n }}
-                            </div>
-                        </div>
+                <div class="label">{{ 'labels.email' | i18n }} <span class="required">*</span></div>
+                <div class="control">
+                    <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.email" tabindex=5/>
+                </div>
+                <div class="error-message">
+                    {{'formErrors.general.' + formErrors.email | i18n }}
+                </div>
+            </div>
+        </div>
+
+        <div class="controller visitor-name" control-focus control-error="formErrors.name">
+            <div class="section">
+                <div class="label">{{ 'labels.name.top' | i18n }}<span class="required">*</span></div>
+                <div class="inputs">
+                    <div class="first control">
+                        <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.firstName" tabindex=6/>
                     </div>
-
-                    <div class="controller visitor-name" control-focus control-error="formErrors.name">
-                        <div class="section">
-                            <div class="label">{{ 'labels.name.top' | i18n }}<span class="required">*</span></div>
-                            <div class="inputs">
-                                <div class="first control">
-                                    <input type="text" class="form-control"
-                                           ng-model="genericWidgetModel.leadDetails.firstName"/>
-                                </div>
-                                <div class="second control">
-                                    <input type="text" class="form-control"
-                                           ng-model="genericWidgetModel.leadDetails.lastName"/>
-                                </div>
-                            </div>
-                            <div class="instructions">
-                                <div class="first">
-                                    {{ 'labels.name.first' | i18n }}
-                                </div>
-                                <div class="second">
-                                    {{ 'labels.name.last' | i18n }}
-                                </div>
-                            </div>
-                            <div class="error-message">
-                                {{'formErrors.general.' + formErrors.name | i18n }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="controller" control-focus control-error="formErrors.company">
-                        <div class="section">
-                            <div class="label">{{'labels.companyName' | i18n}}<span class="required">*</span></div>
-                            <div class="control">
-                                <input type="text" class="form-control"
-                                       ng-model="genericWidgetModel.leadDetails.companyName"/>
-                            </div>
-                            <div class="error-message">
-                                {{'formErrors.general.' + formErrors.company | i18n }}
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="agreement controller" control-focus control-error="formErrors.agreed">
-                        <div class="section">
-                            <div>By submitting this form you grant us permission to communicate with you using
-                                email.<span class="required">*</span></div>
-                            <div class="control" style="padding-top:20px; padding-left:7px;">
-                                <input type="checkbox" ng-model="execution.agreed"> <span style="padding-left:10px;">I agree</span>
-                            </div>
-                            <div class="error-message">
-                                {{'formErrors.general.' + formErrors.company | i18n }}
-                            </div>
-                        </div>
-                    </div>
-                    <!--</div>-->
-                    <div class="form-errors" ng-show="execution.error">
-                        {{execution.error}}
-                    </div>
-
-                    <div class="controller" control-focus>
-                        <div class="section">
-                            <div class="you-must-agree">
-                                {{'bluSolo.mustAgree' | i18n }}
-                            </div>
-                            <div class="form-actions">
-                                <i ng-show="!genericWidgetModel.loaded" class="fa fa-spinner fa-spin"></i>
-                                <button ng-show="!!genericWidgetModel.loaded" ng-click="submitForm()">Submit</button>
-                                <span class="submit-error"
-                                      ng-show="!!formErrors">{{'formErrors.pleaseReview' | i18n }}</span>
-                            </div>
-                        </div>
+                    <div class="second control">
+                        <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.lastName" tabindex=7/>
                     </div>
                 </div>
+                <div class="instructions">
+                    <div class="first">
+                        {{ 'labels.name.first' | i18n }}
+                    </div>
+                    <div class="second">
+                        {{ 'labels.name.last' | i18n }}
+                    </div>
+                </div>
+                <div class="error-message">
+                    {{'formErrors.general.' + formErrors.name | i18n }}
+                </div>
+            </div>
+        </div>
+
+        <div class="controller" control-focus control-error="formErrors.company">
+            <div class="section">
+                <div class="label">{{'labels.companyName' | i18n}}<span class="required">*</span></div>
+                <div class="control">
+                    <input type="text" class="form-control" ng-model="genericWidgetModel.leadDetails.companyName" tabindex=8/>
+                </div>
+                <div class="error-message">
+                    {{'formErrors.general.' + formErrors.company | i18n }}
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="agreement controller" control-focus control-error="formErrors.agreed">
+                <div class="section">
+                <div>By submitting this form you grant us permission to communicate with you using email.<span class="required">*</span></div>
+                <div class="control" style="padding-top:20px; padding-left:7px;">
+                    <input type="checkbox" ng-model="execution.agreed" tabindex=9> <span style="padding-left:10px;">I agree</span>
+                </div>
+                <div class="error-message">
+                    {{'formErrors.general.' + formErrors.company | i18n }}
+                </div>
+            </div>
+        </div>
+        <!--</div>-->
+        <div class="form-errors" ng-show="execution.error">
+            {{execution.error}}
+        </div>
+
+        <div class="controller" control-focus>
+            <div class="section">
+                <div class="you-must-agree">
+                    {{'bluSolo.mustAgree' | i18n }}
+                </div>
+                <div class="form-actions">
+                    <i ng-show="!genericWidgetModel.loaded" class="fa fa-spinner fa-spin"></i>
+                    <button ng-show="!!genericWidgetModel.loaded" ng-click="submitForm()" tabindex=10>Submit</button>
+                    <span class="submit-error" ng-show="!!formErrors" >{{'formErrors.pleaseReview' | i18n }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <span ng-show="showWidget">
         <div widget-iframe url="widgetUrl"></div>
     </span>
-            </div>
-            <!--form-->
-        </div>
-
+     </div> <!--form-->
     </div>
+
+</div>
 
 </div>
