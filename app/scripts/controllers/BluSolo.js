@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ibmBiginsightsUiApp')
-    .controller('BluSoloCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService, BluSoloFormValidator) {
+    .controller('BluSoloCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService, BluSoloFormValidator, PossibleErrorsService) {
 
         $scope.data = CloudDataService;
         $scope.showWidget = window === window.parent;
@@ -132,12 +132,20 @@ angular.module('ibmBiginsightsUiApp')
         }, true);
 
 
+        // lets scan for possible errors in the output and add possible errors.
+        $scope.$watch('[genericWidgetModel.widgetStatus.rawOutput,genericWidgetModel.widgetStatus.message]', function(  ){
+            $scope.possibleErrors = PossibleErrorsService.detect( $scope.genericWidgetModel.widgetStatus.rawOutput, $scope.genericWidgetModel.widgetStatus.message );
+        },true);
+
+
         $scope.submitForm = function () {
+            updateProperties('from submit');
             $scope.formIsValid = validateForm();
             if (!$scope.formIsValid) {
                 return;
             }
             $log.info('submitting form');
+            $scope.possibleErrors = null;
             $scope.playWidget();
 
         };

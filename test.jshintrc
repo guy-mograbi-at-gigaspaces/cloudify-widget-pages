@@ -32,7 +32,9 @@
     "spyOn": false,
       "$" : false,
       "waits" : false,
-      "runs" : false
+      "runs" : false,
+      "waitsFor": false,
+      "_" : false
   }
 }
 

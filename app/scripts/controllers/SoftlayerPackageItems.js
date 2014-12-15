@@ -16,7 +16,9 @@ angular.module('ibmBiginsightsUiApp')
 
 
         $scope.loadCachedItems = function () {
-            $scope.items = $http.get('https://www.dropbox.com/s/if4akhffs2m4avb/data.json?dl=1').data;
+            $http.get('https://www.dropbox.com/s/if4akhffs2m4avb/data.json?dl=1').then(function(result){
+                $scope.items = result.data;
+            });
         };
 
         $scope.loginDetails = {};
