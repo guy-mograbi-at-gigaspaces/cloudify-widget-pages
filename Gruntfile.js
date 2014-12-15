@@ -407,6 +407,11 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'karma.conf.js',
                 singleRun: true
+            },
+            debug: {
+                configFile: 'karma.conf.js',
+                singleRun: false,
+                reporters: ['failed']
             }
         },
         ngmin: {
@@ -428,6 +433,18 @@ module.exports = function (grunt) {
                         '<%= yeoman.dist %>/scripts/scripts.js'
                     ]
                 }
+            }
+        },
+        mochaTest: {
+            test: {
+                options: {
+                    timeout: 1800000,
+                    reporter: 'spec',
+                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    quiet: false, // Optionally suppress output to standard out (defaults to false)
+                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+                },
+                src: ['systemTests/src']
             }
         }
     });
@@ -452,7 +469,7 @@ module.exports = function (grunt) {
         'html2js:main',
         'concurrent:test',
         'connect:test',
-        'karma'
+        'karma:unit'
     ]);
 
     grunt.registerTask('build', function () {
@@ -495,4 +512,10 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('mocha', function() {
+        grunt.task.run([
+            'mochaTest'
+        ]);
+    });
 };

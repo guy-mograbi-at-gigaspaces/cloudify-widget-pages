@@ -171,11 +171,8 @@
 
   .widget-message{
     padding:15px;
-    max-width:300px;
     margin:0 auto;
     border:1px solid #a94442;
-    text-align:center;
-
   }
   .form {
       margin-top: 20px;
@@ -337,4 +334,11 @@
 
     }
 
+}
+
+
+.possible-errors{
+  .subtitle{
+    padding-bottom:10px;
+  }
 }
