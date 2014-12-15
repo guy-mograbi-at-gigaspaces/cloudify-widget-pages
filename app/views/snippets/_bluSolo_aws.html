@@ -3,7 +3,7 @@
     <div class="section">
         <div class="label"> {{'labels.region' | i18n }} <span class="required">*</span></div>
         <div class="control">
-            <select ng-options="region.id as ('aws.regions.' + region.id | i18n ) for region in data.aws.region.data" ng-model="execution.aws.region"></select>
+            <select ng-options="region.id as ('aws.regions.' + region.id | i18n ) for region in data.aws.region.data" ng-model="execution.aws.region" tabindex=2></select>
         </div>
     </div>
 </div>
@@ -11,7 +11,7 @@
     <div class="section">
         <div class="label">Security Group <span class="required">*</span></div>
         <div class="control">
-            <input type="text" class="form-control" ng-model="execution.aws.securityGroup" />
+            <input type="text" class="form-control" ng-model="execution.aws.securityGroup" tabindex=3/>
         </div>
         <div class="error-message">
             {{'formErrors.general.' + formErrors.securityGroup | i18n }}
@@ -39,7 +39,7 @@
     <div class="section">
         <div class="label">AWS API Key  <span class="required">*</span></div>
         <div class="control">
-            <input type="text" class="form-control" ng-model="awsLoginDetails.params.key" />
+            <input type="text" class="form-control" ng-model="awsLoginDetails.params.key" tabindex=4/>
         </div>
 
         <div class="error-message">
@@ -56,7 +56,7 @@
     <div class="section">
         <div class="label">AWS API Secret Key  <span class="required">*</span></div>
         <div class="control">
-            <input type="password" class="form-control" ng-model="awsLoginDetails.params.secretKey" />
+            <input type="password" class="form-control" ng-model="awsLoginDetails.params.secretKey" tabindex=5/>
         </div>
         <div class="error-message">
             {{'formErrors.general.' + formErrors.secretKey | i18n }}
