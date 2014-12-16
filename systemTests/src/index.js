@@ -42,7 +42,7 @@ var MINUTE = 60 * SECOND;
 
  */
 
-var lodash = require('lodash');
+var _ = require('lodash');
 var assert = require('assert');
 var path = require('path');
 var meJson = process.env.ME_JSON && path.resolve(__dirname + '/../../', process.env.ME_JSON) || path.resolve(__dirname, '../conf/dev/me.json');
@@ -67,7 +67,7 @@ try {
 try {
     var overrideJSON = path.resolve(__dirname, '../conf/dev/me-override.json');
     var overrideConf = require(overrideJSON);
-    lodash.merge(conf, overrideConf);
+    _.merge(conf, overrideConf);
 } catch (e) {
     logger.debug('There is no me-override.json file', e);
 }
@@ -292,7 +292,9 @@ describe('snippet tests', function () {
 
         beforeEach(function (done) {
             driver = globalSteps.getChromeDriver(seleniumServerAddress);
-            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang=').then(done);
+            driver.get('http://ibmpages.gsdev.info/#/snippet/bluSolo?lang   =').then(function () {
+                done();
+            });
         });
 
         afterEach(function (done) {

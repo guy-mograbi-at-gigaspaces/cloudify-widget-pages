@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 
     try {
         s3Config = require(process.env.IBM_PAGES_S3 || path.resolve('./dev/s3.json'));
-    }catch(e){
+    } catch (e) {
         logger.error('s3 json is undefined, you will not be able to upload to s3');
     }
 
@@ -49,7 +49,7 @@ module.exports = function (grunt) {
                 options: {
                     key: s3Config.accessKey,
                     secret: s3Config.secretKey,
-                    gzip:true,
+                    gzip: true,
                     access: s3Config.access,
                     bucket: s3Config.bucket
                 },
@@ -160,15 +160,15 @@ module.exports = function (grunt) {
         },
 
         jshint: {
-            options:{
+            options: {
                 reporter: require('jshint-stylish')
             },
             main: {
                 options: {
                     jshintrc: '.jshintrc'
                 },
-                files:  {
-                    'src':[
+                files: {
+                    'src': [
                         'Gruntfile.js',
                         '<%= yeoman.app %>/scripts/**/*.js'
                     ]
@@ -178,18 +178,18 @@ module.exports = function (grunt) {
                 options: {
                     jshintrc: 'test.jshintrc'
                 },
-                files:  {
-                    'src':[
+                files: {
+                    'src': [
                         'test/**/*.js'
                     ]
                 }
             },
-            systemTests:{
+            systemTests: {
                 options: {
                     jshintrc: 'systemTests.jshintrc'
                 },
                 files: {
-                    'src' : [
+                    'src': [
                         'systemTests/**/*.js'
                     ]
                 }
@@ -201,7 +201,7 @@ module.exports = function (grunt) {
                 // custom options, see below
             },
             main: {
-                src: ['app/views/**/*.html','app/views/*.html'],
+                src: ['app/views/**/*.html', 'app/views/*.html'],
                 dest: '.tmp/html2js/directives.js',
                 module: 'directives-templates',
                 options: {
@@ -385,8 +385,8 @@ module.exports = function (grunt) {
         },
         concurrent: {
             watchStuff: {
-                'tasks' : [ 'watch', 'watch:jshint' ],
-                'options' : { 'logConcurrentOutput' :true}
+                'tasks': [ 'watch', 'watch:jshint' ],
+                'options': { 'logConcurrentOutput': true}
             },
             server: [
                 'coffee:dist',
@@ -436,15 +436,27 @@ module.exports = function (grunt) {
             }
         },
         mochaTest: {
-            test: {
+            sanity: {
                 options: {
                     timeout: 1800000,
                     reporter: 'spec',
-                    captureFile: 'results.txt', // Optionally capture the reporter output to a file
+                    captureFile: 'systemTests/output/sanity-test-results.txt', // Optionally capture the reporter output to a file
                     quiet: false, // Optionally suppress output to standard out (defaults to false)
                     clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
                 },
-                src: ['systemTests/src']
+                src: ['systemTests/src/suites/sanity/*.spec.js']
+                //src: ['systemTests/src/index.js']
+            },
+            failures: {
+                options: {
+                    timeout: 1800000,
+                    reporter: 'spec',
+                    captureFile: 'systemTests/output/failure-test-results.txt', // Optionally capture the reporter output to a file
+                    quiet: false, // Optionally suppress output to standard out (defaults to false)
+                    clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false)
+                },
+                src: ['systemTests/src/suites/failure-checks/*.spec.js']
+                //src: ['systemTests/src/index.js']
             }
         }
     });
@@ -492,15 +504,15 @@ module.exports = function (grunt) {
         grunt.task.run(tasks);
     });
 
-    grunt.registerTask('updateSoftlayerData', function(){
+    grunt.registerTask('updateSoftlayerData', function () {
         var callback = this.async();
         process.env.SOFTLAYER_PACKAGE_URL = process.env.SOFTLAYER_PACKAGE_URL || s3Config.softlayerDataUrl;
-        require('./build/digest_softlayer_package_items.js').execute( callback );
+        require('./build/digest_softlayer_package_items.js').execute(callback);
     });
 
     grunt.registerTask('writeBuildId',
-        function(){
-            grunt.file.write('dist/build.json', JSON.stringify({ 'host' : require('os').hostname() , 'timestamp' : new Date().getTime() }) );
+        function () {
+            grunt.file.write('dist/build.json', JSON.stringify({ 'host': require('os').hostname(), 'timestamp': new Date().getTime() }));
         }
     );
 
@@ -513,9 +525,17 @@ module.exports = function (grunt) {
         'build'
     ]);
 
-    grunt.registerTask('mocha', function() {
+
+    grunt.registerTask('mocha', function () {
         grunt.task.run([
-            'mochaTest'
+            'mochaTest:sanity'
+        ]);
+    });
+
+
+    grunt.registerTask('mochaFails', function () {
+        grunt.task.run([
+            'mochaTest:failures'
         ]);
     });
 };
