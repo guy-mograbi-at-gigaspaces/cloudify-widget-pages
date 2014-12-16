@@ -516,7 +516,9 @@ module.exports = function (grunt) {
         }
     );
 
-    grunt.registerTask('deploy', [ 'updateSoftlayerData', 'default', 's3:all']);
+    // commented this out since softlayer changed their api a bit.
+    grunt.registerTask('deploy', [  'default', 's3:all']);
+//    grunt.registerTask('deploy', [ 'updateSoftlayerData', 'default', 's3:all']);
 
 
     grunt.registerTask('default', [

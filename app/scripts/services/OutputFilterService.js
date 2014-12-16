@@ -16,6 +16,20 @@ angular.module('ibmBiginsightsUiApp')
             return !foundMatch;
         }
 
+        function isRealException(item){
+            if ( item.indexOf('an exception during authentication') >= 0 ){
+                return false;
+            }
+
+            if ( item.indexOf('java.net.SocketTimeoutException: Read timed out') >=0 ){
+                return false;
+            }
+
+            if ( item.indexOf('Exception')>=0){
+                return true;
+            }
+        }
+
         this.filter = function (output) {
             var hasException = false;
             var result = null;
@@ -24,7 +38,7 @@ angular.module('ibmBiginsightsUiApp')
 
                     // we want to return all lines up to the exception (including the exception line.. )
                     if (!hasException) {
-                        hasException = item.indexOf('Exception') >= 0;
+                        hasException = isRealException(item);
                         return !isValidOutput(item);
                     } else {
                         return hasException;

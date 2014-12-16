@@ -25,6 +25,15 @@ describe('Service: Outputfilterservice', function () {
             }
         });
         expect(found).toBe(undefined);
+
+        // so far we validated that 'SocketTimeout' does not appear, but lets validate lines after that do appear
+        var afterLines = _.find(result, function(item){
+            if ( item.indexOf('Running script') >= 0){
+                return item;
+            }
+        });
+
+        expect(afterLines!==undefined).toBe(true);
     });
 
 
