@@ -489,7 +489,7 @@ module.exports = function (grunt) {
 
         ];
 
-        grunt.task.run(tasks);
+        grunt.task.run(tasks);;
     });
 
     grunt.registerTask('updateSoftlayerData', function(){
