@@ -74,8 +74,8 @@ angular.module('ibmBiginsightsUiApp')
         widgetIds[AppConstants.CloudProviders.AWS] = '548d7da2353b591552beeeb5';
 //        widgetIds[AppConstants.CloudProviders.Softlayer] = '0375c7bb-c070-4b80-970b-eaec99fccfc7';
 
-        $scope.awsLoginDetails = { 'params' : { 'apiKey' : null, 'secretKey': null } };
 //        $scope.softlayerLoginDetails = { 'type' : 'softlayer' , 'params' : { 'username' : null, 'apiKey' : null } };
+        $scope.awsLoginDetails = { 'params' : { 'apiKey' : null, 'secretKey': null } };
 
         $scope.execution = {
             'cloudProvider': $routeParams.cloudProvider || AppConstants.CloudProviders.AWS,
