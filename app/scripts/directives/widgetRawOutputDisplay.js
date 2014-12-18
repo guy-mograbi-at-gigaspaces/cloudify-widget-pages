@@ -18,12 +18,15 @@ angular.module('ibmBiginsightsUiApp')
                     scope.stop();
                 };
 
-                scope.$watch('source.widgetStatus.state', function (newValue, oldValue) {
+                var handleStateChange = function(newValue, oldValue) {
                     if (newValue !== oldValue) {
                         $log.info('status changed', newValue);
                         scope.page.stopping = false;
                     }
+                };
 
+                scope.$watch('source.widgetStatus.state', function (newValue, oldValue) {
+                    handleStateChange(newValue, oldValue);
                 });
 
                 scope.$watch('source.widgetStatus.rawOutput', function () {
@@ -32,7 +35,15 @@ angular.module('ibmBiginsightsUiApp')
                     }
                 }, true);
 
+                scope.$watch('source.widgetStatus.nodeModel.state', function (newValue, oldValue) {
+                    handleStateChange(newValue, oldValue);
+                });
 
+                scope.$watch('source.widgetStatus.output', function () {
+                    if (!!scope.source && !!scope.source.widgetStatus && !!scope.source.widgetStatus.output) {
+                        scope.digestedOutput = OutputFilterService.filter(scope.source.widgetStatus.output);
+                    }
+                }, true);
             }
         };
     });
