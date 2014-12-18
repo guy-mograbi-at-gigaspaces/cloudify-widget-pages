@@ -32,9 +32,9 @@
 
             <!--<pre>{{genericWidgetModel.widgetStatus.status.rawOutput[0]}}</pre>-->
             <div widget-raw-output-display="genericWidgetModel" stop="stopWidget(true)"
-                 ng-show="genericWidgetModel.widgetStatus.state === 'RUNNING' || showCompleteLog"></div>
+                 ng-show="genericWidgetModel.widgetStatus.nodeModel.state === 'RUNNING' || showCompleteLog"></div>
 
-            <div class="form" ng-show="genericWidgetModel.widgetStatus.state !== 'RUNNING' && !showCompleteLog">
+            <div class="form" ng-show="genericWidgetModel.widgetStatus.nodeModel.state !== 'RUNNING' && !showCompleteLog">
                 <div class="controllers">
                     <div class="cloud-provider controller" control-focus>
                         <div class="section">

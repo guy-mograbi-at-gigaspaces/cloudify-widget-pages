@@ -9,11 +9,10 @@ angular.module('ibmBiginsightsUiApp')
                 'pattern': 'Failed to create Cloudify Management VM: Error org.jclouds.rest.AuthorizationException',
                 'error': 'causes.imageUnauthorized.error',
                 'action': 'causes.imageUnauthorized.action'
-            },
-            {
-                'pattern': '',
-                'error': null,
-                'action': 'causes.callSupport.action'
+            },            {
+                'pattern': 'InstanceLimitExceeded',
+                'error': 'causes.instancesOverQuota.error',
+                'action': 'causes.instancesOverQuota.action'
             },
             {
                 'pattern': 'missing image to share details',

@@ -66,7 +66,8 @@ angular.module('ibmBiginsightsUiApp')
 
 
         function changeWidgetUrl() {
-            $scope.widgetUrl = 'http://thewidget.staging.gsdev.info/#/widgets/' + widgetIds[$scope.execution.cloudProvider] + '/blank';
+//            $scope.widgetUrl = 'http://thewidget.staging.gsdev.info/#/widgets/' + widgetIds[$scope.execution.cloudProvider] + '/blank';
+            $scope.widgetUrl = 'http://localhost.com:9000/#/widgets/53d651d37818c889b6619020/blank';
         }
 
         var widgetIds = {};
