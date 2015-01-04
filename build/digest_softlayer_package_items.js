@@ -15,7 +15,9 @@ exports.execute = function execute( callback ) {
 
         var counter = 0;
 
+        console.log('data length:', data, data.length);
         data.forEach(function (section) {
+            console.log('section length' , section.itemPrices, section.itemPrices.length);
             section.itemPrices.forEach(
                 function (price) {
                     counter++;

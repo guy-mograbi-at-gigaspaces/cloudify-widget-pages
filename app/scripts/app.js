@@ -23,6 +23,10 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidget
                 templateUrl : 'views/packageItems.html',
                 controller: 'SoftlayerPackageItemsCtrl'
             })
+            .when('/snippet/bluFree', {
+                templateUrl: 'views/snippet/blufree.html',
+                controller:'BlufreeCtrl'
+            })
 
             .when('/wrapper/bluSolo', {
                 templateUrl : 'views/wrappers/bluSolo.html'
