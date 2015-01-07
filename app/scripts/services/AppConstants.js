@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .constant('AppConstants', {
         'CloudProviders': {
             'AWS': 'aws',

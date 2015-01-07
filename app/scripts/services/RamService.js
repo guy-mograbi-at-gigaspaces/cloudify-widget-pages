@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('RamService', function RamService( $q ) {
         var ramTypes = {
             'cci': [

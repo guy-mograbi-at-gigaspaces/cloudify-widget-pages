@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('optionsDisabled', function ($parse) {
         var disableOptions = function (scope, attr, element, data, fnDisableIfTrue) {
 

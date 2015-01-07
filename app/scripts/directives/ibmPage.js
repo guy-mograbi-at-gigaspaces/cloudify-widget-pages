@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('ibmPage', function ( $log, $compile ) {
         return {
             templateUrl: 'views/directives/_ibmPage.html',

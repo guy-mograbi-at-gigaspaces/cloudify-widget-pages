@@ -7,8 +7,8 @@
  * # BlufreeCtrl
  * Controller of the ibmBiginsightsUiApp
  */
-angular.module('ibmBiginsightsUiApp')
-    .controller('BlufreeCtrl', function ($scope) {
+angular.module('cloudifyWidgetPagesApp')
+    .controller('BluFreeCtrl', function ($scope) {
         $scope.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',

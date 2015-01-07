@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .controller('SoftlayerPackageItemsCtrl', function ($scope, $http, SoftlayerPackageItemsService, $timeout) {
 
 

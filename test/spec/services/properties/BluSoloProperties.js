@@ -3,7 +3,7 @@
 describe('Service: properties/BluSolo', function () {
 
     // load the service's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('cloudifyWidgetPagesApp'));
 
     // instantiate service
     var mBluSoloProperties;

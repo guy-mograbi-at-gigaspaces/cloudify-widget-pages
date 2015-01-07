@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidgetAngularController']) // 'gsUiInfraApp'
+angular.module('cloudifyWidgetPagesApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidgetAngularController']) // 'gsUiInfraApp'
     .config(function ($routeProvider) {
         $routeProvider
             .when('/order', {
@@ -25,7 +25,7 @@ angular.module('ibmBiginsightsUiApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWidget
             })
             .when('/snippet/bluFree', {
                 templateUrl: 'views/snippet/blufree.html',
-                controller:'BlufreeCtrl'
+                controller:'BluFreeCtrl'
             })
 
             .when('/wrapper/bluSolo', {

@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: optionDisabled', function () {
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('cloudifyWidgetPagesApp'));
 
 //  var element;
 //

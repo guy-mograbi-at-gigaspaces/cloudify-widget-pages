@@ -3,7 +3,7 @@
 describe('Controller: BlufreeCtrl', function () {
 
     // load the controller's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('cloudifyWidgetPagesApp'));
 
     var BlufreeCtrl,
         scope;

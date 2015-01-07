@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('PossibleErrorsService', function PossibleErrorsService() {
         // AngularJS will instantiate a singleton by calling "new" on this function
 

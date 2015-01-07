@@ -1,7 +1,7 @@
 'use strict';
 
 describe('Directive: ibmPage', function () {
-    beforeEach(module('ibmBiginsightsUiApp','directives-templates'));
+    beforeEach(module('cloudifyWidgetPagesApp','directives-templates'));
 
     var element;
 

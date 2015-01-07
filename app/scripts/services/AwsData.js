@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('AwsData', function AwsData(AwsInstanceTypeService, AwsRegionService) {
 
         this.instanceType = AwsInstanceTypeService;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('BigInsightsEditionService', function BigInsightsEditionService($q) {
         // currently not supported in recipe, ignore for now.
         var biginsightsEdition = [

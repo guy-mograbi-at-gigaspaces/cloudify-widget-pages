@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('widgetRawOutputDisplay', function ($log, OutputFilterService ) {
         return {
             templateUrl: 'views/directives/_widgetOutputDisplay.html',

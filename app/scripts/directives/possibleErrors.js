@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('possibleErrors', function () {
         return {
             templateUrl: 'views/directives/_possibleErrors.html',

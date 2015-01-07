@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .controller('BluSoloNewCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService, BluSoloFormValidator, PossibleErrorsService) {
 
         $scope.data = CloudDataService;

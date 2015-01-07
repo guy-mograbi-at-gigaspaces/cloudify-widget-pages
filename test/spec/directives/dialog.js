@@ -3,7 +3,7 @@
 describe('Directive: dialog', function () {
 
     // load the directive's module
-    beforeEach(module('ibmBiginsightsUiApp','directives-templates'));
+    beforeEach(module('cloudifyWidgetPagesApp','directives-templates'));
 
     var element,
         scope;

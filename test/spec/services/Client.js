@@ -3,7 +3,7 @@
 describe('Service: Client', function () {
 
     // load the service's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('cloudifyWidgetPagesApp'));
 
     // instantiate service
     var mClient;

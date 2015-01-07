@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('dialog', function (/*$compile*/) {
         return {
             templateUrl: 'views/directives/_dialog.html',

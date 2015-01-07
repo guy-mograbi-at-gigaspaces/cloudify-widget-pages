@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('BluSoloSoftlayerProperties', function BluSoloSoftlayerProperties( /*$log*/ ) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.toProperties = function (execution) {

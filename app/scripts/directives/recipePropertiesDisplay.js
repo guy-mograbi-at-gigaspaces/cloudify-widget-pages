@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('recipePropertiesDisplay', function ( ) {
         return {
             templateUrl: 'views/directives/_recipePropertiesDisplay.html',

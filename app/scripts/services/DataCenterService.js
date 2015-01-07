@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('DataCenterService', function DataCenterService() {
 
 //        use the following format to retrieve

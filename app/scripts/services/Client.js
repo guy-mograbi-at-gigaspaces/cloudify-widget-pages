@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('Client', function Client(CpuService, DataCenterService, BigInsightsEditionService, FilesystemTypesService, RamService, DisksService, ServerTypesService) {
         this.dataCenters = DataCenterService;
         this.biginsightsEditions = BigInsightsEditionService;

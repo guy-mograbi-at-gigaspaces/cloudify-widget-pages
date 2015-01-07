@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .controller('OrderCtrl', function ($log /*, $scope, Client, RecipePropertiesService, $routeParams*/) {
 
         $log.info('disabled');

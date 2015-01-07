@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('loadingWidget', function () {
         return {
             templateUrl: 'views/directives/_loadingWidget.html',

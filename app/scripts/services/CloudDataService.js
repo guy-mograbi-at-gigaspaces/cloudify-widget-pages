@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('CloudDataService', function CloudDataService(AwsData, SoftlayerData) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         this.aws = AwsData;

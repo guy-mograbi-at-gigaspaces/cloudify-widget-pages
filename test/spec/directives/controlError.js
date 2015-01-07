@@ -3,7 +3,7 @@
 describe('Directive: controlError', function () {
 
     // load the directive's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('cloudifyWidgetPagesApp'));
 
     var element,
         scope;

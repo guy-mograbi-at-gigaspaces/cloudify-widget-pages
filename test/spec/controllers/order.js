@@ -3,7 +3,7 @@
 describe('Controller: OrderCtrl', function () {
 //
 //  // load the controller's module
-    beforeEach(module('ibmBiginsightsUiApp'));
+    beforeEach(module('cloudifyWidgetPagesApp'));
 //
     var OrderCtrl,
         scope;

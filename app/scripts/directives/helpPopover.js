@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('helpPopover', function ($log, $filter) {
         return {
             templateUrl: '/views/directives/helpPopover.html',

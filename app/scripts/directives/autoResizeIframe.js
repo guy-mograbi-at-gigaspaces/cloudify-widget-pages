@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('autoResizeIframe', function () {
         return {
             template: '<div ng-transclude></div>',

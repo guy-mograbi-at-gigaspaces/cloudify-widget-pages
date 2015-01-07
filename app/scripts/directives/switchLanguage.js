@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .directive('switchLanguage', function (I18next, $routeParams, $timeout, $location, $log) {
         return {
             templateUrl: 'views/directives/switchLanguage.html',

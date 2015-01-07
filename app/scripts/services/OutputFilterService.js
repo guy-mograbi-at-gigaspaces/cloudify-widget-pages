@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ibmBiginsightsUiApp')
+angular.module('cloudifyWidgetPagesApp')
     .service('OutputFilterService', function OutputFilterService($log) {
         var illegalPatterns = [
             'java.net.SocketTimeoutException: Read timed out',
