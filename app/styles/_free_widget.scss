@@ -271,6 +271,10 @@
     }
 
     .widget-footer {
+        &, *{
+            vertical-align: middle;
+        }
+
         position: absolute;
         top: 420px;
         left: 20px;
@@ -283,7 +287,19 @@
         .powered-by-links{
             display:inline-block;
             a{
-                padding-right:10px;
+                display:inline-block;
+                margin-left:10px;
+                &.softlayer-link{
+                    width:140px;
+                    height:27px;
+                    background:url('/images/free_widget/softlayer_icon.png');
+                }
+
+                &.cloudify-link{
+                    width:57px;
+                    height:39px;
+                    background:url('/images/free_widget/cloudify_icon.png');
+                }
             }
         }
 
@@ -483,10 +499,14 @@
         margin-right: 5px;
         font-size: 12px;
         a {
+
             position: relative;
             color: #046c9f;
             text-decoration: none;
             border-bottom: 1px dashed;
+
+
+
             &:hover {
                 border-bottom-style: solid;
                 &:after {

@@ -30,6 +30,11 @@
         <li ng-repeat="line in genericWidgetModel.widgetStatus.output track by $index">{{ line }}</li>
         <li class="important" ng-show="!!isWidgetInstallationFinished()"><a href="http://{{genericWidgetModel.widgetStatus.nodeModel.publicIp}}:8099" target="_blank">{{'blufree.widget.manageWithCloudify' | i18n }}</a></li>
         <li class="important" ng-show="!!isWidgetInstallationFinished()">{{'blufree.widget.gotoInstruction' | i18n }} <a href="https://{{genericWidgetModel.widgetStatus.nodeModel.publicIp}}:8443" class="track" target="_blank">{{'blufree.widget.gotoTitle'|i18n}}</a></li>
+
+    </ul>
+
+    <ul class="log" ng-show="!!genericWidgetModel.widgetStatus.error">
+        <li class="important">{{genericWidgetModel.widgetStatus.error}}</li>
     </ul>
 
 
@@ -74,12 +79,13 @@
             {{ 'blufree.widget.poweredBy' | i18n }}
         </div>
         <div class="powered-by-links">
-            <a ng-href="http://softlayer.com" target="_blank">
-                <img src="/images/free_widget/softlayer_icon.png"/>
+            <a class="softlayer-link" ng-href="http://softlayer.com" target="_blank">
+
+
                 <!--img class="brand_btns" src="/img/hp_cloud_icon.png"-->
             </a>
-            <a href="http://getcloudify.org" target="_blank">
-                <img class="brand_btns" src="/images/free_widget/cloudify_icon.png">
+            <a class="cloudify-link" href="http://getcloudify.org" target="_blank">
+
             </a>
         </div>
 
