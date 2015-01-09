@@ -24,7 +24,7 @@ angular.module('cloudifyWidgetPagesApp', ['ngRoute','gsUiInfraApp' ,'cloudifyWid
                 controller: 'SoftlayerPackageItemsCtrl'
             })
             .when('/snippet/bluFree', {
-                templateUrl: 'views/snippet/blufree.html',
+                templateUrl: 'views/bluFree/widget.html',
                 controller:'BluFreeCtrl'
             })
 

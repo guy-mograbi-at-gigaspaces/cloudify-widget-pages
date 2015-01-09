@@ -208,6 +208,15 @@
     "errorsDetected" : {
         "intro": "You have encountered an error. Possible reasons are:",
         "possibleActions" : "Please take the following steps and try again:"
+    },
+
+
+    "blufree" : {
+        "widget" : {
+            "title" : "BLU For Cloud",
+            "poweredBy" : "Powered By",
+            "gotoTitle" : "BLU Free Trial"
+        }
     }
 
 }

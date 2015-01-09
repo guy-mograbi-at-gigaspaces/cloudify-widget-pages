@@ -13,7 +13,7 @@ angular.module('cloudifyWidgetPagesApp')
 
                 function refresh() {
                     element.find('iframe').remove();
-                    element.append($('<iframe></iframe>', { 'src': scope.url, 'scrolling': 'no', 'width': '800px', 'height': '800px', 'frameborder': 'no'}));
+                    element.append($('<iframe></iframe>', { 'src': scope.url, 'scrolling': 'no', 'width': '800px', 'height': '800px', 'frameborder': 'no', 'widget' : 'widget'}));
                 }
 
 
