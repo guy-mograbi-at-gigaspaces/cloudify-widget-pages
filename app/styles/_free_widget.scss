@@ -173,7 +173,7 @@
         font-family: "Helvetica Neue";
     }
 
-    ul#log {
+    ul.log {
         font-size: 14px;
         list-style-type: none;
         position: absolute;
@@ -187,34 +187,35 @@
         overflow-y: hidden;
         li {
             word-break: normal;
+            &.error {
+                color: #E95625;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            &.important {
+                font-size: 16px;
+                font-weight: bold;
+                a {
+                    color: #F09927;
+                }
+            }
+
+            /* selected text - must use separate rule for gecko as the whole rule will be dropped on non-supporting engines */
+            &::-moz-selection,
+            a::-moz-selection {
+                background-color: #F09927;
+                color: #FFF;
+            }
+            &::selection,
+            a::selection {
+                background-color: #F09927;
+                color: #FFF;
+            }
         }
     }
 
-    #log li.error {
-        color: #E95625;
-        font-size: 16px;
-        font-weight: bold;
-    }
 
-    #log li.important {
-        font-size: 16px;
-        font-weight: bold;
-        a {
-            color: #F09927;
-        }
-    }
-
-    /* selected text - must use separate rule for gecko as the whole rule will be dropped on non-supporting engines */
-    #log li::-moz-selection,
-    #log li a::-moz-selection {
-        background-color: #F09927;
-        color: #FFF;
-    }
-    #log li::selection,
-    #log li a::selection {
-        background-color: #F09927;
-        color: #FFF;
-    }
 
     #title {
         color: #F09927;
@@ -227,8 +228,8 @@
     #time_left {
         position: absolute;
         color: white;
-        top: 199px;
-        left: 290px;
+        top: 200px;
+        left: 355px;
         font-size: 14px;
     }
 

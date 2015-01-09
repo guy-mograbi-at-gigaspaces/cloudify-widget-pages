@@ -215,7 +215,11 @@
         "widget" : {
             "title" : "BLU For Cloud",
             "poweredBy" : "Powered By",
-            "gotoTitle" : "BLU Free Trial"
+            "gotoTitle" : "BLU Free Trial",
+            "gotoInstruction" : "Go to",
+            "trialLeft" : "Trial time left:",
+            "manageWithCloudify" : "Manage with Cloudify"
+
         }
     }
 

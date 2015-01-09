@@ -25,11 +25,14 @@
        ng-click="stopWidget()"
        ng-class="{'executing':!widgetStatus.instanceIsAvailable}"></a>
 
-    <ul id="log">
+    <ul class="log" ng-show="!!isWidgetPlaying()">
+
         <li ng-repeat="line in genericWidgetModel.widgetStatus.output track by $index">{{ line }}</li>
-        <li class="important" ng-show="!!isWidgetInstallationFinished()"><a href="http://{{genericWidgetModel.widgetStatus.nodeModel.publicIp}}:8099" target="_blank">Manage with Cloudify</a></li>
-        <li class="important" ng-show="!!widgetStatus.instanceIsAvailable">Go to <a href="{{widgetStatus.consoleLink.url}}" class="track" target="_blank">{{'blufree.widget.gotoTitle'|i18n}}</a></li>
+        <li class="important" ng-show="!!isWidgetInstallationFinished()"><a href="http://{{genericWidgetModel.widgetStatus.nodeModel.publicIp}}:8099" target="_blank">{{'blufree.widget.manageWithCloudify' | i18n }}</a></li>
+        <li class="important" ng-show="!!isWidgetInstallationFinished()">{{'blufree.widget.gotoInstruction' | i18n }} <a href="https://{{genericWidgetModel.widgetStatus.nodeModel.publicIp}}:8443" class="track" target="_blank">{{'blufree.widget.gotoTitle'|i18n}}</a></li>
     </ul>
+
+
 
     <ul id="links">
         <li>
@@ -49,8 +52,8 @@
         </li>
     </ul>
 
-    <span id="time_left" ng-show="!!widgetStatus.timeleftMillis">{{ 'widget.default.trialLeft' | i18n }}
-        <span id="time_left_counter">{{getTimeLeft()}}</span>
+    <span id="time_left" ng-show="!!genericWidgetModel.widgetStatus.nodeModel.expires">{{ 'blufree.widget.trialLeft' | i18n }}
+        <span id="time_left_counter">{{genericWidgetModel.widgetStatus.nodeModel.expires | expires}}</span>
     </span>
 
     <div id="video_container" class="video-container">
@@ -59,7 +62,7 @@
     </div>
 
     <!-- advanced message -->
-    <div class="advanced_section" ng-show="!!!isWidgetInstallationFinished()">
+    <div class="advanced_section" ng-show="!!isWidgetInstallationFinished()">
         <div style="margin:10px auto 0 auto"><b>Username</b>: bluadmin<br>We sent the password with instructions in E-mail</div>
     </div>
 
