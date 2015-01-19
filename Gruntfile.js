@@ -93,7 +93,7 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                port: 9001,
+                port: 9003,
                 // Change this to '0.0.0.0' to access the server from outside.
                 hostname: 'localhost'
             },
@@ -101,7 +101,7 @@ module.exports = function (grunt) {
                 {
                     context: '/backend',
                     host: 'localhost',
-                    port: 9001,
+                    port: 9003,
                     https: false,
                     changeOrigin: false,
                     xforward: false
