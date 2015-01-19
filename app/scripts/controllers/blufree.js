@@ -22,8 +22,16 @@ angular.module('cloudifyWidgetPagesApp')
                 'url' : 'http://thewidget.gsdev.info/#/widgets/5447744cbfd521015967f580/blank?timestamp=' + new Date().getTime()
             },
             {
-                'host': 'localhost',
+                'host': 'ibmpages.staging',
+                'url': 'http://thewidget-staging.gsdev.info/#/widgets/5433eaf1547abc6b52b6d6c9/blank?timestamp=' + new Date().getTime()
+            },
+            {
+                'host': 'guym',
                 'url': 'http://127.0.0.1:9000/#/widgets/54adb6777b0a8eca14329a54/blank?timestamp=' + new Date().getTime()
+            },
+            {
+                'host': 'ibmpages-sefi',
+                'url': 'http://127.0.0.1:9000/#/widgets/53d651d37818c889b6619020/blank?timestamp=' + new Date().getTime()
             }
         ];
 
