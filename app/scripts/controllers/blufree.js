@@ -30,7 +30,7 @@ angular.module('cloudifyWidgetPagesApp')
                 'url': 'http://127.0.0.1:9000/#/widgets/54adb6777b0a8eca14329a54/blank?timestamp=' + new Date().getTime()
             },
             {
-                'host': 'ibmpages-sefi',
+                'host': 'sefi',
                 'url': 'http://127.0.0.1:9000/#/widgets/53d651d37818c889b6619020/blank?timestamp=' + new Date().getTime()
             }
         ];

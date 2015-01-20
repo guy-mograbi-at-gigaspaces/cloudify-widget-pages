@@ -105,6 +105,19 @@
         "noteDetails": "建议您不要您的免费BLU加速云的审讯期间上传敏感数据。",
         "trialTitle": "BLU加速云试用",
         "trialEnds": "当你的试用期结束后，继续使用BLU加速云使用的独奏或业务计划。"
+    },
+
+    "blufree" : {
+        "widget" : {
+            "title" : "BLU 加速云",
+            "poweredBy" : "Powered By",
+            "gotoTitle" : "BLU Free Trial",
+            "gotoInstruction" : "Go to",
+            "trialLeft" : "试用剩余时间:",
+            "manageWithCloudify" : "Manage with Cloudify"
+
+        }
     }
+
 
 }
