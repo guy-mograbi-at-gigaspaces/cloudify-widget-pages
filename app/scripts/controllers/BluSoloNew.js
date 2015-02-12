@@ -20,62 +20,65 @@ angular.module('cloudifyWidgetPagesApp')
             {
                 'label': 'AWS',
                 'id': AppConstants.CloudProviders.AWS
-            }//,
-//            {
-//                'label': 'Softlayer',
-//                'id': AppConstants.CloudProviders.Softlayer
-//            }
+            },
+            {
+                'label': 'Softlayer',
+                'id': AppConstants.CloudProviders.Softlayer
+            }
         ];
 
-//        $scope.data.softlayer.ram ={ 'data' :  [
-//            {
-//                'id' : '1155',
-//                'name' : '32gb'
-//            },
-//            {
-//                'id' : '4468',
-//                'name' : '48gb'
-//            },
-//            {
-//                'id' : '1154',
-//                'name' : '64gb'
-//            }
-//        ] } ;
+        $scope.data.softlayer.ram ={ 'data' :  [
+            {
+                'id' : '1155',
+                'name' : '32gb'
+            },
+            {
+                'id' : '4468',
+                'name' : '48gb'
+            },
+            {
+                'id' : '1154',
+                'name' : '64gb'
+            }
+        ] } ;
 
-//        $scope.data.softlayer.cores =  { 'data' : [
-//            {
-//                'id' : '860',
-//                'name' : '8x2g'
-//            },
-//            {
-//                'id' : '1198',
-//                'name' : '12x2g'
-//            },
-//            {
-//                'id' : '1194',
-//                'name' : '16x2g'
-//            }
-//        ]};
-//
-//        $scope.data.softlayer.disks = {'data' : [
-//            {
-//                'id' : '865',
-//                'name' : '100gbsan'
-//            }
-//        ]};
+        $scope.data.softlayer.cores =  { 'data' : [
+            {
+                'id' : '860',
+                'name' : '8x2g'
+            },
+            {
+                'id' : '1198',
+                'name' : '12x2g'
+            },
+            {
+                'id' : '1194',
+                'name' : '16x2g'
+            }
+        ]};
+
+        $scope.data.softlayer.disks = {'data' : [
+            {
+                'id' : '865',
+                'name' : '100gbsan'
+            }
+        ]};
 
 
         function changeWidgetUrl() {
             $scope.widgetUrl = 'http://thewidget.staging.gsdev.info/#/widgets/' + widgetIds[$scope.execution.cloudProvider] + '/blank';
-//            $scope.widgetUrl = 'http://localhost.com:9000/#/widgets/53d651d37818c889b6619020/blank';
+            //softlayer:
+            //$scope.widgetUrl = 'http://localhost.com:9000/#/widgets/54d9ea7d052f86e421c59f0a/blank';
+            //aws ec2:
+            //$scope.widgetUrl = 'http://localhost.com:9000/#/widgets/53d651d37818c889b6619020/blank';
         }
 
         var widgetIds = {};
         widgetIds[AppConstants.CloudProviders.AWS] = '548d7da2353b591552beeeb5';
-//        widgetIds[AppConstants.CloudProviders.Softlayer] = '0375c7bb-c070-4b80-970b-eaec99fccfc7';
+        widgetIds[AppConstants.CloudProviders.Softlayer] = '54d9cf94abc0fcc43f774336';
 
-//        $scope.softlayerLoginDetails = { 'type' : 'softlayer' , 'params' : { 'username' : null, 'apiKey' : null } };
-        $scope.awsLoginDetails = { 'params' : { 'apiKey' : null, 'secretKey': null } };
+        $scope.softlayerLoginDetails = { 'type' : 'softlayer' , 'params' : { 'username' : null, 'apiKey' : null } };
+        $scope.awsLoginDetails = { 'type': 'aws', 'params' : { 'apiKey' : null, 'secretKey': null } };
 
         $scope.execution = {
             'cloudProvider': $routeParams.cloudProvider || AppConstants.CloudProviders.AWS,
@@ -84,14 +87,13 @@ angular.module('cloudifyWidgetPagesApp')
                 'region': $scope.data.aws.region.data[0].id,
                 'instanceType': $scope.data.aws.instanceType.data[0].id,
                 'securityGroup': null
+            },
+            'softlayer' : {
+                'dataCenter' : $scope.data.softlayer.dataCenter.data[0].id,
+                'core' : $scope.data.softlayer.cores.data[0].id,
+                'ram' : $scope.data.softlayer.ram.data[0].id,
+                'disk' : $scope.data.softlayer.disks.data[0].id
             }
-//            ,
-//            'softlayer' : {
-//                'dataCenter' : $scope.data.softlayer.dataCenter.data[0].id,
-//                'core' : $scope.data.softlayer.cores.data[0].id,
-//                'ram' : $scope.data.softlayer.ram.data[0].id,
-//                'disk' : $scope.data.softlayer.disks.data[0].id
-//            }
         };
 
         changeWidgetUrl();

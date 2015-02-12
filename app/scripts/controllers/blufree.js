@@ -23,7 +23,11 @@ angular.module('cloudifyWidgetPagesApp')
             },
             {
                 'host': 'ibmstaging',
-                'url': 'http://thewidget-staging.gsdev.info/#/widgets/548d7da2353b591552beeeb5/blank?timestamp=' + new Date().getTime()
+                'url': 'http://thewidget.staging.gsdev.info/#/widgets/548d7da2353b591552beeeb5/blank?timestamp=' + new Date().getTime()
+            },
+            {
+                'host': 'localhost.com',
+                'url': 'http://thewidget.staging.gsdev.info/#/widgets/548d7da2353b591552beeeb5/blank?timestamp=' + new Date().getTime()
             },
             {
                 'host': 'guym',
