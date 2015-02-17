@@ -35,7 +35,7 @@ angular.module('cloudifyWidgetPagesApp')
             },
             {
                 'host': 'sefi',
-                'url': 'http://127.0.0.1:9000/#/widgets/53d651d37818c889b6619020/blank?timestamp=' + new Date().getTime()
+                'url': 'http://localhost.com:9000/#/widgets/54d8b7161b90e87a275a8860/blank?timestamp=' + new Date().getTime()
             }
         ];
 

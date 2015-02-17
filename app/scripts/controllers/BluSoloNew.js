@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module('cloudifyWidgetPagesApp')
-    .controller('BluSoloNewCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService, BluSoloFormValidator, PossibleErrorsService) {
+    .controller('BluSoloNewCtrl', function ($scope, $log, $controller, DataCenterService, AwsData, $location, $routeParams, CloudDataService, AppConstants, RecipePropertiesService, BluSoloFormValidator, PossibleErrorsService, RandomValueGenerator) {
 
         $scope.data = CloudDataService;
         $scope.showWidget = window === window.parent;
@@ -146,6 +146,11 @@ angular.module('cloudifyWidgetPagesApp')
 
 
         $scope.submitForm = function () {
+            // update db2express random value
+            $scope.execution.db2express = {
+                randomValue: RandomValueGenerator.generate(16)
+            };
+
             updateProperties('from submit');
             $scope.formIsValid = validateForm();
             if (!$scope.formIsValid) {
@@ -160,6 +165,7 @@ angular.module('cloudifyWidgetPagesApp')
         function updateProperties( newValue ){
             $log.info('updating properties. widget loaded', newValue);
             $scope.sentProperties = RecipePropertiesService.bluSolo.toProperties($scope.execution);
+            //GsGenericCtrl watches $scope.genericWidgetModel.recipeProperties for changes and posts the message.
             $scope.genericWidgetModel.recipeProperties = $scope.sentProperties;
         }
         $scope.$watch('execution', updateProperties ,true);

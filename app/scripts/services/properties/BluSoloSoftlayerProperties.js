@@ -14,6 +14,10 @@ angular.module('cloudifyWidgetPagesApp')
                     result.push({'key' : 'locationId' , 'value' : execution.softlayer.dataCenter });
                 }
 
+                if ( execution.db2express ) {
+                    result.push({'key': 'db2expressRandomValue', 'value': execution.db2express.randomValue });
+                }
+
                 var hardwareIds = [];
                 if ( !!execution.softlayer.core ){
                     hardwareIds.push(execution.softlayer.core);

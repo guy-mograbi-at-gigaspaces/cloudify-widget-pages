@@ -47,7 +47,8 @@
     "reporter-file": "*",
     "selenium-webdriver": "~2.43.5",
     "karma-coverage": "~0.2.6",
-    "karma-failed-reporter": "0.0.2"
+    "karma-failed-reporter": "0.0.2",
+    "phantomjs": "^1.9.15"
   },
   "engines": {
     "node": ">=0.8.0"

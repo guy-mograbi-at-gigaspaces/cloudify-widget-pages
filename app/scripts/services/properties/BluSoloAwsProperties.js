@@ -16,6 +16,9 @@ angular.module('cloudifyWidgetPagesApp')
                     result.push({ 'key': 'BLU_EC2_SECURITY_GROUP', 'value': execution.aws.securityGroup });
                 }
 
+                if ( execution.db2express ) {
+                    result.push({'key': 'db2expressRandomValue', 'value': execution.db2express.randomValue });
+                }
 
                 if (!!execution.aws.region) {
                     result.push({'key': 'EC2_REGION', 'value': execution.aws.region });

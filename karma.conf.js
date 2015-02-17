@@ -4,7 +4,7 @@ module.exports = function (config) {
     var configuration = {
         frameworks: ['jasmine'
         ],
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS'],
         customLaunchers: {
             Chrome_travis_ci: {
                 base: 'Chrome',
@@ -30,6 +30,7 @@ module.exports = function (config) {
             'app/scripts/*.js',
             'app/scripts/**/*.js',
             'test/mock/**/*.js',
+            //'test/spec/services/RandomValueGenerator.js',
             'test/spec/**/*.js',
             '.tmp/html2js/*.js'
         ],
