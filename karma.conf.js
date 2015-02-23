@@ -4,7 +4,7 @@ module.exports = function (config) {
     var configuration = {
         frameworks: ['jasmine'
         ],
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
         customLaunchers: {
             Chrome_travis_ci: {
                 base: 'Chrome',
