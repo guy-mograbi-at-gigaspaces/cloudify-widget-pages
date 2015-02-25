@@ -167,6 +167,7 @@ angular.module('cloudifyWidgetPagesApp')
             $scope.sentProperties = RecipePropertiesService.bluSolo.toProperties($scope.execution);
             //GsGenericCtrl watches $scope.genericWidgetModel.recipeProperties for changes and posts the message.
             $scope.genericWidgetModel.recipeProperties = $scope.sentProperties;
+            $scope.$apply();
         }
         $scope.$watch('execution', updateProperties ,true);
         $scope.$watch(function(){ return $scope.genericWidgetModel.loaded; }, updateProperties );
